@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JourneyWell Studios — Channel</title>
+<meta name="description" content="The JourneyWell channel — episodes, shorts, shows, and behind-the-scenes from our Baton Rouge studio. Production + publishing for founders & brands." />
+<link rel="stylesheet" href="style.css?v=5" />
+<link rel="stylesheet" href="redesign.css" />
+</head>
+<body>
+
+<!-- 1. CHANNEL HEADER -->
+<section class="channel-header">
+  <div class="container">
+    <div class="channel-banner">
+      <div class="channel-identity">
+        <div class="channel-avatar" aria-hidden="true">JW</div>
+        <div class="channel-meta">
+          <div class="channel-eyebrow">Channel · Baton Rouge, LA</div>
+          <h1 class="channel-name">JourneyWell <em>Studios</em></h1>
+          <p class="channel-tagline">The studio + system behind founders, brands, and creators building real content authority. We capture it. We produce it. We publish it. You own the audience.</p>
+          <div class="channel-stats" id="channelStats">
+            <span><strong>—</strong> Pieces</span>
+            <span class="dot"></span>
+            <span><strong>—</strong> Shows</span>
+            <span class="dot"></span>
+            <span><strong>—</strong> Topics</span>
+          </div>
+          <div class="channel-ctas">
+            <button class="btn btn-gold" data-open-drawer-with="studio">Book the studio</button>
+            <button class="btn btn-ghost" data-open-drawer-with="podcast">Start a podcast</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. HERO PIECE (pinned, auto-playing) -->
+<section class="hero-piece-section">
+  <div class="container hero-piece-grid">
+    <div class="hero-piece-player" id="heroPiecePlayer">
+      <video id="heroPieceVideo" autoplay muted loop playsinline preload="metadata"></video>
+      <div class="hero-piece-overlay">
+        <div class="hero-piece-badge">Pinned · Channel trailer</div>
+      </div>
+      <div class="hero-piece-play-cta" aria-hidden="true" data-icon="play" data-icon-size="28"></div>
+    </div>
+    <div class="hero-piece-info">
+      <div class="hero-piece-eyebrow" id="heroPieceEyebrow">Now showing</div>
+      <h2 class="hero-piece-title" id="heroPieceTitle">Loading…</h2>
+      <p class="hero-piece-desc" id="heroPieceDesc"></p>
+      <div class="hero-piece-meta" id="heroPieceMeta"></div>
+      <div class="hero-piece-ctas">
+        <button class="btn btn-gold" id="heroPiecePlayBtn"><span data-icon="play" data-icon-size="16"></span> Play full</button>
+        <button class="btn btn-ghost" data-open-drawer-with="learn">Want this for your brand?</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. STICKY CHANNEL TABS -->
+<nav class="channel-tabs" id="channelTabs">
+  <div class="container">
+    <div class="channel-tabs-inner">
+      <a href="#featured" class="channel-tab active" data-tab="featured">Featured</a>
+      <a href="#episodes" class="channel-tab" data-tab="episodes">Episodes</a>
+      <a href="#shorts" class="channel-tab" data-tab="shorts">Shorts</a>
+      <a href="#shows" class="channel-tab" data-tab="shows">Shows</a>
+      <a href="#bts" class="channel-tab" data-tab="bts">Behind the scenes</a>
+    </div>
+  </div>
+</nav>
+
+<!-- 4. FEATURED -->
+<section class="channel-section" id="featured">
+  <div class="container">
+    <div class="row-header">
+      <h3 class="row-title">Featured</h3>
+      <span class="row-meta" id="featuredCount">—</span>
+    </div>
+    <div class="work-strip-wrap"><div class="work-strip" id="featuredStrip"></div></div>
+  </div>
+</section>
+
+<!-- 5. EPISODES (long-form) -->
+<section class="channel-section" id="episodes">
+  <div class="container">
+    <div class="row-header">
+      <h3 class="row-title">Episodes</h3>
+      <span class="row-meta" id="episodesCount">—</span>
+    </div>
+    <div class="work-strip-wrap"><div class="work-strip episode-strip" id="episodesStrip"></div></div>
+  </div>
+</section>
+
+<!-- 6. SHORTS -->
+<section class="channel-section" id="shorts">
+  <div class="container">
+    <div class="row-header">
+      <h3 class="row-title">Shorts</h3>
+      <div style="display:flex; gap:14px; align-items:center;">
+        <span class="row-meta" id="shortsCount">—</span>
+        <button type="button" class="row-action-pill" id="watchShortsBtn"><span data-icon="play" data-icon-size="15"></span> Watch shorts</button>
+      </div>
+    </div>
+    <div class="work-strip-wrap"><div class="work-strip shorts-strip" id="shortsStrip"></div></div>
+  </div>
+</section>
+
+<!-- 7. ABOUT THIS CHANNEL inline strip -->
+<section class="container">
+  <div class="channel-about">
+    <div class="channel-about-inner">
+      <div class="channel-about-text">
+        <div class="channel-about-eyebrow">About this channel</div>
+        <h3>Made in Baton Rouge. Built for brands that need to ship content weekly, not yearly.</h3>
+        <p>JourneyWell is a full-service studio and content system. We handle production, editorial, and distribution — your brand's voice gets captured, multiplied, and published every week.</p>
+      </div>
+      <div class="channel-about-ctas">
+        <a href="studio.html" class="about-cta"><strong>Studio</strong><span>Walk in, walk out with an episode.</span></a>
+        <a href="podcast.html" class="about-cta"><strong>Podcast Launch</strong><span>Concept → branded show in 2 weeks.</span></a>
+        <a href="authority.html" class="about-cta"><strong>Authority System</strong><span>One recording becomes 30+ pieces.</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. SHOWS — each brand as a series -->
+<section class="channel-section" id="shows">
+  <div class="container">
+    <div class="row-header">
+      <h3 class="row-title">Shows</h3>
+      <span class="row-meta">Series we produce</span>
+    </div>
+  </div>
+  <div class="show-rows" id="showRows"></div>
+</section>
+
+<!-- 9. BEHIND THE SCENES -->
+<section class="channel-section" id="bts">
+  <div class="container">
+    <div class="row-header">
+      <h3 class="row-title">Behind the scenes</h3>
+      <span class="row-meta">Raw studio output</span>
+    </div>
+    <div class="work-strip-wrap"><div class="work-strip" id="btsStrip"></div></div>
+  </div>
+</section>
+
+<!-- 10. SUBSCRIBE / final CTA -->
+<section class="channel-subscribe">
+  <div class="container">
+    <div class="subscribe-card">
+      <div>
+        <div class="subscribe-eyebrow">Want yours next?</div>
+        <h2>This is what the system ships.</h2>
+        <p>Every clip on this channel came out of the JourneyWell studio with the Authority System running. Apply to work with us — we take on a small number of brands per quarter.</p>
+      </div>
+      <div class="subscribe-ctas">
+        <button class="btn btn-gold btn-large" data-open-drawer-with="authority">Build my system</button>
+        <button class="btn btn-ghost btn-large" data-open-drawer-with="learn">Talk first</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. MINI PLAYER (docked) -->
+<div class="mini-player" id="miniPlayer" hidden>
+  <button class="mini-player-expand" id="miniPlayerExpand" aria-label="Expand" data-icon="expandArrows" data-icon-size="18"></button>
+  <button class="mini-player-close" id="miniPlayerClose" aria-label="Close" data-icon="close" data-icon-size="18"></button>
+  <div class="mini-player-video">
+    <video id="miniPlayerVideo" controls playsinline preload="metadata"></video>
+  </div>
+  <div class="mini-player-info">
+    <div class="mini-player-title" id="miniPlayerTitle"></div>
+    <div class="mini-player-meta" id="miniPlayerMeta"></div>
+  </div>
+</div>
+
+<!-- 12. IMMERSIVE PLAYER OVERLAY — two modes:
+     - default (shorts): centered 9:16 frame, snap-scroll feed
+     - .long-form (episodes): big 16:9 player with meta panel below + Up-next sidebar  -->
+<div class="reels-overlay" id="reelsOverlay" hidden>
+  <div class="reels-backdrop"></div>
+  <button class="reels-close" id="reelsClose" aria-label="Close" data-icon="close" data-icon-size="22"></button>
+  <button class="reels-nav-up" id="reelsNavUp" aria-label="Previous" data-icon="chevronUp" data-icon-size="22"></button>
+  <button class="reels-nav-down" id="reelsNavDown" aria-label="Next" data-icon="chevronDown" data-icon-size="22"></button>
+
+  <div class="reels-stage">
+    <div class="reels-frame">
+      <div class="reels-track" id="reelsTrack"></div>
+    </div>
+    <!-- Long-form meta panel (visible only when .reels-overlay.long-form) -->
+    <div class="lf-meta" id="lfMeta">
+      <h2 class="lf-meta-title" id="lfMetaTitle"></h2>
+      <div class="lf-meta-row">
+        <div class="lf-meta-avatar" id="lfMetaAvatar">JW</div>
+        <div class="lf-meta-channel">
+          <div class="lf-meta-handle" id="lfMetaHandle"></div>
+          <div class="lf-meta-channel-sub" id="lfMetaChannelSub">JourneyWell Studios</div>
+        </div>
+        <button class="lf-meta-subscribe" data-open-drawer-with="podcast">Subscribe</button>
+        <div class="lf-meta-actions">
+          <button class="lf-meta-btn" data-action="like"><span data-icon="heart" data-icon-size="18"></span> Like</button>
+          <button class="lf-meta-btn" data-action="share"><span data-icon="share" data-icon-size="18"></span> Share</button>
+          <button class="lf-meta-btn" data-action="ask" data-open-drawer-with="learn"><span data-icon="message" data-icon-size="18"></span> Ask</button>
+          <button class="lf-meta-btn cta" data-open-drawer-with="studio"><span data-icon="star" data-icon-size="18"></span> Book the studio</button>
+        </div>
+      </div>
+      <div class="lf-meta-stats" id="lfMetaStats"></div>
+      <div class="lf-meta-desc" id="lfMetaDesc"></div>
+    </div>
+  </div>
+
+  <!-- Up-next sidebar (visible only in long-form mode) -->
+  <aside class="lf-upnext" id="lfUpNext">
+    <div class="lf-upnext-title">Up next</div>
+    <div class="lf-upnext-list" id="lfUpNextList"></div>
+  </aside>
+</div>
+
+<!-- 13. DETAIL MODAL (full expand from mini-player) -->
+<div class="detail-modal-overlay" id="detailOverlay">
+  <div class="detail-modal" id="detailModal">
+    <button class="detail-close" id="detailClose" aria-label="Close" data-icon="close" data-icon-size="20"></button>
+    <div class="detail-player" id="detailPlayer"></div>
+    <div class="detail-info" id="detailInfo"></div>
+  </div>
+</div>
+
+<script src="chrome.js"></script>
+<script>
+(function () {
+  // ---------- helpers ----------
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function fmtDuration(s) {
+    if (!s || s < 1) return '';
+    const m = Math.floor(s / 60);
+    const sec = Math.round(s % 60);
+    return m ? `${m}:${String(sec).padStart(2, '0')}` : `${sec}s`;
+  }
+  function isHttps(u) { return typeof u === 'string' && u.startsWith('https://'); }
+  function hasPlayableVideo(a) { return isHttps(a.cdn_url) && /\.(mp4|webm|mov)(\?|#|$)/i.test(a.cdn_url); }
+  function initials(name) {
+    return String(name || '?').split(/\s+/).map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase();
+  }
+
+  // ---------- live-feed integration (creator-tunnel) ----------
+  // The work page is sourced from creator-tunnel assets tagged
+  // `live-feed:featured` / `:episode` / `:show` / `:shorts` / `:behind-the-scenes`.
+  //
+  // URL resolution (in order):
+  //   1. window.CREATOR_TUNNEL_URL set via inline <script> in this page's <head>
+  //   2. localhost dev → http://127.0.0.1:8787
+  //   3. anywhere else → null (skip fetching gracefully, sections render empty)
+  //
+  // To wire production, add this ONE LINE to work.html's <head> after deploying creator-tunnel:
+  //   <script>window.CREATOR_TUNNEL_URL = 'https://your-creator-tunnel-domain.vercel.app';<\/script>
+  const USE_LIVE_FEED_TAGS = true;
+  const IS_LOCAL = (location.hostname === 'localhost' || location.hostname === '127.0.0.1');
+  const CREATOR_TUNNEL_URL =
+    (typeof window !== 'undefined' && window.CREATOR_TUNNEL_URL) ||
+    (IS_LOCAL ? 'http://127.0.0.1:8787' : 'https://creator-tunnel.vercel.app');
+
+  async function fetchByTag(tag, limit) {
+    if (!CREATOR_TUNNEL_URL) return [];  // not configured for this host — silent no-op
+    const url = `${CREATOR_TUNNEL_URL}/api/assets?tag=${encodeURIComponent(tag)}&limit=${limit || 24}`;
+    try {
+      const res = await fetch(url, { cache: 'no-cache' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      return (data.items || []).map(adaptCreatorTunnelAsset);
+    } catch (err) {
+      console.warn('[live-feed] failed for tag', tag, err);
+      return [];
+    }
+  }
+
+  function adaptCreatorTunnelAsset(a) {
+    const tags = a.tags || [];
+    const tagVal = (prefix) => {
+      const t = tags.find(x => typeof x === 'string' && x.startsWith(prefix + ':'));
+      return t ? t.slice(prefix.length + 1) : null;
+    };
+    const brandSlug = tagVal('brand');
+    const brand = brandSlug
+      ? brandSlug.split('-').map(w => w ? w[0].toUpperCase() + w.slice(1) : '').join(' ')
+      : null;
+    const display = String(a.title || 'Untitled').replace(/\.(mp4|mov|webm|m4v)$/i, '').trim();
+    return {
+      id: a.id,
+      title: a.title || display,
+      display_title: display,
+      brand: brand,
+      file_type: a.file_type,
+      duration: a.duration_seconds || 0,
+      thumbnail_url: a.thumbnail_url || null,
+      cdn_url: a.cdn_url,
+      width: a.width,
+      height: a.height,
+      tags: tags,
+      created_at: a.created_at,
+      description: a.ai_description || '',
+      ai_description: a.ai_description || '',
+      polished: tags.includes('status:polished') || tags.includes('quality:polished'),
+    };
+  }
+
+  // Fetch all five live-feed buckets in parallel, then build a `seg` object
+  // shaped the same way `segment()` returns, so the rest of the page code
+  // doesn't need to change.
+  async function loadByLiveFeedTagsForSegment() {
+    const [featured, episodes, show, shorts, bts] = await Promise.all([
+      fetchByTag('live-feed:featured'),
+      fetchByTag('live-feed:episode'),
+      fetchByTag('live-feed:show'),
+      fetchByTag('live-feed:shorts'),
+      fetchByTag('live-feed:behind-the-scenes'),
+    ]);
+    // Combined deduped list for click handlers
+    const allMap = new Map();
+    [...featured, ...episodes, ...show, ...shorts, ...bts].forEach(a => allMap.set(a.id, a));
+    const all = Array.from(allMap.values());
+    // Build "shows" rows by grouping live-feed:show assets by brand
+    const byBrand = {};
+    show.forEach(a => {
+      const b = a.brand;
+      if (!b) return;
+      (byBrand[b] = byBrand[b] || []).push(a);
+    });
+    const byDate = (a, b) => (b.created_at || '').localeCompare(a.created_at || '');
+    const shows = Object.entries(byBrand)
+      .map(([brand, items]) => ({ brand, items: items.sort(byDate) }))
+      .filter(s => s.items.length >= 1)
+      .sort((a, b) => b.items.length - a.items.length);
+    return { featured, episodes, shorts, bts, shows, all };
+  }
+
+  // ---------- segmentation ----------
+  // Build the channel's discrete shelves from the flat asset list.
+  function segment(assets) {
+    const playable = assets.filter(hasPlayableVideo);
+    const byDate = (a, b) => (b.created_at || '').localeCompare(a.created_at || '');
+
+    const featured = playable.filter(a => a.polished && a.brand && a.brand !== 'Journeywell').sort(byDate);
+    if (featured.length < 6) {
+      const filler = playable.filter(a => !featured.includes(a) && a.polished).sort(byDate);
+      featured.push(...filler.slice(0, 6 - featured.length));
+    }
+
+    const episodes = playable
+      .filter(a => (a.duration || 0) >= 300)
+      .sort(byDate);
+
+    const shorts = playable
+      .filter(a => (a.duration || 0) > 0 && (a.duration || 0) < 120)
+      .sort(byDate);
+
+    const bts = playable
+      .filter(a => !a.polished && (a.tags || []).includes('source:frameio'))
+      .sort(byDate);
+
+    // Group by brand for "Shows"
+    const byBrand = {};
+    playable.forEach(a => {
+      const b = a.brand;
+      if (!b || b === 'Journeywell') return;
+      (byBrand[b] = byBrand[b] || []).push(a);
+    });
+    const shows = Object.entries(byBrand)
+      .map(([brand, items]) => ({ brand, items: items.sort(byDate) }))
+      .filter(s => s.items.length >= 1)
+      .sort((a, b) => b.items.length - a.items.length);
+
+    return { featured: featured.slice(0, 10), episodes, shorts, bts, shows, all: playable };
+  }
+
+  // ---------- card render ----------
+  function cardHtml(asset, idx) {
+    const altClass = `alt-${(idx % 6) + 1}`;
+    const hasVideo = hasPlayableVideo(asset);
+    const hasThumb = isHttps(asset.thumbnail_url);
+    let coverInner = '';
+    if (hasVideo) {
+      // Native autoplay + muted + preload="metadata" matches the homepage
+      // carousel pattern. chrome.js initAutoplayVideos pauses off-screen cards.
+      coverInner = `<video class="card-video" autoplay muted loop playsinline preload="metadata" ${hasThumb ? `poster="${escapeHtml(asset.thumbnail_url)}"` : ''} src="${escapeHtml(asset.cdn_url)}"></video>`;
+    } else if (hasThumb) {
+      coverInner = `<img src="${escapeHtml(asset.thumbnail_url)}" alt="" loading="lazy" />`;
+    }
+    const meta = [asset.brand, fmtDuration(asset.duration)].filter(Boolean).join(' · ') || 'Studio';
+    const title = asset.display_title || asset.title || 'Untitled';
+    return `
+      <div class="show-card playable" data-id="${escapeHtml(asset.id)}">
+        <div class="show-cover ${coverInner ? '' : altClass}">
+          ${coverInner}
+          <div class="play-overlay" aria-hidden="true" data-icon="play" data-icon-size="26"></div>
+        </div>
+        <div class="show-title">${escapeHtml(title)}</div>
+        <div class="show-meta">${escapeHtml(meta)}</div>
+      </div>
+    `;
+  }
+
+  function renderStrip(selector, items) {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    if (!items.length) {
+      el.innerHTML = '<div style="color:var(--text-tertiary); padding:24px 0; font-size:14px;">Nothing here yet — check back soon.</div>';
+      return;
+    }
+    el.innerHTML = items.map(cardHtml).join('');
+  }
+
+  function renderHeroPiece(asset) {
+    if (!asset) return;
+    const video = document.getElementById('heroPieceVideo');
+    if (hasPlayableVideo(asset)) {
+      video.src = asset.cdn_url;
+      if (isHttps(asset.thumbnail_url)) video.poster = asset.thumbnail_url;
+      video.load();
+      const p = video.play();
+      if (p && p.catch) p.catch(() => {});
+    }
+    document.getElementById('heroPieceTitle').textContent = asset.display_title || asset.title || 'Featured episode';
+    document.getElementById('heroPieceDesc').textContent = asset.description || asset.ai_description || 'A piece from the JourneyWell channel — produced in our studio, distributed across every platform our clients show up on.';
+    const metaBits = [
+      asset.brand,
+      fmtDuration(asset.duration),
+      asset.polished ? 'Polished' : null,
+    ].filter(Boolean);
+    document.getElementById('heroPieceMeta').innerHTML = metaBits.map(m => `<span>${escapeHtml(m)}</span>`).join('');
+    // Hero play button → open in immersive player (wired again after segmentation runs)
+    document.getElementById('heroPiecePlayBtn').onclick = () => openVideoOverlay(asset);
+    document.getElementById('heroPiecePlayer').onclick = () => openVideoOverlay(asset);
+  }
+
+  function renderShows(shows) {
+    const wrap = document.getElementById('showRows');
+    if (!shows.length) { wrap.innerHTML = ''; return; }
+    wrap.innerHTML = shows.map(({ brand, items }) => {
+      const cards = items.slice(0, 12).map(cardHtml).join('');
+      return `
+        <div class="show-row">
+          <div class="container">
+            <div class="row-header">
+              <div class="row-show-head">
+                <div class="row-show-avatar">${escapeHtml(initials(brand))}</div>
+                <a class="row-title" href="#">${escapeHtml(brand)}</a>
+              </div>
+              <div class="row-meta">${items.length} ${items.length === 1 ? 'episode' : 'episodes'} · Series</div>
+            </div>
+            <div class="work-strip-wrap"><div class="work-strip episode-strip">${cards}</div></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // ---------- REELS FEED (TikTok/IG-style vertical) ----------
+  // Builds a slide list interleaving clips with JW promo interstitials
+  // every PROMO_EVERY clips. Active slide auto-plays + unmutes; others pause.
+
+  const PROMO_EVERY = 3;
+  const PROMO_TEMPLATES = [
+    {
+      theme: 'studio',
+      sponsored: 'Sponsored · JourneyWell Studios',
+      headline: 'Book the <em>studio.</em>',
+      sub: 'Walk in, sit down, walk out with a finished episode. Engineer + lighting + masters in 48hrs.',
+      cta: 'Book a session →',
+      drawer: 'studio',
+    },
+    {
+      theme: 'authority',
+      sponsored: 'Sponsored · The Authority System',
+      headline: 'One recording. <em>Thirty pieces.</em>',
+      sub: 'We turn each studio session into 30+ pieces of social, written, and short-form content.',
+      cta: 'Build my system →',
+      drawer: 'authority',
+    },
+    {
+      theme: 'podcast',
+      sponsored: 'Sponsored · Podcast Launch',
+      headline: 'Start a <em>branded</em> podcast.',
+      sub: 'Concept to launch in two weeks. Production, branding, distribution end-to-end.',
+      cta: 'Launch your show →',
+      drawer: 'podcast',
+    },
+  ];
+
+  let REELS_SLIDES = [];  // [{type:'clip'|'promo', asset?, promo?}]
+  let REELS_OPEN = false;
+  let REELS_INDEX = 0;
+  let REELS_GLOBAL_MUTED = true;
+  let REELS_IO = null;
+  let REELS_WHEEL_LOCK = 0;
+
+  function buildSlides(clips) {
+    const out = [];
+    let pi = 0;
+    clips.forEach((asset, i) => {
+      out.push({ type: 'clip', asset });
+      if ((i + 1) % PROMO_EVERY === 0) {
+        out.push({ type: 'promo', promo: PROMO_TEMPLATES[pi % PROMO_TEMPLATES.length] });
+        pi++;
+      }
+    });
+    // ensure feed ends on a promo if no closing promo yet (so the last frame is the pitch)
+    if (out.length && out[out.length - 1].type !== 'promo') {
+      out.push({ type: 'promo', promo: PROMO_TEMPLATES[pi % PROMO_TEMPLATES.length] });
+    }
+    return out;
+  }
+
+  function brandHandle(brand) {
+    return '@' + String(brand || 'journeywell').toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 24);
+  }
+
+  function clipSlideHtml(asset, slideIdx) {
+    const hasVideo = hasPlayableVideo(asset);
+    const poster = isHttps(asset.thumbnail_url) ? `poster="${escapeHtml(asset.thumbnail_url)}"` : '';
+    const brand = asset.brand || 'JourneyWell';
+    const handle = brandHandle(brand);
+    const title = asset.display_title || asset.title || 'Untitled';
+    const caption = (asset.description || asset.ai_description || title).slice(0, 180);
+    return `
+      <div class="reels-slide" data-slide-index="${slideIdx}" data-asset-id="${escapeHtml(asset.id)}">
+        ${hasVideo
+          ? `<video class="reels-video" muted playsinline loop preload="metadata" ${poster} src="${escapeHtml(asset.cdn_url)}"></video>`
+          : (isHttps(asset.thumbnail_url) ? `<img src="${escapeHtml(asset.thumbnail_url)}" alt="" />` : '')}
+
+        <div class="reels-top-controls">
+          <div class="reels-top-left">
+            <button class="reels-top-btn" data-action="playpause" title="Play / Pause" data-icon="play" data-icon-size="18"></button>
+            <button class="reels-top-btn" data-action="mute" title="Toggle audio" data-icon="volumeOff" data-icon-size="18"></button>
+          </div>
+          <div class="reels-top-right">
+            <button class="reels-top-btn" data-action="expand" title="Open full" data-icon="expandArrows" data-icon-size="18"></button>
+            <button class="reels-top-btn" data-action="close" title="Close" data-icon="close" data-icon-size="18"></button>
+          </div>
+        </div>
+
+        <div class="reels-actions">
+          <button class="reels-action" data-action="like" title="Like">
+            <span class="reels-action-icon" data-icon="heart" data-icon-size="24"></span>
+            <span class="reels-action-label">Like</span>
+          </button>
+          <button class="reels-action" data-action="comment" title="Ask" data-open-drawer-with="learn">
+            <span class="reels-action-icon" data-icon="message" data-icon-size="24"></span>
+            <span class="reels-action-label">Ask</span>
+          </button>
+          <button class="reels-action" data-action="share" title="Share">
+            <span class="reels-action-icon" data-icon="share" data-icon-size="24"></span>
+            <span class="reels-action-label">Share</span>
+          </button>
+          <button class="reels-action" data-action="save" title="Save">
+            <span class="reels-action-icon" data-icon="bookmark" data-icon-size="24"></span>
+            <span class="reels-action-label">Save</span>
+          </button>
+          <button class="reels-action cta" data-action="book" title="Book the studio" data-open-drawer-with="studio">
+            <span class="reels-action-icon" data-icon="star" data-icon-size="24"></span>
+            <span class="reels-action-label">Book</span>
+          </button>
+        </div>
+
+        <div class="reels-paused-overlay"><div data-icon="play" data-icon-size="44"></div></div>
+
+        <div class="reels-info">
+          <div class="reels-info-row">
+            <div class="reels-info-avatar">${escapeHtml(initials(brand))}</div>
+            <div class="reels-info-handle">${escapeHtml(handle)}</div>
+            <button class="reels-info-subscribe" data-open-drawer-with="podcast">Subscribe</button>
+          </div>
+          <div class="reels-info-caption">${escapeHtml(caption)}</div>
+        </div>
+
+        <div class="reels-progress"><div class="reels-progress-fill"></div></div>
+      </div>
+    `;
+  }
+  function promoSlideHtml(promo, slideIdx) {
+    return `
+      <div class="reels-slide is-promo theme-${promo.theme}" data-slide-index="${slideIdx}" data-type="promo">
+        <div class="reels-promo">
+          <div class="reels-promo-sponsored">${escapeHtml(promo.sponsored)}</div>
+          <div class="reels-promo-headline">${promo.headline}</div>
+          <div class="reels-promo-sub">${escapeHtml(promo.sub)}</div>
+          <button type="button" class="reels-promo-cta" data-open-drawer-with="${escapeHtml(promo.drawer)}">${escapeHtml(promo.cta)}</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function aspectClass(asset) {
+    const w = asset && asset.width, h = asset && asset.height;
+    if (w && h) {
+      if (h > w * 1.1) return 'is-vertical';
+      if (Math.abs(w - h) < Math.max(w, h) * 0.1) return 'is-square';
+      return 'is-horizontal';
+    }
+    return 'is-vertical';
+  }
+
+  function applyFrameAspect(asset) {
+    const frame = document.querySelector('.reels-frame');
+    if (!frame) return;
+    frame.classList.remove('is-vertical', 'is-horizontal', 'is-square');
+    frame.classList.add(aspectClass(asset));
+  }
+
+  function mountSlides(slides, slideIndex) {
+    REELS_SLIDES = slides;
+    const track = document.getElementById('reelsTrack');
+    track.innerHTML = REELS_SLIDES.map((s, i) =>
+      s.type === 'clip' ? clipSlideHtml(s.asset, i) : promoSlideHtml(s.promo, i)
+    ).join('');
+    REELS_INDEX = slideIndex || 0;
+    wireSlideEvents(track);
+    requestAnimationFrame(() => {
+      const slide = track.querySelector(`[data-slide-index="${REELS_INDEX}"]`);
+      if (slide) track.scrollTop = slide.offsetTop;
+      activateSlide(REELS_INDEX, true);
+    });
+  }
+
+  function mountReelsFeed(clips, startIndex) {
+    if (!clips.length) return;
+    const slides = buildSlides(clips);
+    // Map original clip index → slide index in the interleaved list
+    let firstSlideForClip = 0;
+    if (typeof startIndex === 'number') {
+      let count = 0;
+      for (let i = 0; i < slides.length; i++) {
+        if (slides[i].type === 'clip') {
+          if (count === startIndex) { firstSlideForClip = i; break; }
+          count++;
+        }
+      }
+    }
+    mountSlides(slides, firstSlideForClip);
+  }
+
+  function wireSlideEvents(track) {
+    // Top playback controls (play/pause, mute, expand=fullscreen, close)
+    track.querySelectorAll('.reels-top-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const slide = btn.closest('.reels-slide');
+        const action = btn.dataset.action;
+        if (action === 'mute') { toggleReelsMute(); return; }
+        if (action === 'close') { closeReelsFeed(); return; }
+        if (action === 'expand') {
+          enterFullscreen();
+          return;
+        }
+        if (action === 'playpause') {
+          const v = slide.querySelector('video');
+          if (!v) return;
+          const pausedOverlay = slide.querySelector('.reels-paused-overlay');
+          if (v.paused) {
+            const p = v.play(); if (p && p.catch) p.catch(() => {});
+            pausedOverlay && pausedOverlay.classList.remove('show');
+            btn.innerHTML = window.JW.icon('pause', { size: 18 });
+          } else {
+            v.pause();
+            pausedOverlay && pausedOverlay.classList.add('show');
+            btn.innerHTML = window.JW.icon('play', { size: 18 });
+          }
+        }
+      });
+    });
+
+    // Side action rail — Like / Share / Save toggle visual state, Ask + Book route via data-open-drawer-with
+    track.querySelectorAll('.reels-action').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const action = btn.dataset.action;
+        if (action === 'like' || action === 'save') {
+          btn.classList.toggle('active');
+          return;
+        }
+        if (action === 'share') {
+          const slide = btn.closest('.reels-slide');
+          const id = slide && slide.dataset.assetId;
+          const asset = id && DATA && DATA.assets.find(x => x.id === id);
+          if (asset && navigator.share) {
+            navigator.share({
+              title: asset.display_title || asset.title || 'JourneyWell',
+              text: asset.description || 'From the JourneyWell channel',
+              url: asset.cdn_url || window.location.href,
+            }).catch(() => {});
+          } else {
+            try {
+              navigator.clipboard && navigator.clipboard.writeText(asset && asset.cdn_url || window.location.href);
+              btn.classList.add('active');
+              const lbl = btn.querySelector('.reels-action-label');
+              const oldText = lbl.textContent;
+              lbl.textContent = 'Copied';
+              setTimeout(() => { btn.classList.remove('active'); lbl.textContent = oldText; }, 1400);
+            } catch (e) {}
+          }
+        }
+      });
+    });
+
+    // Anything with data-open-drawer-with — drawer (Ask, Book, Subscribe, Promo CTAs)
+    track.querySelectorAll('[data-open-drawer-with]').forEach(el => {
+      el.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (window.JW) window.JW.openDrawer(el.dataset.openDrawerWith);
+      });
+    });
+
+    // Tap clip to pause/play
+    track.querySelectorAll('.reels-slide:not(.is-promo)').forEach(slide => {
+      slide.addEventListener('click', () => {
+        const v = slide.querySelector('video');
+        if (!v) return;
+        const pausedOverlay = slide.querySelector('.reels-paused-overlay');
+        if (v.paused) {
+          const p = v.play(); if (p && p.catch) p.catch(() => {});
+          pausedOverlay && pausedOverlay.classList.remove('show');
+        } else {
+          v.pause();
+          pausedOverlay && pausedOverlay.classList.add('show');
+        }
+      });
+    });
+
+    // IntersectionObserver: only the slide >=60% visible is "active"
+    if (REELS_IO) REELS_IO.disconnect();
+    REELS_IO = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+          const idx = Number(entry.target.dataset.slideIndex);
+          if (!Number.isNaN(idx) && idx !== REELS_INDEX) {
+            REELS_INDEX = idx;
+            activateSlide(idx, false);
+          }
+        }
+      });
+    }, { root: track, threshold: [0, 0.6, 1] });
+    track.querySelectorAll('.reels-slide').forEach(s => REELS_IO.observe(s));
+
+    // Progress bar tick for current video
+    track.querySelectorAll('video').forEach(v => {
+      v.addEventListener('timeupdate', () => {
+        if (!v.duration) return;
+        const slide = v.closest('.reels-slide');
+        const fill = slide && slide.querySelector('.reels-progress-fill');
+        if (fill) fill.style.width = ((v.currentTime / v.duration) * 100) + '%';
+      });
+    });
+  }
+
+  // Play a video reliably. Waits for buffering if needed, and falls back to
+  // muted if an unmuted autoplay was blocked (so the click is never a no-op).
+  function playWhenReady(v) {
+    if (!v) return () => {};
+    v.muted = REELS_GLOBAL_MUTED;
+    v.playsInline = true;
+    v.setAttribute('playsinline', '');
+    let cancelled = false;
+    const fallbackToMuted = () => {
+      v.muted = true;
+      REELS_GLOBAL_MUTED = true;
+      // Refresh active slide mute button visual
+      const slide = v.closest('.reels-slide');
+      if (slide) {
+        const btn = slide.querySelector('.reels-top-btn[data-action="mute"]');
+        if (btn) btn.innerHTML = window.JW.icon('volumeOff', { size: 18 });
+      }
+    };
+    const tryPlay = () => {
+      if (cancelled) return;
+      const p = v.play();
+      if (p && p.catch) p.catch(err => {
+        // Unmuted autoplay blocked → mute and retry once.
+        if (err && err.name === 'NotAllowedError' && !v.muted) {
+          fallbackToMuted();
+          v.play().catch(() => {
+            v.addEventListener('canplay', () => { if (!cancelled) v.play().catch(() => {}); }, { once: true });
+          });
+          return;
+        }
+        // Otherwise wait for buffer.
+        v.addEventListener('canplay', () => { if (!cancelled) v.play().catch(() => {}); }, { once: true });
+      });
+    };
+    if (v.preload !== 'metadata') v.preload = 'metadata';
+    if (v.readyState >= 2) {
+      tryPlay();
+    } else {
+      try { v.load(); } catch (e) {}
+      v.addEventListener('loadeddata', tryPlay, { once: true });
+      v.addEventListener('canplay', tryPlay, { once: true });
+    }
+    return () => { cancelled = true; };
+  }
+
+  function activateSlide(idx, initial) {
+    const track = document.getElementById('reelsTrack');
+    // Pause every video except the active one
+    track.querySelectorAll('video').forEach(v => {
+      const slide = v.closest('.reels-slide');
+      const isActive = slide.dataset.slideIndex === String(idx);
+      if (isActive) {
+        playWhenReady(v);
+        const pausedOverlay = slide.querySelector('.reels-paused-overlay');
+        pausedOverlay && pausedOverlay.classList.remove('show');
+      } else {
+        try { v.pause(); } catch (e) {}
+        v.currentTime = 0;
+      }
+    });
+    // Sync top control button visuals on the active slide
+    const slide = track.querySelector(`.reels-slide[data-slide-index="${idx}"]`);
+    if (slide) {
+      const muteBtn = slide.querySelector('.reels-top-btn[data-action="mute"]');
+      if (muteBtn) muteBtn.innerHTML = window.JW.icon(REELS_GLOBAL_MUTED ? 'volumeOff' : 'volume', { size: 18 });
+      const playBtn = slide.querySelector('.reels-top-btn[data-action="playpause"]');
+      const v = slide.querySelector('video');
+      if (playBtn && v) playBtn.innerHTML = window.JW.icon(v.paused ? 'play' : 'pause', { size: 18 });
+    }
+    updateReelsNavButtons();
+  }
+
+  function toggleReelsMute() {
+    REELS_GLOBAL_MUTED = !REELS_GLOBAL_MUTED;
+    const track = document.getElementById('reelsTrack');
+    const active = track.querySelector(`.reels-slide[data-slide-index="${REELS_INDEX}"]`);
+    if (!active) return;
+    const v = active.querySelector('video');
+    if (v) v.muted = REELS_GLOBAL_MUTED;
+    const muteBtn = active.querySelector('.reels-top-btn[data-action="mute"]');
+    if (muteBtn) muteBtn.innerHTML = window.JW.icon(REELS_GLOBAL_MUTED ? 'volumeOff' : 'volume', { size: 18 });
+  }
+
+  function updateReelsNavButtons() {
+    const up = document.getElementById('reelsNavUp');
+    const down = document.getElementById('reelsNavDown');
+    if (!up || !down) return;
+    const total = REELS_SLIDES.length;
+    up.disabled = REELS_INDEX <= 0;
+    down.disabled = REELS_INDEX >= total - 1;
+  }
+
+  function scrollReels(delta) {
+    const track = document.getElementById('reelsTrack');
+    const slides = Array.from(track.querySelectorAll('.reels-slide'));
+    const next = Math.min(slides.length - 1, Math.max(0, REELS_INDEX + delta));
+    if (slides[next]) slides[next].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function openReelsFeed(clips, startIndex) {
+    if (!clips || !clips.length) return;
+    REELS_OPEN = true;
+    REELS_GLOBAL_MUTED = true; // shorts feed starts muted (TikTok pattern)
+    const overlay = document.getElementById('reelsOverlay');
+    applyFrameAspect(clips[startIndex || 0]);
+    overlay.hidden = false;
+    requestAnimationFrame(() => overlay.classList.add('open'));
+    document.body.style.overflow = 'hidden';
+    mountReelsFeed(clips, startIndex || 0);
+  }
+  // Long-form pool — populated at boot. Used to render the Up-next sidebar
+  // when a horizontal video is opened.
+  let LONGFORM_POOL = [];
+
+  function renderLfMeta(asset) {
+    const brand = asset.brand || 'JourneyWell';
+    const handle = brandHandle(brand);
+    document.getElementById('lfMetaTitle').textContent = asset.display_title || asset.title || 'Untitled';
+    document.getElementById('lfMetaAvatar').textContent = initials(brand);
+    document.getElementById('lfMetaHandle').textContent = handle;
+    document.getElementById('lfMetaChannelSub').textContent = brand + ' · JourneyWell channel';
+    const stats = [
+      asset.created_at ? new Date(asset.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : null,
+      fmtDuration(asset.duration),
+      asset.polished ? 'Polished' : null,
+    ].filter(Boolean).join(' · ');
+    document.getElementById('lfMetaStats').textContent = stats;
+    document.getElementById('lfMetaDesc').textContent = asset.description || asset.ai_description || 'No description on file.';
+  }
+
+  function renderLfUpNext(currentAsset, pool) {
+    const list = document.getElementById('lfUpNextList');
+    const items = pool.filter(a => a.id !== currentAsset.id).slice(0, 12);
+    if (!items.length) { list.innerHTML = '<div style="color:rgba(255,255,255,0.5); font-size:13px; padding:8px 0;">No other episodes yet.</div>'; return; }
+    list.innerHTML = items.map(a => {
+      const thumb = isHttps(a.thumbnail_url)
+        ? `<img src="${escapeHtml(a.thumbnail_url)}" alt="" loading="lazy" />` : '';
+      const meta = [a.brand, fmtDuration(a.duration)].filter(Boolean).join(' · ');
+      return `
+        <button type="button" class="upnext-card" data-asset-id="${escapeHtml(a.id)}">
+          <div class="upnext-thumb">${thumb}</div>
+          <div class="upnext-info">
+            <div class="upnext-title">${escapeHtml(a.display_title || a.title || 'Untitled')}</div>
+            <div class="upnext-meta">${escapeHtml(meta)}</div>
+          </div>
+        </button>
+      `;
+    }).join('');
+    list.querySelectorAll('.upnext-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const a = DATA && DATA.assets.find(x => x.id === card.dataset.assetId);
+        if (a) loadAssetIntoOverlay(a);
+      });
+    });
+  }
+
+  // Swap the currently playing asset inside an already-open overlay
+  function loadAssetIntoOverlay(asset) {
+    if (!asset) return;
+    applyFrameAspect(asset);
+    mountSlides([{ type: 'clip', asset }], 0);
+    if (aspectClass(asset) === 'is-horizontal') {
+      renderLfMeta(asset);
+      renderLfUpNext(asset, LONGFORM_POOL);
+    }
+  }
+
+  // Single-asset open — used when ANY card is clicked.
+  // Both orientations now use the same TikTok-style swipe feed (with promo
+  // interstitials). The horizontal frame is sized by .reels-frame.is-horizontal
+  // in CSS; the swipe-up/down + ad pattern is identical to vertical.
+  // If a pool is provided, the clicked asset becomes the start of that pool's
+  // swipeable feed; otherwise we open a singleton feed.
+  function openVideoOverlay(asset, pool) {
+    if (!asset) return;
+    REELS_OPEN = true;
+    REELS_GLOBAL_MUTED = false;  // single-asset open implies intent to watch with sound
+    const overlay = document.getElementById('reelsOverlay');
+    applyFrameAspect(asset);
+    // Make sure no stale long-form layout is left over from any earlier open.
+    overlay.classList.remove('long-form');
+    overlay.hidden = false;
+    requestAnimationFrame(() => overlay.classList.add('open'));
+    document.body.style.overflow = 'hidden';
+
+    let clips, startIndex;
+    if (pool && pool.length) {
+      const idx = pool.findIndex(a => a.id === asset.id);
+      if (idx >= 0) { clips = pool; startIndex = idx; }
+      else          { clips = [asset, ...pool]; startIndex = 0; }
+    } else {
+      clips = [asset];
+      startIndex = 0;
+    }
+    mountReelsFeed(clips, startIndex);
+  }
+  function closeReelsFeed() {
+    REELS_OPEN = false;
+    const overlay = document.getElementById('reelsOverlay');
+    if (document.fullscreenElement) {
+      try { document.exitFullscreen(); } catch (e) {}
+    }
+    overlay.classList.remove('open');
+    setTimeout(() => {
+      overlay.hidden = true;
+      overlay.classList.remove('long-form');
+      document.getElementById('reelsTrack').innerHTML = '';
+    }, 240);
+    document.body.style.overflow = '';
+  }
+  function enterFullscreen() {
+    const frame = document.querySelector('.reels-frame');
+    if (!frame) return;
+    if (document.fullscreenElement) {
+      try { document.exitFullscreen(); } catch (e) {}
+      return;
+    }
+    const req = frame.requestFullscreen || frame.webkitRequestFullscreen || frame.msRequestFullscreen;
+    if (req) {
+      try { req.call(frame); } catch (e) {}
+    }
+  }
+
+  // ---------- mini player ----------
+  let CURRENT_ASSET = null;
+  function openMiniPlayer(asset) {
+    CURRENT_ASSET = asset;
+    const mini = document.getElementById('miniPlayer');
+    const video = document.getElementById('miniPlayerVideo');
+    const title = document.getElementById('miniPlayerTitle');
+    const meta = document.getElementById('miniPlayerMeta');
+
+    if (hasPlayableVideo(asset)) {
+      video.src = asset.cdn_url;
+      if (isHttps(asset.thumbnail_url)) video.poster = asset.thumbnail_url;
+      video.load();
+      const p = video.play();
+      if (p && p.catch) p.catch(() => {});
+    }
+    title.textContent = asset.display_title || asset.title || 'Untitled';
+    meta.textContent = [asset.brand, fmtDuration(asset.duration)].filter(Boolean).join(' · ');
+    mini.hidden = false;
+    requestAnimationFrame(() => mini.classList.add('open'));
+  }
+  function closeMiniPlayer() {
+    const mini = document.getElementById('miniPlayer');
+    const video = document.getElementById('miniPlayerVideo');
+    mini.classList.remove('open');
+    setTimeout(() => { mini.hidden = true; video.pause(); video.removeAttribute('src'); video.load(); }, 280);
+    CURRENT_ASSET = null;
+  }
+
+  // ---------- detail modal (expand from mini) ----------
+  function openDetail(asset) {
+    if (!asset) return;
+    const overlay = document.getElementById('detailOverlay');
+    const playerEl = document.getElementById('detailPlayer');
+    const infoEl = document.getElementById('detailInfo');
+
+    if (hasPlayableVideo(asset)) {
+      const poster = isHttps(asset.thumbnail_url) ? `poster="${escapeHtml(asset.thumbnail_url)}"` : '';
+      playerEl.innerHTML = `<video controls autoplay playsinline preload="metadata" ${poster}><source src="${escapeHtml(asset.cdn_url)}" type="video/mp4" /></video>`;
+    } else if (isHttps(asset.thumbnail_url)) {
+      playerEl.innerHTML = `<div class="player-poster" style="background-image:url('${escapeHtml(asset.thumbnail_url)}');"><div class="player-play" data-icon="play" data-icon-size="32"></div></div>`;
+    } else {
+      playerEl.innerHTML = `<div style="color:var(--text-tertiary); padding:48px; text-align:center">Preview not available</div>`;
+    }
+
+    const meta = [
+      asset.brand ? `<span>${escapeHtml(asset.brand)}</span>` : '',
+      asset.duration ? `<span>${fmtDuration(asset.duration)}</span>` : '',
+      asset.width && asset.height ? `<span>${asset.width} × ${asset.height}</span>` : '',
+    ].filter(Boolean).join('');
+    const tags = (asset.tags || [])
+      .filter(t => !t.startsWith('source:') && !t.startsWith('type:audio') && !t.startsWith('youtube-'))
+      .slice(0, 8)
+      .map(t => `<span class="detail-tag">${escapeHtml(t)}</span>`)
+      .join('');
+
+    infoEl.innerHTML = `
+      <div class="detail-info-eyebrow">${asset.polished ? 'Polished · Studio production' : 'Studio production'}</div>
+      <h2 class="detail-info-title">${escapeHtml(asset.display_title || asset.title || 'Untitled')}</h2>
+      <div class="detail-info-meta">${meta}</div>
+      <div class="detail-info-desc">${escapeHtml(asset.description || asset.ai_description || 'No description on file.')}</div>
+      <div class="detail-info-tags">${tags}</div>
+      <div style="margin-top:auto; display:flex; gap:8px; padding-top:16px">
+        <button class="btn btn-gold" data-open-drawer-with="authority">Want this for your brand?</button>
+      </div>
+    `;
+    infoEl.querySelectorAll('[data-open-drawer-with]').forEach(b => {
+      b.addEventListener('click', () => window.JW && window.JW.openDrawer(b.dataset.openDrawerWith));
+    });
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDetail() {
+    const overlay = document.getElementById('detailOverlay');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    const v = overlay.querySelector('video');
+    if (v) { v.pause(); v.removeAttribute('src'); v.load(); }
+  }
+
+  // ---------- tabs (active state + smooth scroll) ----------
+  function wireTabs() {
+    const tabs = document.querySelectorAll('.channel-tab');
+    tabs.forEach(t => {
+      t.addEventListener('click', e => {
+        e.preventDefault();
+        const id = t.dataset.tab;
+        const target = document.getElementById(id);
+        if (!target) return;
+        const offset = 132;
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+      });
+    });
+    // Spy: which section is in view
+    const sections = Array.from(document.querySelectorAll('.channel-section[id]'));
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === id));
+        }
+      });
+    }, { rootMargin: '-160px 0px -60% 0px', threshold: 0 });
+    sections.forEach(s => io.observe(s));
+  }
+
+  // ---------- boot ----------
+  let DATA = null;
+  let CURRENT_SEG = null;  // for hourly refresh + click rewiring
+  document.addEventListener('DOMContentLoaded', async () => {
+    if (!window.JW) return;
+
+    let seg;
+    if (USE_LIVE_FEED_TAGS) {
+      // Pull each section directly from creator-tunnel by tag
+      seg = await loadByLiveFeedTagsForSegment();
+      DATA = { assets: seg.all, topic_counts: {}, total_in_vault: seg.all.length };
+      if (!seg.all.length) {
+        document.getElementById('heroPieceTitle').textContent = 'Channel is loading…';
+        // fall through — render empty strips so the layout shows
+      }
+    } else {
+      DATA = (window.JW.loadCollection ? await window.JW.loadCollection('web') : await window.JW.loadContent());
+      if (!DATA || !DATA.assets) {
+        document.getElementById('heroPieceTitle').textContent = 'Channel is loading…';
+        return;
+      }
+      seg = segment(DATA.assets);
+    }
+    CURRENT_SEG = seg;
+    // Long-form pool for the Up-next sidebar
+    LONGFORM_POOL = seg.episodes.length ? seg.episodes : seg.all.filter(a => aspectClass(a) === 'is-horizontal');
+
+    // Hero piece = first featured
+    renderHeroPiece(seg.featured[0]);
+
+    // Strips
+    renderStrip('#featuredStrip', seg.featured);
+    renderStrip('#episodesStrip', seg.episodes);
+    renderStrip('#shortsStrip', seg.shorts);
+    renderStrip('#btsStrip', seg.bts);
+    renderShows(seg.shows);
+    // Hand off card-video playback to the single-active observer in chrome.js.
+    // Avoids 5+ parallel video streams from card autoplay saturating R2.
+    if (window.JW && typeof window.JW.initAutoplayVideos === 'function') {
+      window.JW.initAutoplayVideos();
+    }
+
+    // Counts
+    document.getElementById('featuredCount').textContent = seg.featured.length + ' picked';
+    document.getElementById('episodesCount').textContent = seg.episodes.length + ' available';
+    document.getElementById('shortsCount').textContent = seg.shorts.length + ' clip' + (seg.shorts.length === 1 ? '' : 's');
+
+    // Channel stats
+    document.getElementById('channelStats').innerHTML = `
+      <span><strong>${seg.all.length}</strong> Pieces</span>
+      <span class="dot"></span>
+      <span><strong>${seg.shows.length}</strong> Shows</span>
+      <span class="dot"></span>
+      <span><strong>${Object.keys(DATA.topic_counts || {}).length || seg.shows.length}</strong> Topics</span>
+    `;
+
+    // Card click — every video card opens in the immersive player.
+    // Cards in the shorts row open the swipeable feed (with promo interstitials);
+    // every other card opens single-asset mode (no swipe, native fullscreen via ⤢).
+    const shortsIds = new Set(seg.shorts.map(s => s.id));
+    document.querySelectorAll('.show-card.playable').forEach(card => {
+      card.addEventListener('click', () => {
+        const a = DATA.assets.find(x => x.id === card.dataset.id);
+        if (!a) return;
+        if (shortsIds.has(a.id)) {
+          // Cross-row pool — any short anywhere flows into the full shorts feed.
+          const idx = seg.shorts.findIndex(s => s.id === a.id);
+          openReelsFeed(seg.shorts, Math.max(0, idx));
+        } else {
+          // Horizontal → TikTok-style swipe feed through the horizontal pool,
+          // promo interstitials spliced in (same UX as vertical, just 16:9 frame).
+          openVideoOverlay(a, LONGFORM_POOL);
+        }
+      });
+    });
+
+    // Hero "Play full" + hero player click — open in immersive player
+    const heroAsset = seg.featured[0];
+    const heroPlayBtn = document.getElementById('heroPiecePlayBtn');
+    const heroPlayer = document.getElementById('heroPiecePlayer');
+    if (heroAsset && heroPlayBtn) heroPlayBtn.onclick = () => openVideoOverlay(heroAsset, LONGFORM_POOL);
+    if (heroAsset && heroPlayer) heroPlayer.onclick = () => openVideoOverlay(heroAsset, LONGFORM_POOL);
+
+    // "Watch shorts" pill — open feed at first slide
+    const watchShortsBtn = document.getElementById('watchShortsBtn');
+    if (watchShortsBtn) {
+      watchShortsBtn.addEventListener('click', () => openReelsFeed(seg.shorts, 0));
+    }
+
+    // Autoplay-on-viewport for all new card videos
+    if (window.JW && window.JW.initAutoplayVideos) window.JW.initAutoplayVideos(document.body);
+
+    // Tabs
+    wireTabs();
+  });
+
+  // Mini-player controls
+  document.getElementById('miniPlayerClose').addEventListener('click', closeMiniPlayer);
+  document.getElementById('miniPlayerExpand').addEventListener('click', () => {
+    if (!CURRENT_ASSET) return;
+    const asset = CURRENT_ASSET;
+    closeMiniPlayer();
+    setTimeout(() => openDetail(asset), 100);
+  });
+
+  // Detail modal controls
+  document.getElementById('detailClose').addEventListener('click', closeDetail);
+  document.getElementById('detailOverlay').addEventListener('click', e => {
+    if (e.target.id === 'detailOverlay') closeDetail();
+  });
+  // Reels feed controls
+  document.getElementById('reelsClose').addEventListener('click', closeReelsFeed);
+  document.getElementById('reelsNavUp').addEventListener('click', () => scrollReels(-1));
+  document.getElementById('reelsNavDown').addEventListener('click', () => scrollReels(1));
+  // Wheel-to-slide on desktop (debounced — one slide per gesture)
+  document.getElementById('reelsOverlay').addEventListener('wheel', e => {
+    if (!REELS_OPEN) return;
+    e.preventDefault();
+    const now = Date.now();
+    if (now - REELS_WHEEL_LOCK < 360) return;
+    if (Math.abs(e.deltaY) < 12) return;
+    REELS_WHEEL_LOCK = now;
+    scrollReels(e.deltaY > 0 ? 1 : -1);
+  }, { passive: false });
+
+  document.addEventListener('keydown', e => {
+    if (REELS_OPEN) {
+      if (e.key === 'Escape') return closeReelsFeed();
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); scrollReels(1); return; }
+      if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); scrollReels(-1); return; }
+      if (e.key.toLowerCase() === 'm') { toggleReelsMute(); return; }
+    }
+    if (e.key === 'Escape') {
+      if (document.getElementById('detailOverlay').classList.contains('open')) closeDetail();
+      else if (document.getElementById('miniPlayer').classList.contains('open')) closeMiniPlayer();
+    }
+  });
+})();
+</script>
+</body>
+</html>

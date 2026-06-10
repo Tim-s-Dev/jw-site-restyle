@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Get Started — JourneyWell</title>
+<meta name="description" content="Tell us where to start. Book the studio, launch a podcast, build authority, or just explore — JourneyWell will route you in 30 seconds." />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="redesign.css" />
+</head>
+<body class="full-page-form">
+
+<div class="full-page-mast">
+  <a href="index.html" class="logo">JourneyWell</a>
+</div>
+
+<script src="chrome.js"></script>
+<script>
+  // Auto-open the drawer once chrome.js mounts it. Drawer is restyled
+  // via .full-page-form body class to render as a centered full-page form.
+  function openWhenReady(attempt) {
+    attempt = attempt || 0;
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawerOverlay');
+    if (drawer && overlay) {
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+      // If a path is hinted in the URL (?path=studio), pre-select it
+      const params = new URLSearchParams(location.search);
+      const preset = params.get('path');
+      if (preset) {
+        const opt = document.querySelector(`[data-path="${preset}"]`);
+        if (opt) opt.click();
+      }
+      return;
+    }
+    if (attempt < 40) setTimeout(() => openWhenReady(attempt + 1), 50);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => openWhenReady());
+  } else {
+    openWhenReady();
+  }
+</script>
+</body>
+</html>

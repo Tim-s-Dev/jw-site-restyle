@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JourneyWell — Content authority, produced and shipped.</title>
+<meta name="description" content="JourneyWell is the studio + system behind founders, brands, and creators building real content authority. We produce it. We multiply it. You own the audience." />
+<link rel="stylesheet" href="style.css?v=5" />
+<link rel="stylesheet" href="lite.css" />
+<link rel="stylesheet" href="redesign.css" />
+</head>
+<body class="lite">
+
+<!--
+  HERO BRAND VIDEO
+  Sits above the headline + 3-up coverflow. 16:9 landscape, full-width within the container.
+
+  Wired via chrome.js → initHeroVideo(). Fetches creator-tunnel asset tagged
+  `live-feed:hero` (cap 1, single video) and injects a looping <video> here.
+  If no asset is tagged, the placeholder below stays visible.
+-->
+<section class="hero-video">
+  <div class="lite-container">
+    <div class="hero-video-frame" id="heroVideoFrame">
+      <!-- Hero overlay: eyebrow + headline + lead + CTAs sit on top of the
+           video. chrome.js's initHeroVideo() inserts the <video> as the
+           FIRST child of #heroVideoFrame, so this overlay sits above it in
+           z-order. The video element itself fades in via data-ready="1". -->
+      <div class="hero-video-overlay">
+        <div class="hero-video-eyebrow">Studio + System · Baton Rouge</div>
+        <h1 class="hero-video-title">The content engine for founders who actually <em>ship</em>.</h1>
+        <p class="hero-video-lead">JourneyWell is a full-service content studio. One recording becomes a month of episodes, reels, and posts — produced in-house, distributed everywhere, owned by you.</p>
+        <div class="hero-video-ctas">
+          <button class="btn btn-large btn-primary" data-open-drawer><span id="iconRocketHero"></span> Build my system</button>
+          <a href="work.html" class="btn btn-large btn-ghost"><span id="iconPlayHero"></span> Watch the work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HERO -->
+<section class="lite-hero hero-split">
+  <div class="lite-container hero-split-grid">
+    <!-- Left column frames the carousel as "what's shipping out of the studio."
+         Carousel slides are fed by Creator Tunnel `live-feed:carousel` (cap 6),
+         so this copy stays accurate as new clips get tagged. -->
+    <div class="hero-context">
+      <div class="hero-context-eyebrow">Recent work</div>
+      <h2 class="hero-context-title">Built in studio. Shipped <em>every week.</em></h2>
+      <p class="hero-context-lead">A live cut of what's coming out of the JourneyWell channel — episodes, reels, and shorts, pulled straight from the studio.</p>
+      <a href="work.html" class="hero-context-cta">Open the channel <span aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="hero-carousel" id="heroCarousel" aria-roledescription="carousel" aria-label="Recent work showcase">
+      <div class="hero-carousel-stage">
+        <figure class="hero-slide" data-pos="prev"><img src="https://picsum.photos/seed/jw-a/640/800" alt=""></figure>
+        <figure class="hero-slide" data-pos="current"><img src="https://picsum.photos/seed/jw-b/640/800" alt=""></figure>
+        <figure class="hero-slide" data-pos="next"><img src="https://picsum.photos/seed/jw-c/640/800" alt=""></figure>
+        <figure class="hero-slide" data-pos="hidden"><img src="https://picsum.photos/seed/jw-d/640/800" alt=""></figure>
+        <figure class="hero-slide" data-pos="hidden"><img src="https://picsum.photos/seed/jw-e/640/800" alt=""></figure>
+        <figure class="hero-slide" data-pos="hidden"><img src="https://picsum.photos/seed/jw-f/640/800" alt=""></figure>
+      </div>
+      <div class="hero-carousel-dots" id="heroCarouselDots"></div>
+    </div>
+  </div>
+
+  <div class="lite-container">
+    <div class="lite-logo-strip">
+      <div class="lite-logo-strip-label">Trusted by founders building</div>
+      <div class="lite-brand-mark">Bonvenu Bank</div>
+      <div class="lite-brand-mark">Melara</div>
+      <div class="lite-brand-mark">She's Built Different</div>
+      <div class="lite-brand-mark">Two Dudes And</div>
+      <div class="lite-brand-mark">Smile Spa</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="lite-section alt">
+  <div class="lite-container">
+    <div class="lite-section-head">
+      <div class="eyebrow neutral">What we do</div>
+      <h2>Three ways to work with JourneyWell.</h2>
+      <p class="lead">Pick the doorway that matches where you are. They all flow into the same system.</p>
+    </div>
+
+    <div class="lite-grid cols-3">
+      <a href="studio.html" class="lite-card lite-card--photo" style="text-decoration:none">
+        <div class="lite-card-photo"><img src="https://picsum.photos/seed/jw-studio/540/960" alt="" loading="lazy" /></div>
+        <div class="lite-card-body">
+          <div class="lite-card-icon" id="cardIconMic"></div>
+          <h3>Book the Studio</h3>
+          <p>Walk in, sit down, walk out with a finished episode. Engineer, lighting, masters delivered in 48 hours.</p>
+          <span class="lite-card-link">Book a session <span id="iconArr1"></span></span>
+        </div>
+      </a>
+      <a href="podcast.html" class="lite-card lite-card--photo" style="text-decoration:none">
+        <div class="lite-card-photo"><img src="https://picsum.photos/seed/jw-podcast/540/960" alt="" loading="lazy" /></div>
+        <div class="lite-card-body">
+          <div class="lite-card-icon" id="cardIconHeadphones"></div>
+          <h3>Launch a Podcast</h3>
+          <p>Concept to first ten episodes. Production, branding, and distribution — handled end-to-end by our team.</p>
+          <span class="lite-card-link">Start your show <span id="iconArr2"></span></span>
+        </div>
+      </a>
+      <a href="authority.html" class="lite-card lite-card--photo" style="text-decoration:none">
+        <div class="lite-card-photo"><img src="https://picsum.photos/seed/jw-authority/540/960" alt="" loading="lazy" /></div>
+        <div class="lite-card-body">
+          <div class="lite-card-icon" id="cardIconLayers"></div>
+          <h3>Build Authority</h3>
+          <p>The full system. One recording becomes thirty-plus pieces of content across every platform you show up on.</p>
+          <span class="lite-card-link">See the system <span id="iconArr3"></span></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="lite-section tight">
+  <div class="lite-container">
+    <div class="lite-stats">
+      <div>
+        <div class="lite-stat-num">200<em>+</em></div>
+        <div class="lite-stat-label">Episodes produced</div>
+      </div>
+      <div>
+        <div class="lite-stat-num">9.4k<em>+</em></div>
+        <div class="lite-stat-label">Assets in the vault</div>
+      </div>
+      <div>
+        <div class="lite-stat-num">15<em>+</em></div>
+        <div class="lite-stat-label">Founder brands</div>
+      </div>
+      <div>
+        <div class="lite-stat-num">4<em>yr</em></div>
+        <div class="lite-stat-label">In studio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="lite-section">
+  <div class="lite-container">
+    <div class="lite-section-head">
+      <div class="eyebrow neutral">How it works</div>
+      <h2>Four steps from idea to <em>audience</em>.</h2>
+      <p class="lead">No black boxes. Here's exactly what happens between booking the studio and the day your content lands on every platform.</p>
+    </div>
+
+    <div class="lite-grid cols-4">
+      <div class="lite-step-card">
+        <div class="lite-step-num">01</div>
+        <h3>Capture</h3>
+        <p>Walk into the studio. Sit down. We handle audio, video, lighting, the rest.</p>
+      </div>
+      <div class="lite-step-card">
+        <div class="lite-step-num">02</div>
+        <h3>Produce</h3>
+        <p>Editorial team cuts the episode, masters audio, designs the visual identity for the show.</p>
+      </div>
+      <div class="lite-step-card">
+        <div class="lite-step-num">03</div>
+        <h3>Publish</h3>
+        <p>Episode goes live across Spotify, Apple, YouTube — with show notes, chapters, and SEO.</p>
+      </div>
+      <div class="lite-step-card">
+        <div class="lite-step-num">04</div>
+        <h3>Multiply</h3>
+        <p>The Authority System spins one episode into thirty-plus pieces of social, written, and video content.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECENT WORK STRIP -->
+<section class="lite-section alt">
+  <div class="lite-container">
+    <div class="lite-section-head" style="display:flex; justify-content:space-between; align-items:end; max-width:none; gap:24px; flex-wrap:wrap">
+      <div>
+        <div class="eyebrow neutral">From the studio</div>
+        <h2 style="margin-bottom:6px">Recent work.</h2>
+      </div>
+      <a href="work.html" class="btn btn-ghost">Browse all <span id="iconArrLink"></span></a>
+    </div>
+
+    <div class="lite-tile-grid" id="liteHomeTiles">
+      <!-- Filled by chrome.js loadCollection('web') -->
+      <div class="lite-tile"><div class="lite-tile-thumb"></div><div class="lite-tile-body"><div class="lite-tile-title">Loading…</div></div></div>
+      <div class="lite-tile"><div class="lite-tile-thumb"></div><div class="lite-tile-body"><div class="lite-tile-title">Loading…</div></div></div>
+      <div class="lite-tile"><div class="lite-tile-thumb"></div><div class="lite-tile-body"><div class="lite-tile-title">Loading…</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="lite-section">
+  <div class="lite-narrow">
+    <span class="lite-quote-mark">"</span>
+    <p class="lite-quote">JourneyWell didn't just produce a podcast. They built our content engine. Three months in, we'd shipped more than I had on social in two years.</p>
+    <div class="lite-quote-attr">
+      <div class="lite-quote-avatar" data-profile-pic="smile-spa"></div>
+      <div>
+        <div class="lite-quote-name">Aimee Russo</div>
+        <div class="lite-quote-role">Founder, The Smile Spa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE ARE TEASER -->
+<section class="lite-section alt">
+  <div class="lite-container">
+    <div class="lite-founders">
+      <div class="lite-founders-photo">
+        <img src="images/tim-and-mel.png" alt="Tim and Melodie Simmons, JourneyWell co-founders" />
+      </div>
+      <div>
+        <div class="eyebrow">Who we are</div>
+        <h2>Run by a husband-and-wife team that's <em>obsessed</em> with shipping.</h2>
+        <p>JourneyWell is led by Tim &amp; Melodie Simmons. We started the studio in 2022 because the gap between "DIY content" and "agency content" was eating founders alive. Today we run a small team out of Baton Rouge, producing, editing, and shipping content across every platform our clients show up on.</p>
+        <p>We work with founders, operators, and brands who actually want to be seen — and aren't willing to wait six months between episodes to do it.</p>
+        <a href="about.html" class="btn btn-ghost" style="margin-top:8px">Read our story <span id="iconArrAbout"></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG TEASER — hidden alongside the Journal nav entry; restore both together. -->
+<!--
+<section class="lite-section">
+  <div class="lite-container">
+    <div class="lite-section-head" style="display:flex; justify-content:space-between; align-items:end; max-width:none; gap:24px; flex-wrap:wrap">
+      <div>
+        <div class="eyebrow neutral">Journal</div>
+        <h2 style="margin-bottom:6px">Notes from the studio.</h2>
+      </div>
+      <a href="blog.html" class="btn btn-ghost">All posts <span id="iconArrBlog"></span></a>
+    </div>
+
+    <div class="lite-blog-grid">
+      <a href="blog/the-cadence-trap.html" class="lite-blog-card">
+        <div class="lite-blog-card-thumb"><img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=900&q=70&auto=format&fit=crop" alt="" loading="lazy" /></div>
+        <div class="lite-blog-card-eyebrow">Strategy · 6 min read</div>
+        <div class="lite-blog-card-title">The cadence trap: why monthly podcasts die</div>
+        <div class="lite-blog-card-meta">Most founder shows fail at episode 6. Here's the schedule that doesn't.</div>
+      </a>
+      <a href="blog/one-recording-thirty-pieces.html" class="lite-blog-card">
+        <div class="lite-blog-card-thumb"><img src="https://images.unsplash.com/photo-1485579149621-3123dd979885?w=900&q=70&auto=format&fit=crop" alt="" loading="lazy" /></div>
+        <div class="lite-blog-card-eyebrow">System · 8 min read</div>
+        <div class="lite-blog-card-title">One recording, thirty pieces — the math</div>
+        <div class="lite-blog-card-meta">A real breakdown of how a single 60-min episode becomes 30+ assets.</div>
+      </a>
+      <a href="blog/why-founders-quit-content.html" class="lite-blog-card">
+        <div class="lite-blog-card-thumb"><img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=900&q=70&auto=format&fit=crop" alt="" loading="lazy" /></div>
+        <div class="lite-blog-card-eyebrow">Psychology · 5 min read</div>
+        <div class="lite-blog-card-title">Why most founders quit content (and what fixes it)</div>
+        <div class="lite-blog-card-meta">It's not lack of ideas. It's the operating model. Fix the model, content ships.</div>
+      </a>
+    </div>
+  </div>
+</section>
+-->
+
+
+<!-- COMPARE -->
+<section class="lite-section alt">
+  <div class="lite-container">
+    <div class="lite-section-head">
+      <div class="eyebrow neutral">How we compare</div>
+      <h2>Where JourneyWell <em>actually</em> fits.</h2>
+      <p class="lead">Honest about what we are and aren't. We're not the cheapest option, and we're not for everyone. Here's the picture.</p>
+    </div>
+
+    <div class="lite-compare">
+      <div class="lite-compare-head"></div>
+      <div class="lite-compare-head lite-compare-cell center">DIY</div>
+      <div class="lite-compare-head lite-compare-cell center">Generic agency</div>
+      <div class="lite-compare-head jw lite-compare-cell center">JourneyWell</div>
+
+      <div class="lite-compare-cell">Pro studio you can walk into</div>
+      <div class="lite-compare-cell center"><span class="x" id="cmpX1"></span></div>
+      <div class="lite-compare-cell center"><span class="x" id="cmpX2"></span></div>
+      <div class="lite-compare-cell jw center"><span class="check" id="cmpC1"></span></div>
+
+      <div class="lite-compare-cell">In-house editorial team</div>
+      <div class="lite-compare-cell center"><span class="x" id="cmpX3"></span></div>
+      <div class="lite-compare-cell center"><span class="check" id="cmpC2"></span></div>
+      <div class="lite-compare-cell jw center"><span class="check" id="cmpC3"></span></div>
+
+      <div class="lite-compare-cell">30+ pieces per recording</div>
+      <div class="lite-compare-cell center"><span class="x" id="cmpX4"></span></div>
+      <div class="lite-compare-cell center"><span class="x" id="cmpX5"></span></div>
+      <div class="lite-compare-cell jw center"><span class="check" id="cmpC4"></span></div>
+
+      <div class="lite-compare-cell">You own everything</div>
+      <div class="lite-compare-cell center"><span class="check" id="cmpC5"></span></div>
+      <div class="lite-compare-cell center"><span class="x" id="cmpX6"></span></div>
+      <div class="lite-compare-cell jw center"><span class="check" id="cmpC6"></span></div>
+
+      <div class="lite-compare-cell">Time to first episode</div>
+      <div class="lite-compare-cell center muted">months</div>
+      <div class="lite-compare-cell center muted">8–12 wks</div>
+      <div class="lite-compare-cell jw center">2 wks</div>
+    </div>
+  </div>
+</section>
+
+<!-- BIG CTA -->
+<section class="lite-cta">
+  <div class="lite-container">
+    <h2>Ready to build the engine?</h2>
+    <p>Whether you need a single studio session or a full content system that runs without you — start the conversation in 30 seconds.</p>
+    <div class="lite-cta-buttons">
+      <button class="btn btn-large btn-primary" data-open-drawer>Get started</button>
+    </div>
+  </div>
+</section>
+
+<script src="chrome.js"></script>
+<script src="player.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    if (!window.JW) return;
+    const I = window.JW.icon;
+    // Inject icons
+    const setIcon = (id, name, sz) => { const el = document.getElementById(id); if (el) el.innerHTML = I(name, {size: sz || 18}); };
+    setIcon('iconRocket', 'rocket', 18);
+    setIcon('iconPlay', 'play', 18);
+    setIcon('cardIconMic', 'mic', 22);
+    setIcon('cardIconHeadphones', 'headphones', 22);
+    setIcon('cardIconLayers', 'layers', 22);
+    setIcon('iconArr1', 'arrowRight', 14);
+    setIcon('iconArr2', 'arrowRight', 14);
+    setIcon('iconArr3', 'arrowRight', 14);
+    setIcon('iconArrLink', 'arrowRight', 14);
+    setIcon('iconArrAbout', 'arrowRight', 14);
+    setIcon('iconArrBlog', 'arrowRight', 14);
+    ['cmpC1','cmpC2','cmpC3','cmpC4','cmpC5','cmpC6'].forEach(id => setIcon(id, 'check', 18));
+    ['cmpX1','cmpX2','cmpX3','cmpX4','cmpX5','cmpX6'].forEach(id => setIcon(id, 'minus', 18));
+
+    // Recent work tiles from the Web collection
+    const data = window.JW.loadCollection ? await window.JW.loadCollection('web') : await window.JW.loadContent();
+    const wrap = document.getElementById('liteHomeTiles');
+    if (!wrap || !data || !data.assets || !data.assets.length) return;
+    const items = data.assets.slice(0, 6);
+    function fmtDur(s) {
+      if (!s) return '';
+      const m = Math.floor(s / 60);
+      const sec = Math.round(s % 60);
+      return m ? `${m}:${String(sec).padStart(2,'0')}` : `${sec}s`;
+    }
+    wrap.innerHTML = items.map(a => {
+      const playable = typeof a.cdn_url === 'string' && /^https:.*\.(mp4|webm|mov)$/i.test(a.cdn_url);
+      const meta = [a.brand, fmtDur(a.duration)].filter(Boolean).join(' · ') || 'JourneyWell Studio';
+      const thumb = a.thumbnail_url || '';
+      return `
+        <button type="button" class="lite-tile" data-asset-id="${a.id}" aria-label="Play ${(a.display_title || a.title || 'video').replace(/"/g, '&quot;')}">
+          <div class="lite-tile-thumb">
+            ${playable ? `<video src="${a.cdn_url}" muted autoplay loop playsinline preload="metadata" ${thumb ? `poster="${thumb}"` : ''}></video>` : (thumb ? `<img src="${thumb}" alt="" loading="lazy" />` : '')}
+            <span class="tile-play">${I('play', {size: 16})}</span>
+          </div>
+          <div class="lite-tile-body">
+            <div class="lite-tile-eyebrow">${a.polished ? 'Polished · Studio' : 'Studio'}</div>
+            <div class="lite-tile-title">${(a.display_title || a.title || 'Untitled').slice(0, 80)}</div>
+            <div class="lite-tile-meta">${meta}</div>
+          </div>
+        </button>`;
+    }).join('');
+
+    // Wire tile clicks → open the player. The full Web collection is the
+    // swipe-through pool; clicked tile becomes the starting slide.
+    wrap.querySelectorAll('.lite-tile[data-asset-id]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (!window.JW || !window.JW.openVideoOverlay) {
+          // Fallback if player.js failed to load — go to /work.html
+          location.href = 'work.html';
+          return;
+        }
+        const id = btn.dataset.assetId;
+        const asset = data.assets.find(a => a.id === id);
+        if (asset) window.JW.openVideoOverlay(asset, data.assets);
+      });
+    });
+
+    if (window.JW.initAutoplayVideos) window.JW.initAutoplayVideos(wrap);
+  });
+</script>
+</body>
+</html>
