@@ -388,7 +388,7 @@
     if (hasVideo) {
       // Native autoplay + muted + preload="metadata" matches the homepage
       // carousel pattern. chrome.js initAutoplayVideos pauses off-screen cards.
-      coverInner = `<video class="card-video" autoplay muted loop playsinline preload="metadata" ${hasThumb ? `poster="${escapeHtml(asset.thumbnail_url)}"` : ''} src="${escapeHtml(asset.cdn_url)}"></video>`;
+      coverInner = `<video class="card-video" muted loop playsinline preload="none" ${hasThumb ? `poster="${escapeHtml(asset.thumbnail_url)}"` : ''} src="${escapeHtml(asset.cdn_url)}"></video>`;
     } else if (hasThumb) {
       coverInner = `<img src="${escapeHtml(asset.thumbnail_url)}" alt="" loading="lazy" />`;
     }
@@ -1099,6 +1099,12 @@
     if (USE_LIVE_FEED_TAGS) {
       // Pull each section directly from creator-tunnel by tag
       seg = await loadByLiveFeedTagsForSegment();
+      // No assets tagged live-feed:featured yet -> promote the freshest pieces
+      // so the hero + Featured shelf never sit on "Loading...".
+      if (!seg.featured.length && seg.all.length) {
+        const byDate = (a, b) => (b.created_at || '').localeCompare(a.created_at || '');
+        seg.featured = [...(seg.episodes.length ? seg.episodes : seg.all)].sort(byDate).slice(0, 6);
+      }
       DATA = { assets: seg.all, topic_counts: {}, total_in_vault: seg.all.length };
       if (!seg.all.length) {
         document.getElementById('heroPieceTitle').textContent = 'Channel is loading…';
