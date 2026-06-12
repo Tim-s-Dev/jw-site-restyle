@@ -1,0 +1,1005 @@
+/* ============================================================
+   redesign.css — additive overlay (isolated for easy revert)
+   - Theme toggle button styles
+   - Light theme overrides (data-theme="light" on <html>)
+   - Split hero (text left, carousel right)
+   - 3-up coverflow carousel
+   ============================================================ */
+
+/* ---------- Theme toggle button (in nav) ---------- */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  color: inherit;
+  border-radius: 999px;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+.theme-toggle:hover {
+  background: var(--bg-hover);
+  border-color: var(--text-primary);
+  transform: rotate(15deg);
+}
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: inline-flex; }
+[data-theme="light"] .theme-toggle .icon-sun { display: inline-flex; }
+[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+/* ---------- DARK THEME (work.html vibe) ---------- */
+/* Body sits at solid #050505 in dark mode. Sections themselves carry either
+   a glow gradient or pure black — alternating, like work.html's split between
+   the channel-header (glow) and the sections below (black). */
+[data-theme="dark"] html,
+[data-theme="dark"] body {
+  background: #050505;
+  color: #fff;
+}
+
+/* Reusable glow recipe — same colors/positions as work.html's .channel-header */
+[data-theme="dark"] body.lite > section:nth-of-type(odd):not(.lite-cta),
+[data-theme="dark"] body.lite > .lite-hero {
+  background:
+    radial-gradient(1100px 600px at 82% 8%,   rgba(212, 255,   0, 0.13) 0%, transparent 60%),
+    radial-gradient(1000px 720px at 5% 72%,   rgba(124,  58, 237, 0.30) 0%, transparent 60%),
+    radial-gradient(900px 720px at 100% 100%, rgba(255,  45, 138, 0.22) 0%, transparent 60%),
+    #050505;
+}
+
+/* Even sections in between → pure black, no glow */
+[data-theme="dark"] body.lite > section:nth-of-type(even):not(.lite-cta) {
+  background: #000000;
+}
+
+/* ---------- LIGHT MODE: alternating section glows ----------
+   Mirrors the dark-mode pattern: odd sections get a soft multi-color glow
+   on the cream base, even sections snap to pure white as a clean rest.
+   Palette leans into greens (the site's accent) with one warm contrast,
+   mirroring dark mode's lime + purple + pink (a primary + a cool + a warm). */
+[data-theme="light"] body.lite > section:nth-of-type(odd):not(.lite-cta),
+[data-theme="light"] body.lite > .lite-hero {
+  background:
+    radial-gradient(1100px 600px at 82% 8%,   rgba(180, 230,  60, 0.22) 0%, transparent 60%),  /* lime-yellow TR */
+    radial-gradient(1000px 720px at 5% 72%,   rgba( 29, 185,  84, 0.18) 0%, transparent 60%),  /* spotify green ML */
+    radial-gradient(900px 720px at 100% 100%, rgba(255, 160, 130, 0.18) 0%, transparent 60%),  /* soft peach BR */
+    var(--paper, #f6f5f2);
+}
+
+/* Even sections → pure white, the calm interval */
+[data-theme="light"] body.lite > section:nth-of-type(even):not(.lite-cta) {
+  background: #ffffff;
+}
+
+/* ---------- LIGHT THEME ---------- */
+[data-theme="light"] {
+  --bg-primary:    var(--paper);
+  --bg-secondary:  #ece9e2;
+  --bg-card:       rgba(0, 0, 0, 0.04);
+  --bg-hover:      rgba(0, 0, 0, 0.06);
+  --text-primary:    #0a0a0a;
+  --text-secondary:  rgba(10, 10, 10, 0.74);
+  --text-tertiary:   rgba(10, 10, 10, 0.52);
+  --line:        var(--line-dk);
+  --line-strong: var(--line-dk-strong);
+  --border:        var(--line-dk-strong);
+  --border-subtle: var(--line-dk);
+}
+[data-theme="light"] html,
+[data-theme="light"] body {
+  background: var(--paper);
+  color: #0a0a0a;
+}
+[data-theme="light"] .nav {
+  background: rgba(246, 245, 242, 0.86);
+  border-bottom: 1px solid var(--line-dk);
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+}
+[data-theme="light"] .nav a,
+[data-theme="light"] .nav .logo {
+  color: #0a0a0a;
+}
+[data-theme="light"] .nav .signin { color: rgba(10,10,10,0.7); }
+[data-theme="light"] .footer {
+  background: #ece9e2;
+  color: #0a0a0a;
+  border-top: 1px solid var(--line-dk);
+}
+[data-theme="light"] .footer a { color: rgba(10,10,10,0.72); }
+[data-theme="light"] .lite-hero,
+[data-theme="light"] .lite-section,
+[data-theme="light"] body.lite {
+  background: var(--paper);
+  color: #0a0a0a;
+}
+[data-theme="light"] .lite-hero h1,
+[data-theme="light"] .lite-section h2,
+[data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3 {
+  color: #0a0a0a;
+}
+[data-theme="light"] .lead,
+[data-theme="light"] .lite-hero p,
+[data-theme="light"] p {
+  color: rgba(10,10,10,0.74);
+}
+[data-theme="light"] .eyebrow,
+[data-theme="light"] .lite-eyebrow {
+  color: rgba(10,10,10,0.66);
+}
+[data-theme="light"] .btn-ghost {
+  border-color: var(--line-dk-strong);
+  color: #0a0a0a;
+}
+[data-theme="light"] .btn-ghost:hover {
+  background: rgba(0,0,0,0.05);
+}
+[data-theme="light"] .lite-tile,
+[data-theme="light"] .lite-card,
+[data-theme="light"] .show-card {
+  background: rgba(0,0,0,0.03);
+  border-color: var(--line-dk);
+}
+[data-theme="light"] .lite-tile-title,
+[data-theme="light"] .show-title {
+  color: #0a0a0a;
+}
+[data-theme="light"] .lite-tile-meta,
+[data-theme="light"] .show-meta {
+  color: rgba(10,10,10,0.6);
+}
+[data-theme="light"] .lite-brand-mark,
+[data-theme="light"] .lite-logo-strip-label {
+  color: rgba(10,10,10,0.6);
+}
+[data-theme="light"] .float-btn {
+  color: #0a0a0a;
+  background: var(--lime);
+}
+
+/* ---------- SPLIT HERO ---------- */
+/* NOTE: selectors are bumped to `body.lite .hero-split.lite-hero ...` because
+   lite.css has its own `body.lite .lite-hero h1 { max-width: 18ch }` rule
+   (specificity 0,2,2) — we need to beat it. */
+
+/* Trim vertical padding so the section is shorter overall */
+body.lite .hero-split.lite-hero {
+  padding: 28px 0 28px;
+}
+
+body.lite .hero-split .hero-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 16px;
+  align-items: center;
+  padding-top: 8px;
+  padding-bottom: 12px;
+}
+
+/* Headline — smaller, tighter, much wider than the lite.css 18ch cap.
+   `clamp` lets it scale fluidly between mobile and large desktops. */
+body.lite .hero-split.lite-hero .hero-text h1 {
+  font-size: clamp(38px, 4.4vw, 62px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  max-width: none;   /* override the 18ch cap from lite.css line 229 */
+}
+body.lite .hero-split.lite-hero .hero-text .lead {
+  font-size: clamp(15px, 1.15vw, 18px);
+  line-height: 1.5;
+  margin-bottom: 22px;
+  max-width: 480px;
+}
+body.lite .hero-split .hero-text .eyebrow {
+  margin-bottom: 14px;
+}
+
+/* Let text bleed RIGHT into the carousel column so headline + blurred prev
+   slide overlap. z-index: 2 keeps the text crisp on top of the blur. */
+body.lite .hero-split .hero-text {
+  position: relative;
+  z-index: 2;
+  margin-right: -64px;     /* the overlap */
+  pointer-events: none;
+}
+body.lite .hero-split .hero-text > * { pointer-events: auto; }
+body.lite .hero-split .hero-carousel {
+  position: relative;
+  z-index: 0;
+}
+
+@media (max-width: 980px) {
+  body.lite .hero-split .hero-text {
+    margin-right: 0;
+  }
+}
+.hero-split .hero-text {
+  text-align: left;
+}
+.hero-split .hero-text h1 {
+  text-align: left;
+}
+.hero-split .hero-text .lead {
+  margin-left: 0;
+  margin-right: 0;
+  max-width: 540px;
+}
+.hero-split .lite-hero-ctas {
+  justify-content: flex-start;
+}
+
+@media (max-width: 980px) {
+  /* body.lite prefix matches the base-rule specificity (0,3,2) — without it
+     the mobile override loses the cascade and the 2-column grid never collapses. */
+  body.lite .hero-split .hero-split-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  body.lite .hero-split .hero-carousel {
+    order: 2;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  /* On mobile, shrink the headline floor so it doesn't dominate the viewport. */
+  body.lite .hero-split.lite-hero .hero-text h1 {
+    font-size: clamp(34px, 8vw, 48px);
+  }
+}
+
+/* ---------- 3-UP COVERFLOW CAROUSEL ----------
+   Stage aspect 4:3 to fit 3 vertical 9:16 slides side-by-side.
+   Hidden slides live off-stage left/right so they SLIDE in/out
+   smoothly rather than fading in at the center.
+   Horizontal positioning uses transform: translateX(Ncqw) — container query
+   units relative to the stage — so the animation is composited on the GPU
+   and feels smooth instead of janky. */
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hero-carousel-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  max-height: 680px;
+  /* Clip horizontally so off-stage slides are hidden, but let the
+     current slide's drop shadow extend downward and fade naturally. */
+  overflow-x: clip;
+  overflow-y: visible;
+  border-radius: 22px;
+  isolation: isolate;
+}
+.hero-slide {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 92%;
+  aspect-ratio: 9 / 16;             /* social-media vertical (TikTok / Reels / Shorts) */
+  margin: 0;
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  will-change: transform, filter, opacity;
+  /* Default transform — JS will override with the pixel-precise transform
+     for each state. The TRANSITION below interpolates whatever JS sets. */
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition:
+    transform 1.5s cubic-bezier(.32, .72, .26, 1),
+    filter 1.1s cubic-bezier(.32, .72, .26, 1),
+    opacity 1s ease;
+}
+.hero-slide img,
+.hero-slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #1a1a1a;
+}
+/* Video overlays the thumbnail img only on the current slide; img stays as
+   the poster underneath so prev/next slides still have something to render. */
+.hero-slide video {
+  position: absolute;
+  inset: 0;
+}
+[data-theme="light"] .hero-slide img,
+[data-theme="light"] .hero-slide video {
+  background: #e8e6e0;
+}
+
+/* Z-index per state (transform/filter/opacity now set inline by JS for
+   reliable pixel-based animation). */
+.hero-slide[data-pos="current"]      { z-index: 3; }
+.hero-slide[data-pos="prev"],
+.hero-slide[data-pos="next"]         { z-index: 2; }
+.hero-slide[data-pos="hidden-left"],
+.hero-slide[data-pos="hidden-right"],
+.hero-slide[data-pos="hidden"]       { z-index: 1; pointer-events: none; }
+
+[data-theme="light"] .hero-slide[data-pos="prev"],
+[data-theme="light"] .hero-slide[data-pos="next"] {
+  filter: blur(8px) brightness(0.88);
+}
+
+/* Subtle border on the active slide for separation */
+.hero-slide[data-pos="current"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+[data-theme="light"] .hero-slide[data-pos="current"]::after {
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10);
+}
+
+/* ---------- Arrow controls ---------- */
+.hero-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(10,10,10,0.55);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(10px) saturate(140%);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  /* Sit above the prev/next slide tiles which overlap this region — those
+     are z-index 2, the current slide is 3, so we go well above all of them.
+     Without this the prev slide swallowed clicks aimed at the left arrow. */
+  z-index: 10;
+  transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
+}
+/* Invisible hit-area extender — adds ~14px slop in every direction so the
+   button is comfortable to hit on touch + with imprecise mouse aim, without
+   changing the visible circle. */
+.hero-carousel-arrow::before {
+  content: '';
+  position: absolute;
+  inset: -14px;
+  border-radius: inherit;
+}
+.hero-carousel-arrow:hover {
+  background: rgba(10,10,10,0.78);
+  border-color: rgba(255,255,255,0.45);
+  transform: translateY(-50%) scale(1.07);
+}
+.hero-carousel-arrow svg { width: 22px; height: 22px; position: relative; z-index: 1; }
+.hero-carousel-arrow--prev { left: 10px; }
+.hero-carousel-arrow--prev svg { transform: rotate(180deg); }
+.hero-carousel-arrow--next { right: 10px; }
+
+[data-theme="light"] .hero-carousel-arrow {
+  background: rgba(255,255,255,0.78);
+  border-color: rgba(0,0,0,0.10);
+  color: #0a0a0a;
+}
+[data-theme="light"] .hero-carousel-arrow:hover {
+  background: rgba(255,255,255,0.95);
+  border-color: rgba(0,0,0,0.25);
+}
+
+/* ---------- Dots (with pill backdrop so the slide's drop shadow can rest here) ---------- */
+.hero-carousel-dots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 12px 22px;
+  margin: 18px auto 0;   /* small gap below the slide; shadow still fades onto the pill */
+  background: rgba(10, 10, 10, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  border-radius: 999px;
+  position: relative;
+  z-index: 4;
+  box-shadow: 0 18px 40px -16px rgba(0,0,0,0.55);
+}
+[data-theme="light"] .hero-carousel-dots {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 18px 40px -16px rgba(0,0,0,0.18);
+}
+.hero-carousel-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.32);
+  cursor: pointer;
+  transition: background 0.25s, transform 0.25s, width 0.25s;
+}
+.hero-carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.55);
+  transform: scale(1.15);
+}
+.hero-carousel-dot.is-active {
+  background: var(--lime, #d4ff00);
+  width: 24px;
+}
+[data-theme="light"] .hero-carousel-dot {
+  background: rgba(0, 0, 0, 0.22);
+}
+[data-theme="light"] .hero-carousel-dot:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+[data-theme="light"] .hero-carousel-dot.is-active {
+  background: #0a0a0a;
+}
+
+/* Reduced-motion override removed intentionally — carousel motion is
+   the point of this feature. If a future user complains, re-add a
+   shorter transition here. */
+
+/* ============================================================
+   SCROLL REVEAL ANIMATIONS
+   Inspired by Apple's iPhone product pages: elements fade + lift +
+   un-blur as they enter the viewport. JS adds `.reveal` to targets
+   and toggles `.is-in-view` via IntersectionObserver.
+   ============================================================ */
+/* Uses @keyframes (not transition) because component-level transition lists
+   like `body.lite .lite-card` win specificity and replace this rule's list,
+   which dropped opacity/filter and made cards pop in. Animations apply
+   independently of the transition cascade and can't be clobbered the same way. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(6px);
+  will-change: opacity, transform, filter;
+}
+.reveal.is-in-view {
+  animation: jw-reveal-fade 1s cubic-bezier(.22, .61, .36, 1) forwards;
+}
+@keyframes jw-reveal-fade {
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+/* Stagger children inside grids so they cascade in instead of all at once */
+.reveal-stagger > .reveal:nth-child(1)  { animation-delay: 0.00s; }
+.reveal-stagger > .reveal:nth-child(2)  { animation-delay: 0.07s; }
+.reveal-stagger > .reveal:nth-child(3)  { animation-delay: 0.14s; }
+.reveal-stagger > .reveal:nth-child(4)  { animation-delay: 0.21s; }
+.reveal-stagger > .reveal:nth-child(5)  { animation-delay: 0.28s; }
+.reveal-stagger > .reveal:nth-child(6)  { animation-delay: 0.35s; }
+.reveal-stagger > .reveal:nth-child(7)  { animation-delay: 0.42s; }
+.reveal-stagger > .reveal:nth-child(8)  { animation-delay: 0.49s; }
+.reveal-stagger > .reveal:nth-child(n+9) { animation-delay: 0.56s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  .reveal.is-in-view { animation: none; }
+}
+
+/* ============================================================
+   DARK MODE for body.lite pages (homepage, solutions, etc.)
+   body.lite re-declares its own local CSS variables (--bg, --ink,
+   --bg-card …) — we redefine those at the same scope so all
+   downstream `body.lite *` rules pick up dark values automatically.
+   ============================================================ */
+[data-theme="dark"] body.lite {
+  --bg:           transparent;                  /* let body gradient show */
+  --bg-alt:       rgba(255, 255, 255, 0.025);
+  --bg-card:      rgba(255, 255, 255, 0.05);
+  --bg-hover:     rgba(255, 255, 255, 0.08);
+  --ink:          #ffffff;
+  --ink-2:        rgba(255, 255, 255, 0.78);
+  --muted:        rgba(255, 255, 255, 0.62);
+  --muted-2:      rgba(255, 255, 255, 0.44);
+  --line:         rgba(255, 255, 255, 0.10);
+  --line-strong:  rgba(255, 255, 255, 0.22);
+  --shadow-sm:    0 1px 2px rgba(0,0,0,0.4), 0 1px 1px rgba(0,0,0,0.3);
+  --shadow-md:    0 6px 20px rgba(0,0,0,0.5),  0 2px 4px rgba(0,0,0,0.35);
+  --shadow-lg:    0 24px 60px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.4);
+  background: transparent;
+  color: #ffffff;
+}
+
+/* Sections that hard-code light backgrounds → dark surfaces */
+[data-theme="dark"] body.lite .lite-section,
+[data-theme="dark"] body.lite .lite-hero {
+  background: transparent;
+}
+[data-theme="dark"] body.lite .lite-section.alt {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+/* Nav + footer */
+[data-theme="dark"] body.lite .nav {
+  background: rgba(5, 5, 5, 0.82);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+}
+[data-theme="dark"] body.lite .nav-links a { color: rgba(255,255,255,0.7); }
+[data-theme="dark"] body.lite .nav-links a:hover,
+[data-theme="dark"] body.lite .nav-links a.active { color: #fff; background: rgba(255,255,255,0.06); }
+[data-theme="dark"] body.lite .nav .logo { color: #fff; }
+[data-theme="dark"] body.lite .nav-cta .signin { color: rgba(255,255,255,0.7); }
+[data-theme="dark"] body.lite .nav-cta .signin:hover { color: #fff; }
+[data-theme="dark"] body.lite .footer { background: #060606; color: #fff; border-top: 1px solid rgba(255,255,255,0.08); }
+[data-theme="dark"] body.lite .footer a { color: rgba(255,255,255,0.6); }
+
+/* Buttons that use --ink as background (inverted dark CTA) — restore explicit colors */
+[data-theme="dark"] body.lite .btn-dark {
+  background: #ffffff;
+  color: #0a0a0a;
+  border-color: #ffffff;
+}
+[data-theme="dark"] body.lite .btn-dark:hover {
+  background: rgba(255,255,255,0.85);
+}
+[data-theme="dark"] body.lite .btn-ghost {
+  border-color: rgba(255,255,255,0.22);
+  color: #fff;
+}
+[data-theme="dark"] body.lite .btn-ghost:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: #fff;
+}
+
+/* "Inverted" CTA block (.lite-cta) — used dark bg in light mode; in dark mode flip to accent panel */
+[data-theme="dark"] body.lite .lite-cta {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+[data-theme="dark"] body.lite .lite-cta h2 { color: #fff; }
+[data-theme="dark"] body.lite .lite-cta p { color: rgba(255,255,255,0.72); }
+
+/* Tile/card thumbnails default to a light gradient placeholder — flip darker */
+[data-theme="dark"] body.lite .lite-tile-thumb {
+  background: linear-gradient(135deg, #1f1f23 0%, #2c2c32 100%);
+}
+
+/* Brand marks */
+[data-theme="dark"] body.lite .lite-brand-mark {
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.6);
+  border-color: rgba(255,255,255,0.08);
+}
+[data-theme="dark"] body.lite .lite-logo-strip-label {
+  color: rgba(255,255,255,0.5);
+}
+
+/* Quote / founders sections (use bg-alt → already covered via var redef, but force readable text) */
+[data-theme="dark"] body.lite .lite-quote-name { color: #fff; }
+[data-theme="dark"] body.lite .lite-quote-role,
+[data-theme="dark"] body.lite .lite-founders p { color: rgba(255,255,255,0.74); }
+
+/* Accent badges/tints stay accent colored, but on dark add some glow */
+[data-theme="dark"] body.lite .lite-badge {
+  background: rgba(29, 185, 84, 0.18);
+  color: #5be08a;
+}
+
+/* Float button: keep lime in dark mode */
+[data-theme="dark"] body.lite .float-btn {
+  background: var(--lime, #d4ff00);
+  color: #0a0a0a;
+}
+
+/* ---------- Cream sections in dark mode ----------
+   The cream design uses `.section-cream` + lots of inline + var-based colors
+   (--text-on-cream = near-black, --text-on-cream-muted = mid-gray, white
+   cards). In dark mode the section background gets rewritten by the
+   body.lite > section:nth-of-type() rules above, but everything inside
+   stays cream-themed and renders nearly invisible.
+
+   Trick: rebind the two cream text vars inside .section-cream when dark.
+   Every inline `color:var(--text-on-cream)` then flips automatically — no
+   need to override each site-wide instance one by one. */
+[data-theme="dark"] body.lite .section-cream {
+  --text-on-cream: #fff;
+  --text-on-cream-muted: rgba(255,255,255,0.74);
+}
+[data-theme="dark"] body.lite .section-cream .section-title,
+[data-theme="dark"] body.lite .section-cream h2,
+[data-theme="dark"] body.lite .section-cream h3 { color: #fff; }
+[data-theme="dark"] body.lite .section-cream .section-lead,
+[data-theme="dark"] body.lite .section-cream .muted,
+[data-theme="dark"] body.lite .section-cream p { color: rgba(255,255,255,0.74); }
+/* Italic em tags inside cream titles are forced #000 — flip to white. */
+[data-theme="dark"] body.lite .section-cream .section-title em,
+[data-theme="dark"] body.lite .section-cream h2 em,
+[data-theme="dark"] body.lite .section-cream h1 em { color: #fff; }
+
+/* Pillar cards (studio.html — "Sessions for any kind of conversation"). */
+[data-theme="dark"] body.lite .pillar-card {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.10);
+}
+[data-theme="dark"] body.lite .pillar-card:hover {
+  border-color: var(--accent, #1db954);
+  box-shadow: 0 0 0 1px rgba(29,185,84,0.18), 0 20px 50px rgba(0,0,0,0.45);
+}
+[data-theme="dark"] body.lite .pillar-num { color: #fff; }
+[data-theme="dark"] body.lite .pillar-title { color: #fff; }
+[data-theme="dark"] body.lite .pillar-desc { color: rgba(255,255,255,0.72); }
+[data-theme="dark"] body.lite .pillar-link { color: #fff; }
+
+/* Cream promo cards (podcast.html "What's included" upsell pair). The base
+   .jw-promo-card.cream forces #fff background + #000 text, which we flip. */
+[data-theme="dark"] body.lite .section-cream .jw-promo-card,
+[data-theme="dark"] body.lite .jw-promo-card.cream {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.10);
+}
+[data-theme="dark"] body.lite .section-cream .jw-promo-card::before,
+[data-theme="dark"] body.lite .jw-promo-card.cream::before { background: #fff; }
+[data-theme="dark"] body.lite .section-cream .jw-promo-card:hover,
+[data-theme="dark"] body.lite .jw-promo-card.cream:hover {
+  border-color: var(--accent, #1db954);
+  box-shadow: 0 0 0 1px rgba(29,185,84,0.18), 0 18px 40px rgba(0,0,0,0.45);
+}
+[data-theme="dark"] body.lite .section-cream .jw-promo-card-eyebrow,
+[data-theme="dark"] body.lite .jw-promo-card.cream .jw-promo-card-eyebrow { color: #fff; }
+[data-theme="dark"] body.lite .section-cream .jw-promo-card-title,
+[data-theme="dark"] body.lite .jw-promo-card.cream .jw-promo-card-title,
+[data-theme="dark"] body.lite .section-cream .jw-promo-card-title em,
+[data-theme="dark"] body.lite .jw-promo-card.cream .jw-promo-card-title em { color: #fff; }
+[data-theme="dark"] body.lite .section-cream .jw-promo-card-desc,
+[data-theme="dark"] body.lite .jw-promo-card.cream .jw-promo-card-desc { color: rgba(255,255,255,0.74); }
+[data-theme="dark"] body.lite .section-cream .jw-promo-card-cta,
+[data-theme="dark"] body.lite .jw-promo-card.cream .jw-promo-card-cta { color: #fff; }
+
+/* Process items (podcast "From signed to live", authority "Four stages"). The
+   process-item-title + -desc carry inline color:var(--text-on-cream*) which
+   the var-rebind above already handles. Keep these explicit overrides as a
+   belt-and-suspenders against future inline tweaks. */
+[data-theme="dark"] body.lite .section-cream .process-item-title { color: #fff; }
+[data-theme="dark"] body.lite .section-cream .process-item-desc  { color: rgba(255,255,255,0.74); }
+
+/* Page-hero (studio / podcast / authority top sections). Has hardcoded
+   background:#000 + color:#fff, but in light mode the body.lite section
+   rule overrides the bg with paper while h1 stays white -> invisible.
+   In dark mode keep it dark + light-on-dark (no change needed). In light
+   mode flip h1 + paragraph to dark text and turn the lime border off so
+   the section blends. */
+[data-theme="light"] body.lite .page-hero h1 { color: #0a0a0a; }
+[data-theme="light"] body.lite .page-hero p,
+[data-theme="light"] body.lite .page-hero .muted { color: rgba(10,10,10,0.74); }
+[data-theme="light"] body.lite .page-hero .hero-eyebrow { color: rgba(10,10,10,0.66); }
+
+/* ---------- Carousel dot visibility ---------- */
+[data-theme="dark"] .hero-carousel-dot {
+  background: rgba(255,255,255,0.32);
+}
+[data-theme="dark"] .hero-carousel-dot:hover {
+  background: rgba(255,255,255,0.6);
+}
+[data-theme="dark"] .hero-carousel-dot.is-active {
+  background: var(--lime, #d4ff00);
+}
+[data-theme="light"] .hero-carousel-dot {
+  background: rgba(0,0,0,0.22);
+}
+[data-theme="light"] .hero-carousel-dot.is-active {
+  background: #0a0a0a;
+}
+
+/* ============================================================
+   SMOOTH THEME TRANSITIONS
+   Applied to surfaces that change between themes. Excludes
+   border-color/box-shadow on hover-heavy elements to avoid
+   sluggish hover feel.
+   ============================================================ */
+/* NOTE: .hero-slide is intentionally NOT in this list.
+   It already declares its own transition (transform/filter/opacity)
+   for the carousel motion. The CSS `transition` property is not additive
+   — listing .hero-slide here would clobber the carousel animation. */
+html,
+body,
+body.lite,
+.nav,
+.footer,
+.lite-section,
+.lite-hero,
+.lite-tile,
+.lite-card,
+.lite-step-card,
+.lite-cta,
+.lite-quote,
+.lite-founders,
+.lite-brand-mark,
+.lite-logo-strip-label,
+.btn-ghost,
+.btn-dark,
+.theme-toggle,
+.hero-carousel-dot,
+.float-btn {
+  transition:
+    background-color 0.45s ease,
+    color 0.40s ease,
+    border-color 0.40s ease;
+}
+/* Headings and text get color transition via inheritance fallback */
+[data-theme] body.lite h1,
+[data-theme] body.lite h2,
+[data-theme] body.lite h3,
+[data-theme] body.lite p,
+[data-theme] body.lite .lead,
+[data-theme] body.lite .eyebrow,
+[data-theme] body.lite .nav-links a,
+[data-theme] body.lite .nav-cta a,
+[data-theme] body.lite .footer a {
+  transition: color 0.40s ease;
+}
+
+/* ---------- LIGHT THEME: Get Started drawer ----------
+   Drawer ships hardcoded white-on-black in style.css. Mirror its structure
+   here with the cream + green/peach palette the rest of light mode uses.
+   The lime "selected" state is left alone — it reads in both themes. */
+[data-theme="light"] .drawer {
+  background-color: var(--paper, #f6f5f2);
+  background-image:
+    radial-gradient(700px 500px at 80% 0%,   rgba( 29, 185,  84, 0.16), transparent 60%),
+    radial-gradient(700px 500px at 0% 100%,  rgba(255, 160, 130, 0.18), transparent 60%);
+  border-left: 1px solid var(--line-dk);
+}
+[data-theme="light"] .drawer-header {
+  /* Lime accent bar stays — it's a brand mark, not a theme color. */
+  border-bottom-color: var(--lime);
+}
+[data-theme="light"] .drawer-close {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: var(--line-dk);
+  color: #0a0a0a;
+}
+[data-theme="light"] .drawer-close:hover { background: rgba(0, 0, 0, 0.12); }
+[data-theme="light"] .drawer-progress {
+  background: rgba(0, 0, 0, 0.10);
+}
+[data-theme="light"] .drawer-title { color: #0a0a0a; }
+[data-theme="light"] .drawer-sub { color: rgba(10, 10, 10, 0.74); }
+[data-theme="light"] .drawer-option {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: var(--line-dk);
+}
+[data-theme="light"] .drawer-option:hover {
+  background: rgba(0, 0, 0, 0.07);
+  border-color: rgba(10, 10, 10, 0.28);
+}
+[data-theme="light"] .drawer-option-title { color: #0a0a0a; }
+[data-theme="light"] .drawer-option-desc { color: rgba(10, 10, 10, 0.66); }
+[data-theme="light"] .drawer-option-arrow { color: rgba(10, 10, 10, 0.48); }
+[data-theme="light"] .drawer-option:hover .drawer-option-arrow { color: #0a0a0a; }
+[data-theme="light"] .drawer-form-group label { color: rgba(10, 10, 10, 0.74); }
+/* form inputs are already light-bg + dark-text in both modes — leave them. */
+[data-theme="light"] .drawer-pill {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: var(--line-dk);
+  color: rgba(10, 10, 10, 0.82);
+}
+[data-theme="light"] .drawer-pill:hover {
+  border-color: rgba(10, 10, 10, 0.28);
+  color: #0a0a0a;
+}
+[data-theme="light"] .drawer-footer { border-top-color: var(--line-dk); }
+[data-theme="light"] .drawer-back { color: rgba(10, 10, 10, 0.66); }
+[data-theme="light"] .drawer-back:hover { color: #0a0a0a; }
+
+/* Full-page-form variant on /get-started.html — body is hardcoded black */
+[data-theme="light"] body.full-page-form { background: var(--paper, #f6f5f2); }
+
+/* ---------- LIGHT THEME: mobile nav (hamburger + drawer panel) ----------
+   style.css ships these white-on-near-black at the @media (max-width: 900px)
+   breakpoint. Same nesting here so the overrides only apply on mobile. */
+@media (max-width: 900px) {
+  [data-theme="light"] .nav-hamburger .hamburger-bar { background: #0a0a0a; }
+  [data-theme="light"] .mobile-nav {
+    background: rgba(246, 245, 242, 0.96);
+    border-bottom-color: var(--line-dk);
+  }
+  [data-theme="light"] .mobile-nav a {
+    color: rgba(10, 10, 10, 0.82);
+    border-bottom-color: rgba(10, 10, 10, 0.08);
+  }
+}
+
+/* ---------- LIGHT THEME: work.html channel surfaces + cross-page dark cards ----------
+   work.html doesn't use body.lite — it inherits raw style.css. Many surfaces hardcode
+   white-on-dark and need explicit overrides. .dark-card, .show-*, and .btn-ghost also
+   appear on podcast.html / authority.html, so the rules below cover those too.
+   Lime accents (channel-tab.active, .btn-gold, etc.) stay untouched — they read in both. */
+
+/* Channel header — flip the dark glow recipe to the light palette */
+[data-theme="light"] .channel-header {
+  background:
+    radial-gradient(900px 500px at 80% 20%,  rgba(180, 230,  60, 0.22) 0%, transparent 60%),
+    radial-gradient(800px 600px at 12% 80%,  rgba( 29, 185,  84, 0.16) 0%, transparent 60%),
+    radial-gradient(700px 600px at 95% 100%, rgba(255, 160, 130, 0.16) 0%, transparent 60%),
+    var(--paper, #f6f5f2);
+}
+[data-theme="light"] .channel-name { color: #0a0a0a; }
+[data-theme="light"] .channel-tagline { color: rgba(10, 10, 10, 0.72); }
+[data-theme="light"] .channel-stats { color: rgba(10, 10, 10, 0.55); }
+[data-theme="light"] .channel-stats strong { color: #0a0a0a; }
+[data-theme="light"] .channel-stats .dot { background: rgba(10, 10, 10, 0.30); }
+
+/* Sticky tabs below the header */
+[data-theme="light"] .channel-tabs {
+  background: rgba(246, 245, 242, 0.85);
+  border-bottom-color: var(--line-dk);
+}
+[data-theme="light"] .channel-tab { color: rgba(10, 10, 10, 0.62); }
+[data-theme="light"] .channel-tab:hover {
+  color: #0a0a0a;
+  background: rgba(0, 0, 0, 0.06);
+}
+/* .channel-tab.active stays lime/black */
+
+/* Channel-section row titles ("Now Showing", "Episodes", "Shorts", etc.) */
+[data-theme="light"] .channel-section .row-title { color: #0a0a0a; }
+
+/* Hero piece (pinned trailer block) */
+[data-theme="light"] .hero-piece-section {
+  background: #ffffff;
+  border-bottom-color: var(--line-dk);
+}
+[data-theme="light"] .hero-piece-player {
+  background: #e9e7e1;
+  border-color: var(--line-dk);
+}
+[data-theme="light"] .hero-piece-title { color: #0a0a0a; }
+[data-theme="light"] .hero-piece-desc { color: rgba(10, 10, 10, 0.72); }
+[data-theme="light"] .hero-piece-meta { color: rgba(10, 10, 10, 0.55); }
+[data-theme="light"] .hero-piece-meta > span { border-color: var(--line-dk); }
+
+/* Show cards (work.html row strips + anywhere else .show-card is used) */
+[data-theme="light"] .show-cover {
+  background: #e9e7e1;
+  border-color: var(--line-dk);
+}
+[data-theme="light"] .show-card.playable .show-cover,
+[data-theme="light"] .show-card .show-cover img,
+[data-theme="light"] .show-card .show-cover video.card-video {
+  background-color: #e9e7e1;
+}
+[data-theme="light"] .show-title { color: #0a0a0a; }
+[data-theme="light"] .show-meta { color: rgba(10, 10, 10, 0.55); }
+
+/* .dark-card (podcast.html, authority.html — name is a misnomer in light mode) */
+[data-theme="light"] .dark-card {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: var(--line-dk);
+}
+[data-theme="light"] .dark-card:hover { border-color: var(--line-dk-strong); }
+[data-theme="light"] .dark-card-title { color: #0a0a0a; }
+[data-theme="light"] .dark-card-desc { color: rgba(10, 10, 10, 0.72); }
+
+/* Secondary CTA button — the "ghost" outline used next to .btn-gold */
+[data-theme="light"] .btn-ghost {
+  background: rgba(0, 0, 0, 0.04);
+  color: #0a0a0a;
+  border-color: var(--line-dk);
+}
+[data-theme="light"] .btn-ghost:hover {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(10, 10, 10, 0.30);
+}
+
+/* ---------- LIGHT THEME: mega-menu (Vimeo-style nav dropdowns) ---------- */
+[data-theme="light"] .megapanel-inner {
+  background: rgba(255, 255, 255, 0.97);
+  border-color: var(--line-dk);
+  box-shadow: 0 24px 60px rgba(10, 10, 10, 0.12);
+}
+[data-theme="light"] .megapanel-col-heading {
+  color: rgba(10, 10, 10, 0.55);
+}
+[data-theme="light"] .megapanel-link:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+[data-theme="light"] .megapanel-link-icon {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: var(--line-dk);
+  color: #0a0a0a;
+}
+[data-theme="light"] .megapanel-link-title { color: #0a0a0a; }
+[data-theme="light"] .megapanel-link-sub   { color: rgba(10, 10, 10, 0.60); }
+[data-theme="light"] .megapanel-featured {
+  background: linear-gradient(135deg, rgba(29, 185, 84, 0.14), rgba(180, 230, 60, 0.10));
+  border-left-color: var(--line-dk);
+}
+[data-theme="light"] .megapanel-featured-title { color: #0a0a0a; }
+[data-theme="light"] .megapanel-featured-body  { color: rgba(10, 10, 10, 0.72); }
+/* Lime eyebrow + CTA wash out on the cream featured panel in light mode —
+   match the "Get started" column heading's muted dark instead. Dark mode
+   keeps lime since contrast is fine there. */
+[data-theme="light"] .megapanel-featured-eyebrow { color: rgba(10, 10, 10, 0.55); }
+[data-theme="light"] .megapanel-featured-cta     { color: rgba(10, 10, 10, 0.72); }
+@media (max-width: 1100px) {
+  [data-theme="light"] .megapanel-featured { border-top-color: var(--line-dk); }
+}
+
+/* =====================================================================
+   SHARED NAV — unify non-lite pages (e.g. work.html) with the redesign
+   nav so the navigation bar is one consistent component sitewide.
+   The markup is already shared (chrome.js navHtml); this aligns the
+   styling for pages that lack `body.lite` (which loads the nav layout
+   from lite.css). Excludes the form page, which hides its nav.
+   ===================================================================== */
+body:not(.lite):not(.full-page-form) .nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+[data-theme="dark"] body:not(.lite):not(.full-page-form) .nav {
+  background: rgba(5, 5, 5, 0.82);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  backdrop-filter: saturate(140%) blur(10px);
+}
+body:not(.lite):not(.full-page-form) .nav-inner {
+  height: 64px;
+  max-width: 1180px; margin: 0 auto; padding: 0 28px;
+}
+body:not(.lite):not(.full-page-form) .logo {
+  font-family: var(--font, 'Inter', sans-serif);
+  font-weight: 800; font-size: 17px; letter-spacing: -0.01em;
+  text-transform: none; gap: 10px;
+  color: #fff;
+}
+[data-theme="light"] body:not(.lite):not(.full-page-form) .logo { color: #0a0a0a; }
+body:not(.lite):not(.full-page-form) .nav-links { gap: 4px; }
+body:not(.lite):not(.full-page-form) .nav-links a,
+body:not(.lite):not(.full-page-form) .nav-link {
+  font-family: var(--font, 'Inter', sans-serif);
+  font-size: 14px; font-weight: 500; letter-spacing: 0; text-transform: none;
+  padding: 8px 14px; border-radius: 999px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: background 150ms ease, color 150ms ease;
+}
+[data-theme="light"] body:not(.lite):not(.full-page-form) .nav-links a,
+[data-theme="light"] body:not(.lite):not(.full-page-form) .nav-link {
+  color: rgba(10, 10, 10, 0.7);
+}
+body:not(.lite):not(.full-page-form) .nav-links a:hover,
+body:not(.lite):not(.full-page-form) .nav-link:hover,
+body:not(.lite):not(.full-page-form) .nav-links a.active {
+  color: #fff; background: rgba(255, 255, 255, 0.06);
+}
+[data-theme="light"] body:not(.lite):not(.full-page-form) .nav-links a:hover,
+[data-theme="light"] body:not(.lite):not(.full-page-form) .nav-link:hover,
+[data-theme="light"] body:not(.lite):not(.full-page-form) .nav-links a.active {
+  color: #0a0a0a; background: rgba(0, 0, 0, 0.05);
+}
+body:not(.lite):not(.full-page-form) .nav-links a.active::after { display: none; }
+body:not(.lite):not(.full-page-form) .nav-cta { gap: 12px; }
+body:not(.lite):not(.full-page-form) .nav-cta .btn {
+  text-transform: none;
+  font-family: var(--font, 'Inter', sans-serif);
+  letter-spacing: 0;
+}
