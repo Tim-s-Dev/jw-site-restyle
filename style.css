@@ -3248,3 +3248,110 @@ body.full-page-form .full-page-mast .logo {
   .megapanel-inner { grid-template-columns: 1fr; }
   .megapanel-featured { border-left: 0; border-top: 1px solid var(--line); }
 }
+
+
+/* ============================================================
+   Image Section Slots — feat/image-slots 2026-06
+   Replace .jw-img-slot with real <img> / <video> when ready.
+   ============================================================ */
+
+
+/* Filled image — covers the slot. Swap the <img src> to use real photos. */
+.jw-slot-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
+/* Shared placeholder (fallback when no image present) */
+.jw-img-slot {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  background: #111;
+  border: 2px dashed rgba(212, 255, 0, 0.28);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 12px;
+  color: rgba(212, 255, 0, 0.55);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+.jw-img-slot::before {
+  content: '';
+  width: 36px; height: 36px;
+  border: 2px solid rgba(212, 255, 0, 0.35);
+  border-radius: 50%;
+  display: block;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(212,255,0,0.55)' stroke-width='2'%3E%3Crect x='3' y='3' width='18' height='18' rx='2'/%3E%3Ccircle cx='8.5' cy='8.5' r='1.5'/%3E%3Cpath d='M21 15l-5-5L5 21'/%3E%3C/svg%3E") center/16px no-repeat;
+}
+
+/* 1 — Full-bleed band */
+.jw-band {
+  width: 100%;
+  height: clamp(220px, 28vw, 420px);
+  position: relative; overflow: hidden;
+}
+.jw-band .jw-img-slot { border-left: none; border-right: none; border-radius: 0; }
+
+/* 2 — Asymmetric editorial split */
+.jw-split-wrap {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  min-height: 380px;
+}
+.jw-split-wrap.flip { grid-template-columns: 2fr 3fr; }
+.jw-split-img { position: relative; overflow: hidden; min-height: 320px; }
+.jw-split-img .jw-img-slot { border-radius: 0; border-top: none; border-bottom: none; }
+.jw-split-txt {
+  padding: 64px 56px;
+  background: var(--paper); color: var(--ink);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.jw-split-txt .eyebrow { color: rgba(10,10,10,0.45); margin-bottom: 10px; }
+.jw-split-txt h2 { color: var(--ink); font-size: clamp(26px, 3.2vw, 46px); line-height: 1.08; margin-bottom: 18px; }
+.jw-split-txt p  { color: var(--text-on-cream-muted); font-size: 17px; line-height: 1.65; }
+
+.jw-split-wrap.flip .jw-split-img { order: 2; }
+.jw-split-wrap.flip .jw-split-txt { order: 1; background: var(--black); color: #fff; }
+.jw-split-wrap.flip .jw-split-txt .eyebrow { color: rgba(255,255,255,0.4); }
+.jw-split-wrap.flip .jw-split-txt h2 { color: #fff; }
+.jw-split-wrap.flip .jw-split-txt p  { color: var(--text-secondary); }
+
+/* 3 — 3-up editorial photo grid */
+.jw-photo-grid { padding: 56px 0; background: var(--black); }
+.jw-photo-grid.on-cream { background: var(--paper); }
+.jw-photo-grid-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 24px;
+  display: grid; grid-template-columns: 1fr 1.45fr 1fr;
+  gap: 10px; align-items: end;
+}
+.jw-photo-cell { display: flex; flex-direction: column; gap: 10px; }
+.jw-photo-frame { width: 100%; height: 280px; position: relative; border-radius: var(--radius-lg); overflow: hidden; }
+.jw-photo-frame.tall { height: 380px; }
+.jw-photo-caption { font-size: 11px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(255,255,255,0.35); padding: 0 4px; }
+.jw-photo-grid.on-cream .jw-photo-caption { color: rgba(10,10,10,0.35); }
+.jw-photo-grid.on-cream .jw-img-slot { background: #e0ddd6; border-color: rgba(10,10,10,0.18); color: rgba(10,10,10,0.38); }
+
+/* 4 — Cinematic full-bleed with overlay text */
+.jw-cinematic { width: 100%; height: clamp(340px, 40vw, 540px); position: relative; overflow: hidden; background: var(--black); }
+.jw-cinematic .jw-img-slot { border-radius: 0; border-left: none; border-right: none; }
+.jw-cinematic-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 55%);
+  display: flex; align-items: flex-end;
+  padding: 56px 64px; pointer-events: none;
+}
+.jw-cinematic-lede { font-size: clamp(34px, 5.5vw, 80px); font-weight: 900; color: #fff; line-height: 1; letter-spacing: -0.025em; text-transform: uppercase; max-width: 700px; }
+.jw-cinematic-lede em { color: var(--lime); font-style: italic; font-family: var(--serif-font); text-transform: none; }
+
+@media (max-width: 768px) {
+  .jw-split-wrap, .jw-split-wrap.flip { grid-template-columns: 1fr; }
+  .jw-split-img { min-height: 260px; }
+  .jw-split-img .jw-img-slot { border: 2px dashed rgba(212,255,0,0.28); border-radius: 0; }
+  .jw-split-wrap.flip .jw-split-txt { order: 2; }
+  .jw-split-wrap.flip .jw-split-img { order: 1; }
+  .jw-split-txt { padding: 40px 24px; }
+  .jw-photo-grid-inner { grid-template-columns: 1fr; }
+  .jw-photo-frame, .jw-photo-frame.tall { height: 260px; }
+  .jw-cinematic-overlay { padding: 32px 24px; }
+}
