@@ -3255,7 +3255,15 @@ body.full-page-form .full-page-mast .logo {
    Replace .jw-img-slot with real <img> / <video> when ready.
    ============================================================ */
 
-/* Shared placeholder */
+
+/* Filled image — covers the slot. Swap the <img src> to use real photos. */
+.jw-slot-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
+/* Shared placeholder (fallback when no image present) */
 .jw-img-slot {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
@@ -3280,7 +3288,7 @@ body.full-page-form .full-page-mast .logo {
 /* 1 — Full-bleed band */
 .jw-band {
   width: 100%;
-  height: clamp(300px, 44vw, 660px);
+  height: clamp(220px, 28vw, 420px);
   position: relative; overflow: hidden;
 }
 .jw-band .jw-img-slot { border-left: none; border-right: none; border-radius: 0; }
@@ -3289,10 +3297,10 @@ body.full-page-form .full-page-mast .logo {
 .jw-split-wrap {
   display: grid;
   grid-template-columns: 3fr 2fr;
-  min-height: 520px;
+  min-height: 380px;
 }
 .jw-split-wrap.flip { grid-template-columns: 2fr 3fr; }
-.jw-split-img { position: relative; overflow: hidden; min-height: 400px; }
+.jw-split-img { position: relative; overflow: hidden; min-height: 320px; }
 .jw-split-img .jw-img-slot { border-radius: 0; border-top: none; border-bottom: none; }
 .jw-split-txt {
   padding: 64px 56px;
@@ -3310,7 +3318,7 @@ body.full-page-form .full-page-mast .logo {
 .jw-split-wrap.flip .jw-split-txt p  { color: var(--text-secondary); }
 
 /* 3 — 3-up editorial photo grid */
-.jw-photo-grid { padding: 72px 0; background: var(--black); }
+.jw-photo-grid { padding: 56px 0; background: var(--black); }
 .jw-photo-grid.on-cream { background: var(--paper); }
 .jw-photo-grid-inner {
   max-width: 1320px; margin: 0 auto; padding: 0 24px;
@@ -3318,14 +3326,14 @@ body.full-page-form .full-page-mast .logo {
   gap: 10px; align-items: end;
 }
 .jw-photo-cell { display: flex; flex-direction: column; gap: 10px; }
-.jw-photo-frame { width: 100%; height: 340px; position: relative; border-radius: var(--radius-lg); overflow: hidden; }
-.jw-photo-frame.tall { height: 480px; }
+.jw-photo-frame { width: 100%; height: 280px; position: relative; border-radius: var(--radius-lg); overflow: hidden; }
+.jw-photo-frame.tall { height: 380px; }
 .jw-photo-caption { font-size: 11px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(255,255,255,0.35); padding: 0 4px; }
 .jw-photo-grid.on-cream .jw-photo-caption { color: rgba(10,10,10,0.35); }
 .jw-photo-grid.on-cream .jw-img-slot { background: #e0ddd6; border-color: rgba(10,10,10,0.18); color: rgba(10,10,10,0.38); }
 
 /* 4 — Cinematic full-bleed with overlay text */
-.jw-cinematic { width: 100%; height: clamp(420px, 56vw, 780px); position: relative; overflow: hidden; background: var(--black); }
+.jw-cinematic { width: 100%; height: clamp(340px, 40vw, 540px); position: relative; overflow: hidden; background: var(--black); }
 .jw-cinematic .jw-img-slot { border-radius: 0; border-left: none; border-right: none; }
 .jw-cinematic-overlay {
   position: absolute; inset: 0;
