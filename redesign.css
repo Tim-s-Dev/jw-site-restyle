@@ -117,6 +117,13 @@
   border-top: 1px solid var(--line-dk);
 }
 [data-theme="light"] .footer a { color: rgba(10,10,10,0.72); }
+/* body.lite pages re-declare .footer color via lite.css (specificity 0,2,1).
+   Bump these to specificity 0,3,1 so the cream/dark light-mode footer wins
+   on lite pages (homepage, work, solutions, etc.) — otherwise the © line
+   inherits var(--muted) and washes out against the cream background. */
+[data-theme="light"] body.lite .footer { color: rgba(10,10,10,0.78); }
+[data-theme="light"] body.lite .footer-meta a { color: rgba(10,10,10,0.72); }
+[data-theme="light"] body.lite .footer-meta a:hover { color: #0a0a0a; }
 [data-theme="light"] .lite-hero,
 [data-theme="light"] .lite-section,
 [data-theme="light"] body.lite {
@@ -896,6 +903,21 @@ body.lite,
 [data-theme="light"] .dark-card:hover { border-color: var(--line-dk-strong); }
 [data-theme="light"] .dark-card-title { color: #0a0a0a; }
 [data-theme="light"] .dark-card-desc { color: rgba(10, 10, 10, 0.72); }
+
+/* "About this channel" strip on work.html stays a dark card in light mode —
+   keep its h3 / p / cta copy white so it doesn't disappear against the
+   hardcoded dark gradient background. */
+[data-theme="light"] .channel-about h3 { color: #fff; }
+[data-theme="light"] .channel-about p { color: rgba(255, 255, 255, 0.72); }
+[data-theme="light"] .channel-about .about-cta span { color: rgba(255, 255, 255, 0.72); }
+[data-theme="light"] .channel-about .about-cta {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: var(--line);
+}
+[data-theme="light"] .channel-about .about-cta:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--lime);
+}
 
 /* Secondary CTA button — the "ghost" outline used next to .btn-gold */
 [data-theme="light"] .btn-ghost {

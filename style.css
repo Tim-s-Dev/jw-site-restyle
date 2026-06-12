@@ -3256,12 +3256,17 @@ body.full-page-form .full-page-mast .logo {
    ============================================================ */
 
 
-/* Filled image — covers the slot. Swap the <img src> to use real photos. */
+/* Filled image — covers the slot. Swap the <img src> to use real photos.
+   object-position bias downward so the visible band shows more of the
+   subjects' torsos/lower body and less ceiling/lights above their heads. */
 .jw-slot-img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  object-fit: cover; display: block;
+  object-fit: cover; object-position: 50% 72%; display: block;
 }
+/* Per-slot crop overrides — when the global 72% bias cuts a subject's head. */
+.jw-slot-img[src*="01-home-studio-band"] { object-position: 50% 58%; }
+.jw-slot-img[src*="08-about-team"]       { object-position: 50% 40%; }
 
 /* Shared placeholder (fallback when no image present) */
 .jw-img-slot {

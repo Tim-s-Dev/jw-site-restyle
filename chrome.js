@@ -1516,8 +1516,10 @@
   }
 
   // ---------- AUTOPLAY VIDEOS ON VIEWPORT ----------
-  // Native HTML autoplay handles starting; IO just pauses off-screen videos
-  // to free CPU. Setting muted/playsInline as JS props is belt-and-suspenders for iOS.
+  // Two-stage loading. Cards render with data-src instead of src so no fetch
+  // fires on mount. Stage 1: IO callback activates visible cards (leftmost
+  // play immediately). Stage 2: a delayed drip-loader walks the remaining
+  // off-screen cards 3-at-a-time so they're cached before the user scrolls.
   function initAutoplayVideos(root) {
     const videos = (root || document).querySelectorAll('video.card-video');
     if (!videos.length) return;
@@ -1526,6 +1528,18 @@
       v.muted = true;
       v.playsInline = true;
       v.setAttribute('muted', '');
+    });
+
+    function setSrc(v) {
+      if (v.dataset.src && !v.src) {
+        v.preload = 'auto';
+        v.src = v.dataset.src;
+        try { v.load(); } catch (e) {}
+      }
+    }
+
+    function activate(v) {
+      setSrc(v);
       const tryPlay = () => {
         const p = v.play();
         if (p && p.catch) p.catch(() => {
@@ -1533,24 +1547,37 @@
         });
       };
       if (v.readyState >= 2) tryPlay();
-      else v.addEventListener('loadedmetadata', tryPlay, { once: true });
-    });
+      else v.addEventListener('loadeddata', tryPlay, { once: true });
+    }
 
-    if (!('IntersectionObserver' in window)) return;
+    // No IO support → eager fallback so the page still functions.
+    if (!('IntersectionObserver' in window)) {
+      videos.forEach(activate);
+      return;
+    }
     const io = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         const v = entry.target;
         if (entry.isIntersecting && entry.intersectionRatio > 0.25) {
-          if (v.paused) {
-            const p = v.play();
-            if (p && p.catch) p.catch(() => {});
-          }
-        } else {
-          if (!v.paused) v.pause();
+          activate(v);
+        } else if (!v.paused) {
+          v.pause();
         }
       });
     }, { threshold: [0, 0.25, 0.5] });
     videos.forEach(v => io.observe(v));
+
+    // Stage 2: after visible cards have grabbed their connection slots,
+    // drip-load the rest in DOM order so they're already cached by the time
+    // the user scrolls to them. Preload only (no play) — the IO above will
+    // start playback when the card enters the viewport.
+    function dripWarmup() {
+      const pending = Array.from(videos).filter(v => !v.src && v.dataset.src);
+      if (!pending.length) return;
+      pending.slice(0, 3).forEach(setSrc);
+      setTimeout(dripWarmup, 1500);
+    }
+    setTimeout(dripWarmup, 2500);
   }
 
   // ---------- PROMO HELPER ----------

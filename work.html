@@ -290,7 +290,8 @@
     const brand = brandSlug
       ? brandSlug.split('-').map(w => w ? w[0].toUpperCase() + w.slice(1) : '').join(' ')
       : null;
-    const display = String(a.title || 'Untitled').replace(/\.(mp4|mov|webm|m4v)$/i, '').trim();
+    const derived = String(a.title || 'Untitled').replace(/\.(mp4|mov|webm|m4v)$/i, '').trim();
+    const display = (typeof a.display_title === 'string' && a.display_title.trim()) ? a.display_title.trim() : derived;
     return {
       id: a.id,
       title: a.title || display,
@@ -386,9 +387,10 @@
     const hasThumb = isHttps(asset.thumbnail_url);
     let coverInner = '';
     if (hasVideo) {
-      // Native autoplay + muted + preload="metadata" matches the homepage
-      // carousel pattern. chrome.js initAutoplayVideos pauses off-screen cards.
-      coverInner = `<video class="card-video" muted loop playsinline preload="none" ${hasThumb ? `poster="${escapeHtml(asset.thumbnail_url)}"` : ''} src="${escapeHtml(asset.cdn_url)}"></video>`;
+      // Lazy-mount: no src attribute on initial render. chrome.js initAutoplayVideos
+      // swaps data-src→src when the card enters the viewport, so the leftmost
+      // (visible) cards load first and off-screen cards never fetch until scrolled to.
+      coverInner = `<video class="card-video" muted loop playsinline preload="none" data-src="${escapeHtml(asset.cdn_url)}" ${hasThumb ? `poster="${escapeHtml(asset.thumbnail_url)}"` : ''}></video>`;
     } else if (hasThumb) {
       coverInner = `<img src="${escapeHtml(asset.thumbnail_url)}" alt="" loading="lazy" />`;
     }
@@ -958,6 +960,14 @@
   function closeReelsFeed() {
     REELS_OPEN = false;
     const overlay = document.getElementById('reelsOverlay');
+    // Pause + detach every video synchronously BEFORE the 240ms fade-out
+    // animation starts. Otherwise the active slide keeps streaming audio
+    // through the close (and innerHTML='' alone doesn't always kill it in time).
+    document.getElementById('reelsTrack').querySelectorAll('video').forEach(v => {
+      try { v.pause(); } catch (e) {}
+      v.removeAttribute('src');
+      try { v.load(); } catch (e) {}
+    });
     if (document.fullscreenElement) {
       try { document.exitFullscreen(); } catch (e) {}
     }
