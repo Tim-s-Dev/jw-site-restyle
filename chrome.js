@@ -25,9 +25,6 @@
 })();
 
 (function () {
-  // Portfolio (portfolio.html) and Journal (blog.html) are temporarily hidden
-  // from navigation — the pages still exist and can be revealed by adding them
-  // back to PAGES + MENU when ready.
   const PAGES = [
     { href: 'solutions.html', label: 'Solutions' },
     { href: 'work.html',      label: 'Work' },
@@ -107,9 +104,6 @@
         },
       },
     },
-    // Portfolio and Journal mega-menu entries are temporarily hidden.
-    // Their panel/link definitions can be restored alongside the PAGES
-    // entries above when these pages return to navigation.
     { label: 'About',   href: 'about.html' },
   ];
 
@@ -119,10 +113,8 @@
   const PATH_PREFIX = '../'.repeat(PATH_DEPTH);
   const IN_BLOG_POST = location.pathname.includes('/blog/') && !location.pathname.endsWith('/blog.html');
 
-  // Lead intake webhook — n8n workflow "JW Website Lead Intake" (id lEWEKZubGriIj2sN)
-  // Fans out to GHL Upsert + Notion Log + Slack Notify (#jw-leadteam C0AEWAS4Y6N).
-  // SOP: AUTOMATION_SOP.md (Tim's Mac copy) and Memory API "JourneyWell Website Lead Automation".
-  const GHL_WEBHOOK_URL = 'https://n8n.journeywellhub.com/webhook/jw-lead';
+  // GHL inbound webhook — paste URL here once Workflow 2 (Lead Capture) is created in GHL
+  const GHL_WEBHOOK_URL = '';
 
   const here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   // Blog posts should mark "Journal" as the active nav item
@@ -914,7 +906,7 @@
     const ctUrl = resolveCreatorTunnelUrl();
     if (!ctUrl) { frame.dataset.navMediaState = 'no-ct'; return; }
     try {
-      const res = await fetch(`${ctUrl}/api/assets?tag=${encodeURIComponent(tag)}&limit=1`, { cache: 'no-store' });
+      const res = await fetch(`${ctUrl}/api/assets?tag=${encodeURIComponent(tag)}&limit=1`);
       if (!res.ok) { frame.dataset.navMediaState = 'http-' + res.status; return; }
       const data = await res.json();
       const asset = (data.items || [])[0];
@@ -928,7 +920,7 @@
         const v = document.createElement('video');
         v.src = asset.cdn_url;
         v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true;
-        v.preload = 'metadata';
+        v.preload = 'auto';
         v.setAttribute('muted', '');
         v.setAttribute('loop', '');
         v.setAttribute('playsinline', '');
@@ -1080,7 +1072,7 @@
       if (cache.has(slug)) return cache.get(slug);
       const p = (async () => {
         try {
-          const r = await fetch(`${ctUrl}/api/assets?tag=profile-picture:${encodeURIComponent(slug)}&limit=1`, { cache: 'no-store' });
+          const r = await fetch(`${ctUrl}/api/assets?tag=profile-picture:${encodeURIComponent(slug)}&limit=1`);
           if (!r.ok) return null;
           const d = await r.json();
           return (d.items && d.items[0]) || null;
@@ -1121,7 +1113,7 @@
     const ctUrl = resolveCreatorTunnelUrl();
     if (!ctUrl) return null;
     try {
-      const res = await fetch(`${ctUrl}/api/assets?tag=live-feed:carousel&limit=6`, { cache: 'no-store' });
+      const res = await fetch(`${ctUrl}/api/assets?tag=live-feed:carousel&limit=6`);
       if (!res.ok) return null;
       const data = await res.json();
       const playable = (data.items || []).filter(a =>
@@ -1146,7 +1138,7 @@
     const ctUrl = resolveCreatorTunnelUrl();
     if (!ctUrl) return;
     try {
-      const res = await fetch(`${ctUrl}/api/assets?tag=live-feed:hero&limit=1`, { cache: 'no-store' });
+      const res = await fetch(`${ctUrl}/api/assets?tag=live-feed:hero&limit=1`);
       if (!res.ok) return;
       const data = await res.json();
       const a = (data.items || [])[0];
@@ -1158,7 +1150,7 @@
       v.muted = true;
       v.loop = true;
       v.playsInline = true;
-      v.preload = 'metadata';
+      v.preload = 'auto';
       v.setAttribute('muted', '');
       v.setAttribute('loop', '');
       v.setAttribute('playsinline', '');
@@ -1190,17 +1182,16 @@
       fig.className = 'hero-slide';
       fig.setAttribute('data-pos', 'hidden');
       fig.setAttribute('data-asset-index', String(i));
-      // Mount with preload='metadata' (moov atom only) so all 6 slides don't
-      // fight for bandwidth at page load. syncSlideVideos play()s the current
-      // one — with +faststart the moov is at byte 0, so playback begins as
-      // soon as the first chunk arrives. Thumbnail rides as the poster so the
-      // slide isn't blank while bytes warm up.
+      // Mount the video eagerly with preload='auto' so all 6 buffer in parallel.
+      // syncSlideVideos then just play()s the current one — no cold round-trip
+      // on swap. Thumbnail rides as the poster so the slide isn't blank while
+      // bytes warm up.
       const v = document.createElement('video');
       v.src = a.cdn_url;
       v.muted = true;
       v.loop = true;
       v.playsInline = true;
-      v.preload = 'metadata';
+      v.preload = 'auto';
       v.setAttribute('muted', '');
       v.setAttribute('loop', '');
       v.setAttribute('playsinline', '');
@@ -1217,8 +1208,8 @@
     if (!stage) return;
 
     // Optionally replace placeholder slides with live-feed:hero assets.
-    // rebuildHeroSlides mounts all 6 videos with preload='metadata' so each
-    // slide is ready (moov atom fetched) without saturating bandwidth.
+    // rebuildHeroSlides eagerly mounts all 6 videos with preload='auto' so
+    // every slide is buffering in parallel before the user can swap.
     const heroAssets = await fetchHeroAssets();
     if (heroAssets) rebuildHeroSlides(stage, heroAssets);
 
@@ -1378,7 +1369,7 @@
         : 'https://creator-tunnel.vercel.app');
     if (!ctUrl) return heroAssets.slice();
     try {
-      const res = await fetch(`${ctUrl}/api/assets?tag=live-feed:shorts&limit=48`, { cache: 'no-store' });
+      const res = await fetch(`${ctUrl}/api/assets?tag=live-feed:shorts&limit=48`);
       if (!res.ok) return heroAssets.slice();
       const data = await res.json();
       const heroIds = new Set(heroAssets.map(a => a.id));
@@ -1411,7 +1402,7 @@
   // Live-fetches a curated Creator Tunnel collection (e.g. "web") and shapes
   // each asset into the same fields content.json provides, so the rest of the
   // site code is unchanged.
-  const MEDIAVAULT_API = 'http://93.188.160.128:18791';
+  const MEDIAVAULT_API = 'https://reels.journeywellhub.com/ct';
   function humanize(slug) {
     return String(slug || '').split('-').map(w => w ? w[0].toUpperCase() + w.slice(1) : '').join(' ');
   }
@@ -1482,9 +1473,6 @@
     if (hasVideo) {
       // Native autoplay + muted is allowed by all browsers without user interaction.
       // src set directly so browser can preload + start playing on its own.
-      // Native autoplay + muted is allowed by all browsers without user interaction.
-      // preload="metadata" pre-fetches the moov atom so playback starts on the
-      // next chunk. initAutoplayVideos pauses cards that scroll off-screen.
       coverInner = `<video class="card-video" autoplay muted loop playsinline preload="metadata" ${hasThumb ? `poster="${escapeHtml(asset.thumbnail_url)}"` : ''} src="${escapeHtml(asset.cdn_url)}"></video>`;
     } else if (hasThumb) {
       coverInner = `<img src="${escapeHtml(asset.thumbnail_url)}" alt="" loading="lazy" />`;
@@ -1520,13 +1508,16 @@
     const videos = (root || document).querySelectorAll('video.card-video');
     if (!videos.length) return;
 
+    // Belt-and-suspenders: ensure muted + playsInline on every element
     videos.forEach(v => {
       v.muted = true;
       v.playsInline = true;
       v.setAttribute('muted', '');
+      // Nudge play() in case autoplay attribute didn't fire (e.g., dynamic insertion)
       const tryPlay = () => {
         const p = v.play();
-        if (p && p.catch) p.catch(() => {
+        if (p && p.catch) p.catch(err => {
+          // Will retry on canplay
           v.addEventListener('canplay', () => v.play().catch(() => {}), { once: true });
         });
       };
