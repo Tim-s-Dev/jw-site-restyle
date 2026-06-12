@@ -389,8 +389,10 @@
     ['cmpC1','cmpC2','cmpC3','cmpC4','cmpC5','cmpC6'].forEach(id => setIcon(id, 'check', 18));
     ['cmpX1','cmpX2','cmpX3','cmpX4','cmpX5','cmpX6'].forEach(id => setIcon(id, 'minus', 18));
 
-    // Recent work tiles from the Web collection
-    const data = window.JW.loadCollection ? await window.JW.loadCollection('web') : await window.JW.loadContent();
+    // Recent work tiles from Creator Tunnel tag `live-feed:recent-work` (cap 6).
+    const data = window.JW.loadCtTag
+      ? await window.JW.loadCtTag('live-feed:recent-work', 6)
+      : (window.JW.loadCollection ? await window.JW.loadCollection('web') : await window.JW.loadContent());
     const wrap = document.getElementById('liteHomeTiles');
     if (!wrap || !data || !data.assets || !data.assets.length) return;
     const items = data.assets.slice(0, 6);

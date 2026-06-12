@@ -1430,7 +1430,8 @@
   function adaptCollectionAsset(a) {
     const brandSlug = tagValue(a.tags, 'brand');
     const topicSlug = tagValue(a.tags, 'topic');
-    const display = cleanTitle(a.title);
+    const fallback = cleanTitle(a.title);
+    const display = (a.display_title && String(a.display_title).trim()) || fallback;
     return {
       id: a.id,
       title: a.title || display,
@@ -1470,6 +1471,38 @@
       };
     } catch (e) {
       console.warn(`Could not load collection "${slug}" — falling back to content.json.`, e);
+      return loadContent();
+    }
+  }
+
+  // ---------- CREATOR TUNNEL TAG LOADER ----------
+  // Fetches a Creator Tunnel tag (e.g. 'live-feed:recent-work') and shapes the
+  // response into the same envelope as loadCollection, so call sites can swap
+  // between MediaVault collections and CT tag-driven feeds transparently.
+  async function loadCtTag(tag, limit = 24) {
+    try {
+      const ctUrl = resolveCreatorTunnelUrl();
+      const url = `${ctUrl}/api/assets?tag=${encodeURIComponent(tag)}&limit=${limit}`;
+      const r = await fetch(url, { cache: 'no-store' });
+      if (!r.ok) throw new Error(`status ${r.status}`);
+      const j = await r.json();
+      const assets = (j.items || []).map(adaptCollectionAsset);
+      const brand_counts = {};
+      const topic_counts = {};
+      assets.forEach(a => {
+        if (a.brand) brand_counts[a.brand] = (brand_counts[a.brand] || 0) + 1;
+        if (a.topic) topic_counts[a.topic] = (topic_counts[a.topic] || 0) + 1;
+      });
+      return {
+        source: 'creator-tunnel-tag',
+        collection: tag,
+        assets,
+        total_in_vault: assets.length,
+        brand_counts,
+        topic_counts,
+      };
+    } catch (e) {
+      console.warn(`Could not load CT tag "${tag}" — falling back to content.json.`, e);
       return loadContent();
     }
   }
@@ -1619,6 +1652,7 @@
     renderWorkInto,
     loadContent,
     loadCollection,
+    loadCtTag,
     initAutoplayVideos,
     renderShowCard,
     promoCard,
