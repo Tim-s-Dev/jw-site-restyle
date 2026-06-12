@@ -1402,7 +1402,9 @@
     try {
       const r = await fetch(`${PATH_PREFIX}content.json`, { cache: 'no-cache' });
       if (!r.ok) throw new Error(`status ${r.status}`);
-      return await r.json();
+      const j = await r.json();
+      if (j && Array.isArray(j.assets)) j.assets = j.assets.map(decoratePublic);
+      return j;
     } catch (e) {
       console.warn('Could not load content.json — using placeholders.', e);
       return null;
@@ -1427,11 +1429,88 @@
       .replace(/^[✀-➿☀-⛿✅✔︎️\s]+/, '')
       .trim();
   }
+  // ---------- PUBLIC-FACING COPY (Phase 1) ----------
+  // Assets arrive from Creator Tunnel / MediaVault with machine titles and
+  // missing or messy descriptions. Phase 1 rewrites title + description into
+  // clean, viewer-directed copy chosen ONLY from the asset *type* — we don't yet
+  // know what each video is about (that's Phase 2). Copy is picked by a stable
+  // hash of the asset id, so every asset keeps a consistent, varied title.
+  function hashId(str) {
+    let h = 0; const s = String(str || '');
+    for (let i = 0; i < s.length; i++) { h = (Math.imul(h, 31) + s.charCodeAt(i)) | 0; }
+    return Math.abs(h);
+  }
+  function pick(arr, seed) { return arr[seed % arr.length]; }
+  function assetType(a) {
+    const tags = (a.tags || []).map(t => String(t).toLowerCase());
+    if (tags.includes('type:trailer') || tags.includes('format:trailer')) return 'trailer';
+    const w = a.width || 0, h = a.height || 0;
+    const dur = a.duration || a.duration_seconds || 0;
+    const vertical = w && h ? h > w : false;
+    if (!vertical && dur >= 600) return 'podcast';      // long horizontal = episode
+    if (vertical || (dur && dur <= 90)) return 'short';  // vertical or short = short-form
+    if (!vertical && dur > 90) return 'clip';            // mid horizontal = highlight
+    return 'short';
+  }
+  const PUBLIC_TITLES = {
+    short: ['A Short Worth the Scroll','One Idea, Captured','Said in a Single Take','Small Format, Real Weight','The Kind of Clip That Lands','Brief, and to the Point','A Clip With Something to Say','Sixty Seconds, Said Right','No Wasted Frames','Made to Be Rewatched','One Point, Landed','The Scroll-Stopper','Short, and It Sticks','A Minute Well Spent'],
+    podcast: ['Two People, One Real Conversation','A Conversation Worth Sitting In On','The Long Version, Worth the Time','An Honest Hour','Where the Real Talk Happens','The Conversation Behind the Work','Two Chairs, One Subject Worth It','Real Talk, Recorded','A Seat at the Table','The Talk Behind the Work'],
+    trailer: ['A Look at What’s Coming','The Door Into the Channel','Start Here','The Quick Tour','What This Channel Is About'],
+    clip: ['A Moment From the Episode','The Part Worth Clipping','One Highlight, Pulled Out','The Bit People Quote','The Quote-Worthy Bit','Lifted From the Long Cut'],
+  };
+  const PUBLIC_DESCS = {
+    short: [
+      'Built to stop your scroll — one sharp idea, delivered in the time it takes to care. No filler, no setup. Just something worth watching to the end.',
+      'Short-form, done right: a single moment made to land. Quick, deliberate, and the kind of thing you’ll want to send to someone before it’s even over.',
+      'A few seconds, built to mean something. The kind of short you actually finish — and then keep thinking about after.',
+    ],
+    podcast: [
+      'Two people, one real conversation — the kind that goes somewhere. They’re getting into what matters in their world, and there’s a message in it worth hearing.',
+      'Pull up a chair. A genuine conversation between people who know their field, getting into the things that matter — honest, unhurried, and worth your time.',
+      'Two people who know their field, talking it out for real — the unscripted, worth-your-time kind of conversation, with something in it the world should hear.',
+    ],
+    trailer: [
+      'Your way in. A quick look at what this channel is really about — the people, the conversations, and the work behind them. If it lands, there’s plenty more.',
+      'Start here. A short tour of what we make and why — the rhythm of the studio in under a minute. Like what you see? The rest is waiting.',
+      'A minute on who we are and what we make — the fastest way to get the feel of the channel before you dive into the full library.',
+    ],
+    clip: [
+      'A standout moment, pulled straight from the full conversation — the part worth replaying. Watch it here, then go find the rest.',
+      'One highlight, lifted from a longer talk — the bit people quote. See it on its own, then dig into where it came from.',
+      'The moment worth lifting out of the full talk — short enough to share, sharp enough to land. Then go watch the rest.',
+    ],
+  };
+  const TYPE_LABEL = { short: 'Short-form', podcast: 'Podcast', trailer: 'Trailer', clip: 'Clip' };
+  function publicCopy(a) {
+    const type = assetType(a);
+    const seed = hashId(a && (a.id || a.title) || '');
+    return {
+      type,
+      typeLabel: TYPE_LABEL[type] || 'Studio',
+      title: pick(PUBLIC_TITLES[type] || PUBLIC_TITLES.short, seed),
+      description: pick(PUBLIC_DESCS[type] || PUBLIC_DESCS.short, seed >> 3),
+    };
+  }
+  // Overwrite display_title + description with public copy; keep originals for debugging.
+  function decoratePublic(a) {
+    if (!a || a._publicized) return a;
+    const c = publicCopy(a);
+    a._raw_title = a.display_title || a.title || null;
+    a._raw_description = a.description || a.ai_description || null;
+    a.display_title = c.title;
+    a.description = c.description;
+    a.ai_description = c.description;
+    a.public_type = c.type;
+    a.type_label = c.typeLabel;
+    a._publicized = true;
+    return a;
+  }
+
   function adaptCollectionAsset(a) {
     const brandSlug = tagValue(a.tags, 'brand');
     const topicSlug = tagValue(a.tags, 'topic');
     const display = cleanTitle(a.title);
-    return {
+    const obj = {
       id: a.id,
       title: a.title || display,
       display_title: display,
@@ -1447,6 +1526,7 @@
       tags: a.tags || [],
       created_at: a.created_at || null,
     };
+    return decoratePublic(obj);
   }
   async function loadCollection(slug) {
     try {
@@ -1594,6 +1674,8 @@
     loadCollection,
     initAutoplayVideos,
     renderShowCard,
+    publicCopy,
+    decoratePublic,
     promoCard,
     injectPromo,
     icon,
