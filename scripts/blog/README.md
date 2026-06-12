@@ -1,6 +1,6 @@
 # JourneyWell Automated SEO Blog Pipeline (Phase 1)
 
-Generates original SEO/content-marketing posts for the Journal (blog) section and
+Generates original SEO/content-marketing posts for the Blogs section and
 publishes them to the live site. Built 2026-06-12.
 
 ## How it works

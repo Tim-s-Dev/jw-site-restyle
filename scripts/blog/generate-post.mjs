@@ -265,7 +265,7 @@ function parseJSON(raw) {
 // 4. The prompt
 // ---------------------------------------------------------------------------
 function buildPrompt(category, existingTitles, headlines) {
-  const system = `You are the in-house writer for JourneyWell, a content studio in Baton Rouge, Louisiana that produces podcasts, films, and short-form content for founders and brands. You write the studio's Journal (blog).
+  const system = `You are the in-house writer for JourneyWell, a content studio in Baton Rouge, Louisiana that produces podcasts, films, and short-form content for founders and brands. You write for the studio's Blogs section.
 
 VOICE — this is non-negotiable:
 - First-person studio voice ("we", "our clients", "what we've watched work"). Practical, confident, a little contrarian. Short paragraphs. No fluff, no listicle filler, no "in today's digital landscape" boilerplate.
@@ -292,7 +292,7 @@ OUTPUT — strict JSON object, nothing else:
   "tags": ["…","…"]
 }`;
 
-  const user = `Write one original Journal post in the category: ${category.label}.
+  const user = `Write one original post for the Blogs section in the category: ${category.label}.
 Category focus: ${category.brief}
 
 Posts already on the site (do NOT repeat these topics or angles):
@@ -404,7 +404,7 @@ function renderPostHTML(post, dateStr) {
 
 <section class="lite-post">
   <div class="lite-narrow">
-    <div style="margin-bottom:18px"><a href="../blog.html" style="color:var(--muted); font-size:13px">← Back to Journal</a></div>
+    <div style="margin-bottom:18px"><a href="../blog.html" style="color:var(--muted); font-size:13px">← Back to Blogs</a></div>
     <div class="lite-post-meta">
       <span style="font-weight:600; color:var(--accent-deep); text-transform:uppercase; letter-spacing:0.04em; font-size:12px">${esc(post.category)}</span>
       <span class="dot"></span>
@@ -431,7 +431,7 @@ function renderPostHTML(post, dateStr) {
     <p>Everything in this post is the system we run for JourneyWell clients — capture, multiply, distribute. Pick a starting point.</p>
     <div class="lite-cta-buttons">
       <button class="btn btn-large btn-primary" data-open-drawer>Get started</button>
-      <a href="../blog.html" class="btn btn-large btn-ghost">More from the Journal</a>
+      <a href="../blog.html" class="btn btn-large btn-ghost">More from Blogs</a>
     </div>
   </div>
 </section>

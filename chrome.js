@@ -25,13 +25,14 @@
 })();
 
 (function () {
-  // Portfolio (portfolio.html) and Journal (blog.html) are temporarily hidden
-  // from navigation — the pages still exist and can be revealed by adding them
-  // back to PAGES + MENU when ready.
+  // Portfolio (portfolio.html) is temporarily hidden from navigation — the
+  // page still exists and can be revealed by adding it back to PAGES + MENU
+  // when ready.
   const PAGES = [
     { href: 'solutions.html', label: 'Solutions' },
     { href: 'work.html',      label: 'Work' },
     { href: 'about.html',     label: 'About' },
+    { href: 'blog.html',      label: 'Blogs' },
   ];
 
   // Service sub-pages (kept in footer + linked from Solutions, off main nav)
@@ -107,10 +108,11 @@
         },
       },
     },
-    // Portfolio and Journal mega-menu entries are temporarily hidden.
-    // Their panel/link definitions can be restored alongside the PAGES
-    // entries above when these pages return to navigation.
+    // Portfolio mega-menu entry is temporarily hidden. Its panel/link
+    // definition can be restored alongside the PAGES entry above when the
+    // page returns to navigation.
     { label: 'About',   href: 'about.html' },
+    { label: 'Blogs',   href: 'blog.html' },
   ];
 
   // Subfolder-aware path prefix. Blog posts live under /blog/<slug>.html
@@ -125,7 +127,7 @@
   const GHL_WEBHOOK_URL = 'https://n8n.journeywellhub.com/webhook/jw-lead';
 
   const here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  // Blog posts should mark "Journal" as the active nav item
+  // Blog posts should mark "Blogs" as the active nav item
   const activeHref = IN_BLOG_POST ? 'blog.html' : here;
 
   // ---------- NAV ----------
