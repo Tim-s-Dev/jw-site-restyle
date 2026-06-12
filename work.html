@@ -291,7 +291,7 @@
       ? brandSlug.split('-').map(w => w ? w[0].toUpperCase() + w.slice(1) : '').join(' ')
       : null;
     const display = String(a.title || 'Untitled').replace(/\.(mp4|mov|webm|m4v)$/i, '').trim();
-    return {
+    const obj = {
       id: a.id,
       title: a.title || display,
       display_title: display,
@@ -308,6 +308,8 @@
       ai_description: a.ai_description || '',
       polished: tags.includes('status:polished') || tags.includes('quality:polished'),
     };
+    // Phase 1: rewrite title + description into public-facing, type-based copy.
+    return (window.JW && window.JW.decoratePublic) ? window.JW.decoratePublic(obj) : obj;
   }
 
   // Fetch all five live-feed buckets in parallel, then build a `seg` object
