@@ -201,6 +201,7 @@
           <div class="nav-cta">
             <a class="nav-social" href="https://www.instagram.com/journeywell.co/" target="_blank" rel="noopener noreferrer" aria-label="JourneyWell on Instagram">${icon('instagram', { size: 18 })}</a>
             <a class="nav-social" href="https://www.linkedin.com/company/journeywellio" target="_blank" rel="noopener noreferrer" aria-label="JourneyWell on LinkedIn">${icon('linkedin', { size: 18 })}</a>
+            <a class="nav-social" href="https://www.facebook.com/journeywell.co" target="_blank" rel="noopener noreferrer" aria-label="JourneyWell on Facebook">${icon('facebook', { size: 18 })}</a>
             <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light/dark theme">
               <span class="icon-sun">${icon('sun', { size: 18 })}</span>
               <span class="icon-moon">${icon('moon', { size: 18 })}</span>
@@ -283,6 +284,7 @@
     expandArrows:'<path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     instagram:   '<rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>',
     linkedin:    '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="9" width="4" height="12" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="4" cy="4" r="2" fill="none" stroke="currentColor" stroke-width="2"/>',
+    facebook:    '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
   };
   function icon(name, opts) {
     const o = opts || {};
