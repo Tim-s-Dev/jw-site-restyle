@@ -199,6 +199,8 @@
             ${MENU.map(navItemHtml).join('')}
           </nav>
           <div class="nav-cta">
+            <a class="nav-social" href="https://www.instagram.com/journeywell.co/" target="_blank" rel="noopener noreferrer" aria-label="JourneyWell on Instagram">${icon('instagram', { size: 18 })}</a>
+            <a class="nav-social" href="https://www.linkedin.com/company/journeywellio" target="_blank" rel="noopener noreferrer" aria-label="JourneyWell on LinkedIn">${icon('linkedin', { size: 18 })}</a>
             <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light/dark theme">
               <span class="icon-sun">${icon('sun', { size: 18 })}</span>
               <span class="icon-moon">${icon('moon', { size: 18 })}</span>
@@ -279,6 +281,8 @@
     volume:      '<path d="M11 5L6 9H2v6h4l5 4V5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     volumeOff:   '<path d="M11 5L6 9H2v6h4l5 4V5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 9l-6 6M17 9l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     expandArrows:'<path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+    instagram:   '<rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>',
+    linkedin:    '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="9" width="4" height="12" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="4" cy="4" r="2" fill="none" stroke="currentColor" stroke-width="2"/>',
   };
   function icon(name, opts) {
     const o = opts || {};
@@ -356,14 +360,23 @@
                 </div>
                 <div class="drawer-option-arrow">→</div>
               </button>
-              <button class="drawer-option" data-path="learn">
+              <button class="drawer-option" data-path="book">
                 <div class="drawer-option-text">
-                  <div class="drawer-option-title">Just exploring</div>
-                  <div class="drawer-option-desc">Show me what JourneyWell does. I'm not sure what I need yet.</div>
+                  <div class="drawer-option-title">Book a call</div>
+                  <div class="drawer-option-desc">Pick a time to talk with Tim directly — no commitment.</div>
                 </div>
                 <div class="drawer-option-arrow">→</div>
               </button>
             </div>
+          </section>
+
+          <!-- STEP 5 — Book-a-call calendar (GHL embed). Bypasses steps 2/3/4
+               since GHL captures contact info + sends confirmation directly. -->
+          <section class="drawer-step" data-step="5">
+            <div class="drawer-eyebrow">Pick a time</div>
+            <h2 class="drawer-title">Book a call with Tim.</h2>
+            <p class="drawer-sub">Choose a slot that works — confirmation lands in your inbox immediately.</p>
+            <div id="bookingFrameMount" class="drawer-booking-frame"></div>
           </section>
 
           <!-- STEP 2 — branch-specific qualifiers (rendered dynamically) -->
@@ -582,12 +595,18 @@
   function showStep(n) {
     state.step = n;
     const isStudio = state.path === 'studio';
-    const totalSteps = isStudio ? 2 : 4;
+    const isBook = state.path === 'book';
+    const totalSteps = isBook ? 2 : (isStudio ? 2 : 4);
     document.querySelectorAll('.drawer-step').forEach(s => {
       s.classList.toggle('active', String(s.dataset.step) === String(n));
     });
-    document.getElementById('drawerStepIndicator').textContent = `Step ${n} of ${totalSteps}`;
-    document.getElementById('drawerProgressFill').style.width = `${(n / totalSteps) * 100}%`;
+    if (isBook && n === 5) {
+      document.getElementById('drawerStepIndicator').textContent = 'Pick a time';
+      document.getElementById('drawerProgressFill').style.width = '100%';
+    } else {
+      document.getElementById('drawerStepIndicator').textContent = `Step ${n} of ${totalSteps}`;
+      document.getElementById('drawerProgressFill').style.width = `${(n / totalSteps) * 100}%`;
+    }
     document.getElementById('drawerBack').toggleAttribute('disabled', n <= 1);
     const nextBtn = document.getElementById('drawerNext');
     nextBtn.style.display = (n >= 2 && n <= 3) ? '' : 'none';
@@ -596,7 +615,7 @@
     } else {
       nextBtn.textContent = n === 3 ? 'Submit →' : 'Continue →';
     }
-    document.getElementById('drawerHint').textContent = n === 4 ? '' : 'Press ESC to close';
+    document.getElementById('drawerHint').textContent = (n === 4 || (isBook && n === 5)) ? '' : 'Press ESC to close';
     document.getElementById('drawerBody').scrollTop = 0;
   }
   function selectPath(path) {
@@ -604,8 +623,11 @@
     document.querySelectorAll('#pathOptions .drawer-option').forEach(o =>
       o.classList.toggle('selected', o.dataset.path === path)
     );
-    setTimeout(() => goStep(2), 280);
+    const nextStep = path === 'book' ? 5 : 2;
+    setTimeout(() => goStep(nextStep), 280);
   }
+  // GHL calendar embed for the Book-a-call path. Set in GHL → Calendars → Share.
+  const GHL_BOOKING_CALENDAR_ID = 'zhpX7oUADvHcPFEJGOYl'; // "Discovery Call with Tim"
   function goStep(n) {
     if (n === 2) {
       const cfg = STEP2[state.path] || STEP2.learn;
@@ -624,6 +646,27 @@
         learn:     "Thanks for the context. We'll send a short note pointing you to the most useful next step.",
       }[state.path] || '';
       if (sub) document.getElementById('confirmSub').textContent = sub;
+    }
+    if (n === 5) {
+      const mount = document.getElementById('bookingFrameMount');
+      if (mount && !mount.querySelector('iframe')) {
+        const src = `https://api.leadconnectorhq.com/widget/booking/${GHL_BOOKING_CALENDAR_ID}`;
+        const iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.title = 'Book a call with Tim';
+        iframe.loading = 'lazy';
+        iframe.scrolling = 'no';
+        iframe.style.cssText = 'width:100%; min-height:720px; border:0; display:block;';
+        mount.appendChild(iframe);
+        // GHL ships form_embed.js for parent-side iframe auto-resize. Load once.
+        if (!document.querySelector('script[data-ghl-form-embed]')) {
+          const s = document.createElement('script');
+          s.src = 'https://link.msgsndr.com/js/form_embed.js';
+          s.async = true;
+          s.setAttribute('data-ghl-form-embed', '1');
+          document.head.appendChild(s);
+        }
+      }
     }
     showStep(n);
   }
@@ -763,7 +806,16 @@
     document.querySelectorAll('#pathOptions .drawer-option').forEach(opt =>
       opt.addEventListener('click', () => selectPath(opt.dataset.path))
     );
-    document.getElementById('drawerBack').addEventListener('click', () => goStep(state.step - 1));
+    document.getElementById('drawerBack').addEventListener('click', () => {
+      // Book-a-call path jumps step 1 → 5; back from 5 must return to 1, not 4.
+      if (state.step === 5 && state.path === 'book') {
+        state.path = null;
+        document.querySelectorAll('.drawer-option.selected').forEach(o => o.classList.remove('selected'));
+        goStep(1);
+        return;
+      }
+      goStep(state.step - 1);
+    });
     document.getElementById('drawerNext').addEventListener('click', () => {
       if (state.step === 3) submitForm();
       else goStep(state.step + 1);

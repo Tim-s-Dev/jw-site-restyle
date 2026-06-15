@@ -37,6 +37,30 @@
 [data-theme="light"] .theme-toggle .icon-sun { display: inline-flex; }
 [data-theme="light"] .theme-toggle .icon-moon { display: none; }
 
+/* ---------- Nav social links (Instagram, LinkedIn) ---------- */
+.nav-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+.nav-social:hover {
+  background: var(--bg-hover);
+  border-color: var(--text-primary);
+  transform: translateY(-1px);
+}
+.nav-social svg { width: 18px; height: 18px; display: block; }
+@media (max-width: 600px) {
+  .nav-social { display: none; }
+}
+
 /* ---------- DARK THEME (work.html vibe) ---------- */
 /* Body sits at solid #050505 in dark mode. Sections themselves carry either
    a glow gradient or pure black — alternating, like work.html's split between
@@ -1142,3 +1166,25 @@ body.lite .hero-video-ctas .btn-ghost:hover,
 [data-theme="light"] .jw-split-wrap.flip .jw-split-txt h2 { color: var(--ink); }
 [data-theme="light"] .jw-split-wrap.flip .jw-split-txt h2 em { color: var(--accent-deep, #CFF42A); }
 [data-theme="light"] .jw-split-wrap.flip .jw-split-txt p { color: var(--text-on-cream-muted); }
+
+/* ---------- Drawer: Book-a-call calendar embed ----------
+   GHL iframe lives inside the drawer body. Pull it flush to the drawer
+   edges (negative margin to escape body padding) so the calendar UI
+   has every pixel of width. Min-height keeps it tall enough for the
+   month grid + slot picker without internal scrolling. */
+.drawer-booking-frame {
+  margin: 8px -20px 0;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.drawer-booking-frame iframe {
+  width: 100%;
+  min-height: 720px;
+  border: 0;
+  display: block;
+}
+@media (max-width: 720px) {
+  .drawer-booking-frame { margin: 8px -12px 0; }
+  .drawer-booking-frame iframe { min-height: 640px; }
+}
