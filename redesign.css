@@ -51,7 +51,7 @@
 [data-theme="dark"] body.lite > section:nth-of-type(odd):not(.lite-cta),
 [data-theme="dark"] body.lite > .lite-hero {
   background:
-    radial-gradient(1100px 600px at 82% 8%,   rgba(212, 255,   0, 0.13) 0%, transparent 60%),
+    radial-gradient(1100px 600px at 82% 8%,   rgba(207, 244, 42, 0.13) 0%, transparent 60%),
     radial-gradient(1000px 720px at 5% 72%,   rgba(124,  58, 237, 0.30) 0%, transparent 60%),
     radial-gradient(900px 720px at 100% 100%, rgba(255,  45, 138, 0.22) 0%, transparent 60%),
     #050505;
@@ -70,8 +70,8 @@
 [data-theme="light"] body.lite > section:nth-of-type(odd):not(.lite-cta),
 [data-theme="light"] body.lite > .lite-hero {
   background:
-    radial-gradient(1100px 600px at 82% 8%,   rgba(180, 230,  60, 0.22) 0%, transparent 60%),  /* lime-yellow TR */
-    radial-gradient(1000px 720px at 5% 72%,   rgba( 29, 185,  84, 0.18) 0%, transparent 60%),  /* spotify green ML */
+    radial-gradient(1100px 600px at 82% 8%,   rgba(207, 244, 42, 0.22) 0%, transparent 60%),  /* lime-yellow TR */
+    radial-gradient(1000px 720px at 5% 72%,   rgba( 207, 244, 42, 0.18) 0%, transparent 60%),  /* spotify green ML */
     radial-gradient(900px 720px at 100% 100%, rgba(255, 160, 130, 0.18) 0%, transparent 60%),  /* soft peach BR */
     var(--paper, #f6f5f2);
 }
@@ -453,7 +453,7 @@ body.lite .hero-split .hero-carousel {
   transform: scale(1.15);
 }
 .hero-carousel-dot.is-active {
-  background: var(--lime, #d4ff00);
+  background: var(--lime, #CFF42A);
   width: 24px;
 }
 [data-theme="light"] .hero-carousel-dot {
@@ -610,13 +610,13 @@ body.lite .hero-split .hero-carousel {
 
 /* Accent badges/tints stay accent colored, but on dark add some glow */
 [data-theme="dark"] body.lite .lite-badge {
-  background: rgba(29, 185, 84, 0.18);
-  color: #5be08a;
+  background: rgba(207, 244, 42, 0.18);
+  color: #CFF42A;
 }
 
 /* Float button: keep lime in dark mode */
 [data-theme="dark"] body.lite .float-btn {
-  background: var(--lime, #d4ff00);
+  background: var(--lime, #CFF42A);
   color: #0a0a0a;
 }
 
@@ -651,8 +651,8 @@ body.lite .hero-split .hero-carousel {
   border-color: rgba(255,255,255,0.10);
 }
 [data-theme="dark"] body.lite .pillar-card:hover {
-  border-color: var(--accent, #1db954);
-  box-shadow: 0 0 0 1px rgba(29,185,84,0.18), 0 20px 50px rgba(0,0,0,0.45);
+  border-color: var(--accent, #CFF42A);
+  box-shadow: 0 0 0 1px rgba(207, 244, 42,0.18), 0 20px 50px rgba(0,0,0,0.45);
 }
 [data-theme="dark"] body.lite .pillar-num { color: #fff; }
 [data-theme="dark"] body.lite .pillar-title { color: #fff; }
@@ -670,8 +670,8 @@ body.lite .hero-split .hero-carousel {
 [data-theme="dark"] body.lite .jw-promo-card.cream::before { background: #fff; }
 [data-theme="dark"] body.lite .section-cream .jw-promo-card:hover,
 [data-theme="dark"] body.lite .jw-promo-card.cream:hover {
-  border-color: var(--accent, #1db954);
-  box-shadow: 0 0 0 1px rgba(29,185,84,0.18), 0 18px 40px rgba(0,0,0,0.45);
+  border-color: var(--accent, #CFF42A);
+  box-shadow: 0 0 0 1px rgba(207, 244, 42,0.18), 0 18px 40px rgba(0,0,0,0.45);
 }
 [data-theme="dark"] body.lite .section-cream .jw-promo-card-eyebrow,
 [data-theme="dark"] body.lite .jw-promo-card.cream .jw-promo-card-eyebrow { color: #fff; }
@@ -710,7 +710,7 @@ body.lite .hero-split .hero-carousel {
   background: rgba(255,255,255,0.6);
 }
 [data-theme="dark"] .hero-carousel-dot.is-active {
-  background: var(--lime, #d4ff00);
+  background: var(--lime, #CFF42A);
 }
 [data-theme="light"] .hero-carousel-dot {
   background: rgba(0,0,0,0.22);
@@ -774,7 +774,7 @@ body.lite,
 [data-theme="light"] .drawer {
   background-color: var(--paper, #f6f5f2);
   background-image:
-    radial-gradient(700px 500px at 80% 0%,   rgba( 29, 185,  84, 0.16), transparent 60%),
+    radial-gradient(700px 500px at 80% 0%,   rgba( 207, 244, 42, 0.16), transparent 60%),
     radial-gradient(700px 500px at 0% 100%,  rgba(255, 160, 130, 0.18), transparent 60%);
   border-left: 1px solid var(--line-dk);
 }
@@ -847,8 +847,8 @@ body.lite,
 /* Channel header — flip the dark glow recipe to the light palette */
 [data-theme="light"] .channel-header {
   background:
-    radial-gradient(900px 500px at 80% 20%,  rgba(180, 230,  60, 0.22) 0%, transparent 60%),
-    radial-gradient(800px 600px at 12% 80%,  rgba( 29, 185,  84, 0.16) 0%, transparent 60%),
+    radial-gradient(900px 500px at 80% 20%,  rgba(207, 244, 42, 0.22) 0%, transparent 60%),
+    radial-gradient(800px 600px at 12% 80%,  rgba( 207, 244, 42, 0.16) 0%, transparent 60%),
     radial-gradient(700px 600px at 95% 100%, rgba(255, 160, 130, 0.16) 0%, transparent 60%),
     var(--paper, #f6f5f2);
 }
@@ -982,7 +982,7 @@ body.lite,
 [data-theme="light"] .megapanel-link-title { color: #0a0a0a; }
 [data-theme="light"] .megapanel-link-sub   { color: rgba(10, 10, 10, 0.60); }
 [data-theme="light"] .megapanel-featured {
-  background: linear-gradient(135deg, rgba(29, 185, 84, 0.14), rgba(180, 230, 60, 0.10));
+  background: linear-gradient(135deg, rgba(207, 244, 42, 0.14), rgba(207, 244, 42, 0.10));
   border-left-color: var(--line-dk);
 }
 [data-theme="light"] .megapanel-featured-title { color: #0a0a0a; }
@@ -1081,7 +1081,7 @@ body:not(.lite):not(.full-page-form) .nav-cta .btn {
 }
 [data-theme="light"] .jw-promo-band.dark { color: var(--text-on-cream); }
 [data-theme="light"] .jw-promo-band.dark .jw-promo-band-title { color: var(--ink); }
-[data-theme="light"] .jw-promo-band.dark .jw-promo-band-title em { color: var(--accent-deep, #169c46); }
+[data-theme="light"] .jw-promo-band.dark .jw-promo-band-title em { color: var(--accent-deep, #CFF42A); }
 [data-theme="light"] .jw-promo-band.dark .jw-promo-band-desc { color: var(--text-on-cream-muted); }
 [data-theme="light"] .jw-promo-band.dark .btn-ghost { color: var(--ink); border-color: var(--line-dk-strong); }
 [data-theme="light"] .jw-promo-band.dark .btn-ghost:hover { background: rgba(0,0,0,0.05); border-color: var(--ink); }
@@ -1112,17 +1112,17 @@ body.lite .hero-video-ctas .btn-ghost:hover,
    bg define the card; on hover the lime accent does the speaking. ---------- */
 [data-theme="dark"] .dark-card {
   border: 0;
-  box-shadow: inset 0 0 0 0px rgba(212, 255, 0, 0);
+  box-shadow: inset 0 0 0 0px rgba(207, 244, 42, 0);
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 [data-theme="dark"] .dark-card:hover {
   border: 0;
-  box-shadow: inset 0 0 0 1px rgba(212, 255, 0, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(207, 244, 42, 0.35);
 }
 
 /* ---------- Split section text panel — dark treatment ---------- */
 .jw-split-txt { background: #0d0d0d; color: #fff; }
-.jw-split-txt .eyebrow { color: var(--lime); border-color: rgba(212,255,0,0.3); }
+.jw-split-txt .eyebrow { color: var(--lime); border-color: rgba(207, 244, 42,0.3); }
 .jw-split-txt h2 { color: #fff; }
 .jw-split-txt h2 em { color: var(--lime); }
 .jw-split-txt p { color: rgba(255,255,255,0.72); }
@@ -1130,7 +1130,7 @@ body.lite .hero-video-ctas .btn-ghost:hover,
 [data-theme="light"] .jw-split-txt { background: var(--paper); color: var(--ink); }
 [data-theme="light"] .jw-split-txt .eyebrow { color: rgba(10,10,10,0.45); border-color: var(--line-dk); }
 [data-theme="light"] .jw-split-txt h2 { color: var(--ink); }
-[data-theme="light"] .jw-split-txt h2 em { color: var(--accent-deep, #169c46); }
+[data-theme="light"] .jw-split-txt h2 em { color: var(--accent-deep, #CFF42A); }
 [data-theme="light"] .jw-split-txt p { color: var(--text-on-cream-muted); }
 
 /* Flip variant (text-left, image-right) — base style.css L3320 hardcodes
@@ -1140,5 +1140,5 @@ body.lite .hero-video-ctas .btn-ghost:hover,
 [data-theme="light"] .jw-split-wrap.flip .jw-split-txt { background: var(--paper); color: var(--ink); }
 [data-theme="light"] .jw-split-wrap.flip .jw-split-txt .eyebrow { color: rgba(10,10,10,0.45); border-color: var(--line-dk); }
 [data-theme="light"] .jw-split-wrap.flip .jw-split-txt h2 { color: var(--ink); }
-[data-theme="light"] .jw-split-wrap.flip .jw-split-txt h2 em { color: var(--accent-deep, #169c46); }
+[data-theme="light"] .jw-split-wrap.flip .jw-split-txt h2 em { color: var(--accent-deep, #CFF42A); }
 [data-theme="light"] .jw-split-wrap.flip .jw-split-txt p { color: var(--text-on-cream-muted); }

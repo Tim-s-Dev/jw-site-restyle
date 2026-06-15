@@ -490,7 +490,7 @@
 .blog-prose a {
   color: var(--lime);
   text-decoration: none;
-  border-bottom: 1px solid rgba(212, 255, 0, 0.4);
+  border-bottom: 1px solid rgba(207, 244, 42, 0.4);
   transition: border-color 150ms ease;
 }
 .blog-prose a:hover { border-bottom-color: var(--lime); }

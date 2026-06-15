@@ -1,7 +1,7 @@
 /* ============================================================
    JourneyWell — Lite Stylesheet
    Light, Spotify/YouTube-inspired aesthetic for primary site pages.
-   White background, black text, single accent green (#1DB954).
+   White background, black text, single accent green (#CFF42A).
    Pages using this load chrome.js and add <body class="lite">.
    ============================================================ */
 
@@ -19,10 +19,10 @@ body.lite {
   --muted-2:      #8a8d94;
   --line:         rgba(0, 0, 0, 0.08);
   --line-strong:  rgba(0, 0, 0, 0.16);
-  --accent:       #1DB954;       /* Spotify green */
-  --accent-deep:  #169c46;
-  --accent-tint:  rgba(29, 185, 84, 0.10);
-  --accent-glow:  rgba(29, 185, 84, 0.22);
+  --accent:       #CFF42A;       /* Spotify green */
+  --accent-deep:  #CFF42A;
+  --accent-tint:  rgba(207, 244, 42, 0.10);
+  --accent-glow:  rgba(207, 244, 42, 0.22);
   --danger:       #d61f4a;
   --shadow-sm:    0 1px 2px rgba(0,0,0,0.04), 0 1px 1px rgba(0,0,0,0.03);
   --shadow-md:    0 6px 20px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
@@ -310,7 +310,7 @@ body.lite .hero-video-title em {
   font-family: var(--serif, 'Cormorant Garamond', Garamond, serif);
   font-style: italic;
   font-weight: 500;
-  color: var(--accent, #1DB954);
+  color: var(--accent, #CFF42A);
 }
 body.lite .hero-video-lead {
   font-size: clamp(15px, 1.2vw, 19px);
@@ -517,7 +517,7 @@ body.lite .lite-card--photo .lite-card-body .lite-card-link {
   color: #fff;
 }
 body.lite .lite-card--photo .lite-card-body .lite-card-link:hover {
-  color: var(--accent, #1DB954);
+  color: var(--accent, #CFF42A);
 }
 /* Card icon kept above the title as a small pill — translucent white so it
    reads as a UI accent rather than a heavy badge against the photo. */
