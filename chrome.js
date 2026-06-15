@@ -334,6 +334,13 @@
             <h2 class="drawer-title">What brings you here?</h2>
             <p class="drawer-sub">Pick the closest match. We'll route you to the right next step — no commitment yet.</p>
             <div class="drawer-options" id="pathOptions">
+              <button class="drawer-option" data-path="book">
+                <div class="drawer-option-text">
+                  <div class="drawer-option-title">Book a call with Tim</div>
+                  <div class="drawer-option-desc">Pick a time to talk with Tim directly — no commitment.</div>
+                </div>
+                <div class="drawer-option-arrow">→</div>
+              </button>
               <button class="drawer-option" data-path="studio">
                 <div class="drawer-option-text">
                   <div class="drawer-option-title">Book the studio</div>
@@ -359,13 +366,6 @@
                 <div class="drawer-option-text">
                   <div class="drawer-option-title">Build content authority</div>
                   <div class="drawer-option-desc">I want the full system — one recording, multiplied across every platform.</div>
-                </div>
-                <div class="drawer-option-arrow">→</div>
-              </button>
-              <button class="drawer-option" data-path="book">
-                <div class="drawer-option-text">
-                  <div class="drawer-option-title">Book a call</div>
-                  <div class="drawer-option-desc">Pick a time to talk with Tim directly — no commitment.</div>
                 </div>
                 <div class="drawer-option-arrow">→</div>
               </button>
