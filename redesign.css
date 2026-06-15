@@ -37,6 +37,33 @@
 [data-theme="light"] .theme-toggle .icon-sun { display: inline-flex; }
 [data-theme="light"] .theme-toggle .icon-moon { display: none; }
 
+/* ---------- Nav typography unification across all pages ----------
+   Default .nav rules in style.css use display-font + uppercase + 72px
+   tall — that's what work.html (no body.lite) was getting. The homepage
+   (body.lite) has a modern lowercase nav via lite.css. Promote that look
+   so non-lite pages match the homepage. On lite pages, body.lite rules
+   in lite.css still win via specificity, so no effective change there. */
+.nav-inner { height: 64px; max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+.logo {
+  font-family: var(--font);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+.nav-links { gap: 4px; }
+.nav-links a {
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+}
+.nav-links a.active::after { display: none; }
+.nav-cta { gap: 12px; }
+
 /* ---------- Nav social links (Instagram, LinkedIn) ---------- */
 .nav-social {
   display: inline-flex;
