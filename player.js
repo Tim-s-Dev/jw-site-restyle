@@ -273,6 +273,47 @@
         if (fill) fill.style.width = ((v.currentTime / v.duration) * 100) + '%';
       });
     });
+
+    // Scrubbable progress bar — click anywhere on the bar to seek,
+    // drag to scrub. stopPropagation prevents the slide's play/pause
+    // click handler from firing on the same gesture.
+    track.querySelectorAll('.reels-progress').forEach(bar => {
+      const slide = bar.closest('.reels-slide');
+      const video = slide && slide.querySelector('video');
+      if (!video) return;
+      let dragging = false;
+      function seekFromEvent(e) {
+        const rect = bar.getBoundingClientRect();
+        const clientX = e.clientX != null ? e.clientX : (e.touches && e.touches[0] && e.touches[0].clientX) || 0;
+        const frac = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+        if (video.duration && isFinite(video.duration)) {
+          video.currentTime = frac * video.duration;
+          const fill = bar.querySelector('.reels-progress-fill');
+          if (fill) fill.style.width = (frac * 100) + '%';
+        }
+      }
+      bar.addEventListener('pointerdown', e => {
+        e.stopPropagation();
+        e.preventDefault();
+        dragging = true;
+        try { bar.setPointerCapture && bar.setPointerCapture(e.pointerId); } catch (_) {}
+        seekFromEvent(e);
+      });
+      bar.addEventListener('pointermove', e => {
+        if (!dragging) return;
+        e.stopPropagation();
+        seekFromEvent(e);
+      });
+      function endDrag(e) {
+        if (!dragging) return;
+        dragging = false;
+        e.stopPropagation();
+        try { bar.releasePointerCapture && bar.releasePointerCapture(e.pointerId); } catch (_) {}
+      }
+      bar.addEventListener('pointerup', endDrag);
+      bar.addEventListener('pointercancel', endDrag);
+      bar.addEventListener('click', e => e.stopPropagation());
+    });
   }
 
   function playWhenReady(v) {

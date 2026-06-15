@@ -2870,19 +2870,46 @@ body.full-page-form .full-page-mast .logo {
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 
-/* PROGRESS BAR — pinned to bottom of frame, lime, thin (replaces top progress) */
+/* Scrubbable progress bar — 16px hit area, 3px visible track that
+   grows to 5px on hover for affordance. Pointer events on the parent
+   so clicks/drags anywhere in the hit area seek the video. */
 .reels-progress {
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  height: 3px;
-  background: rgba(255,255,255,0.18);
+  height: 16px;
+  background: transparent;
   z-index: 4;
-  overflow: hidden;
+  cursor: pointer;
+  touch-action: none;
+}
+.reels-progress::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 4px;
+  height: 3px;
+  background: rgba(255,255,255,0.22);
+  border-radius: 2px;
+  transition: height 150ms ease, bottom 150ms ease;
+  pointer-events: none;
+}
+.reels-progress:hover::before {
+  height: 5px;
+  bottom: 5px;
 }
 .reels-progress-fill {
-  height: 100%; width: 0%;
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  height: 3px;
+  width: 0%;
   background: var(--lime);
-  transition: width 120ms linear;
+  border-radius: 2px;
+  transition: width 120ms linear, height 150ms ease, bottom 150ms ease;
+  pointer-events: none;
+}
+.reels-progress:hover .reels-progress-fill {
+  height: 5px;
+  bottom: 5px;
 }
 
 /* OUTSIDE-FRAME DOWN-ARROW NAV (desktop only, between frame and right edge) */
