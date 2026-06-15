@@ -94,7 +94,7 @@
 
     <div class="lite-grid cols-3">
       <a href="studio.html" class="lite-card lite-card--photo" style="text-decoration:none">
-        <div class="lite-card-photo"><img src="https://picsum.photos/seed/jw-studio/540/960" alt="" loading="lazy" /></div>
+        <div class="lite-card-photo"><img src="images/cards/book-the-studio.jpg" alt="" loading="lazy" /></div>
         <div class="lite-card-body">
           <div class="lite-card-icon" id="cardIconMic"></div>
           <h3>Book the Studio</h3>
@@ -103,7 +103,7 @@
         </div>
       </a>
       <a href="podcast.html" class="lite-card lite-card--photo" style="text-decoration:none">
-        <div class="lite-card-photo"><img src="https://picsum.photos/seed/jw-podcast/540/960" alt="" loading="lazy" /></div>
+        <div class="lite-card-photo"><img src="images/cards/launch-a-podcast.jpg" alt="" loading="lazy" /></div>
         <div class="lite-card-body">
           <div class="lite-card-icon" id="cardIconHeadphones"></div>
           <h3>Launch a Podcast</h3>
@@ -112,7 +112,7 @@
         </div>
       </a>
       <a href="authority.html" class="lite-card lite-card--photo" style="text-decoration:none">
-        <div class="lite-card-photo"><img src="https://picsum.photos/seed/jw-authority/540/960" alt="" loading="lazy" /></div>
+        <div class="lite-card-photo"><img src="images/cards/build-authority.jpg" alt="" loading="lazy" /></div>
         <div class="lite-card-body">
           <div class="lite-card-icon" id="cardIconLayers"></div>
           <h3>Build Authority</h3>
@@ -389,10 +389,17 @@
     ['cmpC1','cmpC2','cmpC3','cmpC4','cmpC5','cmpC6'].forEach(id => setIcon(id, 'check', 18));
     ['cmpX1','cmpX2','cmpX3','cmpX4','cmpX5','cmpX6'].forEach(id => setIcon(id, 'minus', 18));
 
-    // Recent work tiles from Creator Tunnel tag `live-feed:recent-work` (cap 6).
-    const data = window.JW.loadCtTag
+    // Recent work tiles. Prefer CT tag `live-feed:recent-work` (cap 6). Until
+    // the curated set is populated, fall back to `live-feed:episode` so the
+    // row is never empty.
+    let data = window.JW.loadCtTag
       ? await window.JW.loadCtTag('live-feed:recent-work', 6)
-      : (window.JW.loadCollection ? await window.JW.loadCollection('web') : await window.JW.loadContent());
+      : null;
+    if (!data || !data.assets || !data.assets.length) {
+      data = window.JW.loadCtTag
+        ? await window.JW.loadCtTag('live-feed:episode', 6)
+        : (window.JW.loadCollection ? await window.JW.loadCollection('web') : await window.JW.loadContent());
+    }
     const wrap = document.getElementById('liteHomeTiles');
     if (!wrap || !data || !data.assets || !data.assets.length) return;
     const items = data.assets.slice(0, 6);
@@ -438,5 +445,8 @@
     if (window.JW.initAutoplayVideos) window.JW.initAutoplayVideos(wrap);
   });
 </script>
+<!-- impeccable-live-start -->
+<script src="http://localhost:8400/live.js"></script>
+<!-- impeccable-live-end -->
 </body>
 </html>

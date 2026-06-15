@@ -210,8 +210,11 @@
     it.querySelector('.faq-q').addEventListener('click', () => it.classList.toggle('open'));
   });
   document.addEventListener('DOMContentLoaded', () => {
-    if (window.JW) window.JW.renderWorkInto('#podcastExamples', 8);
+    if (window.JW) window.JW.renderWorkInto('#podcastExamples', 6, 'live-feed:episode');
   });
 </script>
+<!-- impeccable-live-start -->
+<script src="http://localhost:8400/live.js"></script>
+<!-- impeccable-live-end -->
 </body>
 </html>

@@ -1538,10 +1538,16 @@
   function escapeHtml(s) {
     return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
-  async function renderWorkInto(selector, count) {
+  async function renderWorkInto(selector, count, tag) {
     const target = document.querySelector(selector);
     if (!target) return;
-    const data = await loadContent();
+    let data = null;
+    if (tag) {
+      data = await loadCtTag(tag, count || 24);
+    }
+    if (!data || !data.assets || !data.assets.length) {
+      data = await loadContent();
+    }
     if (!data || !data.assets || !data.assets.length) return; // keep placeholders
     const items = (count ? data.assets.slice(0, count) : data.assets);
     target.innerHTML = items.map(renderShowCard).join('');
