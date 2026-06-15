@@ -1059,7 +1059,7 @@ body:not(.lite):not(.full-page-form) .nav-cta .btn {
 
 /* Per-slot crop overrides */
 .jw-slot-img[src*="03c-home-edit"] { object-position: 90% 28%; }
-.jw-slot-img[src*="10-podcast-session"] { object-position: 50% 30%; }
+.jw-slot-img[src*="10-podcast-session"] { object-position: 50% 78%; }
 
 /* ---------- Dark promo band — adapt to cream in light mode ----------
    The .dark variant was originally pinned dark across themes as an
@@ -1080,6 +1080,27 @@ body:not(.lite):not(.full-page-form) .nav-cta .btn {
 [data-theme="light"] .jw-promo-band.dark .jw-promo-band-desc { color: var(--text-on-cream-muted); }
 [data-theme="light"] .jw-promo-band.dark .btn-ghost { color: var(--ink); border-color: var(--line-dk-strong); }
 [data-theme="light"] .jw-promo-band.dark .btn-ghost:hover { background: rgba(0,0,0,0.05); border-color: var(--ink); }
+
+/* ---------- Hero video CTAs — force white treatment on any theme ----------
+   The hero ghost button ("Watch the work") sits over a video that can be
+   any color (red roses, dark studio, etc). Default ghost styling uses
+   dark text + dark border, which disappears on dark/red footage. Pin
+   white + translucent backdrop so it reads on any clip. */
+body.lite .hero-video-ctas .btn-ghost,
+[data-theme="light"] body.lite .hero-video-ctas .btn-ghost,
+[data-theme="dark"]  body.lite .hero-video-ctas .btn-ghost {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.28);
+  border-color: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+body.lite .hero-video-ctas .btn-ghost:hover,
+[data-theme="light"] body.lite .hero-video-ctas .btn-ghost:hover,
+[data-theme="dark"]  body.lite .hero-video-ctas .btn-ghost:hover {
+  background: rgba(0, 0, 0, 0.45);
+  border-color: #fff;
+}
 
 /* ---------- Dark cards — drop the 1px white border that reads as a
    left-edge highlight on the near-black page. Let the slight white-tint
