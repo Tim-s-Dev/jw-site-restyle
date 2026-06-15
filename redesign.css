@@ -867,6 +867,12 @@ body.lite,
   border-color: rgba(10, 10, 10, 0.28);
   color: #0a0a0a;
 }
+[data-theme="light"] .drawer-pill.selected,
+[data-theme="light"] .drawer-pill.selected:hover {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: #000;
+}
 [data-theme="light"] .drawer-footer { border-top-color: var(--line-dk); }
 [data-theme="light"] .drawer-back { color: rgba(10, 10, 10, 0.66); }
 [data-theme="light"] .drawer-back:hover { color: #0a0a0a; }
