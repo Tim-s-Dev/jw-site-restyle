@@ -1671,14 +1671,6 @@ body.full-page-form .full-page-mast .logo {
   font: inherit;
   color: inherit;
 }
-.jw-promo-card::before {
-  content: '';
-  position: absolute; left: 0; top: 0; bottom: 0;
-  width: 3px;
-  background: var(--lime);
-  border-top-left-radius: var(--radius-lg);
-  border-bottom-left-radius: var(--radius-lg);
-}
 .jw-promo-card:hover {
   transform: translateY(-3px);
   border-color: var(--lime);
@@ -1732,8 +1724,6 @@ body.full-page-form .full-page-mast .logo {
   background: #fff;
   border-color: var(--line-dk);
 }
-.section-cream .jw-promo-card::before,
-.jw-promo-card.cream::before { background: #000; }
 .section-cream .jw-promo-card:hover,
 .jw-promo-card.cream:hover {
   border-color: #000;
