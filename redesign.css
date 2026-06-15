@@ -900,6 +900,11 @@ body.lite,
   background: #ffffff;
   border-bottom-color: var(--line-dk);
 }
+
+/* Channel trailer card sat 8px below the channel header — too tight
+   visually. Push the top padding so the trailer breathes against the
+   stats row above. Applies to both themes. */
+.hero-piece-section { padding-top: 56px; }
 [data-theme="light"] .hero-piece-player {
   background: #e9e7e1;
   border-color: var(--line-dk);
