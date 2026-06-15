@@ -237,7 +237,10 @@
     });
 
     track.querySelectorAll('.reels-slide:not(.is-promo)').forEach(slide => {
-      slide.addEventListener('click', () => {
+      slide.addEventListener('click', (e) => {
+        // Ignore clicks that originated inside the progress bar (scrub gesture)
+        // or any of the action/top buttons — they handle themselves.
+        if (e.target.closest('.reels-progress, .reels-top-btn, .reels-action, .reels-info-subscribe, .reels-promo-cta, [data-open-drawer-with]')) return;
         const v = slide.querySelector('video');
         if (!v) return;
         const pausedOverlay = slide.querySelector('.reels-paused-overlay');
