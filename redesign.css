@@ -124,6 +124,11 @@
 [data-theme="light"] body.lite .footer { color: rgba(10,10,10,0.78); }
 [data-theme="light"] body.lite .footer-meta a { color: rgba(10,10,10,0.72); }
 [data-theme="light"] body.lite .footer-meta a:hover { color: #0a0a0a; }
+
+/* FAQ answers default to white (designed for dark sections). When the FAQ
+   block lives on a non-cream light section (e.g. studio.html), the white
+   text vanishes against the page background — keep it dark in light mode. */
+[data-theme="light"] .faq-a { color: rgba(10, 10, 10, 0.72); }
 [data-theme="light"] .lite-hero,
 [data-theme="light"] .lite-section,
 [data-theme="light"] body.lite {
@@ -1025,3 +1030,51 @@ body:not(.lite):not(.full-page-form) .nav-cta .btn {
   font-family: var(--font, 'Inter', sans-serif);
   letter-spacing: 0;
 }
+
+/* ---------- Photo grid — adapt to light mode ---------- */
+[data-theme="light"] .jw-photo-grid { background: var(--paper); }
+[data-theme="light"] .jw-photo-caption { color: rgba(10,10,10,0.35); }
+
+/* Per-slot crop overrides */
+.jw-slot-img[src*="03c-home-edit"] { object-position: 90% 28%; }
+.jw-slot-img[src*="10-podcast-session"] { object-position: 50% 30%; }
+
+/* ---------- Dark promo band stays dark in light mode ----------
+   redesign.css L70 paints every odd body.lite > section with a cream
+   radial-gradient. .jw-promo-band.dark is meant to be an interstitial
+   dark slab regardless of theme, so re-pin its background and re-assert
+   the white text styling. */
+[data-theme="light"] body.lite > section.jw-promo-band.dark,
+[data-theme="light"] body.lite > section.jw-promo-band.dark:nth-of-type(odd),
+[data-theme="light"] body.lite > section.jw-promo-band.dark:nth-of-type(even) {
+  background:
+    radial-gradient(900px 400px at 80% 20%, rgba(212, 255, 0, 0.10) 0%, transparent 60%),
+    radial-gradient(700px 400px at 10% 90%, rgba(31, 107, 255, 0.12) 0%, transparent 60%),
+    #0a0a0a;
+}
+
+/* ---------- Dark cards — drop the 1px white border that reads as a
+   left-edge highlight on the near-black page. Let the slight white-tint
+   bg define the card; on hover the lime accent does the speaking. ---------- */
+[data-theme="dark"] .dark-card {
+  border: 0;
+  box-shadow: inset 0 0 0 0px rgba(212, 255, 0, 0);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+[data-theme="dark"] .dark-card:hover {
+  border: 0;
+  box-shadow: inset 0 0 0 1px rgba(212, 255, 0, 0.35);
+}
+
+/* ---------- Split section text panel — dark treatment ---------- */
+.jw-split-txt { background: #0d0d0d; color: #fff; }
+.jw-split-txt .eyebrow { color: var(--lime); border-color: rgba(212,255,0,0.3); }
+.jw-split-txt h2 { color: #fff; }
+.jw-split-txt h2 em { color: var(--lime); }
+.jw-split-txt p { color: rgba(255,255,255,0.72); }
+
+[data-theme="light"] .jw-split-txt { background: var(--paper); color: var(--ink); }
+[data-theme="light"] .jw-split-txt .eyebrow { color: rgba(10,10,10,0.45); border-color: var(--line-dk); }
+[data-theme="light"] .jw-split-txt h2 { color: var(--ink); }
+[data-theme="light"] .jw-split-txt h2 em { color: var(--accent-deep, #169c46); }
+[data-theme="light"] .jw-split-txt p { color: var(--text-on-cream-muted); }

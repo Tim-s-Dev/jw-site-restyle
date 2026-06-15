@@ -69,7 +69,7 @@
           },
         ],
         featured: {
-          media: { tag: 'nav:solutions' },
+          media: { tag: 'nav:solutions', poster: 'images/nav/solutions.jpg' },
           eyebrow: 'How it works',
           title: 'Content authority, produced & shipped',
           body: 'One recording becomes 30+ assets. We capture it, edit it, ship it — you own the audience.',
@@ -99,7 +99,7 @@
           },
         ],
         featured: {
-          media: { tag: 'nav:work' },
+          media: { tag: 'nav:work', poster: 'images/nav/work.jpg' },
           eyebrow: 'Channel trailer',
           title: 'Two minutes on what we ship',
           body: 'A quick tour of the JourneyWell studio channel — episodes, shorts, and the production rhythm behind them.',

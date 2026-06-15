@@ -1214,7 +1214,7 @@ body.full-page-form .full-page-mast .logo {
   position: absolute; inset: 0;
   background: radial-gradient(70% 60% at 50% 30%, rgba(31, 107, 255, 0.40) 0%, rgba(124, 58, 237, 0.25) 35%, transparent 70%);
 }
-.studio-tile.t-1::before { background: radial-gradient(70% 60% at 50% 30%, rgba(255, 45, 138, 0.45) 0%, rgba(124, 58, 237, 0.30) 35%, transparent 70%); }
+.studio-tile.t-1 { background-image: url("img/studio/control-room.jpg"); }
 .studio-tile.t-2 { background-image: url("img/studio/2-mic.jpg"); }
 .studio-tile.t-3 { background-image: url("img/studio/solo-booth.jpg"); }
 .studio-tile.t-4 { background-image: url("img/studio/multicam.jpg"); }
@@ -1222,6 +1222,7 @@ body.full-page-form .full-page-mast .logo {
 /* Tiles with photos: replace the colorful blob with a dark bottom-to-
    transparent overlay so the data-label text stays legible against the
    photo's lower edge. */
+.studio-tile.t-1::before,
 .studio-tile.t-2::before,
 .studio-tile.t-3::before,
 .studio-tile.t-4::before,
@@ -3267,6 +3268,7 @@ body.full-page-form .full-page-mast .logo {
 /* Per-slot crop overrides — when the global 72% bias cuts a subject's head. */
 .jw-slot-img[src*="01-home-studio-band"] { object-position: 50% 58%; }
 .jw-slot-img[src*="08-about-team"]       { object-position: 50% 40%; }
+.jw-slot-img[src*="07c-studio-brand"]    { object-position: 50% 20%; }
 
 /* Shared placeholder (fallback when no image present) */
 .jw-img-slot {
