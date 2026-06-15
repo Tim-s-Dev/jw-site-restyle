@@ -23,6 +23,7 @@ import path from "node:path";
 import os from "node:os";
 import { execSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { buildSitemap } from "../build-sitemap.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "..", "..");
@@ -389,6 +390,25 @@ async function getCoverImage(query, fallbackQuery) {
 // ---------------------------------------------------------------------------
 function renderPostHTML(post, dateStr) {
   const plainTitle = stripTags(post.title);
+  const canonical = `https://journeywell.io/blog/${post.slug}.html`;
+  const ogDesc = esc(post.meta_description);
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: plainTitle,
+    description: post.meta_description,
+    image: post.cover_image_url,
+    author: { "@type": "Person", name: post.author },
+    publisher: {
+      "@type": "Organization",
+      name: "JourneyWell",
+      logo: { "@type": "ImageObject", url: "https://journeywell.io/images/jw-logo.png" },
+    },
+    datePublished: new Date().toISOString(),
+    dateModified: new Date().toISOString(),
+    mainEntityOfPage: canonical,
+    articleSection: post.category,
+  };
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -396,9 +416,34 @@ function renderPostHTML(post, dateStr) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>${esc(plainTitle)} — JourneyWell</title>
 <meta name="description" content="${esc(post.meta_description)}" />
+
+<link rel="canonical" href="${canonical}" />
+<meta name="theme-color" content="#CFF42A" />
+
+<link rel="icon" type="image/png" href="/images/jw-logo.png" />
+<link rel="apple-touch-icon" href="/images/jw-logo.png" />
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="JourneyWell" />
+<meta property="og:title" content="${esc(plainTitle)}" />
+<meta property="og:description" content="${ogDesc}" />
+<meta property="og:url" content="${canonical}" />
+<meta property="og:image" content="${esc(post.cover_image_url)}" />
+<meta property="article:section" content="${esc(post.category)}" />
+<meta property="article:author" content="${esc(post.author)}" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="${esc(plainTitle)}" />
+<meta name="twitter:description" content="${ogDesc}" />
+<meta name="twitter:image" content="${esc(post.cover_image_url)}" />
+
 <link rel="stylesheet" href="../style.css?v=5" />
 <link rel="stylesheet" href="../lite.css" />
 <link rel="stylesheet" href="../redesign.css" />
+
+<script type="application/ld+json">
+${JSON.stringify(articleSchema)}
+</script>
 </head>
 <body class="lite">
 
@@ -470,7 +515,7 @@ function renderIndexSection(posts) {
   const cards = grid
     .map(
       (p) => `      <a href="blog/${p.slug}.html" class="lite-blog-card">
-        <div class="lite-blog-card-thumb"><img src="${p.cover_image_url.replace("w=1600", "w=900").replace("w=1600", "w=900")}" alt="" loading="lazy" /></div>
+        <div class="lite-blog-card-thumb"><img src="${p.cover_image_url.replace("w=1600", "w=900").replace("w=1600", "w=900")}" alt="${esc(stripTags(p.title))}" loading="lazy" /></div>
         <div class="lite-blog-card-eyebrow">${esc(p.category)} · ${p.read_time} min read</div>
         <div class="lite-blog-card-title">${p.title}</div>
         <div class="lite-blog-card-meta">${esc(p.meta_description)}</div>
@@ -589,11 +634,14 @@ async function main() {
   updateBlogIndex(all);
   console.log("→ rebuilt blog.html index");
 
+  const sm = buildSitemap();
+  console.log(`→ rebuilt sitemap.xml (${sm.count} urls)`);
+
   if (flag("--push")) {
     const run = (cmd) => execSync(cmd, { cwd: REPO_ROOT, stdio: "inherit" });
     run(`git config user.name "Tim Simmons"`);
     run(`git config user.email "timsimmons@journeywell.io"`);
-    run(`git add blog.html "blog/${post.slug}.html"`);
+    run(`git add blog.html sitemap.xml "blog/${post.slug}.html"`);
     run(`git commit -m "blog: ${stripTags(post.title).replace(/"/g, "'")}"`);
     run(`git push origin main`);
     console.log("→ pushed to main (Vercel will deploy in ~20s)");

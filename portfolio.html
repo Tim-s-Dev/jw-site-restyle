@@ -5,9 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Portfolio — JourneyWell</title>
 <meta name="description" content="Selected case studies from the JourneyWell studio: brands that build content authority, episode by episode." />
+
+<link rel="canonical" href="https://journeywell.io/portfolio.html" />
+<meta name="theme-color" content="#CFF42A" />
+
+<link rel="icon" type="image/png" href="/images/jw-logo.png" />
+<link rel="apple-touch-icon" href="/images/jw-logo.png" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="JourneyWell" />
+<meta property="og:title" content="Portfolio — JourneyWell" />
+<meta property="og:description" content="Selected case studies from the JourneyWell studio: brands that build content authority, episode by episode." />
+<meta property="og:url" content="https://journeywell.io/portfolio.html" />
+<meta property="og:image" content="https://journeywell.io/images/jw-logo.png" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Portfolio — JourneyWell" />
+<meta name="twitter:description" content="Selected case studies from the JourneyWell studio: brands that build content authority, episode by episode." />
+<meta name="twitter:image" content="https://journeywell.io/images/jw-logo.png" />
+
 <link rel="stylesheet" href="style.css?v=5" />
 <link rel="stylesheet" href="lite.css" />
 <link rel="stylesheet" href="redesign.css" />
+
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"CollectionPage","name":"JourneyWell Portfolio","url":"https://journeywell.io/portfolio.html","isPartOf":{"@type":"WebSite","name":"JourneyWell","url":"https://journeywell.io"} }
+</script>
 </head>
 <body class="lite">
 
@@ -190,7 +213,7 @@
       return `
         <a href="work.html" class="lite-tile">
           <div class="lite-tile-thumb">
-            ${playable ? `<video src="${a.cdn_url}" muted autoplay loop playsinline preload="metadata" ${thumb ? `poster="${thumb}"` : ''}></video>` : (thumb ? `<img src="${thumb}" alt="" loading="lazy" />` : '')}
+            ${playable ? `<video src="${a.cdn_url}" muted autoplay loop playsinline preload="metadata" ${thumb ? `poster="${thumb}"` : ''}></video>` : (thumb ? `<img src="${thumb}" alt="${(a.display_title || a.title || 'JourneyWell studio work').replace(/"/g, '&quot;')}" loading="lazy" />` : '')}
             <span class="tile-play">${I('play', {size: 16})}</span>
           </div>
           <div class="lite-tile-body">

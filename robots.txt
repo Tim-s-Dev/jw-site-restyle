@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Don't crawl the form-submit landing or anything under /scripts
+Disallow: /scripts/
+
+Sitemap: https://journeywell.io/sitemap.xml

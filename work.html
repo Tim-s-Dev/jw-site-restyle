@@ -5,8 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>JourneyWell Studios — Channel</title>
 <meta name="description" content="The JourneyWell channel — episodes, shorts, shows, and behind-the-scenes from our Baton Rouge studio. Production + publishing for founders & brands." />
+
+<link rel="canonical" href="https://journeywell.io/work.html" />
+<meta name="theme-color" content="#CFF42A" />
+
+<link rel="icon" type="image/png" href="/images/jw-logo.png" />
+<link rel="apple-touch-icon" href="/images/jw-logo.png" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="JourneyWell" />
+<meta property="og:title" content="JourneyWell Studios — Channel" />
+<meta property="og:description" content="The JourneyWell channel — episodes, shorts, shows, and behind-the-scenes from our Baton Rouge studio." />
+<meta property="og:url" content="https://journeywell.io/work.html" />
+<meta property="og:image" content="https://journeywell.io/images/jw-logo.png" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="JourneyWell Studios — Channel" />
+<meta name="twitter:description" content="The JourneyWell channel — episodes, shorts, shows, and behind-the-scenes from our Baton Rouge studio." />
+<meta name="twitter:image" content="https://journeywell.io/images/jw-logo.png" />
+
 <link rel="stylesheet" href="style.css?v=5" />
 <link rel="stylesheet" href="redesign.css" />
+
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"CollectionPage","name":"JourneyWell Channel","url":"https://journeywell.io/work.html","isPartOf":{"@type":"WebSite","name":"JourneyWell","url":"https://journeywell.io"} }
+</script>
 </head>
 <body>
 
@@ -392,7 +415,7 @@
       // (visible) cards load first and off-screen cards never fetch until scrolled to.
       coverInner = `<video class="card-video" muted loop playsinline preload="none" data-src="${escapeHtml(asset.cdn_url)}" ${hasThumb ? `poster="${escapeHtml(asset.thumbnail_url)}"` : ''}></video>`;
     } else if (hasThumb) {
-      coverInner = `<img src="${escapeHtml(asset.thumbnail_url)}" alt="" loading="lazy" />`;
+      coverInner = `<img src="${escapeHtml(asset.thumbnail_url)}" alt="${escapeHtml(asset.display_title || asset.title || 'JourneyWell video')}" loading="lazy" />`;
     }
     const meta = [asset.brand, fmtDuration(asset.duration)].filter(Boolean).join(' · ') || 'Studio';
     const title = asset.display_title || asset.title || 'Untitled';
@@ -534,7 +557,7 @@
       <div class="reels-slide" data-slide-index="${slideIdx}" data-asset-id="${escapeHtml(asset.id)}">
         ${hasVideo
           ? `<video class="reels-video" muted playsinline loop preload="metadata" ${poster} src="${escapeHtml(asset.cdn_url)}"></video>`
-          : (isHttps(asset.thumbnail_url) ? `<img src="${escapeHtml(asset.thumbnail_url)}" alt="" />` : '')}
+          : (isHttps(asset.thumbnail_url) ? `<img src="${escapeHtml(asset.thumbnail_url)}" alt="${escapeHtml(asset.display_title || asset.title || 'JourneyWell video')}" />` : '')}
 
         <div class="reels-top-controls">
           <div class="reels-top-left">
@@ -897,7 +920,7 @@
     if (!items.length) { list.innerHTML = '<div style="color:rgba(255,255,255,0.5); font-size:13px; padding:8px 0;">No other episodes yet.</div>'; return; }
     list.innerHTML = items.map(a => {
       const thumb = isHttps(a.thumbnail_url)
-        ? `<img src="${escapeHtml(a.thumbnail_url)}" alt="" loading="lazy" />` : '';
+        ? `<img src="${escapeHtml(a.thumbnail_url)}" alt="${escapeHtml(a.display_title || a.title || 'JourneyWell video')}" loading="lazy" />` : '';
       const meta = [a.brand, fmtDuration(a.duration)].filter(Boolean).join(' · ');
       return `
         <button type="button" class="upnext-card" data-asset-id="${escapeHtml(a.id)}">
