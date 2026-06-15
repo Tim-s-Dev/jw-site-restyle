@@ -159,7 +159,7 @@
 [data-theme="light"] .lite-tile,
 [data-theme="light"] .lite-card,
 [data-theme="light"] .show-card {
-  background: rgba(0,0,0,0.03);
+  background: transparent;
   border-color: var(--line-dk);
 }
 [data-theme="light"] .lite-tile-title,
@@ -873,6 +873,28 @@ body.lite,
 /* Channel-section row titles ("Now Showing", "Episodes", "Shorts", etc.) */
 [data-theme="light"] .channel-section .row-title { color: #0a0a0a; }
 
+/* Hero piece layout — info column was forced to stretch to the 16/9 player
+   height, then justify-content: center pushed long titles into the video.
+   Top-align instead, cap the title, and let the column take its natural height. */
+.hero-piece-grid { align-items: start; }
+.hero-piece-info {
+  justify-content: flex-start;
+  min-width: 0;
+  padding: 4px 4px 0;
+}
+.hero-piece-title {
+  font-size: clamp(22px, 2.4vw, 34px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  overflow-wrap: anywhere;
+}
+.hero-piece-eyebrow { margin-bottom: 10px; }
+.hero-piece-desc { margin-bottom: 14px; }
+.hero-piece-meta { margin-bottom: 16px; }
+.hero-piece-ctas { flex-wrap: wrap; row-gap: 10px; }
+.hero-piece-ctas .btn { white-space: nowrap; flex: 0 1 auto; }
+
 /* Hero piece (pinned trailer block) */
 [data-theme="light"] .hero-piece-section {
   background: #ffffff;
@@ -1078,3 +1100,13 @@ body:not(.lite):not(.full-page-form) .nav-cta .btn {
 [data-theme="light"] .jw-split-txt h2 { color: var(--ink); }
 [data-theme="light"] .jw-split-txt h2 em { color: var(--accent-deep, #169c46); }
 [data-theme="light"] .jw-split-txt p { color: var(--text-on-cream-muted); }
+
+/* Flip variant (text-left, image-right) — base style.css L3320 hardcodes
+   black bg + white text, and its paragraph color uses var(--text-secondary)
+   which flips dark in light mode, making body copy invisible on the black
+   panel. Force the same cream treatment as the regular split. */
+[data-theme="light"] .jw-split-wrap.flip .jw-split-txt { background: var(--paper); color: var(--ink); }
+[data-theme="light"] .jw-split-wrap.flip .jw-split-txt .eyebrow { color: rgba(10,10,10,0.45); border-color: var(--line-dk); }
+[data-theme="light"] .jw-split-wrap.flip .jw-split-txt h2 { color: var(--ink); }
+[data-theme="light"] .jw-split-wrap.flip .jw-split-txt h2 em { color: var(--accent-deep, #169c46); }
+[data-theme="light"] .jw-split-wrap.flip .jw-split-txt p { color: var(--text-on-cream-muted); }
