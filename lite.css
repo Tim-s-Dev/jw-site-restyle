@@ -881,7 +881,7 @@ body.lite .lite-compare .lite-compare-head {
 body.lite .lite-compare .lite-compare-head.jw { background: var(--accent-tint); color: var(--accent-deep); }
 body.lite .lite-compare .lite-compare-cell.jw { color: var(--accent-deep); font-weight: 600; }
 body.lite .lite-compare .lite-compare-cell.center { justify-content: center; }
-body.lite .lite-compare .lite-compare-cell .check { color: var(--accent); }
+body.lite .lite-compare .lite-compare-cell .check { color: #000; }
 body.lite .lite-compare .lite-compare-cell .x { color: var(--muted-2); }
 body.lite .lite-compare .lite-compare-cell .check svg,
 body.lite .lite-compare .lite-compare-cell .x svg { width: 18px; height: 18px; }
