@@ -1221,3 +1221,40 @@ body.lite .hero-video-ctas .btn-ghost:hover,
   .drawer-booking-frame { margin: 8px -12px 0; }
   .drawer-booking-frame iframe { min-height: 640px; }
 }
+
+/* ============================================================
+   Studio booking — calendar, summary, payment (drawer steps 6–8)
+   ============================================================ */
+.studio-cal { display:flex; flex-direction:column; gap:18px; margin-top:8px; }
+.studio-cal-loading,
+.studio-cal-empty { padding:24px; text-align:center; color:var(--text-tertiary); font-size:14px;
+  border:1px dashed var(--border, rgba(255,255,255,.18)); border-radius:12px; }
+.studio-cal-empty a { color:var(--accent, #CFF42A); }
+.studio-day { display:flex; flex-direction:column; gap:8px; }
+.studio-day-label { font-size:13px; font-weight:600; letter-spacing:.02em; color:var(--text-secondary, #c9c9c9); text-transform:uppercase; }
+.studio-slots { display:flex; flex-wrap:wrap; gap:8px; }
+.studio-slot {
+  appearance:none; cursor:pointer; font:inherit; font-size:14px; font-weight:600;
+  padding:9px 14px; border-radius:10px;
+  background:rgba(255,255,255,.05); color:var(--text-primary, #fff);
+  border:1px solid var(--border, rgba(255,255,255,.16)); transition:all .14s ease;
+}
+.studio-slot:hover { border-color:var(--accent, #CFF42A); transform:translateY(-1px); }
+.studio-slot.selected { background:var(--accent, #CFF42A); color:#0c0c0c; border-color:var(--accent, #CFF42A); }
+
+.studio-summary { display:flex; flex-direction:column; gap:2px; margin:6px 0 18px;
+  border:1px solid var(--border, rgba(255,255,255,.14)); border-radius:14px; padding:6px 16px;
+  background:rgba(255,255,255,.03); }
+.studio-summary-row { display:flex; justify-content:space-between; align-items:center; gap:16px;
+  padding:11px 0; border-bottom:1px solid var(--border, rgba(255,255,255,.08)); font-size:14px; }
+.studio-summary-row:last-child { border-bottom:0; }
+.studio-summary-row span { color:var(--text-tertiary, #9a9a9a); }
+.studio-summary-row strong { color:var(--text-primary, #fff); font-weight:600; text-align:right; }
+.studio-summary-row.total { padding-top:13px; }
+.studio-summary-row.total span,
+.studio-summary-row.total strong { font-size:18px; color:var(--accent, #CFF42A); font-weight:800; }
+
+.studio-pay-element { min-height:48px; margin-top:6px; }
+.studio-mock-note { padding:16px; border-radius:12px; font-size:14px; text-align:center;
+  background:rgba(207,244,42,.08); border:1px solid rgba(207,244,42,.3); color:var(--text-secondary,#ddd); }
+.studio-pay-error { color:#ff6b6b; font-size:13px; margin-top:10px; min-height:18px; }

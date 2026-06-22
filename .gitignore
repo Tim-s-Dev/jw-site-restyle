@@ -1,3 +1,8 @@
 .DS_Store
 *.log
 .impeccable/
+node_modules/
+.vercel/
+.env
+.env.local
+.env*.local

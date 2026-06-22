@@ -434,6 +434,33 @@
               </button>
             </div>
           </section>
+
+          <!-- STEP 6 — Studio: pick date & time (custom UI backed by GHL free-slots API) -->
+          <section class="drawer-step" data-step="6">
+            <div class="drawer-eyebrow">Pick your time</div>
+            <h2 class="drawer-title">Choose a studio date & time.</h2>
+            <p class="drawer-sub" id="studioSlotSub">Live availability for your session length. All times Central (Baton Rouge).</p>
+            <div id="studioCalendar" class="studio-cal"><div class="studio-cal-loading">Loading availability…</div></div>
+          </section>
+
+          <!-- STEP 7 — Studio: review + payment (Stripe) -->
+          <section class="drawer-step" data-step="7">
+            <div class="drawer-eyebrow gold">Confirm &amp; pay</div>
+            <h2 class="drawer-title">Reserve your session.</h2>
+            <p class="drawer-sub">Your time is held when payment completes — you'll get a confirmation email immediately.</p>
+            <div class="studio-summary" id="studioSummary"></div>
+            <div id="studioPayElement" class="studio-pay-element"></div>
+            <div id="studioPayError" class="studio-pay-error" role="alert"></div>
+          </section>
+
+          <!-- STEP 8 — Studio: booked confirmation -->
+          <section class="drawer-step" data-step="8">
+            <div class="drawer-eyebrow gold">You're booked</div>
+            <h2 class="drawer-title" id="studioDoneTitle">Studio session confirmed.</h2>
+            <p class="drawer-sub" id="studioDoneSub"></p>
+            <div class="studio-summary" id="studioDoneSummary"></div>
+            <p class="drawer-sub" style="margin-top:18px;">A confirmation email is on its way. Questions? <a href="mailto:team@journeywell.io">team@journeywell.io</a></p>
+          </section>
         </div>
         <footer class="drawer-footer">
           <button class="drawer-back" id="drawerBack" disabled>← Back</button>
@@ -572,7 +599,7 @@
   };
 
   // ---------- DRAWER STATE + LOGIC ----------
-  const state = { step: 1, path: null, payload: {} };
+  const state = { step: 1, path: null, payload: {}, studio: {} };
 
   function openDrawer(preselect) {
     document.getElementById('drawer').classList.add('open');
@@ -590,34 +617,53 @@
     setTimeout(resetDrawer, 320);
   }
   function resetDrawer() {
-    state.step = 1; state.path = null; state.payload = {};
+    state.step = 1; state.path = null; state.payload = {}; state.studio = {};
     showStep(1);
     document.querySelectorAll('.drawer-option.selected').forEach(o => o.classList.remove('selected'));
   }
+  const STUDIO_SEQ = [2, 3, 6, 7]; // hours → contact → date/time → pay  (8 = confirmation)
   function showStep(n) {
     state.step = n;
     const isStudio = state.path === 'studio';
     const isBook = state.path === 'book';
-    const totalSteps = isBook ? 2 : (isStudio ? 2 : 4);
     document.querySelectorAll('.drawer-step').forEach(s => {
       s.classList.toggle('active', String(s.dataset.step) === String(n));
     });
-    if (isBook && n === 5) {
-      document.getElementById('drawerStepIndicator').textContent = 'Pick a time';
-      document.getElementById('drawerProgressFill').style.width = '100%';
-    } else {
-      document.getElementById('drawerStepIndicator').textContent = `Step ${n} of ${totalSteps}`;
-      document.getElementById('drawerProgressFill').style.width = `${(n / totalSteps) * 100}%`;
-    }
-    document.getElementById('drawerBack').toggleAttribute('disabled', n <= 1);
+    const indicator = document.getElementById('drawerStepIndicator');
+    const fill = document.getElementById('drawerProgressFill');
     const nextBtn = document.getElementById('drawerNext');
-    nextBtn.style.display = (n >= 2 && n <= 3) ? '' : 'none';
-    if (isStudio && n === 2) {
-      nextBtn.textContent = 'Continue to checkout →';
+    const backBtn = document.getElementById('drawerBack');
+
+    if (isBook && n === 5) {
+      indicator.textContent = 'Pick a time';
+      fill.style.width = '100%';
+    } else if (isStudio && (STUDIO_SEQ.includes(n) || n === 8)) {
+      if (n === 8) { indicator.textContent = 'Booked'; fill.style.width = '100%'; }
+      else {
+        const idx = STUDIO_SEQ.indexOf(n);
+        indicator.textContent = `Step ${idx + 1} of ${STUDIO_SEQ.length}`;
+        fill.style.width = `${((idx + 1) / STUDIO_SEQ.length) * 100}%`;
+      }
     } else {
+      indicator.textContent = `Step ${n} of 4`;
+      fill.style.width = `${(n / 4) * 100}%`;
+    }
+
+    // Back disabled on the very first step and on terminal/confirmation steps.
+    backBtn.toggleAttribute('disabled', n <= 1 || n === 4 || n === 8);
+
+    // Next button visibility + label
+    if (isStudio && (STUDIO_SEQ.includes(n) || n === 8)) {
+      const labels = { 2: 'Continue →', 3: 'Choose a time →', 6: 'Continue to payment →', 7: `Pay${state.studio.dollars ? ' $' + state.studio.dollars : ''} →` };
+      if (labels[n]) { nextBtn.style.display = ''; nextBtn.textContent = labels[n]; }
+      else nextBtn.style.display = 'none';
+      nextBtn.disabled = (n === 6 && !state.studio.slotIso);
+    } else {
+      nextBtn.disabled = false;
+      nextBtn.style.display = (n >= 2 && n <= 3) ? '' : 'none';
       nextBtn.textContent = n === 3 ? 'Submit →' : 'Continue →';
     }
-    document.getElementById('drawerHint').textContent = (n === 4 || (isBook && n === 5)) ? '' : 'Press ESC to close';
+    document.getElementById('drawerHint').textContent = (n === 4 || n === 8 || (isBook && n === 5)) ? '' : 'Press ESC to close';
     document.getElementById('drawerBody').scrollTop = 0;
   }
   function selectPath(path) {
@@ -670,6 +716,8 @@
         }
       }
     }
+    if (n === 6) studioRenderCalendar();
+    if (n === 7) studioEnterPayment();
     showStep(n);
   }
   function hookPills() {
@@ -786,6 +834,167 @@
     }
   }
 
+  // ---------- STUDIO BOOKING (paid: GHL availability + Stripe) ----------
+  const STUDIO_TZ = 'America/Chicago';
+  const STUDIO_LOCATION = '10144 Patriot Dr, Suite A, Baton Rouge';
+  function studioPrice(h) { return 250 + (h - 2) * 125; }      // mirrors lib/pricing.js
+  function fmtTime(iso) { return new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: STUDIO_TZ }).format(new Date(iso)); }
+  function fmtDay(iso)  { return new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'short', day: 'numeric', timeZone: STUDIO_TZ }).format(new Date(iso)); }
+
+  function loadStripeJs() {
+    return new Promise((resolve, reject) => {
+      if (window.Stripe) return resolve();
+      const s = document.createElement('script');
+      s.src = 'https://js.stripe.com/v3/';
+      s.onload = () => resolve();
+      s.onerror = () => reject(new Error('Could not load Stripe'));
+      document.head.appendChild(s);
+    });
+  }
+
+  function studioNext() {
+    const n = state.step;
+    if (n === 2) {
+      const sel = document.querySelector('[data-single-pill="studioHours"] .drawer-pill.selected');
+      if (!sel) { alert('Please choose a session length.'); return; }
+      state.studio.hours = parseInt(sel.dataset.val, 10);
+      state.studio.dollars = studioPrice(state.studio.hours);
+      state.studio.slotIso = null; // hours changed → availability differs
+      goStep(3);
+    } else if (n === 3) {
+      if (!studioCaptureContact()) return;
+      goStep(6);
+    } else if (n === 6) {
+      if (!state.studio.slotIso) { alert('Please pick a date and time.'); return; }
+      goStep(7);
+    } else if (n === 7) {
+      studioPayAndBook();
+    }
+  }
+
+  function studioCaptureContact() {
+    const get = (id) => (document.getElementById(id) || {}).value || '';
+    const name = get('contactName').trim(), email = get('contactEmail').trim();
+    if (!name || !email) { alert('Please fill in your name and email.'); return false; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email.'); return false; }
+    Object.assign(state.studio, { name, email, phone: get('contactPhone').trim(), notes: get('contactNotes').trim() });
+    return true;
+  }
+
+  async function studioRenderCalendar() {
+    const s = state.studio;
+    const el = document.getElementById('studioCalendar');
+    document.getElementById('studioSlotSub').textContent = `Open ${s.hours}-hour blocks over the next 3 weeks. All times Central (Baton Rouge).`;
+    el.innerHTML = '<div class="studio-cal-loading">Loading availability…</div>';
+    try {
+      const data = await fetch(`${PATH_PREFIX}api/studio-availability?hours=${s.hours}&days=21`).then(r => r.json());
+      if (data.error) throw new Error(data.error);
+      if (!data.days || !data.days.length) {
+        el.innerHTML = `<div class="studio-cal-empty">No open ${s.hours}-hour blocks in the next 3 weeks. Email <a href="mailto:team@journeywell.io">team@journeywell.io</a> and we'll find a time.</div>`;
+        return;
+      }
+      el.innerHTML = data.days.map(d => {
+        const chips = d.slots.map(sl =>
+          `<button class="studio-slot" data-iso="${sl.iso}" data-label="${fmtDay(sl.iso)} at ${fmtTime(sl.iso)}">${fmtTime(sl.iso)}</button>`
+        ).join('');
+        return `<div class="studio-day"><div class="studio-day-label">${fmtDay(d.slots[0].iso)}</div><div class="studio-slots">${chips}</div></div>`;
+      }).join('');
+      el.querySelectorAll('.studio-slot').forEach(btn => btn.addEventListener('click', () => {
+        el.querySelectorAll('.studio-slot.selected').forEach(x => x.classList.remove('selected'));
+        btn.classList.add('selected');
+        state.studio.slotIso = btn.dataset.iso;
+        state.studio.slotLabel = btn.dataset.label;
+        const nb = document.getElementById('drawerNext');
+        nb.disabled = false;
+      }));
+    } catch (e) {
+      el.innerHTML = `<div class="studio-cal-empty">Could not load availability: ${e.message}. Email <a href="mailto:team@journeywell.io">team@journeywell.io</a>.</div>`;
+    }
+  }
+
+  function studioSummaryHtml(s) {
+    return `
+      <div class="studio-summary-row"><span>Session</span><strong>${s.hours} hours</strong></div>
+      <div class="studio-summary-row"><span>When</span><strong>${s.slotLabel || ''}</strong></div>
+      <div class="studio-summary-row"><span>Location</span><strong>${STUDIO_LOCATION}</strong></div>
+      <div class="studio-summary-row total"><span>Total</span><strong>$${s.dollars}</strong></div>`;
+  }
+
+  async function studioEnterPayment() {
+    const s = state.studio;
+    document.getElementById('studioSummary').innerHTML = studioSummaryHtml(s);
+    const mount = document.getElementById('studioPayElement');
+    const errEl = document.getElementById('studioPayError');
+    errEl.textContent = '';
+    mount.innerHTML = '<div class="studio-cal-loading">Loading secure checkout…</div>';
+    try {
+      const cfg = await fetch(`${PATH_PREFIX}api/stripe-public-config`).then(r => r.json());
+      const pay = await fetch(`${PATH_PREFIX}api/create-payment-intent`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ hours: s.hours, slotIso: s.slotIso, name: s.name, email: s.email, phone: s.phone, notes: s.notes }),
+      }).then(r => r.json());
+      if (pay.error) throw new Error(pay.error);
+      Object.assign(s, { paymentIntentId: pay.paymentIntentId, clientSecret: pay.clientSecret, dollars: pay.dollars, mock: !!pay.mock });
+      const nb = document.getElementById('drawerNext');
+      nb.textContent = `Pay $${pay.dollars} →`;
+
+      if (cfg.paymentsMode === 'mock' || pay.mock) {
+        mount.innerHTML = '<div class="studio-mock-note">Test mode — no card needed. Click “Pay” to simulate a successful booking.</div>';
+        s.stripe = null; s.elements = null;
+        return;
+      }
+      await loadStripeJs();
+      s.stripe = window.Stripe(cfg.publishableKey);
+      s.elements = s.stripe.elements({ clientSecret: pay.clientSecret, appearance: { theme: 'night', variables: { colorPrimary: '#CFF42A', borderRadius: '10px' } } });
+      mount.innerHTML = '';
+      s.paymentElement = s.elements.create('payment', { layout: 'tabs' });
+      s.paymentElement.mount(mount);
+    } catch (e) {
+      mount.innerHTML = '';
+      errEl.textContent = 'Could not start checkout: ' + e.message;
+    }
+  }
+
+  async function studioPayAndBook() {
+    const s = state.studio;
+    const nb = document.getElementById('drawerNext');
+    const errEl = document.getElementById('studioPayError');
+    errEl.textContent = '';
+    const orig = nb.textContent;
+    nb.disabled = true; nb.textContent = 'Processing…';
+    try {
+      if (!s.mock && s.stripe) {
+        const { error, paymentIntent } = await s.stripe.confirmPayment({
+          elements: s.elements,
+          confirmParams: { return_url: location.href },
+          redirect: 'if_required',
+        });
+        if (error) throw new Error(error.message);
+        if (paymentIntent && paymentIntent.status !== 'succeeded') throw new Error('Payment status: ' + paymentIntent.status);
+      }
+      const res = await fetch(`${PATH_PREFIX}api/confirm-booking`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ paymentIntentId: s.paymentIntentId, hours: s.hours, slotIso: s.slotIso, name: s.name, email: s.email, phone: s.phone, notes: s.notes }),
+      }).then(r => r.json());
+      if (res.error) throw new Error(res.error);
+      state.studio.confirmation = res;
+      studioFillConfirmation(res);
+      goStep(8);
+    } catch (e) {
+      errEl.textContent = e.message;
+      nb.disabled = false; nb.textContent = orig;
+    }
+  }
+
+  function studioFillConfirmation(res) {
+    document.getElementById('studioDoneSub').textContent = `You're booked for a ${res.hours}-hour studio session.`;
+    document.getElementById('studioDoneSummary').innerHTML = `
+      <div class="studio-summary-row"><span>When</span><strong>${res.when}</strong></div>
+      <div class="studio-summary-row"><span>Length</span><strong>${res.hours} hours</strong></div>
+      <div class="studio-summary-row"><span>Location</span><strong>${STUDIO_LOCATION}</strong></div>
+      <div class="studio-summary-row total"><span>Paid</span><strong>$${res.dollars}</strong></div>`;
+  }
+
   // ---------- INSTALL ----------
   function installChrome() {
     // Insert nav at top of body, footer + float-btn + drawer at bottom
@@ -816,9 +1025,21 @@
         goStep(1);
         return;
       }
+      // Studio path follows its own non-contiguous sequence (2→3→6→7).
+      if (state.path === 'studio') {
+        const seq = [1, ...STUDIO_SEQ];
+        const i = seq.indexOf(state.step);
+        if (i === 1) { // back from hours → reset to path picker
+          state.path = null;
+          document.querySelectorAll('.drawer-option.selected').forEach(o => o.classList.remove('selected'));
+        }
+        goStep(i > 0 ? seq[i - 1] : 1);
+        return;
+      }
       goStep(state.step - 1);
     });
     document.getElementById('drawerNext').addEventListener('click', () => {
+      if (state.path === 'studio') { studioNext(); return; }
       if (state.step === 3) submitForm();
       else goStep(state.step + 1);
     });

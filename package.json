@@ -1,0 +1,22 @@
+{
+  "name": "jw-site-restyle",
+  "version": "1.0.0",
+  "description": "JourneyWell marketing site + studio booking (Vercel functions, GHL, Stripe)",
+  "private": true,
+  "scripts": {
+    "dev": "node tools/dev-server.js",
+    "test:e2e": "node tools/browser-check.mjs"
+  },
+  "dependencies": {
+    "stripe": "^22.2.2"
+  },
+  "devDependencies": {
+    "dotenv": "^17.4.2",
+    "playwright": "^1.61.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tim-s-Dev/jw-site-restyle.git"
+  },
+  "license": "ISC"
+}
