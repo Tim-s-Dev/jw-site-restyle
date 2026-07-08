@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/next-steps", "destination": "https://jw-qualify.vercel.app/next-steps" },
+    { "source": "/next-steps/:path*", "destination": "https://jw-qualify.vercel.app/next-steps/:path*" }
+  ]
+}
