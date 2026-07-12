@@ -12,7 +12,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<link rel="canonical" href="https://journeywell.io/authority.html" />
+<meta name="theme-color" content="#CFF42A" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="JourneyWell" />
+<meta property="og:title" content="Content Authority System — JourneyWell" />
+<meta property="og:description" content="One recording. Thirty pieces of content. Built for founders who can't sit on a content calendar." />
+<meta property="og:url" content="https://journeywell.io/authority.html" />
+<meta property="og:image" content="https://journeywell.io/images/jw-logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Content Authority System — JourneyWell" />
+<meta name="twitter:description" content="One recording. Thirty pieces of content. Built for founders who can't sit on a content calendar." />
+<meta name="twitter:image" content="https://journeywell.io/images/jw-logo.png" />
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"Service","name":"Content Authority System","provider":{"@type":"Organization","name":"JourneyWell","url":"https://journeywell.io"},"url":"https://journeywell.io/authority.html","description":"One recording becomes thirty pieces of content — a full content engine for founders." }
+</script>
 <link rel="icon" type="image/png" href="images/jw-logo.png"/>
+<script>(function(){try{var t=localStorage.getItem('jw-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}addEventListener('DOMContentLoaded',function(){var b=document.querySelector('.theme-toggle');if(b)b.addEventListener('click',function(){var h=document.documentElement,l=h.getAttribute('data-theme')==='light';if(l)h.removeAttribute('data-theme');else h.setAttribute('data-theme','light');try{localStorage.setItem('jw-theme',l?'dark':'light');}catch(e){}});});})();</script>
 <link rel="stylesheet" href="v2.css"/>
 <style>
 /* ================= authority: system/tech identity ================= */
@@ -55,7 +71,7 @@
 .rec-badge{position:absolute;top:18px;left:18px;z-index:2;display:inline-flex;align-items:center;gap:7px;
   font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.18em;color:var(--cream);
   background:rgba(10,10,10,.6);backdrop-filter:blur(6px);border:1px solid var(--line2);border-radius:30px;padding:6px 11px}
-.rec-badge i{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 2.6s var(--ease) infinite}
+.rec-badge i{width:7px;height:7px;border-radius:50%;background:var(--lime-fill);animation:pulse 2.6s var(--ease) infinite}
 .src-meta{display:flex;flex-direction:column;gap:5px;padding:14px 8px 8px;font-family:'JetBrains Mono',monospace}
 .src-meta .sk{font-size:10.5px;letter-spacing:.14em;color:var(--lime)}
 .src-meta .st{font-size:16px;font-weight:700;letter-spacing:.06em;color:var(--cream)}
@@ -133,6 +149,21 @@
   .dcol+.dcol{border-left:none;border-top:1px solid var(--line2)}
   .dline .dn{flex-basis:34px;padding-right:10px}
 }
+
+/* ---------- light theme (page-scoped): warm paper panels, ink mono, print-lime diff ---------- */
+[data-theme="light"] .phero::before{
+  background-image:linear-gradient(rgba(18,18,15,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(18,18,15,.05) 1px,transparent 1px)}
+[data-theme="light"] .termline{background:rgba(18,18,15,.035)}
+[data-theme="light"] .statline .v{color:#33332B}
+[data-theme="light"] .sysd-lines .lbase{stroke:rgba(18,18,15,.14)}
+[data-theme="light"] .src-chip{box-shadow:0 30px 60px -45px rgba(18,18,15,.3)}
+[data-theme="light"] .rec-badge{color:#F6F5F2}
+[data-theme="light"] .grp{background:linear-gradient(160deg,rgba(18,18,15,.025),rgba(18,18,15,.006))}
+[data-theme="light"] .chip{color:#43433C;background:rgba(18,18,15,.03)}
+[data-theme="light"] .dhead{background:rgba(18,18,15,.02)}
+[data-theme="light"] .dbefore .dline{background:rgba(18,18,15,.015)}
+[data-theme="light"] .dafter .dhead{background:rgba(92,104,15,.07)}
+[data-theme="light"] .dafter .dline{background:rgba(92,104,15,.06)}
 </style>
 </head>
 <body>
@@ -148,6 +179,7 @@
     <a href="work.html">Work</a>
     <a href="about.html">About</a>
   </div>
+  <button class="theme-toggle" aria-label="Switch theme"><span class="tt-sun">☀</span><span class="tt-moon">☾</span></button>
   <button class="navcta mag" data-open-drawer>See the system</button>
 </div></nav>
 
@@ -361,8 +393,9 @@
       <div class="fcol"><h4>Studio</h4><a href="work.html">The Work</a><a href="about.html">About</a><a href="blog.html">Notes</a></div>
     </div>
   </div>
-  <div class="bot"><div>© 2026 JourneyWell Studios</div><div>Produced in-house · Owned by you</div></div>
+  <div class="bot"><div>© 2026 JourneyWell Studios</div><div class="fsoc"><a href="https://www.instagram.com/journeywell.co/" aria-label="Instagram">Instagram</a><a href="https://www.linkedin.com/company/journeywellio" aria-label="LinkedIn">LinkedIn</a><a href="https://www.facebook.com/journeywell.co" aria-label="Facebook">Facebook</a></div><div>Produced in-house · Owned by you</div></div>
 </div></footer>
+<script src="chrome.js"></script>
 <script src="v2.js"></script>
 <script>
 /* ---------- authority system diagram: lines + sequential light-up ---------- */

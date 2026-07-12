@@ -12,7 +12,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<link rel="canonical" href="https://journeywell.io/studio.html" />
+<meta name="theme-color" content="#CFF42A" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="JourneyWell" />
+<meta property="og:title" content="The Studio — JourneyWell" />
+<meta property="og:description" content="Show up, sit down, walk out with a finished episode. The studio is fully staffed and ready." />
+<meta property="og:url" content="https://journeywell.io/studio.html" />
+<meta property="og:image" content="https://journeywell.io/images/jw-logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="The Studio — JourneyWell" />
+<meta name="twitter:description" content="Show up, sit down, walk out with a finished episode. The studio is fully staffed and ready." />
+<meta name="twitter:image" content="https://journeywell.io/images/jw-logo.png" />
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"LocalBusiness","name":"JourneyWell Studio","url":"https://journeywell.io/studio.html","image":"https://journeywell.io/images/jw-logo.png","address":{"@type":"PostalAddress","addressLocality":"Baton Rouge","addressRegion":"LA","addressCountry":"US"},"description":"A full-service content studio. Show up, sit down, walk out with a finished episode." }
+</script>
 <link rel="icon" type="image/png" href="images/jw-logo.png"/>
+<script>(function(){try{var t=localStorage.getItem('jw-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}addEventListener('DOMContentLoaded',function(){var b=document.querySelector('.theme-toggle');if(b)b.addEventListener('click',function(){var h=document.documentElement,l=h.getAttribute('data-theme')==='light';if(l)h.removeAttribute('data-theme');else h.setAttribute('data-theme','light');try{localStorage.setItem('jw-theme',l?'dark':'light');}catch(e){}});});})();</script>
 <link rel="stylesheet" href="v2.css"/>
 <style>
 /* ============ studio.html page identity: editorial-brutalist rider ============ */
@@ -133,6 +149,13 @@
 /* faq head spacing on this page */
 .bk-head{max-width:66ch}
 .bk-head h2{margin-top:18px}
+
+/* ---------- light theme (page-scoped) ---------- */
+/* dark caption chips stay dark (they sit on photos): force light mono text inside */
+[data-theme="light"] .st-bleed .cap,
+[data-theme="light"] .adapt-ph .fcap{color:#c9c8c1}
+[data-theme="light"] .st-bleed .cap .rec{background:var(--lime-fill)}
+[data-theme="light"] .adapt-ph .fcap .lm{color:var(--lime-fill)}
 </style>
 </head>
 <body>
@@ -148,6 +171,7 @@
     <a href="work.html">Work</a>
     <a href="about.html">About</a>
   </div>
+  <button class="theme-toggle" aria-label="Switch theme"><span class="tt-sun">☀</span><span class="tt-moon">☾</span></button>
   <button class="navcta mag" data-open-drawer>Book a session</button>
 </div></nav>
 
@@ -279,8 +303,9 @@
       <div class="fcol"><h4>Studio</h4><a href="work.html">The Work</a><a href="about.html">About</a><a href="blog.html">Notes</a></div>
     </div>
   </div>
-  <div class="bot"><div>© 2026 JourneyWell Studios</div><div>Produced in-house · Owned by you</div></div>
+  <div class="bot"><div>© 2026 JourneyWell Studios</div><div class="fsoc"><a href="https://www.instagram.com/journeywell.co/" aria-label="Instagram">Instagram</a><a href="https://www.linkedin.com/company/journeywellio" aria-label="LinkedIn">LinkedIn</a><a href="https://www.facebook.com/journeywell.co" aria-label="Facebook">Facebook</a></div><div>Produced in-house · Owned by you</div></div>
 </div></footer>
+<script src="chrome.js"></script>
 <script src="v2.js"></script>
 </body>
 </html>

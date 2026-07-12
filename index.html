@@ -12,7 +12,40 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<link rel="canonical" href="https://journeywell.io/" />
+<meta name="theme-color" content="#CFF42A" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="JourneyWell" />
+<meta property="og:title" content="JourneyWell — Content authority, produced and shipped." />
+<meta property="og:description" content="The studio + system behind founders building real content authority. One recording becomes a month of content." />
+<meta property="og:url" content="https://journeywell.io/" />
+<meta property="og:image" content="https://journeywell.io/images/jw-logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="JourneyWell — Content authority, produced and shipped." />
+<meta name="twitter:description" content="The studio + system behind founders building real content authority. One recording becomes a month of content." />
+<meta name="twitter:image" content="https://journeywell.io/images/jw-logo.png" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "JourneyWell",
+  "url": "https://journeywell.io",
+  "logo": "https://journeywell.io/images/jw-logo.png",
+  "description": "A content studio + system based in Baton Rouge, Louisiana. We produce podcasts, films, and short-form content for founders and brands.",
+  "founder": [
+    { "@type": "Person", "name": "Tim Simmons" },
+    { "@type": "Person", "name": "Melodie Simmons" }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Baton Rouge",
+    "addressRegion": "LA",
+    "addressCountry": "US"
+  }
+}
+</script>
 <link rel="icon" type="image/png" href="images/jw-logo.png"/>
+<script>(function(){try{var t=localStorage.getItem('jw-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}addEventListener('DOMContentLoaded',function(){var b=document.querySelector('.theme-toggle');if(b)b.addEventListener('click',function(){var h=document.documentElement,l=h.getAttribute('data-theme')==='light';if(l)h.removeAttribute('data-theme');else h.setAttribute('data-theme','light');try{localStorage.setItem('jw-theme',l?'dark':'light');}catch(e){}});});})();</script>
 <link rel="stylesheet" href="v2.css"/>
 </head>
 <body>
@@ -30,6 +63,7 @@
     <a href="work.html">Work</a>
     <a href="about.html">About</a>
   </div>
+  <button class="theme-toggle" aria-label="Switch theme"><span class="tt-sun">☀</span><span class="tt-moon">☾</span></button>
   <button class="navcta mag" data-open-drawer>Build my system</button>
 </div></nav>
 
@@ -178,6 +212,22 @@
   </div>
 </div></div></section>
 
+
+<!-- BLOG TEASER -->
+<section class="blk" id="blogTeaser" style="padding-top:0"><div class="wrap">
+  <div class="sec-head split-head">
+    <div><span class="eyebrow neutral reveal">Notes</span><h2 class="reveal">From the <em>journal</em>.</h2></div>
+    <a href="blog.html" class="btn btn-ghost reveal">All posts →</a>
+  </div>
+  <div class="bt-grid"><a class="bt-card reveal" href="blog/ai-search-founder-brands.html"><span class="bt-t">How founder brands win AI search</span><span class="bt-a">Read →</span></a><a class="bt-card reveal" href="blog/linkedin-content-strategy-founders.html"><span class="bt-t">A LinkedIn content strategy that compounds</span><span class="bt-a">Read →</span></a><a class="bt-card reveal" href="blog/med-spa-video-marketing.html"><span class="bt-t">Video marketing for med spas that books patients</span><span class="bt-a">Read →</span></a></div>
+  <style>.bt-grid{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .bt-card{border:1px solid var(--line2);border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:18px;transition:border-color .3s var(--ease),transform .4s var(--easex)}
+  .bt-card:hover{border-color:var(--line);transform:translateY(-4px)}
+  .bt-t{font-weight:700;font-size:17px;letter-spacing:-.01em;line-height:1.3}
+  .bt-a{margin-top:auto;color:var(--lime);font-size:13.5px;font-weight:600}
+  @media(max-width:760px){.bt-grid{grid-template-columns:1fr}}</style>
+</div></section>
+
 <!-- COMPARE -->
 <section class="blk" style="padding-top:0"><div class="wrap">
   <div class="sec-head reveal">
@@ -216,8 +266,10 @@
       <div class="fcol"><h4>Studio</h4><a href="work.html">The Work</a><a href="about.html">About</a><a href="blog.html">Notes</a></div>
     </div>
   </div>
-  <div class="bot"><div>© 2026 JourneyWell Studios</div><div>Produced in-house · Owned by you</div></div>
+  <div class="bot"><div>© 2026 JourneyWell Studios</div><div class="fsoc"><a href="https://www.instagram.com/journeywell.co/" aria-label="Instagram">Instagram</a><a href="https://www.linkedin.com/company/journeywellio" aria-label="LinkedIn">LinkedIn</a><a href="https://www.facebook.com/journeywell.co" aria-label="Facebook">Facebook</a></div><div>Produced in-house · Owned by you</div></div>
 </div></footer>
+<script src="chrome.js"></script>
+<script src="player.js"></script>
 <script src="v2.js"></script>
 </body>
 </html>

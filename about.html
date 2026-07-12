@@ -12,7 +12,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<link rel="canonical" href="https://journeywell.io/about.html" />
+<meta name="theme-color" content="#CFF42A" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="JourneyWell" />
+<meta property="og:title" content="About — JourneyWell" />
+<meta property="og:description" content="A husband-and-wife studio building content authority for founders and brands. Meet Tim and Melodie Simmons." />
+<meta property="og:url" content="https://journeywell.io/about.html" />
+<meta property="og:image" content="https://journeywell.io/images/jw-logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="About — JourneyWell" />
+<meta name="twitter:description" content="A husband-and-wife studio building content authority for founders and brands. Meet Tim and Melodie Simmons." />
+<meta name="twitter:image" content="https://journeywell.io/images/jw-logo.png" />
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"AboutPage","url":"https://journeywell.io/about.html","name":"About JourneyWell","isPartOf":{"@type":"WebSite","name":"JourneyWell","url":"https://journeywell.io"} }
+</script>
 <link rel="icon" type="image/png" href="images/jw-logo.png"/>
+<script>(function(){try{var t=localStorage.getItem('jw-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}addEventListener('DOMContentLoaded',function(){var b=document.querySelector('.theme-toggle');if(b)b.addEventListener('click',function(){var h=document.documentElement,l=h.getAttribute('data-theme')==='light';if(l)h.removeAttribute('data-theme');else h.setAttribute('data-theme','light');try{localStorage.setItem('jw-theme',l?'dark':'light');}catch(e){}});});})();</script>
 <link rel="stylesheet" href="v2.css"/>
 <style>
 /* ============ ABOUT · editorial magazine identity ============ */
@@ -30,12 +46,12 @@
   .phero.about-hero h1{font-size:clamp(37px,10.5vw,44px)}
 }
 
-/* ---- the cream magazine body ---- */
-.magazine{background:var(--cream);color:#12120f}
+/* ---- the cream magazine body (identical in BOTH themes: literal cream, true lime) ---- */
+.magazine{background:#F6F5F2;color:#12120f}
 .magazine h2{color:#12120f}
 .magazine em{color:#5c680f}
 .magazine .eyebrow{color:#5c680f}
-.magazine mark{background:var(--lime);color:#12120f;padding:.02em .24em;border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.magazine mark{background:var(--lime-fill);color:#12120f;padding:.02em .24em;border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .mag-label{display:flex;align-items:center;gap:22px;color:#6b6b60;font-size:11.5px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;white-space:nowrap}
 .mag-label::before,.mag-label::after{content:"";height:1px;background:rgba(18,18,15,.16);flex:1;min-width:24px}
 .mag-label.left::before{display:none}
@@ -95,7 +111,7 @@
 .br{padding-top:clamp(70px,8vw,120px)}
 .br-photo{height:clamp(380px,64vh,660px);overflow:hidden;position:relative;margin:0}
 .br-photo img{width:100%;height:118%;object-fit:cover;will-change:transform}
-.br-panel{position:relative;z-index:2;background:var(--cream);width:min(680px,100%);margin-top:calc(-1 * clamp(84px,10vw,150px));padding:clamp(30px,4vw,50px) clamp(26px,4vw,54px) 0 0}
+.br-panel{position:relative;z-index:2;background:#F6F5F2;width:min(680px,100%);margin-top:calc(-1 * clamp(84px,10vw,150px));padding:clamp(30px,4vw,50px) clamp(26px,4vw,54px) 0 0}
 .br-panel .eyebrow{display:block;margin-bottom:18px}
 .br-panel h2{font-size:clamp(30px,4vw,52px)}
 .br-panel p{margin-top:18px;color:#43433c;font-size:16px;line-height:1.62;max-width:54ch}
@@ -118,6 +134,7 @@
     <a href="work.html">Work</a>
     <a href="about.html" style="color:var(--cream)">About</a>
   </div>
+  <button class="theme-toggle" aria-label="Switch theme"><span class="tt-sun">☀</span><span class="tt-moon">☾</span></button>
   <button class="navcta mag" data-open-drawer>Work with us</button>
 </div></nav>
 
@@ -253,8 +270,9 @@
       <div class="fcol"><h4>Studio</h4><a href="work.html">The Work</a><a href="about.html">About</a><a href="blog.html">Notes</a></div>
     </div>
   </div>
-  <div class="bot"><div>© 2026 JourneyWell Studios</div><div>Produced in-house · Owned by you</div></div>
+  <div class="bot"><div>© 2026 JourneyWell Studios</div><div class="fsoc"><a href="https://www.instagram.com/journeywell.co/" aria-label="Instagram">Instagram</a><a href="https://www.linkedin.com/company/journeywellio" aria-label="LinkedIn">LinkedIn</a><a href="https://www.facebook.com/journeywell.co" aria-label="Facebook">Facebook</a></div><div>Produced in-house · Owned by you</div></div>
 </div></footer>
+<script src="chrome.js"></script>
 <script src="v2.js"></script>
 </body>
 </html>

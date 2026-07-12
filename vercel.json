@@ -1,7 +1,38 @@
 {
   "rewrites": [
-    { "source": "/next-steps", "destination": "https://jw-qualify.vercel.app/next-steps" },
-    { "source": "/next-steps/", "destination": "https://jw-qualify.vercel.app/next-steps" },
-    { "source": "/next-steps/:path*", "destination": "https://jw-qualify.vercel.app/next-steps/:path*" }
+    {
+      "source": "/next-steps",
+      "destination": "https://jw-qualify.vercel.app/next-steps"
+    },
+    {
+      "source": "/next-steps/",
+      "destination": "https://jw-qualify.vercel.app/next-steps"
+    },
+    {
+      "source": "/next-steps/:path*",
+      "destination": "https://jw-qualify.vercel.app/next-steps/:path*"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/solutions.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/solutions",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio.html",
+      "destination": "/work.html",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio",
+      "destination": "/work.html",
+      "permanent": true
+    }
   ]
 }

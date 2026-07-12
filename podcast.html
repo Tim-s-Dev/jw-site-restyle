@@ -12,7 +12,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<link rel="canonical" href="https://journeywell.io/podcast.html" />
+<meta name="theme-color" content="#CFF42A" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="JourneyWell" />
+<meta property="og:title" content="Launch Your Podcast — JourneyWell" />
+<meta property="og:description" content="From concept to first ten episodes in two weeks. Production, branding, and distribution — handled." />
+<meta property="og:url" content="https://journeywell.io/podcast.html" />
+<meta property="og:image" content="https://journeywell.io/images/jw-logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Launch Your Podcast — JourneyWell" />
+<meta name="twitter:description" content="From concept to first ten episodes in two weeks. Production, branding, and distribution — handled." />
+<meta name="twitter:image" content="https://journeywell.io/images/jw-logo.png" />
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"Service","name":"Podcast Launch","provider":{"@type":"Organization","name":"JourneyWell","url":"https://journeywell.io"},"url":"https://journeywell.io/podcast.html","description":"Concept to first ten episodes in two weeks — production, branding, and distribution handled." }
+</script>
 <link rel="icon" type="image/png" href="images/jw-logo.png"/>
+<script>(function(){try{var t=localStorage.getItem('jw-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}addEventListener('DOMContentLoaded',function(){var b=document.querySelector('.theme-toggle');if(b)b.addEventListener('click',function(){var h=document.documentElement,l=h.getAttribute('data-theme')==='light';if(l)h.removeAttribute('data-theme');else h.setAttribute('data-theme','light');try{localStorage.setItem('jw-theme',l?'dark':'light');}catch(e){}});});})();</script>
 <link rel="stylesheet" href="v2.css"/>
 <style>
 /* ===== podcast page: "ship your show" identity ===== */
@@ -42,11 +58,11 @@
 .poster .plok{position:absolute;left:20px;right:20px;bottom:60px;z-index:2;text-transform:uppercase;font-weight:900;line-height:.84;letter-spacing:.01em}
 .poster .plok .l1,.poster .plok .l3{display:block;font-size:clamp(36px,3.5vw,50px)}
 .poster .plok .l2{display:block;font-family:'Cormorant Garamond',Garamond,serif;font-style:italic;font-weight:500;text-transform:lowercase;
-  color:var(--lime);font-size:clamp(24px,2.3vw,32px);line-height:1;margin:4px 0}
+  color:var(--lime-fill);font-size:clamp(24px,2.3vw,32px);line-height:1;margin:4px 0}
 .poster .pfoot{position:absolute;left:20px;right:20px;bottom:16px;z-index:2;display:flex;justify-content:space-between;gap:10px;
   padding-top:10px;border-top:1px solid rgba(246,245,242,.28);
   font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(246,245,242,.75)}
-.sticker{position:absolute;top:0;right:4px;z-index:3;width:100px;height:100px;border-radius:50%;background:var(--lime);color:#0a0a0a;
+.sticker{position:absolute;top:0;right:4px;z-index:3;width:100px;height:100px;border-radius:50%;background:var(--lime-fill);color:#0a0a0a;
   display:grid;place-items:center;text-align:center;padding:14px;line-height:1.3;
   font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-10deg);
   box-shadow:0 26px 50px -18px rgba(207,244,42,.4)}
@@ -64,7 +80,7 @@
 .chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:26px}
 .chip{font-size:12.5px;font-weight:600;letter-spacing:.02em;padding:9px 16px;border-radius:40px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
 .chip b{color:var(--lime);font-weight:800;margin-right:7px;font-size:11px}
-.chip.on{background:var(--lime);color:#0a0a0a;border-color:var(--lime);font-weight:700}
+.chip.on{background:var(--lime-fill);color:#0a0a0a;border-color:var(--lime-fill);font-weight:700}
 .chip.on b{color:#0a0a0a}
 
 /* --- giant numeral phases --- */
@@ -109,18 +125,18 @@
 .show:hover img{transform:scale(1.06)}
 .show .sh{position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(10,10,10,.6))}
 .show .idx{position:absolute;top:12px;left:12px;z-index:2;font-size:10.5px;font-weight:800;letter-spacing:.1em;
-  background:rgba(10,10,10,.55);backdrop-filter:blur(6px);border:1px solid var(--line2);border-radius:7px;padding:5px 9px;color:var(--lime)}
+  background:rgba(10,10,10,.55);backdrop-filter:blur(6px);border:1px solid rgba(246,245,242,.08);border-radius:7px;padding:5px 9px;color:var(--lime-fill)}
 .show .bar{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;
   padding:12px 14px;background:rgba(10,10,10,.78);backdrop-filter:blur(10px);border-top:1px solid var(--line2)}
 .show .bar .t{font-weight:800;font-size:14px;letter-spacing:-.01em;line-height:1.2}
-.show .bar .pl2{width:26px;height:26px;flex:0 0 auto;border-radius:50%;background:var(--lime);color:#0a0a0a;
+.show .bar .pl2{width:26px;height:26px;flex:0 0 auto;border-radius:50%;background:var(--lime-fill);color:#0a0a0a;
   display:grid;place-items:center;font-size:9px;transition:transform .4s var(--easex)}
 .show:hover .bar .pl2{transform:scale(1.12)}
 @media(max-width:860px){.shelf{grid-template-columns:1fr 1fr;gap:14px}}
 
 /* --- lime offer band (the only inverted band on the site) --- */
-.limeband{position:relative;overflow:hidden;background:var(--lime);color:#0a0a0a;padding:clamp(84px,10vw,150px) 0}
-.limeband ::selection{background:#0a0a0a;color:var(--lime)}
+.limeband{position:relative;overflow:hidden;background:var(--lime-fill);color:#0a0a0a;padding:clamp(84px,10vw,150px) 0}
+.limeband ::selection{background:#0a0a0a;color:var(--lime-fill)}
 .limeband .lb-tag{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.22em;
   text-transform:uppercase;color:rgba(10,10,10,.62);margin-bottom:22px}
 .limeband .lb-tag::before{content:"";width:26px;height:1.5px;background:rgba(10,10,10,.5)}
@@ -131,10 +147,10 @@
 .lb-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
 .lb-list li{display:flex;gap:11px;align-items:flex-start;padding:15px 0;border-top:1.5px solid rgba(10,10,10,.22);
   font-size:14.5px;font-weight:600;line-height:1.4}
-.lb-list li::before{content:"✓";flex:0 0 auto;width:21px;height:21px;border-radius:50%;background:#0a0a0a;color:var(--lime);
+.lb-list li::before{content:"✓";flex:0 0 auto;width:21px;height:21px;border-radius:50%;background:#0a0a0a;color:var(--lime-fill);
   display:grid;place-items:center;font-size:11px;font-weight:800;margin-top:1px}
-.lb-btn{background:#0a0a0a;color:var(--lime);margin-top:34px}
-.lb-btn .ar{width:24px;height:24px;border-radius:50%;background:var(--lime);color:#0a0a0a;display:grid;place-items:center;font-size:13px;transition:transform .45s var(--easex)}
+.lb-btn{background:#0a0a0a;color:var(--lime-fill);margin-top:34px}
+.lb-btn .ar{width:24px;height:24px;border-radius:50%;background:var(--lime-fill);color:#0a0a0a;display:grid;place-items:center;font-size:13px;transition:transform .45s var(--easex)}
 .lb-btn:hover .ar{transform:translate(3px,-2px)}
 .lb14{position:absolute;right:-1vw;bottom:-.16em;z-index:1;font-weight:900;letter-spacing:-.06em;line-height:.7;
   font-size:clamp(220px,28vw,420px);color:rgba(10,10,10,.07);user-select:none;pointer-events:none}
@@ -143,6 +159,16 @@
   .lb-list{grid-template-columns:1fr;gap:0}
 }
 @media(max-width:520px){.lb-list{grid-template-columns:1fr}}
+
+/* ---------- light theme (page-scoped) ---------- */
+/* poster + show cards keep their dark-on-image overlays: force light type there */
+[data-theme="light"] .poster .plok{color:#F6F5F2}
+[data-theme="light"] .show .bar .t{color:#F6F5F2}
+[data-theme="light"] .poster{border-color:rgba(18,18,15,.14);
+  box-shadow:0 60px 110px -50px rgba(18,18,15,.4),0 26px 48px -28px rgba(18,18,15,.28)}
+[data-theme="light"] .show:hover{box-shadow:0 34px 60px -34px rgba(18,18,15,.35)}
+/* ghost numerals: ink-tinted stroke on paper */
+[data-theme="light"] .phase .pnum{color:rgba(18,18,15,.035);-webkit-text-stroke:2px rgba(18,18,15,.2)}
 </style>
 </head>
 <body>
@@ -158,6 +184,7 @@
     <a href="work.html">Work</a>
     <a href="about.html">About</a>
   </div>
+  <button class="theme-toggle" aria-label="Switch theme"><span class="tt-sun">☀</span><span class="tt-moon">☾</span></button>
   <button class="navcta mag" data-open-drawer>Start your show</button>
 </div></nav>
 
@@ -337,8 +364,9 @@
       <div class="fcol"><h4>Studio</h4><a href="work.html">The Work</a><a href="about.html">About</a><a href="blog.html">Notes</a></div>
     </div>
   </div>
-  <div class="bot"><div>© 2026 JourneyWell Studios</div><div>Produced in-house · Owned by you</div></div>
+  <div class="bot"><div>© 2026 JourneyWell Studios</div><div class="fsoc"><a href="https://www.instagram.com/journeywell.co/" aria-label="Instagram">Instagram</a><a href="https://www.linkedin.com/company/journeywellio" aria-label="LinkedIn">LinkedIn</a><a href="https://www.facebook.com/journeywell.co" aria-label="Facebook">Facebook</a></div><div>Produced in-house · Owned by you</div></div>
 </div></footer>
+<script src="chrome.js"></script>
 <script src="v2.js"></script>
 </body>
 </html>

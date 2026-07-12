@@ -31,7 +31,32 @@ if(!RM&&!TOUCH){
 addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>40),{passive:true});
 
 /* ---------- drawer stub ---------- */
-document.querySelectorAll('[data-open-drawer]').forEach(b=>b.addEventListener('click',()=>alert('[preview] Opens the JourneyWell lead drawer (formsubmit + GHL booking) on the live site.')));
+/* lead drawer: chrome.js owns [data-open-drawer] when loaded; this is only a
+   fallback notice for previews served without chrome.js */
+document.querySelectorAll('[data-open-drawer]').forEach(b=>b.addEventListener('click',()=>{
+  if(!(window.JW&&window.JW.openDrawer)) alert('[preview] The lead drawer (formsubmit + GHL booking) wires up on the live build.');
+}));
+
+/* homepage: hydrate the pinned work gallery from the creator-tunnel live feed.
+   Static cards remain as the skeleton/fallback. */
+addEventListener('load',async()=>{
+  const track=document.getElementById('wtrack');
+  if(!track||!(window.JW&&window.JW.loadCtTag))return;
+  try{
+    let data=await window.JW.loadCtTag('live-feed:recent-work',8);
+    if(!data||!data.assets||!data.assets.length) data=await window.JW.loadCtTag('live-feed:episode',8);
+    if(!data||!data.assets||!data.assets.length)return;
+    const cards=track.querySelectorAll('.wcard');
+    data.assets.slice(0,cards.length).forEach((a,i)=>{
+      const c=cards[i], img=c.querySelector('img'), t=c.querySelector('.info .t'), s=c.querySelector('.info .s');
+      if(a.thumbnail_url&&img){img.src=a.thumbnail_url;img.alt=a.display_title||a.title||'';}
+      if(t)t.textContent=(a.display_title||a.title||t.textContent).slice(0,60);
+      if(s)s.textContent=[a.brand||'JourneyWell','Studio'].join(' · ');
+      c.dataset.assetId=a.id;
+      c.addEventListener('click',()=>{ if(window.JW.openVideoOverlay)window.JW.openVideoOverlay(a,data.assets); });
+    });
+  }catch(e){/* keep static skeleton */}
+});
 
 /* ---------- loader → then boot ---------- */
 function boot(){

@@ -386,9 +386,28 @@ async function getCoverImage(query, fallbackQuery) {
 }
 
 // ---------------------------------------------------------------------------
-// 7. Static post renderer — matches the existing lite-post template exactly
+// 7. Static post renderer — fills the v2 article shell (blog/_template.html)
 // ---------------------------------------------------------------------------
-function renderPostHTML(post, dateStr) {
+function fillTemplate(tpl, map) {
+  let out = tpl;
+  for (const [k, v] of Object.entries(map)) out = out.split(`{{${k}}}`).join(v ?? "");
+  return out;
+}
+
+function renderRelatedCard(p) {
+  const d = p.published_at ? new Date(p.published_at) : new Date();
+  return `    <a class="rel-card reveal" href="${p.slug}.html">
+      <div class="rc-thumb"><img src="${esc(p.cover_image_url)}" alt="${esc(stripTags(p.title))}" loading="lazy"/></div>
+      <div class="rc-body">
+        <span class="chip sm">${esc(p.category)}</span>
+        <div class="rc-title">${p.title}</div>
+        <div class="rc-date">${fmtDate(d)} · ${p.read_time} min read</div>
+      </div>
+    </a>`;
+}
+
+function renderPostHTML(post, dateStr, related = []) {
+  const template = fs.readFileSync(path.join(REPO_ROOT, "blog", "_template.html"), "utf8");
   const plainTitle = stripTags(post.title);
   const canonical = `https://journeywell.io/blog/${post.slug}.html`;
   const ogDesc = esc(post.meta_description);
@@ -409,20 +428,10 @@ function renderPostHTML(post, dateStr) {
     mainEntityOfPage: canonical,
     articleSection: post.category,
   };
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>${esc(plainTitle)} — JourneyWell</title>
-<meta name="description" content="${esc(post.meta_description)}" />
-
-<link rel="canonical" href="${canonical}" />
+  const seoHead = `<link rel="canonical" href="${canonical}" />
 <meta name="theme-color" content="#CFF42A" />
-
 <link rel="icon" type="image/png" href="/images/jw-logo.png" />
 <link rel="apple-touch-icon" href="/images/jw-logo.png" />
-
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="JourneyWell" />
 <meta property="og:title" content="${esc(plainTitle)}" />
@@ -431,60 +440,28 @@ function renderPostHTML(post, dateStr) {
 <meta property="og:image" content="${esc(post.cover_image_url)}" />
 <meta property="article:section" content="${esc(post.category)}" />
 <meta property="article:author" content="${esc(post.author)}" />
-
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="${esc(plainTitle)}" />
 <meta name="twitter:description" content="${ogDesc}" />
 <meta name="twitter:image" content="${esc(post.cover_image_url)}" />
-
-<link rel="stylesheet" href="../style.css?v=5" />
-<link rel="stylesheet" href="../lite.css" />
-<link rel="stylesheet" href="../redesign.css" />
-
 <script type="application/ld+json">
 ${JSON.stringify(articleSchema)}
-</script>
-</head>
-<body class="lite">
-
-<section class="lite-post">
-  <div class="lite-narrow">
-    <div style="margin-bottom:18px"><a href="../blog.html" style="color:var(--muted); font-size:13px">← Back to Blogs</a></div>
-    <div class="lite-post-meta">
-      <span style="font-weight:600; color:var(--accent-deep); text-transform:uppercase; letter-spacing:0.04em; font-size:12px">${esc(post.category)}</span>
-      <span class="dot"></span>
-      <span>${post.read_time} min read</span>
-      <span class="dot"></span>
-      <span>${esc(post.author)} · ${dateStr}</span>
-    </div>
-    <h1>${post.title}</h1>
-    <p class="lead">${esc(post.lead)}</p>
-
-    <div class="lite-post-cover">
-      <img src="${post.cover_image_url}" alt="${esc(plainTitle)}" />
-    </div>
-
-    <div class="lite-post-body">
-      ${post.body_html}
-    </div>
-  </div>
-</section>
-
-<section class="lite-cta">
-  <div class="lite-container">
-    <h2>Want content that <em>compounds</em>?</h2>
-    <p>Everything in this post is the system we run for JourneyWell clients — capture, multiply, distribute. Pick a starting point.</p>
-    <div class="lite-cta-buttons">
-      <button class="btn btn-large btn-primary" data-open-drawer>Get started</button>
-      <a href="../blog.html" class="btn btn-large btn-ghost">More from Blogs</a>
-    </div>
-  </div>
-</section>
-
-<script src="../chrome.js"></script>
-</body>
-</html>
-`;
+</script>`;
+  return fillTemplate(template, {
+    TITLE_TAG: `${esc(plainTitle)} · JourneyWell`,
+    DESCRIPTION: esc(post.meta_description),
+    SEO_HEAD: seoHead,
+    CATEGORY: esc(post.category),
+    DATE_HUMAN: dateStr,
+    READ_MIN: String(post.read_time),
+    TITLE_HTML: post.title,
+    LEAD: esc(post.lead),
+    AUTHOR: esc(post.author),
+    COVER_SRC: esc(post.cover_image_url),
+    COVER_ALT: esc(plainTitle),
+    BODY: post.body_html,
+    RELATED: related.slice(0, 3).map(renderRelatedCard).join("\n"),
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -492,42 +469,37 @@ ${JSON.stringify(articleSchema)}
 // ---------------------------------------------------------------------------
 function renderIndexSection(posts) {
   const [featured, ...rest] = posts;
-  const grid = rest.slice(0, 6);
   const fDate = featured.published_at ? new Date(featured.published_at) : new Date();
-  const featuredHTML = `
-    <!-- FEATURED -->
-    <a href="blog/${featured.slug}.html" class="lite-card" style="display:grid; grid-template-columns: 1.2fr 1fr; gap: 32px; padding:0; overflow:hidden; text-decoration:none; margin-bottom:48px; align-items:stretch">
-      <div style="aspect-ratio:auto; min-height:320px; background:url('${featured.cover_image_url}') center/cover"></div>
-      <div style="padding: 36px 36px 36px 0">
-        <div class="lite-tile-eyebrow">Featured · ${esc(featured.category)}</div>
-        <h2 style="font-size:28px; margin-bottom:14px; margin-top:6px">${featured.title}</h2>
-        <p style="color:var(--muted); font-size:16px; line-height:1.6; margin-bottom:18px">${esc(featured.meta_description)}</p>
-        <div style="display:flex; gap:14px; align-items:center; font-size:13px; color:var(--muted-2)">
-          <span style="font-weight:600; color:var(--ink)">${esc(featured.author)}</span>
-          <span class="dot" style="width:3px;height:3px;border-radius:50%;background:var(--muted-2)"></span>
-          <span>${featured.read_time} min read</span>
-          <span class="dot" style="width:3px;height:3px;border-radius:50%;background:var(--muted-2)"></span>
-          <span>${fmtDate(fDate)}</span>
-        </div>
+  const featuredHTML = `    <a class="feat reveal" href="blog/${featured.slug}.html">
+      <div class="feat-img"><img src="${esc(featured.cover_image_url)}" alt="${esc(stripTags(featured.title))}"/></div>
+      <div class="feat-body">
+        <div class="feat-meta"><span class="chip">${esc(featured.category)}</span><span class="fm">Latest · ${fmtDate(fDate)}</span></div>
+        <h2 class="feat-title">${featured.title}</h2>
+        <p class="feat-dek">${esc(featured.meta_description)}</p>
+        <span class="feat-more">Read the note <span class="a">→</span></span>
       </div>
     </a>`;
 
-  const cards = grid
-    .map(
-      (p) => `      <a href="blog/${p.slug}.html" class="lite-blog-card">
-        <div class="lite-blog-card-thumb"><img src="${p.cover_image_url.replace("w=1600", "w=900").replace("w=1600", "w=900")}" alt="${esc(stripTags(p.title))}" loading="lazy" /></div>
-        <div class="lite-blog-card-eyebrow">${esc(p.category)} · ${p.read_time} min read</div>
-        <div class="lite-blog-card-title">${p.title}</div>
-        <div class="lite-blog-card-meta">${esc(p.meta_description)}</div>
-      </a>`
-    )
-    .join("\n\n");
+  const rows = rest
+    .map((p) => {
+      const d = p.published_at ? new Date(p.published_at) : new Date();
+      return `      <a class="ix-row reveal" href="blog/${p.slug}.html">
+        <div class="ix-thumb"><img src="${esc(p.cover_image_url)}" alt="${esc(stripTags(p.title))}" loading="lazy"/></div>
+        <div class="ix-main">
+          <div class="ix-title">${p.title}</div>
+          <p class="ix-dek">${esc(p.meta_description)}</p>
+        </div>
+        <div class="ix-side"><span class="chip">${esc(p.category)}</span><span class="ix-date">${fmtDate(d)} · ${p.read_time} min read</span></div>
+      </a>`;
+    })
+    .join("\n");
 
-  return `${featuredHTML}
+  return `
+${featuredHTML}
 
-    <!-- LATEST GRID -->
-    <div class="lite-blog-grid">
-${cards}
+    <div class="ix-label">All notes</div>
+    <div class="ix-rows">
+${rows}
     </div>`;
 }
 
@@ -553,7 +525,7 @@ function updateBlogIndex(posts) {
 async function main() {
   console.log("JourneyWell blog generator");
 
-  const posts = await sb("blog_posts?select=slug,title,category,published_at,created_at,status&order=published_at.desc");
+  const posts = await sb("blog_posts?select=slug,title,category,meta_description,cover_image_url,read_time,published_at,created_at,status&order=published_at.desc");
   const published = posts.filter((p) => p.status === "published");
   const existingSlugs = new Set(posts.map((p) => p.slug));
   const category = pickCategory(published);
@@ -622,9 +594,13 @@ async function main() {
   });
   console.log("→ inserted into Supabase");
 
-  // Render static post file
+  // Render static post file (v2 shell + related posts row)
+  const related = [
+    ...published.filter((p) => p.slug !== post.slug && p.category === post.category),
+    ...published.filter((p) => p.slug !== post.slug && p.category !== post.category),
+  ].slice(0, 3);
   const postPath = path.join(REPO_ROOT, "blog", `${post.slug}.html`);
-  fs.writeFileSync(postPath, renderPostHTML(post, dateStr));
+  fs.writeFileSync(postPath, renderPostHTML(post, dateStr, related));
   console.log(`→ wrote blog/${post.slug}.html`);
 
   // Rebuild index from Supabase (all published posts, newest first)

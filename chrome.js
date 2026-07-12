@@ -14,6 +14,8 @@
 
 // ---- Inject redesign.css on every page (so toggle + carousel + theme work everywhere) ----
 (function injectRedesignCss() {
+  // v2 pages carry their own design system (v2.css) — legacy skin must not load.
+  if (document.querySelector('link[href$="v2.css"]')) return;
   if (document.querySelector('link[data-jw-redesign]')) return;
   var depth = location.pathname.split('/').filter(function (s) { return s && !s.endsWith('.html'); }).length;
   var prefix = '../'.repeat(depth);
@@ -788,13 +790,19 @@
 
   // ---------- INSTALL ----------
   function installChrome() {
-    // Insert nav at top of body, footer + float-btn + drawer at bottom
-    const navMount = document.createElement('div');
-    navMount.innerHTML = navHtml();
-    document.body.insertBefore(navMount.firstElementChild, document.body.firstChild);
+    // v2 pages ship their own nav + footer; chrome.js contributes only the
+    // functional layer there (drawer, icons, feeds, player hooks).
+    const JW_V2 = !!document.querySelector('link[href$="v2.css"]');
+
+    if (!JW_V2) {
+      // Insert nav at top of body, footer + float-btn at bottom (legacy pages)
+      const navMount = document.createElement('div');
+      navMount.innerHTML = navHtml();
+      document.body.insertBefore(navMount.firstElementChild, document.body.firstChild);
+    }
 
     const tail = document.createElement('div');
-    tail.innerHTML = footerHtml() + floatBtnHtml() + drawerHtml();
+    tail.innerHTML = (JW_V2 ? '' : footerHtml() + floatBtnHtml()) + drawerHtml();
     while (tail.firstElementChild) document.body.appendChild(tail.firstElementChild);
 
     // Wire events
@@ -880,7 +888,7 @@
     initHeroCarousel();
 
     // Scroll reveal animations (Apple/Blaksheep style)
-    initScrollReveal();
+    if (!JW_V2) initScrollReveal(); // v2 pages run their own GSAP reveal system
 
     // Profile pictures pulled from creator-tunnel (any [data-profile-pic="<slug>"])
     initProfilePictures();
