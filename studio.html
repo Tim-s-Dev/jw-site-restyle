@@ -1,215 +1,286 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The Studio — JourneyWell</title>
-<meta name="description" content="Show up, sit down, walk out with a finished episode. The studio is fully staffed and ready." />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Book the Studio · JourneyWell</title>
+<meta name="description" content="Walk into a fully staffed Baton Rouge studio. Sit down, record, and walk out with a finished episode. Masters delivered in 48 hours."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>if(!matchMedia('(prefers-reduced-motion:reduce)').matches)document.documentElement.classList.add('janim');</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<link rel="icon" type="image/png" href="images/jw-logo.png"/>
+<link rel="stylesheet" href="v2.css"/>
+<style>
+/* ============ studio.html page identity: editorial-brutalist rider ============ */
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.mono .lm{color:var(--lime)}
 
-<link rel="canonical" href="https://journeywell.io/studio.html" />
-<meta name="theme-color" content="#CFF42A" />
+/* ---- opener ---- */
+.st-open{padding:118px 0 0}
+.st-frame{padding:0 clamp(20px,3vw,40px)}
+.st-topline{display:flex;justify-content:space-between;align-items:flex-start;gap:34px;
+  padding:22px 0 clamp(40px,6.5vw,86px);border-bottom:none}
+.st-micro{max-width:37ch;line-height:1.8;text-align:left}
+.st-micro b{color:var(--cream);font-weight:600}
+.st-open h1{font-weight:900;letter-spacing:-.045em;line-height:.82;max-width:none;
+  font-size:clamp(66px,17.2vw,246px);text-transform:uppercase;overflow-wrap:break-word}
+.st-open h1 .ln{display:block;overflow:hidden;padding-block:.03em}
+.st-open h1 .ln i{display:inline-block;font-style:normal}
+.st-open h1 .dotx{color:var(--lime)}
+.janim .st-open h1 .ln i{transform:translateY(105%)}
+.st-meta{display:flex;justify-content:space-between;gap:14px 30px;flex-wrap:wrap;
+  border-top:1px solid var(--line);margin-top:clamp(26px,4vw,46px);padding:16px 0 20px}
+.st-meta span{white-space:nowrap}
+@media(max-width:760px){
+  .st-topline{flex-direction:column;gap:22px;padding-bottom:44px}
+  .st-meta span:nth-child(2){display:none}
+}
 
-<link rel="icon" type="image/png" href="/images/jw-logo.png" />
-<link rel="apple-touch-icon" href="/images/jw-logo.png" />
+/* ---- grayscale photography: color returns on hover only ---- */
+.gph{position:relative;overflow:hidden}
+.gph img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);
+  transition:filter .7s var(--ease)}
+.gph:hover img{filter:grayscale(0) contrast(1)}
+.caprow{display:flex;justify-content:space-between;gap:16px;padding-top:11px}
+.caprow .hint{color:var(--faint)}
+@media(hover:none){.caprow .hint{display:none}}
 
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="JourneyWell" />
-<meta property="og:title" content="The Studio — JourneyWell" />
-<meta property="og:description" content="Show up, sit down, walk out with a finished episode. The studio is fully staffed and ready." />
-<meta property="og:url" content="https://journeywell.io/studio.html" />
-<meta property="og:image" content="https://journeywell.io/images/jw-logo.png" />
+/* ---- full-bleed opener photo ---- */
+.st-bleed{height:clamp(340px,78vh,760px)}
+.st-bleed img{height:112%;will-change:transform}
+.st-bleed .cap{position:absolute;left:clamp(20px,3vw,40px);bottom:18px;z-index:3;display:flex;align-items:center;gap:10px;
+  background:rgba(10,10,10,.62);backdrop-filter:blur(8px);border:1px solid var(--line2);padding:9px 14px}
+.st-bleed .cap .rec{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 2.6s var(--ease) infinite}
+.st-bleed .hnt{position:absolute;right:clamp(20px,3vw,40px);bottom:18px;z-index:3;color:rgba(246,245,242,.55);
+  background:rgba(10,10,10,.5);backdrop-filter:blur(8px);padding:9px 14px;border:1px solid var(--line2)}
+@media(hover:none){.st-bleed .hnt{display:none}}
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="The Studio — JourneyWell" />
-<meta name="twitter:description" content="Show up, sit down, walk out with a finished episode. The studio is fully staffed and ready." />
-<meta name="twitter:image" content="https://journeywell.io/images/jw-logo.png" />
+/* ---- section head, editorial ---- */
+.sidx{display:flex;align-items:baseline;gap:18px;margin-bottom:24px}
+.sidx .rule{flex:1;height:1px;background:var(--line2);transform:translateY(-3px)}
+.spec-head{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end;margin-bottom:clamp(34px,5vw,60px)}
+.spec-head p{color:var(--muted);font-size:15px;line-height:1.6;max-width:44ch;justify-self:end;text-align:right}
+@media(max-width:760px){.spec-head{grid-template-columns:1fr}.spec-head p{justify-self:start;text-align:left}}
 
-<link rel="stylesheet" href="style.css?v=5" />
-<link rel="stylesheet" href="lite.css" />
-<link rel="stylesheet" href="redesign.css" />
+/* ---- spec sheet / technical rider ---- */
+.spec{border-bottom:1px solid var(--line)}
+.srow{display:flex;align-items:baseline;gap:clamp(16px,3vw,34px);border-top:1px solid var(--line);
+  padding:clamp(20px,2.8vw,31px) 2px}
+.srow .sn{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--faint);flex:0 0 2.4em}
+.srow .sl{flex:0 0 clamp(96px,15vw,200px);transition:color .3s var(--ease)}
+.srow .sv{margin-left:auto;text-align:right;font-weight:650;letter-spacing:-.015em;min-width:0;
+  font-size:clamp(15.5px,1.8vw,24px);transition:color .3s var(--ease)}
+.srow:hover .sl,.srow:hover .sn{color:var(--lime)}
+@media(max-width:560px){.srow .sl{flex-basis:84px}}
 
-<script type="application/ld+json">
-{ "@context":"https://schema.org","@type":"LocalBusiness","name":"JourneyWell Studio","url":"https://journeywell.io/studio.html","image":"https://journeywell.io/images/jw-logo.png","address":{"@type":"PostalAddress","addressLocality":"Baton Rouge","addressRegion":"LA","addressCountry":"US"},"description":"A full-service content studio. Show up, sit down, walk out with a finished episode." }
-</script>
+/* ---- the floor: photo grid ---- */
+.floor-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(12px,1.4vw,18px) clamp(12px,1.4vw,18px)}
+.floor-grid figure{margin:0;min-width:0}
+.fg-a{grid-column:1/8}
+.fg-b{grid-column:8/13}
+.fg-c{grid-column:4/13;margin-top:clamp(6px,1vw,14px)}
+.fg-note{grid-column:1/4;align-self:end;padding:0 6px 46px 2px;line-height:1.8;max-width:22ch}
+.fg-note .tick{display:block;width:26px;height:1px;background:var(--lime);margin-bottom:14px}
+.floor-grid .gph{height:clamp(220px,34vw,480px)}
+.fg-c .gph{height:clamp(220px,30vw,440px)}
+.floor-grid .gph img{transition:filter .7s var(--ease),transform 1.1s var(--easex)}
+.floor-grid .gph:hover img{transform:scale(1.025)}
+@media(max-width:760px){
+  .fg-a,.fg-b,.fg-c{grid-column:1/13;margin-top:0}
+  .fg-note{grid-column:1/13;order:9;padding:10px 2px 0}
+  .floor-grid .gph,.fg-c .gph{height:clamp(220px,58vw,420px)}
+}
+
+/* ---- hour by hour ---- */
+.hourly{border-top:1px solid var(--line2)}
+.tl{display:flex;justify-content:space-between;gap:26px;border-top:1px solid var(--line);
+  margin-top:clamp(30px,4vw,48px)}
+.tk{position:relative;padding-top:20px;min-width:0}
+.tk::before{content:"";position:absolute;top:0;left:1px;width:1px;height:13px;background:var(--faint)}
+.tk .tt{display:block;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
+.tk .td{font-weight:700;font-size:clamp(15px,1.5vw,19px);letter-spacing:-.01em}
+.tk.lit::before{background:var(--lime)}
+.tk.lit .tt,.tk.lit .td{color:var(--lime)}
+@media(max-width:700px){
+  .tl{flex-direction:column;gap:24px;border-top:none;border-left:1px solid var(--line);
+    padding-left:22px;margin-left:2px}
+  .tk{padding-top:0}
+  .tk::before{top:7px;left:-22px;width:13px;height:1px}
+}
+
+/* ---- adapt split (the one color photo) ---- */
+.adapt{border-top:1px solid var(--line2)}
+.adapt-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(34px,5vw,80px);align-items:center}
+.adapt-ph{margin:0;position:relative;overflow:hidden}
+.adapt-ph img{width:100%;height:auto;display:block}
+.adapt-ph .fcap{position:absolute;left:16px;bottom:14px;background:rgba(10,10,10,.62);
+  backdrop-filter:blur(8px);border:1px solid var(--line2);padding:8px 13px}
+.adapt-txt h2{max-width:14ch;margin:18px 0 20px}
+.adapt-txt>p{color:var(--muted);font-size:15.5px;line-height:1.65;max-width:46ch}
+.cfg{margin-top:34px;border-bottom:1px solid var(--line2)}
+.cfg li{list-style:none;display:flex;gap:20px;align-items:baseline;border-top:1px solid var(--line2);padding:13px 2px}
+.cfg li .k{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--lime);letter-spacing:.12em}
+.cfg li .v{font-weight:600;font-size:14.5px;letter-spacing:.01em;text-transform:uppercase}
+.cfg li .m{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--faint);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+@media(max-width:860px){.adapt-grid{grid-template-columns:1fr}.adapt-ph{max-width:520px}}
+@media(max-width:560px){.cfg li .m{display:none}}
+
+/* faq head spacing on this page */
+.bk-head{max-width:66ch}
+.bk-head h2{margin-top:18px}
+</style>
 </head>
-<body class="lite">
+<body>
+<div class="grain"></div>
+<div id="cur"></div><div id="curr"><span class="lab"></span></div>
 
-<section class="page-hero">
-  <div class="container">
-    <div class="hero-eyebrow">The studio</div>
-    <h1>Show up. Sit down. <em>Walk out with an episode.</em></h1>
-    <p class="muted">Full-service podcast and video studio. Engineered audio, broadcast-quality video, professional lighting, and a producer in the room. You bring the conversation. We bring everything else.</p>
-    <div class="flex-row" style="margin-top:36px">
-      <button class="btn btn-gold btn-large" data-open-drawer-with="studio">Book a session</button>
-      <button class="btn btn-ghost btn-large" data-open-drawer-with="learn">See availability</button>
-    </div>
+<nav id="nav"><div class="wrap">
+  <a class="brand" href="index.html"><span class="dot">J</span> JourneyWell</a>
+  <div class="navlinks">
+    <a href="studio.html" style="color:var(--cream)">Book the Studio</a>
+    <a href="podcast.html">Launch a Podcast</a>
+    <a href="authority.html">Build Authority</a>
+    <a href="work.html">Work</a>
+    <a href="about.html">About</a>
   </div>
+  <button class="navcta mag" data-open-drawer>Book a session</button>
+</div></nav>
+
+<!-- ============ OPENER ============ -->
+<header class="phero st-open"><div class="st-frame">
+  <div class="st-topline">
+    <div class="mono he-in"><span class="lm">(01)</span>&nbsp; Book the Studio</div>
+    <p class="mono st-micro he-in">A staffed recording room in Baton Rouge. <b>Engineer, lighting, direction included.</b> Sit down, talk, walk out. Masters in 48 hours. Every file yours.</p>
+  </div>
+  <h1><span class="ln"><i>The Room<span class="dotx">.</span></i></span></h1>
+  <div class="st-meta mono he-in">
+    <span>Baton Rouge, LA</span>
+    <span>30.4515 N / 91.1871 W</span>
+    <span>Fully staffed</span>
+    <span class="lm">Masters in 48h</span>
+  </div>
+</div></header>
+
+<!-- full-bleed b/w photo -->
+<section class="st-bleed gph" data-cursor="view">
+  <img src="images/bts/06-studio-mic.jpg" alt="The JourneyWell recording studio, mic on the boom" data-parallax-img/>
+  <div class="cap mono"><span class="rec"></span> Fig. 01 / On the floor</div>
+  <div class="hnt mono">Color on hover</div>
 </section>
 
-<!-- GALLERY -->
-<section class="section">
-  <div class="container">
-    <div class="studio-gallery">
-      <div class="studio-tile tall t-1" data-label="Main control room"></div>
-      <div class="studio-tile t-2" data-label="2-mic interview"></div>
-      <div class="studio-tile t-3" data-label="Solo booth"></div>
-      <div class="studio-tile t-4" data-label="Multicam"></div>
-      <div class="studio-tile t-5" data-label="Lounge"></div>
+<!-- ============ SPEC SHEET ============ -->
+<section class="blk"><div class="wrap">
+  <div class="spec-head reveal">
+    <div>
+      <div class="sidx mono"><span><span class="lm">(02)</span>&nbsp; Spec sheet</span><span class="rule"></span></div>
+      <h2>The <em>rider</em>.</h2>
+    </div>
+    <p>Nothing to rent, nothing to decode. Every line below is included in every booking, every time.</p>
+  </div>
+  <div class="spec">
+    <div class="srow reveal"><span class="sn">01</span><span class="sl mono">Cameras</span><span class="sv">3x cinema line, multi-angle</span></div>
+    <div class="srow reveal"><span class="sn">02</span><span class="sl mono">Audio</span><span class="sv">Engineer-mixed, live in the room</span></div>
+    <div class="srow reveal"><span class="sn">03</span><span class="sl mono">Lighting</span><span class="sv">Pre-lit set, broadcast grade</span></div>
+    <div class="srow reveal"><span class="sn">04</span><span class="sl mono">Direction</span><span class="sv">Producer on the floor</span></div>
+    <div class="srow reveal"><span class="sn">05</span><span class="sl mono">Set</span><span class="sv">Re-dresses in minutes</span></div>
+    <div class="srow reveal"><span class="sn">06</span><span class="sl mono">Sessions</span><span class="sv">Half-day standard</span></div>
+    <div class="srow reveal"><span class="sn">07</span><span class="sl mono">Turnaround</span><span class="sv">Masters in 48 hours</span></div>
+    <div class="srow reveal"><span class="sn">08</span><span class="sl mono">Ownership</span><span class="sv">Every file yours. No hostage tapes.</span></div>
+    <div class="srow reveal"><span class="sn">09</span><span class="sl mono">Location</span><span class="sv">Baton Rouge, LA</span></div>
+  </div>
+</div></section>
+
+<!-- ============ THE FLOOR ============ -->
+<section class="blk" style="padding-top:0"><div class="wrap">
+  <div class="sidx mono reveal"><span><span class="lm">(03)</span>&nbsp; The floor</span><span class="rule"></span></div>
+  <div class="floor-grid">
+    <figure class="fg-a reveal">
+      <div class="gph" data-cursor="view"><img src="images/bts/01-home-studio-band.jpg" alt="A full band session on the studio floor"/></div>
+      <figcaption class="caprow mono"><span><span class="lm">Fig. 02</span> / The live floor</span><span class="hint">Color on hover</span></figcaption>
+    </figure>
+    <figure class="fg-b reveal">
+      <div class="gph" data-cursor="view"><img src="images/bts/07a-studio-interview.jpg" alt="A two-chair interview in progress"/></div>
+      <figcaption class="caprow mono"><span><span class="lm">Fig. 03</span> / Two-chair setup</span></figcaption>
+    </figure>
+    <div class="fg-note mono reveal"><span class="tick"></span>Shot in the room. Not a render, not a rental, not a backdrop.</div>
+    <figure class="fg-c reveal">
+      <div class="gph" data-cursor="view"><img src="images/bts/05-studio-detail.jpg" alt="Detail of the studio rig"/></div>
+      <figcaption class="caprow mono"><span><span class="lm">Fig. 04</span> / Detail, the rig</span><span class="hint">Color on hover</span></figcaption>
+    </figure>
+  </div>
+</div></section>
+
+<!-- ============ HOUR BY HOUR ============ -->
+<section class="blk hourly"><div class="wrap">
+  <div class="sidx mono reveal"><span><span class="lm">(04)</span>&nbsp; A session, hour by hour</span><span class="rule"></span></div>
+  <div class="tl reveal">
+    <div class="tk"><span class="tt">00:00</span><span class="td">Arrive</span></div>
+    <div class="tk"><span class="tt">00:15</span><span class="td">Mic'd and lit</span></div>
+    <div class="tk"><span class="tt">00:30</span><span class="td">Rolling</span></div>
+    <div class="tk"><span class="tt">03:00</span><span class="td">Wrapped</span></div>
+    <div class="tk lit"><span class="tt">+48:00</span><span class="td">Masters delivered</span></div>
+  </div>
+</div></section>
+
+<!-- ============ THE ROOM ADAPTS ============ -->
+<section class="blk adapt"><div class="wrap adapt-grid">
+  <figure class="adapt-ph reveal" data-cursor="view">
+    <img src="images/bts/07b-studio-solo-tall.jpg" alt="A solo session in the studio, in color"/>
+    <div class="fcap mono"><span class="lm">Fig. 05</span> / In color. The only one that needs to be.</div>
+  </figure>
+  <div class="adapt-txt">
+    <div class="sidx mono reveal"><span><span class="lm">(05)</span>&nbsp; Configurations</span><span class="rule"></span></div>
+    <h2 class="reveal">Solo, interview, panel. <em>The room adapts.</em></h2>
+    <p class="reveal">Founder solo shows, two-chair interviews, roundtables, brand shoots. The set re-dresses in minutes, so your show never looks like anyone else's.</p>
+    <ul class="cfg reveal">
+      <li><span class="k">A</span><span class="v">Solo show</span><span class="m">1 chair / 2 cams</span></li>
+      <li><span class="k">B</span><span class="v">Two-chair interview</span><span class="m">2 chairs / 3 cams</span></li>
+      <li><span class="k">C</span><span class="v">Roundtable panel</span><span class="m">3+ chairs / all mics</span></li>
+      <li><span class="k">D</span><span class="v">Brand shoot</span><span class="m">Set to spec</span></li>
+    </ul>
+  </div>
+</div></section>
+
+<!-- ============ FAQ ============ -->
+<section class="blk" style="border-top:1px solid var(--line2)"><div class="wrap">
+  <div class="bk-head reveal">
+    <div class="sidx mono"><span><span class="lm">(06)</span>&nbsp; Common questions</span><span class="rule"></span></div>
+    <h2>Before you book.</h2>
+  </div>
+  <div class="faq">
+    <div class="fq reveal"><button class="q">Do I need any experience on camera?<span class="ic">+</span></button><div class="a"><p>No. The producer directs the whole session and the edit removes every stumble. Most first-timers say it felt like a good conversation, not a shoot.</p></div></div>
+    <div class="fq reveal"><button class="q">How long is a session?<span class="ic">+</span></button><div class="a"><p>Most bookings are half-day. That's comfortably enough for a full episode plus shorts pulled from the same recording.</p></div></div>
+    <div class="fq reveal"><button class="q">What do I walk away with?<span class="ic">+</span></button><div class="a"><p>Finished audio and video masters within 48 hours, plus every raw file. If you're on the Authority System, the multiplication starts immediately.</p></div></div>
+    <div class="fq reveal"><button class="q">Can I bring a guest?<span class="ic">+</span></button><div class="a"><p>Yes, the room is built for interviews. Bring a guest, a co-host, or a panel; we mic and shoot everyone.</p></div></div>
+  </div>
+</div></section>
+
+<!-- ============ CTA ============ -->
+<section class="cta"><div class="wrap">
+  <div class="mono reveal" style="margin-bottom:26px"><span class="lm">(07)</span>&nbsp; Booking</div>
+  <h2 class="reveal">Book your<br><em>first session</em>.</h2>
+  <p class="reveal">Walk in with an idea. Walk out with an episode. Masters in 48 hours.</p>
+  <button class="btn btn-primary mag reveal" data-open-drawer>Book the studio <span class="ar">↗</span></button>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="top">
+    <div>
+      <a class="brand" href="index.html"><span class="dot">J</span> JourneyWell</a>
+      <p style="color:var(--muted);max-width:32ch;font-size:14px">The studio + system behind founders building real content authority. Baton Rouge, LA.</p>
+    </div>
+    <div class="cols">
+      <div class="fcol"><h4>Work with us</h4><a href="studio.html">Book the Studio</a><a href="podcast.html">Launch a Podcast</a><a href="authority.html">Build Authority</a></div>
+      <div class="fcol"><h4>Studio</h4><a href="work.html">The Work</a><a href="about.html">About</a><a href="blog.html">Notes</a></div>
     </div>
   </div>
-</section>
-
-<!-- IMAGE SLOT 05 — Studio interior detail, band -->
-<div class="jw-band">
-  <!-- SWAP: replace src with your photo for slot 05 -->
-    <img class="jw-slot-img" src="images/bts/05-studio-detail.jpg" alt="Studio gear and lighting detail" loading="lazy" />
-</div>
-
-<!-- WHAT'S INCLUDED -->
-<section class="section">
-  <div class="container">
-    <div class="section-eyebrow">What's included</div>
-    <h2 class="section-title">Every session, fully staffed.</h2>
-
-    <div class="spec-grid">
-      <div class="spec-cell">
-        <div class="spec-cell-label">Audio</div>
-        <div class="spec-cell-value">Shure SM7Bs, broadcast-grade preamps, isolated mix room, 96kHz multitrack</div>
-      </div>
-      <div class="spec-cell">
-        <div class="spec-cell-label">Video</div>
-        <div class="spec-cell-value">3-camera multicam, 4K Sony cinema sensors, motorized rig, switched live or post</div>
-      </div>
-      <div class="spec-cell">
-        <div class="spec-cell-label">Lighting</div>
-        <div class="spec-cell-value">Aputure key + fill, custom-tuned color temperature, no flat-lit Zoom look</div>
-      </div>
-      <div class="spec-cell">
-        <div class="spec-cell-label">Crew</div>
-        <div class="spec-cell-value">Engineer + producer in the room. We run the session so you can focus on the conversation.</div>
-      </div>
-      <div class="spec-cell">
-        <div class="spec-cell-label">Set design</div>
-        <div class="spec-cell-value">Three configurable backdrops, brandable surfaces, real plants, real warmth</div>
-      </div>
-      <div class="spec-cell">
-        <div class="spec-cell-label">Delivery</div>
-        <div class="spec-cell-value">Raw masters within 48 hours. Edit packages start within 1 week.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- IMAGE SLOT 06 -->
-<div class="jw-split-wrap flip">
-  <div class="jw-split-txt">
-    <div class="eyebrow">Inside the session</div>
-    <h2>The crew handles everything. <em>You just talk.</em></h2>
-    <p>Engineer on the board, producer in the room, cameras live. Every session is a broadcast-ready production — without the production stress.</p>
-  </div>
-  <div class="jw-split-img">
-    <!-- SWAP: replace src with your photo for slot 06 -->
-    <img class="jw-slot-img" src="images/bts/06-studio-mic.jpg" alt="A host recording at the mic" loading="lazy" />
-  </div>
-</div>
-
-<!-- USE CASES -->
-<section class="section section-cream">
-  <div class="container">
-    <div class="section-eyebrow">What you can record</div>
-    <h2 class="section-title">Sessions for any kind of conversation.</h2>
-
-    <div class="pillars-grid">
-      <div class="pillar-card">
-        <div class="pillar-num">Podcast interview</div>
-        <div class="pillar-title">Two-host interviews</div>
-        <div class="pillar-desc">You and one or two guests. Full multicam, broadcast audio, ready-to-edit. Most clients land 60–90 minutes per session.</div>
-        <a href="podcast.html" class="pillar-link">Launch a show</a>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-num">Solo record</div>
-        <div class="pillar-title">Solo monologue</div>
-        <div class="pillar-desc">Teleprompter, multiple takes, retakes welcome. Perfect for monthly thought leadership videos or Loom-replacements.</div>
-        <a href="#" data-open-drawer-with="studio" class="pillar-link">Book a solo</a>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-num">Video shoot</div>
-        <div class="pillar-title">Brand video shoots</div>
-        <div class="pillar-desc">Talking-head ads, founder spots, product demos. We've shot for 15+ founder brands and counting.</div>
-        <a href="work.html" class="pillar-link">See examples</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- IMAGE SLOT 07 — Session types grid -->
-<div class="jw-photo-grid">
-  <div class="jw-photo-grid-inner">
-    <div class="jw-photo-cell">
-      <div class="jw-photo-frame"><!-- SWAP: replace src with your photo for slot 07a -->
-    <img class="jw-slot-img" src="images/bts/07a-studio-interview.jpg" alt="Two-host interview setup" loading="lazy" /></div>
-      <div class="jw-photo-caption">Podcast interview</div>
-    </div>
-    <div class="jw-photo-cell">
-      <div class="jw-photo-frame tall"><!-- SWAP: replace src with your photo for slot 07b -->
-    <img class="jw-slot-img" src="images/bts/07b-studio-solo-tall.jpg" alt="Solo recording session" loading="lazy" /></div>
-      <div class="jw-photo-caption">Solo record</div>
-    </div>
-    <div class="jw-photo-cell">
-      <div class="jw-photo-frame"><!-- SWAP: replace src with your photo for slot 07c -->
-    <img class="jw-slot-img" src="images/bts/07c-studio-brand.jpg" alt="A brand video shoot" loading="lazy" /></div>
-      <div class="jw-photo-caption">Brand video</div>
-    </div>
-  </div>
-</div>
-
-<!-- FAQ -->
-<section class="section section-tight" style="border-top: 1px solid var(--border-subtle)">
-  <div class="container-narrow">
-    <div class="section-eyebrow">FAQ</div>
-    <h2 class="section-title short-margin">Common questions.</h2>
-
-    <div class="faq-list" style="margin-top: 32px">
-      <div class="faq-item open">
-        <div class="faq-q">How far in advance do I need to book?</div>
-        <div class="faq-a">Most weeks have openings within 5–7 days. For specific dates, 2–3 weeks ahead is safest. Submit the form and we'll confirm same-day.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">What if I just need to record one episode?</div>
-        <div class="faq-a">No problem. Single-session bookings are common. We don't push you into a retainer unless it's clearly the right fit.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Can I bring a guest who's flying in?</div>
-        <div class="faq-a">Yes. We can also do remote-guest sessions where one or more participants Zoom in with high-quality remote capture. Just flag it on the form.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Do I have to also use you for editing?</div>
-        <div class="faq-a">No. You can take the raw masters and edit anywhere. That said, most clients who book the studio also book the editing — the workflow is much faster end-to-end.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Where is the studio?</div>
-        <div class="faq-a">Baton Rouge, Louisiana. We'll send the address with your booking confirmation.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="final-cta">
-  <div class="container">
-    <h2>Book your first session.</h2>
-    <p>Tell us what you're recording and when. We'll confirm availability within one business day.</p>
-    <div class="final-cta-buttons">
-      <button class="btn btn-gold btn-large" data-open-drawer-with="studio">Book a session</button>
-      <button class="btn btn-ghost btn-large" data-open-drawer-with="learn">Talk first</button>
-    </div>
-  </div>
-</section>
-
-<script src="chrome.js"></script>
-<script>
-  document.querySelectorAll('.faq-item').forEach(it => {
-    it.querySelector('.faq-q').addEventListener('click', () => it.classList.toggle('open'));
-  });
-</script>
+  <div class="bot"><div>© 2026 JourneyWell Studios</div><div>Produced in-house · Owned by you</div></div>
+</div></footer>
+<script src="v2.js"></script>
 </body>
 </html>

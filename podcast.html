@@ -1,243 +1,344 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Launch Your Podcast — JourneyWell</title>
-<meta name="description" content="From concept to first ten episodes in two weeks. Production, branding, and distribution — handled." />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Launch a Podcast · JourneyWell</title>
+<meta name="description" content="From concept to your first ten episodes in two weeks. Production, branding, and distribution handled end-to-end by the JourneyWell team."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<script>if(!matchMedia('(prefers-reduced-motion:reduce)').matches)document.documentElement.classList.add('janim');</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<link rel="icon" type="image/png" href="images/jw-logo.png"/>
+<link rel="stylesheet" href="v2.css"/>
+<style>
+/* ===== podcast page: "ship your show" identity ===== */
 
-<link rel="canonical" href="https://journeywell.io/podcast.html" />
-<meta name="theme-color" content="#CFF42A" />
+/* --- serif-led hero with poster --- */
+.pod-hero{overflow:hidden}
+.pod-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:clamp(36px,5vw,80px);align-items:center}
+.pod-hero::after{content:"";position:absolute;top:6%;right:0;width:min(560px,46vw);height:min(560px,46vw);
+  background:radial-gradient(circle at 70% 40%,rgba(207,244,42,.10),transparent 62%);pointer-events:none}
+.pod-hero h1{line-height:.9;max-width:none}
+.pod-hero h1 .ln{padding-block:.055em}
+.ser{font-family:'Cormorant Garamond',Garamond,serif;font-style:italic;font-weight:500;letter-spacing:-.015em}
+.pod-hero h1 .ser{font-size:1.12em}
+.pod-hero h1 em{font-size:1.12em;letter-spacing:-.015em}
+.pod-hero .lead{max-width:46ch}
 
-<link rel="icon" type="image/png" href="/images/jw-logo.png" />
-<link rel="apple-touch-icon" href="/images/jw-logo.png" />
+/* poster card */
+.poster-wrap{position:relative;padding:26px 30px 40px;z-index:2}
+.poster{position:relative;aspect-ratio:2/3;width:100%;max-width:min(400px,100%);margin-left:auto;border-radius:16px;overflow:hidden;
+  transform:rotate(2deg);border:1px solid rgba(246,245,242,.16);
+  box-shadow:0 80px 140px -50px rgba(0,0,0,.95),0 34px 60px -28px rgba(0,0,0,.85)}
+.poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.poster .pov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.42),transparent 32%,transparent 52%,rgba(10,10,10,.9))}
+.poster .ptop{position:absolute;top:20px;left:20px;right:104px;z-index:2;display:flex;align-items:center;gap:12px;
+  font-size:9.5px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:rgba(246,245,242,.85);white-space:nowrap}
+.poster .ptop::after{content:"";height:1px;flex:1;min-width:14px;background:rgba(246,245,242,.4)}
+.poster .plok{position:absolute;left:20px;right:20px;bottom:60px;z-index:2;text-transform:uppercase;font-weight:900;line-height:.84;letter-spacing:.01em}
+.poster .plok .l1,.poster .plok .l3{display:block;font-size:clamp(36px,3.5vw,50px)}
+.poster .plok .l2{display:block;font-family:'Cormorant Garamond',Garamond,serif;font-style:italic;font-weight:500;text-transform:lowercase;
+  color:var(--lime);font-size:clamp(24px,2.3vw,32px);line-height:1;margin:4px 0}
+.poster .pfoot{position:absolute;left:20px;right:20px;bottom:16px;z-index:2;display:flex;justify-content:space-between;gap:10px;
+  padding-top:10px;border-top:1px solid rgba(246,245,242,.28);
+  font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(246,245,242,.75)}
+.sticker{position:absolute;top:0;right:4px;z-index:3;width:100px;height:100px;border-radius:50%;background:var(--lime);color:#0a0a0a;
+  display:grid;place-items:center;text-align:center;padding:14px;line-height:1.3;
+  font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-10deg);
+  box-shadow:0 26px 50px -18px rgba(207,244,42,.4)}
+@media(max-width:940px){
+  .pod-grid{grid-template-columns:1fr}
+  .poster-wrap{width:100%;max-width:420px;margin:0 auto;padding:26px 26px 40px}
+  .poster{margin:0 auto}
+}
+@media(max-width:560px){
+  .poster .pfoot{font-size:8px;letter-spacing:.1em}
+  .poster .ptop{font-size:8.5px;letter-spacing:.2em}
+}
 
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="JourneyWell" />
-<meta property="og:title" content="Launch Your Podcast — JourneyWell" />
-<meta property="og:description" content="From concept to first ten episodes in two weeks. Production, branding, and distribution — handled." />
-<meta property="og:url" content="https://journeywell.io/podcast.html" />
-<meta property="og:image" content="https://journeywell.io/images/jw-logo.png" />
+/* --- chip headers (index chips) --- */
+.chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:26px}
+.chip{font-size:12.5px;font-weight:600;letter-spacing:.02em;padding:9px 16px;border-radius:40px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.chip b{color:var(--lime);font-weight:800;margin-right:7px;font-size:11px}
+.chip.on{background:var(--lime);color:#0a0a0a;border-color:var(--lime);font-weight:700}
+.chip.on b{color:#0a0a0a}
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Launch Your Podcast — JourneyWell" />
-<meta name="twitter:description" content="From concept to first ten episodes in two weeks. Production, branding, and distribution — handled." />
-<meta name="twitter:image" content="https://journeywell.io/images/jw-logo.png" />
+/* --- giant numeral phases --- */
+.phases{padding-bottom:clamp(50px,6vw,90px)}
+.phase{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:clamp(30px,7vw,110px);align-items:center;
+  padding:clamp(60px,8.5vw,116px) 0;border-top:1px solid var(--line2)}
+.phase .pnum{font-weight:900;font-size:clamp(120px,20vw,280px);line-height:.72;letter-spacing:-.04em;
+  color:rgba(246,245,242,.05);-webkit-text-stroke:2px rgba(246,245,242,.24);user-select:none;transform:translateY(.02em)}
+.phase.alt .pnum{order:2;text-align:right}
+.phase.alt .pbody{order:1;text-align:right}
+.phase .pdays{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--lime);margin-bottom:16px}
+.phase .pdays::before{content:"";width:26px;height:1.5px;background:var(--lime)}
+.phase.alt .pdays::before{order:2}
+.phase h3{font-size:clamp(28px,3.4vw,44px);font-weight:800;letter-spacing:-.025em;margin-bottom:14px}
+.phase h3 .dotp{color:var(--lime)}
+.phase p{color:var(--muted);font-size:clamp(15px,1.15vw,17px);line-height:1.62;max-width:52ch}
+.phase.alt p{margin-left:auto}
+@media(max-width:760px){
+  .phase{grid-template-columns:1fr;gap:14px;padding:52px 0;align-items:start}
+  .phase .pnum{font-size:clamp(96px,24vw,140px)}
+  .phase.alt .pnum{order:0;text-align:left}
+  .phase.alt .pbody{order:1;text-align:left}
+  .phase.alt .pdays::before{order:0}
+  .phase.alt p{margin-left:0}
+}
 
-<link rel="stylesheet" href="style.css?v=5" />
-<link rel="stylesheet" href="lite.css" />
-<link rel="stylesheet" href="redesign.css" />
+/* --- editorial pull statement --- */
+.pull{padding:clamp(90px,12vw,170px) 0;text-align:center}
+.pull p{font-family:'Cormorant Garamond',Garamond,serif;font-style:italic;font-weight:500;
+  font-size:clamp(34px,5.4vw,74px);line-height:1.04;letter-spacing:-.01em;max-width:20ch;margin:0 auto}
+.pull p em{font-size:1em}
+.pull .by{margin-top:30px;font-family:'Inter',sans-serif;font-style:normal;font-size:11.5px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--faint)}
 
-<script type="application/ld+json">
-{ "@context":"https://schema.org","@type":"Service","name":"Podcast Launch","provider":{"@type":"Organization","name":"JourneyWell","url":"https://journeywell.io"},"url":"https://journeywell.io/podcast.html","description":"Concept to first ten episodes in two weeks — production, branding, and distribution handled." }
-</script>
+/* --- poster wall / streaming shelf --- */
+.shelf{margin-top:54px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.show{position:relative;aspect-ratio:2/3;border-radius:14px;overflow:hidden;border:1px solid var(--line2);
+  transition:transform .5s var(--easex),box-shadow .5s var(--easex),border-color .4s var(--ease)}
+.show:hover{transform:translateY(-10px);border-color:var(--line);box-shadow:0 44px 70px -34px rgba(0,0,0,.9)}
+.show img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--easex)}
+.show:hover img{transform:scale(1.06)}
+.show .sh{position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(10,10,10,.6))}
+.show .idx{position:absolute;top:12px;left:12px;z-index:2;font-size:10.5px;font-weight:800;letter-spacing:.1em;
+  background:rgba(10,10,10,.55);backdrop-filter:blur(6px);border:1px solid var(--line2);border-radius:7px;padding:5px 9px;color:var(--lime)}
+.show .bar{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:12px 14px;background:rgba(10,10,10,.78);backdrop-filter:blur(10px);border-top:1px solid var(--line2)}
+.show .bar .t{font-weight:800;font-size:14px;letter-spacing:-.01em;line-height:1.2}
+.show .bar .pl2{width:26px;height:26px;flex:0 0 auto;border-radius:50%;background:var(--lime);color:#0a0a0a;
+  display:grid;place-items:center;font-size:9px;transition:transform .4s var(--easex)}
+.show:hover .bar .pl2{transform:scale(1.12)}
+@media(max-width:860px){.shelf{grid-template-columns:1fr 1fr;gap:14px}}
+
+/* --- lime offer band (the only inverted band on the site) --- */
+.limeband{position:relative;overflow:hidden;background:var(--lime);color:#0a0a0a;padding:clamp(84px,10vw,150px) 0}
+.limeband ::selection{background:#0a0a0a;color:var(--lime)}
+.limeband .lb-tag{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:rgba(10,10,10,.62);margin-bottom:22px}
+.limeband .lb-tag::before{content:"";width:26px;height:1.5px;background:rgba(10,10,10,.5)}
+.limeband h2{color:#0a0a0a}
+.limeband .lbser{font-family:'Cormorant Garamond',Garamond,serif;font-style:italic;font-weight:600;font-size:1.06em;letter-spacing:-.015em}
+.limeband .lb-sub{color:rgba(10,10,10,.72);font-size:clamp(15.5px,1.2vw,18px);line-height:1.55;max-width:42ch;margin-top:22px}
+.lb-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(40px,6vw,90px);align-items:center;position:relative;z-index:2}
+.lb-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
+.lb-list li{display:flex;gap:11px;align-items:flex-start;padding:15px 0;border-top:1.5px solid rgba(10,10,10,.22);
+  font-size:14.5px;font-weight:600;line-height:1.4}
+.lb-list li::before{content:"✓";flex:0 0 auto;width:21px;height:21px;border-radius:50%;background:#0a0a0a;color:var(--lime);
+  display:grid;place-items:center;font-size:11px;font-weight:800;margin-top:1px}
+.lb-btn{background:#0a0a0a;color:var(--lime);margin-top:34px}
+.lb-btn .ar{width:24px;height:24px;border-radius:50%;background:var(--lime);color:#0a0a0a;display:grid;place-items:center;font-size:13px;transition:transform .45s var(--easex)}
+.lb-btn:hover .ar{transform:translate(3px,-2px)}
+.lb14{position:absolute;right:-1vw;bottom:-.16em;z-index:1;font-weight:900;letter-spacing:-.06em;line-height:.7;
+  font-size:clamp(220px,28vw,420px);color:rgba(10,10,10,.07);user-select:none;pointer-events:none}
+@media(max-width:820px){
+  .lb-grid{grid-template-columns:1fr;gap:36px}
+  .lb-list{grid-template-columns:1fr;gap:0}
+}
+@media(max-width:520px){.lb-list{grid-template-columns:1fr}}
+</style>
 </head>
-<body class="lite">
+<body>
+<div class="grain"></div>
+<div id="cur"></div><div id="curr"><span class="lab"></span></div>
 
-<section class="page-hero">
-  <div class="container">
-    <div class="hero-eyebrow">Podcast launch</div>
-    <h1>Launch your podcast in <em>two weeks</em>, not two months.</h1>
-    <p class="muted">Concept to first episode in 14 days. We handle production, branding, distribution end-to-end. You stay focused on the conversations that matter.</p>
-    <div class="flex-row" style="margin-top:36px">
-      <button class="btn btn-gold btn-large" data-open-drawer-with="podcast">Launch my show</button>
-      <button class="btn btn-ghost btn-large" data-open-drawer-with="learn">See examples</button>
+<nav id="nav"><div class="wrap">
+  <a class="brand" href="index.html"><span class="dot">J</span> JourneyWell</a>
+  <div class="navlinks">
+    <a href="studio.html">Book the Studio</a>
+    <a href="podcast.html" style="color:var(--cream)">Launch a Podcast</a>
+    <a href="authority.html">Build Authority</a>
+    <a href="work.html">Work</a>
+    <a href="about.html">About</a>
+  </div>
+  <button class="navcta mag" data-open-drawer>Start your show</button>
+</div></nav>
+
+<!-- HERO: serif editorial statement + show poster -->
+<header class="phero pod-hero"><div class="wrap pod-grid">
+  <div>
+    <div class="ptag he-in">02 · Launch a Podcast</div>
+    <h1>
+      <span class="ln"><i>Launch your</i></span>
+      <span class="ln"><i><span class="ser">podcast</span> in</i></span>
+      <span class="ln"><i><em>two weeks,</em></i></span>
+      <span class="ln"><i><span class="ser">not two months.</span></i></span>
+    </h1>
+    <p class="lead he-in">Concept and naming, cover art, ten produced episodes, and distribution across Spotify, Apple, and YouTube. Shorts from day one. Our team handles all of it while you focus on the conversations.</p>
+    <div class="hero-ctas he-in">
+      <button class="btn btn-primary mag" data-open-drawer>Start your show <span class="ar">↗</span></button>
+      <a href="#shows" class="btn btn-ghost" data-cursor="watch">▶ Shows we've shipped</a>
     </div>
   </div>
-</section>
+  <div class="poster-wrap he-in">
+    <div class="poster" data-cursor="view">
+      <img src="images/bts/10-podcast-session.jpg" alt="A podcast session recorded at JourneyWell"/>
+      <div class="pov"></div>
+      <div class="ptop">A JourneyWell Original</div>
+      <div class="plok" aria-hidden="true">
+        <span class="l1">Sons</span>
+        <span class="l2">of</span>
+        <span class="l3">Thunder</span>
+      </div>
+      <div class="pfoot"><span>New episodes weekly</span><span>Spotify · Apple · YouTube</span></div>
+    </div>
+    <div class="sticker" aria-hidden="true">Live in 14 days</div>
+  </div>
+</div></header>
 
-<!-- THE PACKAGE -->
-<section class="section">
-  <div class="container">
-    <div class="section-eyebrow">What's in a launch</div>
-    <h2 class="section-title">Everything to ship the first ten episodes.</h2>
+<!-- SIGNAL -->
+<div class="signal"><canvas id="wave"></canvas><span class="lab"><span class="rec"></span> From signed to live in 14 days</span></div>
 
-    <div class="card-grid cols-2">
-      <div class="dark-card">
-        <div class="dark-card-eyebrow">PRE-LAUNCH</div>
-        <div class="dark-card-title">Brand + concept</div>
-        <div class="dark-card-desc" style="margin-top:12px">Show name, positioning, format, target audience. Cover art designed in your brand. Visual identity built across all platforms. Trailer episode produced.</div>
-      </div>
-      <div class="dark-card">
-        <div class="dark-card-eyebrow">PRODUCTION</div>
-        <div class="dark-card-title">4 episodes / month</div>
-        <div class="dark-card-desc" style="margin-top:12px">Studio sessions scheduled. Multicam capture, broadcast audio. Full editorial team — cuts, audio mastering, intro/outro design, music licensing.</div>
-      </div>
-      <div class="dark-card">
-        <div class="dark-card-eyebrow">DISTRIBUTION</div>
-        <div class="dark-card-title">Every platform that matters</div>
-        <div class="dark-card-desc" style="margin-top:12px">Spotify, Apple Podcasts, YouTube, Pocket Casts, Overcast. RSS feed, transcripts, show notes, chapter markers. SEO-optimized so episodes get discovered.</div>
-      </div>
-      <div class="dark-card">
-        <div class="dark-card-eyebrow">SUPPORT</div>
-        <div class="dark-card-title">A real producer, not a chatbot</div>
-        <div class="dark-card-desc" style="margin-top:12px">Weekly producer call. Topic planning, guest pipeline, performance reviews. We're operators, not vendors.</div>
-      </div>
+<!-- GIANT NUMERAL PHASES -->
+<section class="blk phases"><div class="wrap">
+  <div class="sec-head reveal">
+    <div class="chips">
+      <span class="chip"><b>01</b>Concept</span>
+      <span class="chip"><b>02</b>Identity</span>
+      <span class="chip"><b>03</b>Record</span>
+      <span class="chip"><b>04</b>Ship</span>
+    </div>
+    <h2>Four phases. <em>Zero guesswork.</em></h2>
+  </div>
+
+  <article class="phase reveal">
+    <div class="pnum" aria-hidden="true">1</div>
+    <div class="pbody">
+      <div class="pdays">Concept · Days 1-3</div>
+      <h3>Find the show inside you<span class="dotp">.</span></h3>
+      <p>Positioning workshop, format, and a name that doesn't sound like the other four million shows. We leave day three with the content thesis, the audience, and the first ten episode titles on the wall.</p>
+    </div>
+  </article>
+
+  <article class="phase alt reveal">
+    <div class="pnum" aria-hidden="true">2</div>
+    <div class="pbody">
+      <div class="pdays">Identity · Days 4-7</div>
+      <h3>Make it look like a hit<span class="dotp">.</span></h3>
+      <p>Cover art that holds its own on a Spotify shelf, episode templates, and a motion package built for every platform. By day seven the show looks like it has been running for years.</p>
+    </div>
+  </article>
+
+  <article class="phase reveal">
+    <div class="pnum" aria-hidden="true">3</div>
+    <div class="pbody">
+      <div class="pdays">Record · Days 8-10</div>
+      <h3>Batch the first ten<span class="dotp">.</span></h3>
+      <p>Record the first ten episodes in one or two studio sessions. Our crew runs cameras, audio, and the run of show. You just have the conversations.</p>
+    </div>
+  </article>
+
+  <article class="phase alt reveal">
+    <div class="pnum" aria-hidden="true">4</div>
+    <div class="pbody">
+      <div class="pdays">Ship · Days 11-14</div>
+      <h3>Go live everywhere at once<span class="dotp">.</span></h3>
+      <p>Edit, master, distribute. Feeds, chapters, show notes, and SEO across Spotify, Apple, and YouTube, plus vertical shorts cut from day one. On day fourteen your show is live, and you own all of it.</p>
+    </div>
+  </article>
+</div></section>
+
+<!-- EDITORIAL PULL -->
+<section class="pull"><div class="wrap">
+  <p class="reveal">Most shows die at episode six. Yours launches with <em>a runway of ten.</em></p>
+  <div class="by reveal">The JourneyWell launch standard</div>
+</div></section>
+
+<!-- POSTER WALL -->
+<section class="blk" id="shows" style="padding-top:0"><div class="wrap">
+  <div class="sec-head reveal">
+    <span class="eyebrow neutral">Shows we've shipped</span>
+    <h2>Built here. <em>Streaming everywhere.</em></h2>
+  </div>
+  <div class="chips reveal" style="margin-top:26px;margin-bottom:0">
+    <span class="chip on">All shows</span>
+    <span class="chip">Founder led</span>
+    <span class="chip">Interview</span>
+    <span class="chip">Local brand</span>
+  </div>
+  <div class="shelf">
+    <div class="show reveal" data-cursor="view">
+      <img src="images/bts/07c-studio-brand.jpg" alt="She's Built Different, recorded at JourneyWell"/>
+      <div class="sh"></div><div class="idx">01</div>
+      <div class="bar"><span class="t">She's Built Different</span><span class="pl2">▶</span></div>
+    </div>
+    <div class="show reveal" data-cursor="view">
+      <img src="images/bts/03b-home-founder-tall.jpg" alt="Two Dudes And, recorded at JourneyWell"/>
+      <div class="sh"></div><div class="idx">02</div>
+      <div class="bar"><span class="t">Two Dudes And</span><span class="pl2">▶</span></div>
+    </div>
+    <div class="show reveal" data-cursor="view">
+      <img src="images/bts/07a-studio-interview.jpg" alt="The Founder Sessions, recorded at JourneyWell"/>
+      <div class="sh"></div><div class="idx">03</div>
+      <div class="bar"><span class="t">The Founder Sessions</span><span class="pl2">▶</span></div>
+    </div>
+    <div class="show reveal" data-cursor="view">
+      <img src="images/bts/06-studio-mic.jpg" alt="Smile Spa, recorded at JourneyWell"/>
+      <div class="sh"></div><div class="idx">04</div>
+      <div class="bar"><span class="t">Smile Spa</span><span class="pl2">▶</span></div>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- PROMO BAND — Studio booking (already-have-show angle) -->
-<section class="jw-promo-band dark" aria-label="Already have a show — book the studio">
-  <div class="jw-promo-band-inner">
+<!-- LIME OFFER BAND -->
+<section class="limeband">
+  <div class="wrap lb-grid">
     <div>
-      <span class="jw-promo-band-eyebrow">From JourneyWell</span>
-      <h2 class="jw-promo-band-title">Already <em>have</em> a show?</h2>
-      <p class="jw-promo-band-desc">Don't need a full launch — just need a great room with a real crew? Book the studio by the hour. Multicam, broadcast audio, in and out the same day.</p>
+      <div class="lb-tag reveal">The offer</div>
+      <h2 class="reveal">Podcast Launch. <span class="lbser">Live in 14 days.</span></h2>
+      <p class="lb-sub reveal">One sprint, one team, one price. Everything on the list is included, and on day fourteen all of it belongs to you.</p>
+      <button class="btn lb-btn mag reveal" data-open-drawer>Start your show <span class="ar">↗</span></button>
     </div>
-    <div class="jw-promo-band-ctas">
-      <button class="btn btn-gold btn-large" data-open-drawer-with="studio">Book the studio</button>
-      <a class="btn btn-ghost btn-large" href="studio.html">See the room</a>
-    </div>
+    <ul class="lb-list reveal">
+      <li>Show concept + naming</li>
+      <li>Cover art + full visual identity</li>
+      <li>Ten produced episodes</li>
+      <li>Spotify, Apple + YouTube distribution</li>
+      <li>Vertical shorts from day one</li>
+      <li>You own the show, feed, and files</li>
+    </ul>
   </div>
-</section>
-
-<!-- IMAGE SLOT 10 — Recording session band -->
-<div class="jw-band">
-  <!-- SWAP: replace src with your photo for slot 10 -->
-    <img class="jw-slot-img" src="images/bts/10-podcast-session.jpg" alt="A podcast recording session" loading="lazy" />
-</div>
-
-<!-- THE 2-WEEK TIMELINE -->
-<section class="section section-cream">
-  <div class="container-narrow">
-    <div class="section-eyebrow">Timeline</div>
-    <h2 class="section-title short-margin">From signed to live in 14 days.</h2>
-    <p class="section-lead" style="margin-top:0">Most agencies spend 8–12 weeks on "discovery" and brand workshops. We don't. Real shows ship faster.</p>
-
-    <div class="process-list" style="margin-top: 32px">
-      <div class="process-item">
-        <div class="process-item-num">DAY 1–2</div>
-        <div>
-          <div class="process-item-title" style="color:var(--text-on-cream)">Concept lock</div>
-          <div class="process-item-desc" style="color:var(--text-on-cream-muted)">90-minute working session. Show name, format, audience, first 10 episode topics. We leave with a brief.</div>
-        </div>
-      </div>
-      <div class="process-item">
-        <div class="process-item-num">DAY 3–5</div>
-        <div>
-          <div class="process-item-title" style="color:var(--text-on-cream)">Brand identity</div>
-          <div class="process-item-desc" style="color:var(--text-on-cream-muted)">Cover art, color, type, intro music, motion graphics. Three concepts shown. One picked. Locked.</div>
-        </div>
-      </div>
-      <div class="process-item">
-        <div class="process-item-num">DAY 6–8</div>
-        <div>
-          <div class="process-item-title" style="color:var(--text-on-cream)">First studio session</div>
-          <div class="process-item-desc" style="color:var(--text-on-cream-muted)">Trailer + first episode recorded back-to-back. Full multicam, broadcast audio. You walk out with raw material for two episodes.</div>
-        </div>
-      </div>
-      <div class="process-item">
-        <div class="process-item-num">DAY 9–12</div>
-        <div>
-          <div class="process-item-title" style="color:var(--text-on-cream)">Edit + assemble</div>
-          <div class="process-item-desc" style="color:var(--text-on-cream-muted)">Trailer cut. Episode 1 cut. Cover art rendered for both. Show notes drafted. Distribution feeds set up.</div>
-        </div>
-      </div>
-      <div class="process-item">
-        <div class="process-item-num">DAY 13–14</div>
-        <div>
-          <div class="process-item-title" style="color:var(--text-on-cream)">Live</div>
-          <div class="process-item-desc" style="color:var(--text-on-cream-muted)">Trailer goes live. Episode 1 follows 48 hours later. From here on, two new episodes drop every two weeks.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXAMPLES -->
-<section class="section">
-  <div class="container">
-    <div class="section-eyebrow">Recently launched</div>
-    <h2 class="section-title short-margin">Shows we've shipped.</h2>
-    <p class="section-lead" style="margin-top:0">Real client work, currently active.</p>
-
-    <div class="work-strip-wrap">
-      <div class="work-strip" id="podcastExamples">
-        <!-- Loaded from content.json -->
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHAT'S INCLUDED -->
-<section class="section section-cream">
-  <div class="container">
-    <div class="section-eyebrow">What's included</div>
-    <h2 class="section-title short-margin">Podcast Launch.</h2>
-    <p class="section-lead" style="margin-top: 0">4 episodes per month, full editorial, brand identity, and distribution.</p>
-
-    <!-- Authority upsell — natural "ok, what's next" beat -->
-    <div class="card-grid cols-2" style="margin-top: 48px;">
-      <button type="button" class="jw-promo-card cream" data-open-drawer-with="authority" aria-label="Upgrade to the Authority System">
-        <div class="jw-promo-card-eyebrow">Want more than a podcast?</div>
-        <div class="jw-promo-card-title">The full <em>Authority System.</em></div>
-        <div class="jw-promo-card-desc">Every episode multiplied: clips, reels, quote cards, carousels, an essay, an email. The whole flywheel — same team, same studio.</div>
-        <span class="jw-promo-card-cta">See the system</span>
-      </button>
-      <button type="button" class="jw-promo-card cream" data-open-drawer-with="shorts" aria-label="Get a stack of shorts">
-        <div class="jw-promo-card-eyebrow">Just want the clips?</div>
-        <div class="jw-promo-card-title">A stack of <em>shorts</em>, monthly.</div>
-        <div class="jw-promo-card-desc">No full-show commitment. Send us source footage (or shoot in our studio) and we'll send back captioned, posted-ready short-form every week.</div>
-        <span class="jw-promo-card-cta">Get a quote</span>
-      </button>
-    </div>
-  </div>
+  <div class="lb14" aria-hidden="true">14</div>
 </section>
 
 <!-- FAQ -->
-<section class="section section-tight" style="border-top: 1px solid var(--border-subtle)">
-  <div class="container-narrow">
-    <div class="section-eyebrow">FAQ</div>
-    <h2 class="section-title short-margin">Common questions.</h2>
+<section class="blk"><div class="wrap">
+  <div class="sec-head reveal"><span class="eyebrow neutral">Common questions</span><h2>Before you launch.</h2></div>
+  <div class="faq">
+    <div class="fq reveal"><button class="q">Why ten episodes first?<span class="ic">+</span></button><div class="a"><p>Shows die at episode six when they're produced one at a time. Batching the first ten builds a runway, so the show survives your busiest month.</p></div></div>
+    <div class="fq reveal"><button class="q">Do I have to be "a podcaster"?<span class="ic">+</span></button><div class="a"><p>No. You have conversations; we make them a show. The founders we work with treat the podcast as the engine for everything else they publish.</p></div></div>
+    <div class="fq reveal"><button class="q">Who owns the show?<span class="ic">+</span></button><div class="a"><p>You do. The feed, the files, the brand, the audience. All of it is yours from day one.</p></div></div>
+    <div class="fq reveal"><button class="q">What happens after episode ten?<span class="ic">+</span></button><div class="a"><p>Most founders roll into the Authority System: a monthly recording rhythm where each episode becomes thirty-plus pieces of content.</p></div></div>
+  </div>
+</div></section>
 
-    <div class="faq-list" style="margin-top: 32px">
-      <div class="faq-item open">
-        <div class="faq-q">Two weeks really? What's the catch?</div>
-        <div class="faq-a">No catch — but we move fast. We've done this 15+ times. The system is documented. We don't redesign workshops; we ship episodes. The "catch" is that you have to be available for the day-1 session and decisive on the brand picks.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">What if I have a name and concept already?</div>
-        <div class="faq-a">Even better — we can compress to 7–10 days. The first conversation tells us how much pre-work is left to do.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Do I have to do every episode in the studio?</div>
-        <div class="faq-a">For best quality, yes. But we offer remote-guest sessions and even hybrid setups. Talk it through with us — most setups work.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Can I keep my existing podcast feed?</div>
-        <div class="faq-a">Yes. We migrate the RSS feed so subscribers don't lose access. Existing episodes stay where they are; new ones publish under our system.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">What happens if I want to cancel?</div>
-        <div class="faq-a">Month-to-month after the first 90 days. You keep all your masters, brand assets, and feeds. We don't hold anything hostage.</div>
-      </div>
+<!-- CTA -->
+<section class="cta"><div class="wrap">
+  <h2 class="reveal">Two weeks from now,<br>your show could be <em>live</em>.</h2>
+  <p class="reveal">Concept, identity, ten episodes, everywhere at once. Start the conversation in 30 seconds.</p>
+  <button class="btn btn-primary mag reveal" data-open-drawer>Start your show <span class="ar">↗</span></button>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="top">
+    <div>
+      <a class="brand" href="index.html"><span class="dot">J</span> JourneyWell</a>
+      <p style="color:var(--muted);max-width:32ch;font-size:14px">The studio + system behind founders building real content authority. Baton Rouge, LA.</p>
+    </div>
+    <div class="cols">
+      <div class="fcol"><h4>Work with us</h4><a href="studio.html">Book the Studio</a><a href="podcast.html">Launch a Podcast</a><a href="authority.html">Build Authority</a></div>
+      <div class="fcol"><h4>Studio</h4><a href="work.html">The Work</a><a href="about.html">About</a><a href="blog.html">Notes</a></div>
     </div>
   </div>
-</section>
-
-<section class="final-cta">
-  <div class="container">
-    <h2>Two weeks from now, your show could be live.</h2>
-    <p>Tell us what you'd build. We'll send back a custom roadmap and a date for your first session.</p>
-    <div class="final-cta-buttons">
-      <button class="btn btn-gold btn-large" data-open-drawer-with="podcast">Launch my show</button>
-      <button class="btn btn-ghost btn-large" data-open-drawer-with="learn">Talk first</button>
-    </div>
-  </div>
-</section>
-
-<script src="chrome.js"></script>
-<script>
-  document.querySelectorAll('.faq-item').forEach(it => {
-    it.querySelector('.faq-q').addEventListener('click', () => it.classList.toggle('open'));
-  });
-  document.addEventListener('DOMContentLoaded', () => {
-    if (window.JW) window.JW.renderWorkInto('#podcastExamples', 6, 'live-feed:episode');
-  });
-</script>
-<!-- impeccable-live-start -->
-<script src="http://localhost:8400/live.js"></script>
-<!-- impeccable-live-end -->
+  <div class="bot"><div>© 2026 JourneyWell Studios</div><div>Produced in-house · Owned by you</div></div>
+</div></footer>
+<script src="v2.js"></script>
 </body>
 </html>

@@ -1,1270 +1,509 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>JourneyWell Studios — Channel</title>
-<meta name="description" content="The JourneyWell channel — episodes, shorts, shows, and behind-the-scenes from our Baton Rouge studio. Production + publishing for founders & brands." />
-
-<link rel="canonical" href="https://journeywell.io/work.html" />
-<meta name="theme-color" content="#CFF42A" />
-
-<link rel="icon" type="image/png" href="/images/jw-logo.png" />
-<link rel="apple-touch-icon" href="/images/jw-logo.png" />
-
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="JourneyWell" />
-<meta property="og:title" content="JourneyWell Studios — Channel" />
-<meta property="og:description" content="The JourneyWell channel — episodes, shorts, shows, and behind-the-scenes from our Baton Rouge studio." />
-<meta property="og:url" content="https://journeywell.io/work.html" />
-<meta property="og:image" content="https://journeywell.io/images/jw-logo.png" />
-
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="JourneyWell Studios — Channel" />
-<meta name="twitter:description" content="The JourneyWell channel — episodes, shorts, shows, and behind-the-scenes from our Baton Rouge studio." />
-<meta name="twitter:image" content="https://journeywell.io/images/jw-logo.png" />
-
-<link rel="stylesheet" href="style.css?v=5" />
-<link rel="stylesheet" href="redesign.css" />
-
-<script type="application/ld+json">
-{ "@context":"https://schema.org","@type":"CollectionPage","name":"JourneyWell Channel","url":"https://journeywell.io/work.html","isPartOf":{"@type":"WebSite","name":"JourneyWell","url":"https://journeywell.io"} }
-</script>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>The Work · JourneyWell Studios</title>
+<meta name="description" content="Episodes, shows, shorts, and behind-the-scenes from the JourneyWell channel. This is what the system ships."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<script>if(!matchMedia('(prefers-reduced-motion:reduce)').matches)document.documentElement.classList.add('janim');</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<link rel="icon" type="image/png" href="images/jw-logo.png"/>
+<link rel="stylesheet" href="v2.css"/>
+<style>
+/* ================= WORK PAGE · platform-native feed ================= */
+/* ---------- desktop = YouTube channel page ---------- */
+.ytv{padding-top:96px;padding-bottom:34px}
+.banner{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:5.6/1;min-height:170px;max-height:260px;background:var(--surface)}
+.banner img{width:100%;height:100%;object-fit:cover;object-position:50% 36%}
+.chhead{display:flex;gap:26px;align-items:center;padding:26px 0 2px;flex-wrap:wrap}
+.chav{width:126px;height:126px;border-radius:50%;background:var(--lime);color:#0a0a0a;display:grid;place-items:center;font-weight:900;font-size:54px;flex:0 0 auto}
+.chinfo{flex:1;min-width:280px}
+.chname{display:flex;align-items:center;gap:8px}
+.chname h1{font-size:clamp(24px,2.6vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.vcheck{color:var(--muted);display:grid;place-items:center}
+.vcheck svg{width:16px;height:16px}
+.chmeta{color:var(--muted);font-size:14px;margin-top:7px}
+.chmeta b{color:var(--cream);font-weight:600}
+.chbio{color:var(--muted);font-size:14px;margin-top:5px;max-width:76ch}
+.chbio .more{color:var(--cream);font-weight:600;white-space:nowrap;cursor:pointer}
+.chbtns{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;align-items:center}
+.subbtn{border:none;cursor:pointer;background:var(--lime);color:#0a0a0a;font-weight:700;font-size:14px;font-family:inherit;padding:11px 20px;border-radius:40px;will-change:transform}
+.ghostpill{display:inline-flex;align-items:center;border:1px solid var(--line);color:var(--cream);font-weight:600;font-size:14px;padding:10px 20px;border-radius:40px;transition:border-color .25s var(--ease)}
+.ghostpill:hover{border-color:var(--muted)}
+/* sticky YouTube-style underline tabs */
+.ytabs{position:sticky;top:76px;z-index:40;background:rgba(10,10,10,.9);backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid var(--line2);margin-top:14px}
+.ytabs .row{display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none}
+.ytabs .row::-webkit-scrollbar{display:none}
+.ytabs .wtab{border:none;background:none;border-radius:0;padding:16px 13px;color:var(--muted);font-size:14.5px;font-weight:600;position:relative;white-space:nowrap}
+.ytabs .wtab:hover{color:var(--cream)}
+.ytabs .wtab::after{content:"";position:absolute;left:13px;right:13px;bottom:-1px;height:2.5px;border-radius:2px;background:transparent;transition:background .25s var(--ease)}
+.ytabs .wtab.on{background:none;color:var(--cream);border:none;font-weight:700}
+.ytabs .wtab.on::after{background:var(--cream)}
+.ytabs .find{margin-left:8px;color:var(--faint);display:grid;place-items:center;padding:0 6px;flex:0 0 auto}
+.ytabs .find svg{width:17px;height:17px}
+/* shelves */
+.shelf{padding:30px 0 16px;border-bottom:1px solid var(--line2)}
+.shelf.last{border-bottom:none}
+.shead{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}
+.shead h3{font-size:21px;font-weight:800;letter-spacing:-.015em;display:flex;align-items:center;gap:10px}
+.shead h3 .sic{color:var(--lime);display:grid;place-items:center}
+.shead h3 .sic svg{width:19px;height:19px}
+.viewall{border:1px solid var(--line);background:none;color:var(--muted);font-family:inherit;font-size:13px;font-weight:600;padding:8px 15px;border-radius:40px;cursor:pointer;transition:.25s var(--ease);white-space:nowrap}
+.viewall:hover{color:var(--cream);border-color:var(--muted)}
+/* now showing: player + up next */
+.nowrow{display:grid;grid-template-columns:1.62fr 1fr;gap:26px;align-items:start}
+.player .thumb{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:var(--surface)}
+.player .thumb img{width:100%;height:100%;object-fit:cover}
+.playbtn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:70px;height:48px;border-radius:12px;background:rgba(207,244,42,.95);color:#0a0a0a;display:grid;place-items:center;box-shadow:0 18px 44px -12px rgba(0,0,0,.75)}
+.playbtn svg{width:26px;height:26px}
+.dur{position:absolute;right:8px;bottom:10px;background:rgba(0,0,0,.82);color:var(--cream);font-size:12px;font-weight:600;letter-spacing:.02em;padding:2px 6px;border-radius:5px;z-index:2}
+.prog{position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.22);z-index:2}
+.prog i{display:block;height:100%;width:34%;background:var(--lime)}
+.pmeta{padding:14px 2px 0}
+.pmeta .t{font-size:19px;font-weight:700;letter-spacing:-.01em;line-height:1.3}
+.prow{display:flex;align-items:center;gap:10px;margin-top:11px;flex-wrap:wrap}
+.mini{width:34px;height:34px;border-radius:50%;background:var(--lime);color:#0a0a0a;font-weight:900;font-size:15px;display:grid;place-items:center;flex:0 0 auto}
+.prow .nm{font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:5px}
+.prow .nm svg{width:13px;height:13px;color:var(--muted)}
+.prow .st{color:var(--muted);font-size:13px}
+.pdesc{color:var(--muted);font-size:13.5px;line-height:1.55;margin-top:10px;max-width:62ch}
+.upnext .lab{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.uprow{display:grid;grid-template-columns:168px 1fr;gap:10px;padding:7px;margin:0 -7px;border-radius:10px;transition:background .2s var(--ease)}
+.uprow:hover{background:var(--surface)}
+.uprow .th{position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:var(--surface)}
+.uprow .th img{width:100%;height:100%;object-fit:cover}
+.uprow .th .dur{bottom:6px;right:6px;font-size:11px}
+.uprow .tt{font-size:14px;font-weight:600;line-height:1.32;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.uprow .mm{color:var(--muted);font-size:12px;margin-top:4px;line-height:1.45}
+/* horizontal shelf rows (override v2 .wgrid/.wcard) */
+.srow.wgrid{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x proximity;padding:2px 2px 10px;scrollbar-width:none;overscroll-behavior-x:contain}
+.srow.wgrid::-webkit-scrollbar{display:none}
+.srow.wgrid .wcard{position:relative;flex:0 0 calc((100% - 48px)/3.4);width:auto;height:auto;aspect-ratio:auto;border:none;border-radius:0;overflow:visible;background:none;scroll-snap-align:start}
+.srow.wgrid .wcard::after{content:none}
+.srow.wgrid .wcard img{transition:none}
+.srow.wgrid .wcard:hover img{transform:none}
+.srow .th{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--surface)}
+.srow .th img{width:100%;height:100%;object-fit:cover}
+.srow .vt{margin-top:10px;font-size:14.5px;font-weight:600;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.srow .vm{margin-top:4px;color:var(--muted);font-size:12.5px;line-height:1.45}
+/* shorts: vertical 9:16 */
+.srow.shorts.wgrid .wcard{flex-basis:calc((100% - 80px)/5.4)}
+.srow.shorts .th{aspect-ratio:9/16;border-radius:14px}
+.srow.shorts .th::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.68))}
+.srow.shorts .views{position:absolute;left:9px;bottom:9px;z-index:2;color:#fff;font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:5px}
+.srow.shorts .views svg{width:12px;height:12px}
+.srow.shorts .vt{font-size:13.5px}
+/* shows: playlist-style */
+.srow.shows.wgrid .wcard{flex-basis:calc((100% - 64px)/4.3)}
+.plbadge{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.82);color:var(--cream);font-size:11.5px;font-weight:600;padding:3px 7px;border-radius:5px;display:flex;align-items:center;gap:5px;z-index:2}
+.plbadge svg{width:13px;height:13px}
+.feednote{padding:26px 0 6px}
+.feednote p{color:var(--faint);font-size:13px;max-width:70ch}
+@media(max-width:1020px){
+  .nowrow{grid-template-columns:1fr}
+  .srow.wgrid .wcard{flex-basis:calc((100% - 32px)/2.35)}
+  .srow.shorts.wgrid .wcard{flex-basis:calc((100% - 48px)/3.4)}
+  .srow.shows.wgrid .wcard{flex-basis:calc((100% - 48px)/3.2)}
+}
+/* ---------- mobile = Instagram profile ---------- */
+.igv{display:none}
+@media(max-width:760px){
+  .ytv{display:none}
+  .igv{display:block;padding-top:88px;padding-bottom:14px}
+  .igtop{display:flex;align-items:center;justify-content:space-between;padding:8px 16px 4px}
+  .igtop .u{display:flex;align-items:center;gap:5px;font-weight:800;font-size:16.5px;letter-spacing:-.01em}
+  .igtop .u svg{width:16px;height:16px;color:var(--muted)}
+  .igtop .ics{display:flex;gap:20px;color:var(--cream)}
+  .igtop .ics svg{width:22px;height:22px}
+  .igprof{display:flex;align-items:center;gap:22px;padding:16px 16px 12px}
+  .igring{flex:0 0 auto;padding:3px;border:2px solid var(--lime);border-radius:50%}
+  .igav{width:76px;height:76px;border-radius:50%;background:var(--lime);color:#0a0a0a;display:grid;place-items:center;font-weight:900;font-size:34px}
+  .igstats{display:flex;flex:1;justify-content:space-around;text-align:center}
+  .igstats b{display:block;font-size:17.5px;font-weight:800;letter-spacing:-.01em}
+  .igstats span{font-size:12.5px;color:var(--muted)}
+  .igbio{padding:0 16px;font-size:13.5px;line-height:1.5;color:#c9c8c1}
+  .igbio .n{display:flex;align-items:center;gap:5px;font-weight:700;font-size:14px;color:var(--cream)}
+  .igbio .n svg{width:14px;height:14px;color:var(--lime)}
+  .igbio .lk{color:var(--lime);font-weight:600}
+  .igbtns{display:flex;gap:8px;padding:14px 16px 8px}
+  .igbtns .b{flex:1;text-align:center;font-size:13.5px;font-weight:700;padding:10px 0;border-radius:9px;border:none;cursor:pointer;font-family:inherit}
+  .igbtns .b.go{background:var(--lime);color:#0a0a0a}
+  .igbtns .b.gh{background:none;border:1px solid var(--line);color:var(--cream);font-weight:600}
+  /* story highlights (double as filter tabs) */
+  .high{display:flex;gap:16px;overflow-x:auto;padding:8px 16px 14px;scrollbar-width:none}
+  .high::-webkit-scrollbar{display:none}
+  .high .wtab{display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:none;border-radius:0;padding:0;color:var(--muted);font-size:11px;font-weight:500;flex:0 0 auto}
+  .high .wtab:hover{color:var(--cream)}
+  .high .wtab.on{background:none;border:none;color:var(--cream);font-weight:600}
+  .high .cir{width:62px;height:62px;border-radius:50%;border:1.5px solid var(--faint);padding:3px;transition:border-color .25s var(--ease)}
+  .high .cir img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+  .high .wtab.on .cir{border-color:var(--lime);border-width:2px;padding:2.5px}
+  /* profile tab icons row */
+  .igtabs{display:flex;border-top:1px solid var(--line2)}
+  .igtabs span{flex:1;display:grid;place-items:center;padding:12px 0;color:var(--faint);position:relative}
+  .igtabs svg{width:22px;height:22px}
+  .igtabs span.on{color:var(--cream)}
+  .igtabs span.on::after{content:"";position:absolute;top:-1px;left:22%;right:22%;height:1.5px;background:var(--cream)}
+  /* tight IG square grid (override v2 .wgrid/.wcard) */
+  .wgrid.iggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;padding:0}
+  .wgrid.iggrid .wcard{position:relative;width:100%;height:auto;flex:none;aspect-ratio:1/1;border:none;border-radius:0;overflow:hidden}
+  .wgrid.iggrid .wcard::after{content:none}
+  .wgrid.iggrid .wcard img{width:100%;height:100%;object-fit:cover;transition:none}
+  .wgrid.iggrid .wcard:hover img{transform:none}
+  .igbdg{position:absolute;top:7px;right:7px;color:#fff;filter:drop-shadow(0 1px 3px rgba(0,0,0,.75));z-index:2}
+  .igbdg svg{width:15px;height:15px}
+  .feednote{padding:20px 0 0}
+}
+</style>
 </head>
 <body>
+<div class="grain"></div>
+<div id="cur"></div><div id="curr"><span class="lab"></span></div>
 
-<!-- 1. CHANNEL HEADER -->
-<section class="channel-header">
-  <div class="container">
-    <div class="channel-banner">
-      <div class="channel-identity">
-        <div class="channel-avatar" aria-hidden="true">JW</div>
-        <div class="channel-meta">
-          <div class="channel-eyebrow">Channel · Baton Rouge, LA</div>
-          <h1 class="channel-name">JourneyWell <em>Studios</em></h1>
-          <p class="channel-tagline">The studio + system behind founders, brands, and creators building real content authority. We capture it. We produce it. We publish it. You own the audience.</p>
-          <div class="channel-stats" id="channelStats">
-            <span><strong>—</strong> Pieces</span>
-            <span class="dot"></span>
-            <span><strong>—</strong> Shows</span>
-            <span class="dot"></span>
-            <span><strong>—</strong> Topics</span>
+<nav id="nav"><div class="wrap">
+  <a class="brand" href="index.html"><span class="dot">J</span> JourneyWell</a>
+  <div class="navlinks">
+    <a href="studio.html">Book the Studio</a>
+    <a href="podcast.html">Launch a Podcast</a>
+    <a href="authority.html">Build Authority</a>
+    <a href="work.html" style="color:var(--cream)">Work</a>
+    <a href="about.html">About</a>
+  </div>
+  <button class="navcta mag" data-open-drawer>Build my system</button>
+</div></nav>
+
+<!-- ============ DESKTOP: YouTube channel view ============ -->
+<section class="ytv" id="ytView">
+  <div class="wrap">
+    <!-- channel banner -->
+    <div class="banner he-in"><img src="images/bts/01-home-studio-band.jpg" alt="The JourneyWell studio floor, full band session"/></div>
+    <!-- channel header -->
+    <div class="chhead he-in">
+      <div class="chav">J</div>
+      <div class="chinfo">
+        <div class="chname">
+          <h1>JourneyWell Studios</h1>
+          <span class="vcheck" title="Verified"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 14.5-4.3-4.3 1.4-1.4 2.9 2.9 5.9-5.9 1.4 1.4-7.3 7.3z"/></svg></span>
+        </div>
+        <div class="chmeta"><b>@journeywellstudios</b> · 200+ pieces · 15 founder brands</div>
+        <div class="chbio">Everything here came out of one room in Baton Rouge, episodes, shows, shorts, and the system that ships them <span class="more">...more</span></div>
+        <div class="chbtns">
+          <button class="subbtn mag" data-open-drawer>Build my system</button>
+          <a class="ghostpill" href="studio.html">Book the studio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- sticky channel tabs -->
+  <div class="ytabs" id="ytabs"><div class="wrap"><div class="row">
+    <button class="wtab on" data-filter="all">Featured</button>
+    <button class="wtab" data-filter="episode">Episodes</button>
+    <button class="wtab" data-filter="short">Shorts</button>
+    <button class="wtab" data-filter="show">Shows</button>
+    <button class="wtab" data-filter="bts">Behind the scenes</button>
+    <span class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+  </div></div></div>
+
+  <!-- now showing: player + up next -->
+  <div class="shelf reveal" data-shelfcat="featured"><div class="wrap">
+    <div class="shead"><h3>Now showing</h3></div>
+    <div class="nowrow">
+      <div class="player" data-cursor="play">
+        <div class="thumb">
+          <img src="images/bts/07a-studio-interview.jpg" alt="Studio interview setup, two chairs and cameras rolling"/>
+          <span class="playbtn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="dur">56:12</span>
+          <span class="prog"><i></i></span>
+        </div>
+        <div class="pmeta">
+          <div class="t">The Founder Sessions, Ep. 24: One room, two hundred pieces</div>
+          <div class="prow">
+            <span class="mini">J</span>
+            <span class="nm">JourneyWell Studios <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 14.5-4.3-4.3 1.4-1.4 2.9 2.9 5.9-5.9 1.4 1.4-7.3 7.3z"/></svg></span>
+            <span class="st">24K views · Streamed 4 days ago</span>
           </div>
-          <div class="channel-ctas">
-            <button class="btn btn-gold" data-open-drawer-with="studio">Book the studio</button>
-            <button class="btn btn-ghost" data-open-drawer-with="podcast">Start a podcast</button>
-          </div>
+          <p class="pdesc">Tim sits down with the crew to break down how one studio session becomes a month of content, the pipeline, the cuts, and the numbers behind all of it.</p>
+        </div>
+      </div>
+      <div class="upnext">
+        <div class="lab">Up next</div>
+        <div class="uprow" data-cursor="play">
+          <span class="th"><img src="images/bts/10-podcast-session.jpg" alt=""/><span class="dur">47:05</span><span class="prog"><i style="width:62%"></i></span></span>
+          <span><span class="tt">Two Dudes And a Mic, Ep. 18: Say the quiet part</span><span class="mm">JourneyWell Studios · 12K views · 2 weeks ago</span></span>
+        </div>
+        <div class="uprow" data-cursor="play">
+          <span class="th"><img src="images/bts/07c-studio-brand.jpg" alt=""/><span class="dur">38:20</span></span>
+          <span><span class="tt">She's Built Different, Ep. 07: Rooms full of doubt</span><span class="mm">JourneyWell Studios · 8.4K views · 3 weeks ago</span></span>
+        </div>
+        <div class="uprow" data-cursor="play">
+          <span class="th"><img src="images/bts/03a-home-suite.jpg" alt=""/><span class="dur">33:59</span></span>
+          <span><span class="tt">Smile Spa, Ep. 12: The patient story engine</span><span class="mm">JourneyWell Studios · 6.1K views · 1 month ago</span></span>
+        </div>
+        <div class="uprow" data-cursor="play">
+          <span class="th"><img src="images/bts/02-home-split.jpg" alt=""/><span class="dur">44:37</span></span>
+          <span><span class="tt">Melara, Ep. 04: Building in the open</span><span class="mm">JourneyWell Studios · 5.2K views · 1 month ago</span></span>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </div></div>
 
-<!-- 2. HERO PIECE (pinned, auto-playing) -->
-<section class="hero-piece-section">
-  <div class="container hero-piece-grid">
-    <div class="hero-piece-player" id="heroPiecePlayer">
-      <video id="heroPieceVideo" autoplay muted loop playsinline preload="metadata"></video>
-      <div class="hero-piece-overlay">
-        <div class="hero-piece-badge">Pinned · Channel trailer</div>
+  <!-- episodes shelf -->
+  <div class="shelf reveal" data-shelfcat="episode"><div class="wrap">
+    <div class="shead"><h3>Episodes</h3><button class="viewall" data-jump="episode">View all →</button></div>
+    <div class="srow wgrid">
+      <div class="wcard" data-cat="episode" data-cursor="play">
+        <div class="th"><img src="images/bts/10-podcast-session.jpg" alt=""/><span class="dur">47:05</span></div>
+        <div class="vt">Two Dudes And a Mic, Ep. 18: Say the quiet part</div>
+        <div class="vm">JourneyWell · 12K views · 2 weeks ago</div>
       </div>
-      <div class="hero-piece-play-cta" aria-hidden="true" data-icon="play" data-icon-size="28"></div>
-    </div>
-    <div class="hero-piece-info">
-      <div class="hero-piece-eyebrow" id="heroPieceEyebrow">Now showing</div>
-      <h2 class="hero-piece-title" id="heroPieceTitle">Loading…</h2>
-      <p class="hero-piece-desc" id="heroPieceDesc"></p>
-      <div class="hero-piece-meta" id="heroPieceMeta"></div>
-      <div class="hero-piece-ctas">
-        <button class="btn btn-gold" id="heroPiecePlayBtn"><span data-icon="play" data-icon-size="16"></span> Play</button>
-        <button class="btn btn-ghost" data-open-drawer-with="learn">Want this for your brand?</button>
+      <div class="wcard" data-cat="episode" data-cursor="play">
+        <div class="th"><img src="images/bts/04-home-cinema.jpg" alt=""/><span class="dur">52:48</span></div>
+        <div class="vt">The Founder Sessions, Ep. 23: The cinema cut</div>
+        <div class="vm">JourneyWell · 9.8K views · 3 weeks ago</div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- 3. STICKY CHANNEL TABS -->
-<nav class="channel-tabs" id="channelTabs">
-  <div class="container">
-    <div class="channel-tabs-inner">
-      <a href="#featured" class="channel-tab active" data-tab="featured">Featured</a>
-      <a href="#episodes" class="channel-tab" data-tab="episodes">Episodes</a>
-      <a href="#shorts" class="channel-tab" data-tab="shorts">Shorts</a>
-      <a href="#shows" class="channel-tab" data-tab="shows">Shows</a>
-      <a href="#bts" class="channel-tab" data-tab="bts">Behind the scenes</a>
-    </div>
-  </div>
-</nav>
-
-<!-- 4. FEATURED -->
-<section class="channel-section" id="featured">
-  <div class="container">
-    <div class="row-header">
-      <h3 class="row-title">Featured</h3>
-      <span class="row-meta" id="featuredCount">—</span>
-    </div>
-    <div class="work-strip-wrap"><div class="work-strip" id="featuredStrip"></div></div>
-  </div>
-</section>
-
-<!-- 5. EPISODES (long-form) -->
-<section class="channel-section" id="episodes">
-  <div class="container">
-    <div class="row-header">
-      <h3 class="row-title">Episodes</h3>
-      <span class="row-meta" id="episodesCount">—</span>
-    </div>
-    <div class="work-strip-wrap"><div class="work-strip episode-strip" id="episodesStrip"></div></div>
-  </div>
-</section>
-
-<!-- 6. SHORTS -->
-<section class="channel-section" id="shorts">
-  <div class="container">
-    <div class="row-header">
-      <h3 class="row-title">Shorts</h3>
-      <div style="display:flex; gap:14px; align-items:center;">
-        <span class="row-meta" id="shortsCount">—</span>
-        <button type="button" class="row-action-pill" id="watchShortsBtn"><span data-icon="play" data-icon-size="15"></span> Watch shorts</button>
+      <div class="wcard" data-cat="episode" data-cursor="play">
+        <div class="th"><img src="images/bts/03b-home-founder-tall.jpg" alt=""/><span class="dur">38:20</span></div>
+        <div class="vt">She's Built Different, Ep. 07: Rooms full of doubt</div>
+        <div class="vm">JourneyWell · 8.4K views · 3 weeks ago</div>
+      </div>
+      <div class="wcard" data-cat="episode" data-cursor="play">
+        <div class="th"><img src="images/bts/06-studio-mic.jpg" alt=""/><span class="dur">41:16</span></div>
+        <div class="vt">Sons of Thunder, Ep. 31: Loud and clear</div>
+        <div class="vm">JourneyWell · 7.2K views · 1 month ago</div>
+      </div>
+      <div class="wcard" data-cat="episode" data-cursor="play">
+        <div class="th"><img src="images/bts/03a-home-suite.jpg" alt=""/><span class="dur">33:59</span></div>
+        <div class="vt">Smile Spa, Ep. 12: The patient story engine</div>
+        <div class="vm">JourneyWell · 6.1K views · 1 month ago</div>
+      </div>
+      <div class="wcard" data-cat="episode" data-cursor="play">
+        <div class="th"><img src="images/bts/02-home-split.jpg" alt=""/><span class="dur">44:37</span></div>
+        <div class="vt">Melara, Ep. 04: Building in the open</div>
+        <div class="vm">JourneyWell · 5.2K views · 1 month ago</div>
       </div>
     </div>
-    <div class="work-strip-wrap"><div class="work-strip shorts-strip" id="shortsStrip"></div></div>
+  </div></div>
+
+  <!-- shorts shelf -->
+  <div class="shelf reveal" data-shelfcat="short"><div class="wrap">
+    <div class="shead"><h3><span class="sic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.77 10.32a3.6 3.6 0 0 0-1.4-6.92 3.6 3.6 0 0 0-3.06-1.7H10.7A3.6 3.6 0 0 0 6.23 4.6a3.6 3.6 0 0 0 0 7.08 3.6 3.6 0 0 0 1.4 6.92 3.6 3.6 0 0 0 3.06 1.7h2.61a3.6 3.6 0 0 0 4.47-2.9 3.6 3.6 0 0 0 0-7.08zM10 15.5v-7l6 3.5-6 3.5z"/></svg></span>Shorts</h3><button class="viewall" data-jump="short">View all →</button></div>
+    <div class="srow shorts wgrid">
+      <div class="wcard" data-cat="short" data-cursor="play">
+        <div class="th"><img src="images/bts/07b-studio-solo-tall.jpg" alt=""/><span class="views"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>24K</span></div>
+        <div class="vt">Mic check, ego check</div>
+      </div>
+      <div class="wcard" data-cat="short" data-cursor="play">
+        <div class="th"><img src="images/bts/03c-home-edit.jpg" alt=""/><span class="views"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>31K</span></div>
+        <div class="vt">One cut, four platforms</div>
+      </div>
+      <div class="wcard" data-cat="short" data-cursor="play">
+        <div class="th"><img src="images/bts/03b-home-founder-tall.jpg" alt=""/><span class="views"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>21K</span></div>
+        <div class="vt">Founder, unscripted</div>
+      </div>
+      <div class="wcard" data-cat="short" data-cursor="play">
+        <div class="th"><img src="images/bts/05-studio-detail.jpg" alt=""/><span class="views"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>18K</span></div>
+        <div class="vt">The detail pass</div>
+      </div>
+      <div class="wcard" data-cat="short" data-cursor="play">
+        <div class="th"><img src="images/bts/06-studio-mic.jpg" alt=""/><span class="views"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>12K</span></div>
+        <div class="vt">Before the red light</div>
+      </div>
+      <div class="wcard" data-cat="short" data-cursor="play">
+        <div class="th"><img src="images/bts/08-about-team.jpg" alt=""/><span class="views"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>9.4K</span></div>
+        <div class="vt">Set day energy</div>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- shows shelf -->
+  <div class="shelf reveal" data-shelfcat="show"><div class="wrap">
+    <div class="shead"><h3>Shows</h3><button class="viewall" data-jump="show">View all →</button></div>
+    <div class="srow shows wgrid">
+      <div class="wcard" data-cat="show" data-cursor="play">
+        <div class="th"><img src="images/bts/01-home-studio-band.jpg" alt=""/><span class="plbadge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6h12v2H3zm0 5h12v2H3zm0 5h8v2H3zm13-5v8l6-4-6-4z"/></svg>31 episodes</span></div>
+        <div class="vt">Sons of Thunder</div>
+        <div class="vm">View full show</div>
+      </div>
+      <div class="wcard" data-cat="show" data-cursor="play">
+        <div class="th"><img src="images/bts/07c-studio-brand.jpg" alt=""/><span class="plbadge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6h12v2H3zm0 5h12v2H3zm0 5h8v2H3zm13-5v8l6-4-6-4z"/></svg>12 episodes</span></div>
+        <div class="vt">She's Built Different</div>
+        <div class="vm">View full show</div>
+      </div>
+      <div class="wcard" data-cat="show" data-cursor="play">
+        <div class="th"><img src="images/bts/10-podcast-session.jpg" alt=""/><span class="plbadge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6h12v2H3zm0 5h12v2H3zm0 5h8v2H3zm13-5v8l6-4-6-4z"/></svg>18 episodes</span></div>
+        <div class="vt">Two Dudes And</div>
+        <div class="vm">View full show</div>
+      </div>
+      <div class="wcard" data-cat="show" data-cursor="play">
+        <div class="th"><img src="images/bts/03a-home-suite.jpg" alt=""/><span class="plbadge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6h12v2H3zm0 5h12v2H3zm0 5h8v2H3zm13-5v8l6-4-6-4z"/></svg>14 episodes</span></div>
+        <div class="vt">Smile Spa</div>
+        <div class="vm">View full show</div>
+      </div>
+      <div class="wcard" data-cat="show" data-cursor="play">
+        <div class="th"><img src="images/bts/07a-studio-interview.jpg" alt=""/><span class="plbadge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6h12v2H3zm0 5h12v2H3zm0 5h8v2H3zm13-5v8l6-4-6-4z"/></svg>24 episodes</span></div>
+        <div class="vt">The Founder Sessions</div>
+        <div class="vm">View full show</div>
+      </div>
+      <div class="wcard" data-cat="show" data-cursor="play">
+        <div class="th"><img src="images/bts/02-home-split.jpg" alt=""/><span class="plbadge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6h12v2H3zm0 5h12v2H3zm0 5h8v2H3zm13-5v8l6-4-6-4z"/></svg>6 episodes</span></div>
+        <div class="vt">Melara</div>
+        <div class="vm">View full show</div>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- behind the scenes shelf -->
+  <div class="shelf reveal last" data-shelfcat="bts"><div class="wrap">
+    <div class="shead"><h3>Behind the scenes</h3><button class="viewall" data-jump="bts">View all →</button></div>
+    <div class="srow wgrid">
+      <div class="wcard" data-cat="bts" data-cursor="play">
+        <div class="th"><img src="images/bts/08-about-team.jpg" alt=""/><span class="dur">12:04</span></div>
+        <div class="vt">A day in the studio</div>
+        <div class="vm">JourneyWell · 4.2K views · 2 months ago</div>
+      </div>
+      <div class="wcard" data-cat="bts" data-cursor="play">
+        <div class="th"><img src="images/bts/03c-home-edit.jpg" alt=""/><span class="dur">08:33</span></div>
+        <div class="vt">Where the cut happens</div>
+        <div class="vm">JourneyWell · 3.1K views · 2 months ago</div>
+      </div>
+      <div class="wcard" data-cat="bts" data-cursor="play">
+        <div class="th"><img src="images/bts/05-studio-detail.jpg" alt=""/><span class="dur">06:12</span></div>
+        <div class="vt">In the details</div>
+        <div class="vm">JourneyWell · 2.8K views · 3 months ago</div>
+      </div>
+      <div class="wcard" data-cat="bts" data-cursor="play">
+        <div class="th"><img src="images/bts/09-about-founders.jpg" alt=""/><span class="dur">15:47</span></div>
+        <div class="vt">The two who started it</div>
+        <div class="vm">JourneyWell · 6.7K views · 4 months ago</div>
+      </div>
+      <div class="wcard" data-cat="bts" data-cursor="play">
+        <div class="th"><img src="images/tim-and-mel.png" alt=""/><span class="dur">04:58</span></div>
+        <div class="vt">Tim and Mel, after hours</div>
+        <div class="vm">JourneyWell · 5.9K views · 5 months ago</div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ MOBILE: Instagram profile view ============ -->
+<section class="igv" id="igView">
+  <div class="igtop">
+    <span class="u">journeywellstudios <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+    <span class="ics">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </span>
+  </div>
+  <div class="igprof">
+    <div class="igring"><div class="igav">J</div></div>
+    <div class="igstats" id="igStats">
+      <div><b><span class="count" data-to="200">0</span>+</b><span>pieces</span></div>
+      <div><b><span class="count" data-to="15">0</span></b><span>brands</span></div>
+      <div><b><span class="count" data-to="6">0</span></b><span>years</span></div>
+    </div>
+  </div>
+  <div class="igbio">
+    <span class="n">JourneyWell Studios <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 14.5-4.3-4.3 1.4-1.4 2.9 2.9 5.9-5.9 1.4 1.4-7.3 7.3z"/></svg></span>
+    Video engine for founders.<br>
+    One room in Baton Rouge · every episode, short, and show below<br>
+    <span class="lk">journeywell.io/work</span>
+  </div>
+  <div class="igbtns">
+    <button class="b go" data-open-drawer>Build my system</button>
+    <a class="b gh" href="#igFeed">Watch</a>
+  </div>
+  <!-- story highlights: double as feed filters -->
+  <div class="high" id="igHighlights">
+    <button class="wtab on" data-filter="all"><span class="cir"><img src="images/tim-and-mel.png" alt=""/></span>All</button>
+    <button class="wtab" data-filter="episode"><span class="cir"><img src="images/bts/07a-studio-interview.jpg" alt=""/></span>Episodes</button>
+    <button class="wtab" data-filter="short"><span class="cir"><img src="images/bts/07b-studio-solo-tall.jpg" alt=""/></span>Shorts</button>
+    <button class="wtab" data-filter="show"><span class="cir"><img src="images/bts/01-home-studio-band.jpg" alt=""/></span>Shows</button>
+    <button class="wtab" data-filter="bts"><span class="cir"><img src="images/bts/03c-home-edit.jpg" alt=""/></span>BTS</button>
+  </div>
+  <div class="igtabs">
+    <span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/></svg></span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M3 8.2h18M9.5 3l3.2 5.2M15.2 3l3.2 5.2"/><path fill="currentColor" stroke="none" d="M10.4 12l4.8 2.9-4.8 2.9z"/></svg></span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="10" r="3"/><path d="M6.5 19c.8-3 2.8-4.5 5.5-4.5s4.7 1.5 5.5 4.5"/></svg></span>
+  </div>
+  <!-- LIVE SITE: these tiles stream from the creator-tunnel live-feed (tag=brand:journeywell). Static crops here are placeholders from the same vault. -->
+  <div class="wgrid iggrid" id="igFeed">
+    <div class="wcard" data-cat="episode" data-cursor="play"><img src="images/bts/07a-studio-interview.jpg" alt="Studio interview"/><span class="igbdg"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 9V4h1c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1h1v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z"/></svg></span></div>
+    <div class="wcard" data-cat="show bts" data-cursor="play"><img src="images/bts/01-home-studio-band.jpg" alt="Band session"/><span class="igbdg"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 9V4h1c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1h1v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z"/></svg></span></div>
+    <div class="wcard" data-cat="short" data-cursor="play"><img src="images/bts/07b-studio-solo-tall.jpg" alt="Solo studio shoot"/><span class="igbdg"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></div>
+    <div class="wcard" data-cat="episode show" data-cursor="play"><img src="images/bts/10-podcast-session.jpg" alt="Podcast session"/></div>
+    <div class="wcard" data-cat="bts short" data-cursor="play"><img src="images/bts/03c-home-edit.jpg" alt="Edit bay"/><span class="igbdg"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></div>
+    <div class="wcard" data-cat="show episode" data-cursor="play"><img src="images/bts/07c-studio-brand.jpg" alt="Brand shoot"/></div>
+    <div class="wcard" data-cat="short" data-cursor="play"><img src="images/bts/06-studio-mic.jpg" alt="Studio mic"/><span class="igbdg"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></div>
+    <div class="wcard" data-cat="bts" data-cursor="play"><img src="images/bts/08-about-team.jpg" alt="Team on set"/></div>
+    <div class="wcard" data-cat="episode show" data-cursor="play"><img src="images/bts/03b-home-founder-tall.jpg" alt="Founder feature"/></div>
+    <div class="wcard" data-cat="short bts" data-cursor="play"><img src="images/bts/05-studio-detail.jpg" alt="Studio detail"/><span class="igbdg"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></div>
+    <div class="wcard" data-cat="show" data-cursor="play"><img src="images/bts/02-home-split.jpg" alt="Split set"/></div>
+    <div class="wcard" data-cat="bts" data-cursor="play"><img src="images/bts/09-about-founders.jpg" alt="The founders"/></div>
   </div>
 </section>
 
-<!-- 7. ABOUT THIS CHANNEL inline strip -->
-<section class="container">
-  <div class="channel-about">
-    <div class="channel-about-inner">
-      <div class="channel-about-text">
-        <div class="channel-about-eyebrow">About this channel</div>
-        <h3>Made in Baton Rouge. Built for brands that need to ship content weekly, not yearly.</h3>
-        <p>JourneyWell is a full-service studio and content system. We handle production, editorial, and distribution — your brand's voice gets captured, multiplied, and published every week.</p>
-      </div>
-      <div class="channel-about-ctas">
-        <a href="studio.html" class="about-cta"><strong>Studio</strong><span>Walk in, walk out with an episode.</span></a>
-        <a href="podcast.html" class="about-cta"><strong>Podcast Launch</strong><span>Concept → branded show in 2 weeks.</span></a>
-        <a href="authority.html" class="about-cta"><strong>Authority System</strong><span>One recording becomes 30+ pieces.</span></a>
-      </div>
+<!-- LIVE SITE: this whole feed streams from the creator-tunnel live-feed (creator-tunnel.vercel.app/api, tag=brand:journeywell). -->
+<section class="feednote"><div class="wrap">
+  <p>On the live site this feed streams straight from the studio vault, tagged, encoded, always current.</p>
+</div></section>
+
+<!-- SIGNAL -->
+<div class="signal"><canvas id="wave"></canvas><span class="lab"><span class="rec"></span> Always shipping</span></div>
+
+<!-- CTA -->
+<section class="cta"><div class="wrap">
+  <h2 class="reveal">Your show belongs<br><em>up here</em>.</h2>
+  <p class="reveal">One studio session and you're on this wall. Start the conversation in 30 seconds.</p>
+  <button class="btn btn-primary mag reveal" data-open-drawer>Get started <span class="ar">↗</span></button>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="top">
+    <div>
+      <a class="brand" href="index.html"><span class="dot">J</span> JourneyWell</a>
+      <p style="color:var(--muted);max-width:32ch;font-size:14px">The studio + system behind founders building real content authority. Baton Rouge, LA.</p>
+    </div>
+    <div class="cols">
+      <div class="fcol"><h4>Work with us</h4><a href="studio.html">Book the Studio</a><a href="podcast.html">Launch a Podcast</a><a href="authority.html">Build Authority</a></div>
+      <div class="fcol"><h4>Studio</h4><a href="work.html">The Work</a><a href="about.html">About</a><a href="blog.html">Notes</a></div>
     </div>
   </div>
-</section>
-
-<!-- 8. SHOWS — each brand as a series -->
-<section class="channel-section" id="shows">
-  <div class="container">
-    <div class="row-header">
-      <h3 class="row-title">Shows</h3>
-      <span class="row-meta">Series we produce</span>
-    </div>
-  </div>
-  <div class="show-rows" id="showRows"></div>
-</section>
-
-<!-- 9. BEHIND THE SCENES -->
-<section class="channel-section" id="bts">
-  <div class="container">
-    <div class="row-header">
-      <h3 class="row-title">Behind the scenes</h3>
-      <span class="row-meta">Raw studio output</span>
-    </div>
-    <div class="work-strip-wrap"><div class="work-strip" id="btsStrip"></div></div>
-  </div>
-</section>
-
-<!-- 10. SUBSCRIBE / final CTA -->
-<section class="channel-subscribe">
-  <div class="container">
-    <div class="subscribe-card">
-      <div>
-        <div class="subscribe-eyebrow">Want yours next?</div>
-        <h2>This is what the system ships.</h2>
-        <p>Every clip on this channel came out of the JourneyWell studio with the Authority System running. Apply to work with us — we take on a small number of brands per quarter.</p>
-      </div>
-      <div class="subscribe-ctas">
-        <button class="btn btn-gold btn-large" data-open-drawer-with="authority">Build my system</button>
-        <button class="btn btn-ghost btn-large" data-open-drawer-with="learn">Talk first</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 11. MINI PLAYER (docked) -->
-<div class="mini-player" id="miniPlayer" hidden>
-  <button class="mini-player-expand" id="miniPlayerExpand" aria-label="Expand" data-icon="expandArrows" data-icon-size="18"></button>
-  <button class="mini-player-close" id="miniPlayerClose" aria-label="Close" data-icon="close" data-icon-size="18"></button>
-  <div class="mini-player-video">
-    <video id="miniPlayerVideo" controls playsinline preload="metadata"></video>
-  </div>
-  <div class="mini-player-info">
-    <div class="mini-player-title" id="miniPlayerTitle"></div>
-    <div class="mini-player-meta" id="miniPlayerMeta"></div>
-  </div>
-</div>
-
-<!-- 12. IMMERSIVE PLAYER OVERLAY — two modes:
-     - default (shorts): centered 9:16 frame, snap-scroll feed
-     - .long-form (episodes): big 16:9 player with meta panel below + Up-next sidebar  -->
-<div class="reels-overlay" id="reelsOverlay" hidden>
-  <div class="reels-backdrop"></div>
-  <button class="reels-close" id="reelsClose" aria-label="Close" data-icon="close" data-icon-size="22"></button>
-  <button class="reels-nav-up" id="reelsNavUp" aria-label="Previous" data-icon="chevronUp" data-icon-size="22"></button>
-  <button class="reels-nav-down" id="reelsNavDown" aria-label="Next" data-icon="chevronDown" data-icon-size="22"></button>
-
-  <div class="reels-stage">
-    <div class="reels-frame">
-      <div class="reels-track" id="reelsTrack"></div>
-    </div>
-    <!-- Long-form meta panel (visible only when .reels-overlay.long-form) -->
-    <div class="lf-meta" id="lfMeta">
-      <h2 class="lf-meta-title" id="lfMetaTitle"></h2>
-      <div class="lf-meta-row">
-        <div class="lf-meta-avatar" id="lfMetaAvatar">JW</div>
-        <div class="lf-meta-channel">
-          <div class="lf-meta-handle" id="lfMetaHandle"></div>
-          <div class="lf-meta-channel-sub" id="lfMetaChannelSub">JourneyWell Studios</div>
-        </div>
-        <button class="lf-meta-subscribe" data-open-drawer-with="podcast">Subscribe</button>
-        <div class="lf-meta-actions">
-          <button class="lf-meta-btn" data-action="like"><span data-icon="heart" data-icon-size="18"></span> Like</button>
-          <button class="lf-meta-btn" data-action="share"><span data-icon="share" data-icon-size="18"></span> Share</button>
-          <button class="lf-meta-btn" data-action="ask" data-open-drawer-with="learn"><span data-icon="message" data-icon-size="18"></span> Ask</button>
-          <button class="lf-meta-btn cta" data-open-drawer-with="studio"><span data-icon="star" data-icon-size="18"></span> Book the studio</button>
-        </div>
-      </div>
-      <div class="lf-meta-stats" id="lfMetaStats"></div>
-      <div class="lf-meta-desc" id="lfMetaDesc"></div>
-    </div>
-  </div>
-
-  <!-- Up-next sidebar (visible only in long-form mode) -->
-  <aside class="lf-upnext" id="lfUpNext">
-    <div class="lf-upnext-title">Up next</div>
-    <div class="lf-upnext-list" id="lfUpNextList"></div>
-  </aside>
-</div>
-
-<!-- 13. DETAIL MODAL (full expand from mini-player) -->
-<div class="detail-modal-overlay" id="detailOverlay">
-  <div class="detail-modal" id="detailModal">
-    <button class="detail-close" id="detailClose" aria-label="Close" data-icon="close" data-icon-size="20"></button>
-    <div class="detail-player" id="detailPlayer"></div>
-    <div class="detail-info" id="detailInfo"></div>
-  </div>
-</div>
-
-<script src="chrome.js"></script>
+  <div class="bot"><div>© 2026 JourneyWell Studios</div><div>Produced in-house · Owned by you</div></div>
+</div></footer>
+<script src="v2.js"></script>
 <script>
-(function () {
-  // ---------- helpers ----------
-  function escapeHtml(s) {
-    return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  }
-  function fmtDuration(s) {
-    if (!s || s < 1) return '';
-    const m = Math.floor(s / 60);
-    const sec = Math.round(s % 60);
-    return m ? `${m}:${String(sec).padStart(2, '0')}` : `${sec}s`;
-  }
-  function isHttps(u) { return typeof u === 'string' && u.startsWith('https://'); }
-  function hasPlayableVideo(a) { return isHttps(a.cdn_url) && /\.(mp4|webm|mov)(\?|#|$)/i.test(a.cdn_url); }
-  function initials(name) {
-    return String(name || '?').split(/\s+/).map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase();
-  }
-
-  // ---------- live-feed integration (creator-tunnel) ----------
-  // The work page is sourced from creator-tunnel assets tagged
-  // `live-feed:featured` / `:episode` / `:show` / `:shorts` / `:behind-the-scenes`.
-  //
-  // URL resolution (in order):
-  //   1. window.CREATOR_TUNNEL_URL set via inline <script> in this page's <head>
-  //   2. localhost dev → http://127.0.0.1:8787
-  //   3. anywhere else → null (skip fetching gracefully, sections render empty)
-  //
-  // To wire production, add this ONE LINE to work.html's <head> after deploying creator-tunnel:
-  //   <script>window.CREATOR_TUNNEL_URL = 'https://your-creator-tunnel-domain.vercel.app';<\/script>
-  const USE_LIVE_FEED_TAGS = true;
-  const IS_LOCAL = (location.hostname === 'localhost' || location.hostname === '127.0.0.1');
-  const CREATOR_TUNNEL_URL =
-    (typeof window !== 'undefined' && window.CREATOR_TUNNEL_URL) ||
-    (IS_LOCAL ? 'http://127.0.0.1:8787' : 'https://creator-tunnel.vercel.app');
-
-  async function fetchByTag(tag, limit) {
-    if (!CREATOR_TUNNEL_URL) return [];  // not configured for this host — silent no-op
-    const url = `${CREATOR_TUNNEL_URL}/api/assets?tag=${encodeURIComponent(tag)}&limit=${limit || 24}`;
-    try {
-      const res = await fetch(url, { cache: 'no-cache' });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const data = await res.json();
-      return (data.items || []).map(adaptCreatorTunnelAsset);
-    } catch (err) {
-      console.warn('[live-feed] failed for tag', tag, err);
-      return [];
-    }
-  }
-
-  function adaptCreatorTunnelAsset(a) {
-    const tags = a.tags || [];
-    const tagVal = (prefix) => {
-      const t = tags.find(x => typeof x === 'string' && x.startsWith(prefix + ':'));
-      return t ? t.slice(prefix.length + 1) : null;
-    };
-    const brandSlug = tagVal('brand');
-    const brand = brandSlug
-      ? brandSlug.split('-').map(w => w ? w[0].toUpperCase() + w.slice(1) : '').join(' ')
-      : null;
-    const derived = String(a.title || 'Untitled').replace(/\.(mp4|mov|webm|m4v)$/i, '').trim();
-    const display = (typeof a.display_title === 'string' && a.display_title.trim()) ? a.display_title.trim() : derived;
-    return {
-      id: a.id,
-      title: a.title || display,
-      display_title: display,
-      brand: brand,
-      file_type: a.file_type,
-      duration: a.duration_seconds || 0,
-      thumbnail_url: a.thumbnail_url || null,
-      cdn_url: a.cdn_url,
-      width: a.width,
-      height: a.height,
-      tags: tags,
-      created_at: a.created_at,
-      description: a.ai_description || '',
-      ai_description: a.ai_description || '',
-      polished: tags.includes('status:polished') || tags.includes('quality:polished'),
-    };
-  }
-
-  // Fetch all five live-feed buckets in parallel, then build a `seg` object
-  // shaped the same way `segment()` returns, so the rest of the page code
-  // doesn't need to change.
-  async function loadByLiveFeedTagsForSegment() {
-    const [featured, episodes, show, shorts, bts] = await Promise.all([
-      fetchByTag('live-feed:featured'),
-      fetchByTag('live-feed:episode'),
-      fetchByTag('live-feed:show'),
-      fetchByTag('live-feed:shorts'),
-      fetchByTag('live-feed:behind-the-scenes'),
-    ]);
-    // Combined deduped list for click handlers
-    const allMap = new Map();
-    [...featured, ...episodes, ...show, ...shorts, ...bts].forEach(a => allMap.set(a.id, a));
-    const all = Array.from(allMap.values());
-    // Build "shows" rows by grouping live-feed:show assets by brand
-    const byBrand = {};
-    show.forEach(a => {
-      const b = a.brand;
-      if (!b) return;
-      (byBrand[b] = byBrand[b] || []).push(a);
+/* work.html glue: shelf-level filtering (YouTube tabs), view-all jumps, aria sync */
+(function(){
+  var shelves=document.querySelectorAll('[data-shelfcat]');
+  var tabs=Array.prototype.slice.call(document.querySelectorAll('.wtab'));
+  function apply(f){
+    shelves.forEach(function(s){
+      var cats=(s.getAttribute('data-shelfcat')||'').split(' ');
+      s.style.display=(f==='all'||cats.indexOf(f)>-1)?'':'none';
     });
-    const byDate = (a, b) => (b.created_at || '').localeCompare(a.created_at || '');
-    const shows = Object.entries(byBrand)
-      .map(([brand, items]) => ({ brand, items: items.sort(byDate) }))
-      .filter(s => s.items.length >= 1)
-      .sort((a, b) => b.items.length - a.items.length);
-    return { featured, episodes, shorts, bts, shows, all };
+    if(window.ScrollTrigger)ScrollTrigger.refresh();
   }
-
-  // ---------- segmentation ----------
-  // Build the channel's discrete shelves from the flat asset list.
-  function segment(assets) {
-    const playable = assets.filter(hasPlayableVideo);
-    const byDate = (a, b) => (b.created_at || '').localeCompare(a.created_at || '');
-
-    const featured = playable.filter(a => a.polished && a.brand && a.brand !== 'Journeywell').sort(byDate);
-    if (featured.length < 6) {
-      const filler = playable.filter(a => !featured.includes(a) && a.polished).sort(byDate);
-      featured.push(...filler.slice(0, 6 - featured.length));
-    }
-
-    const episodes = playable
-      .filter(a => (a.duration || 0) >= 300)
-      .sort(byDate);
-
-    const shorts = playable
-      .filter(a => (a.duration || 0) > 0 && (a.duration || 0) < 120)
-      .sort(byDate);
-
-    const bts = playable
-      .filter(a => !a.polished && (a.tags || []).includes('source:frameio'))
-      .sort(byDate);
-
-    // Group by brand for "Shows"
-    const byBrand = {};
-    playable.forEach(a => {
-      const b = a.brand;
-      if (!b || b === 'Journeywell') return;
-      (byBrand[b] = byBrand[b] || []).push(a);
+  tabs.forEach(function(t){t.addEventListener('click',function(){apply(t.dataset.filter);});});
+  document.querySelectorAll('[data-jump]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=tabs.filter(function(x){return x.dataset.filter===b.dataset.jump&&x.closest('.ytabs');})[0];
+      if(t)t.click();
     });
-    const shows = Object.entries(byBrand)
-      .map(([brand, items]) => ({ brand, items: items.sort(byDate) }))
-      .filter(s => s.items.length >= 1)
-      .sort((a, b) => b.items.length - a.items.length);
-
-    return { featured: featured.slice(0, 10), episodes, shorts, bts, shows, all: playable };
-  }
-
-  // ---------- card render ----------
-  function cardHtml(asset, idx) {
-    const altClass = `alt-${(idx % 6) + 1}`;
-    const hasVideo = hasPlayableVideo(asset);
-    const hasThumb = isHttps(asset.thumbnail_url);
-    let coverInner = '';
-    if (hasVideo) {
-      // Lazy-mount: no src attribute on initial render. chrome.js initAutoplayVideos
-      // swaps data-src→src when the card enters the viewport, so the leftmost
-      // (visible) cards load first and off-screen cards never fetch until scrolled to.
-      coverInner = `<video class="card-video" muted loop playsinline preload="none" data-src="${escapeHtml(asset.cdn_url)}" ${hasThumb ? `poster="${escapeHtml(asset.thumbnail_url)}"` : ''}></video>`;
-    } else if (hasThumb) {
-      coverInner = `<img src="${escapeHtml(asset.thumbnail_url)}" alt="${escapeHtml(asset.display_title || asset.title || 'JourneyWell video')}" loading="lazy" />`;
-    }
-    const meta = [asset.brand, fmtDuration(asset.duration)].filter(Boolean).join(' · ') || 'Studio';
-    const title = asset.display_title || asset.title || 'Untitled';
-    return `
-      <div class="show-card playable" data-id="${escapeHtml(asset.id)}">
-        <div class="show-cover ${coverInner ? '' : altClass}">
-          ${coverInner}
-          <div class="play-overlay" aria-hidden="true" data-icon="play" data-icon-size="26"></div>
-        </div>
-        <div class="show-title">${escapeHtml(title)}</div>
-        <div class="show-meta">${escapeHtml(meta)}</div>
-      </div>
-    `;
-  }
-
-  function renderStrip(selector, items) {
-    const el = document.querySelector(selector);
-    if (!el) return;
-    if (!items.length) {
-      el.innerHTML = '<div style="color:var(--text-tertiary); padding:24px 0; font-size:14px;">Nothing here yet — check back soon.</div>';
-      return;
-    }
-    el.innerHTML = items.map(cardHtml).join('');
-  }
-
-  function renderHeroPiece(asset) {
-    if (!asset) return;
-    const video = document.getElementById('heroPieceVideo');
-    if (hasPlayableVideo(asset)) {
-      video.src = asset.cdn_url;
-      if (isHttps(asset.thumbnail_url)) video.poster = asset.thumbnail_url;
-      video.load();
-      const p = video.play();
-      if (p && p.catch) p.catch(() => {});
-    }
-    document.getElementById('heroPieceTitle').textContent = asset.display_title || asset.title || 'Featured episode';
-    document.getElementById('heroPieceDesc').textContent = asset.description || asset.ai_description || 'A piece from the JourneyWell channel — produced in our studio, distributed across every platform our clients show up on.';
-    const metaBits = [
-      asset.brand,
-      fmtDuration(asset.duration),
-      asset.polished ? 'Polished' : null,
-    ].filter(Boolean);
-    document.getElementById('heroPieceMeta').innerHTML = metaBits.map(m => `<span>${escapeHtml(m)}</span>`).join('');
-    // Hero play button → open in immersive player (wired again after segmentation runs)
-    document.getElementById('heroPiecePlayBtn').onclick = () => openVideoOverlay(asset);
-    document.getElementById('heroPiecePlayer').onclick = () => openVideoOverlay(asset);
-  }
-
-  function renderShows(shows) {
-    const wrap = document.getElementById('showRows');
-    if (!shows.length) { wrap.innerHTML = ''; return; }
-    wrap.innerHTML = shows.map(({ brand, items }) => {
-      const cards = items.slice(0, 12).map(cardHtml).join('');
-      return `
-        <div class="show-row">
-          <div class="container">
-            <div class="row-header">
-              <div class="row-show-head">
-                <div class="row-show-avatar">${escapeHtml(initials(brand))}</div>
-                <a class="row-title" href="#">${escapeHtml(brand)}</a>
-              </div>
-              <div class="row-meta">${items.length} ${items.length === 1 ? 'episode' : 'episodes'} · Series</div>
-            </div>
-            <div class="work-strip-wrap"><div class="work-strip episode-strip">${cards}</div></div>
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  // ---------- REELS FEED (TikTok/IG-style vertical) ----------
-  // Builds a slide list interleaving clips with JW promo interstitials
-  // every PROMO_EVERY clips. Active slide auto-plays + unmutes; others pause.
-
-  const PROMO_EVERY = 3;
-  const PROMO_TEMPLATES = [
-    {
-      theme: 'studio',
-      sponsored: 'Sponsored · JourneyWell Studios',
-      headline: 'Book the <em>studio.</em>',
-      sub: 'Walk in, sit down, walk out with a finished episode. Engineer + lighting + masters in 48hrs.',
-      cta: 'Book a session →',
-      drawer: 'studio',
-    },
-    {
-      theme: 'authority',
-      sponsored: 'Sponsored · The Authority System',
-      headline: 'One recording. <em>Thirty pieces.</em>',
-      sub: 'We turn each studio session into 30+ pieces of social, written, and short-form content.',
-      cta: 'Build my system →',
-      drawer: 'authority',
-    },
-    {
-      theme: 'podcast',
-      sponsored: 'Sponsored · Podcast Launch',
-      headline: 'Start a <em>branded</em> podcast.',
-      sub: 'Concept to launch in two weeks. Production, branding, distribution end-to-end.',
-      cta: 'Launch your show →',
-      drawer: 'podcast',
-    },
-  ];
-
-  let REELS_SLIDES = [];  // [{type:'clip'|'promo', asset?, promo?}]
-  let REELS_OPEN = false;
-  let REELS_INDEX = 0;
-  let REELS_GLOBAL_MUTED = true;
-  let REELS_IO = null;
-  let REELS_WHEEL_LOCK = 0;
-
-  function buildSlides(clips) {
-    const out = [];
-    let pi = 0;
-    clips.forEach((asset, i) => {
-      out.push({ type: 'clip', asset });
-      if ((i + 1) % PROMO_EVERY === 0) {
-        out.push({ type: 'promo', promo: PROMO_TEMPLATES[pi % PROMO_TEMPLATES.length] });
-        pi++;
-      }
-    });
-    // ensure feed ends on a promo if no closing promo yet (so the last frame is the pitch)
-    if (out.length && out[out.length - 1].type !== 'promo') {
-      out.push({ type: 'promo', promo: PROMO_TEMPLATES[pi % PROMO_TEMPLATES.length] });
-    }
-    return out;
-  }
-
-  function brandHandle(brand) {
-    return '@' + String(brand || 'journeywell').toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 24);
-  }
-
-  function clipSlideHtml(asset, slideIdx) {
-    const hasVideo = hasPlayableVideo(asset);
-    const poster = isHttps(asset.thumbnail_url) ? `poster="${escapeHtml(asset.thumbnail_url)}"` : '';
-    const brand = asset.brand || 'JourneyWell';
-    const handle = brandHandle(brand);
-    const title = asset.display_title || asset.title || 'Untitled';
-    const caption = (asset.description || asset.ai_description || title).slice(0, 180);
-    return `
-      <div class="reels-slide" data-slide-index="${slideIdx}" data-asset-id="${escapeHtml(asset.id)}">
-        ${hasVideo
-          ? `<video class="reels-video" muted playsinline loop preload="metadata" ${poster} src="${escapeHtml(asset.cdn_url)}"></video>`
-          : (isHttps(asset.thumbnail_url) ? `<img src="${escapeHtml(asset.thumbnail_url)}" alt="${escapeHtml(asset.display_title || asset.title || 'JourneyWell video')}" />` : '')}
-
-        <div class="reels-top-controls">
-          <div class="reels-top-left">
-            <button class="reels-top-btn" data-action="playpause" title="Play / Pause" data-icon="play" data-icon-size="18"></button>
-            <button class="reels-top-btn" data-action="mute" title="Toggle audio" data-icon="volumeOff" data-icon-size="18"></button>
-          </div>
-          <div class="reels-top-right">
-            <button class="reels-top-btn" data-action="expand" title="Open full" data-icon="expandArrows" data-icon-size="18"></button>
-            <button class="reels-top-btn" data-action="close" title="Close" data-icon="close" data-icon-size="18"></button>
-          </div>
-        </div>
-
-        <div class="reels-actions">
-          <button class="reels-action" data-action="like" title="Like">
-            <span class="reels-action-icon" data-icon="heart" data-icon-size="24"></span>
-            <span class="reels-action-label">Like</span>
-          </button>
-          <button class="reels-action" data-action="comment" title="Ask" data-open-drawer-with="learn">
-            <span class="reels-action-icon" data-icon="message" data-icon-size="24"></span>
-            <span class="reels-action-label">Ask</span>
-          </button>
-          <button class="reels-action" data-action="share" title="Share">
-            <span class="reels-action-icon" data-icon="share" data-icon-size="24"></span>
-            <span class="reels-action-label">Share</span>
-          </button>
-          <button class="reels-action" data-action="save" title="Save">
-            <span class="reels-action-icon" data-icon="bookmark" data-icon-size="24"></span>
-            <span class="reels-action-label">Save</span>
-          </button>
-          <button class="reels-action cta" data-action="book" title="Book the studio" data-open-drawer-with="studio">
-            <span class="reels-action-icon" data-icon="star" data-icon-size="24"></span>
-            <span class="reels-action-label">Book</span>
-          </button>
-        </div>
-
-        <div class="reels-paused-overlay"><div data-icon="play" data-icon-size="44"></div></div>
-
-        <div class="reels-info">
-          <div class="reels-info-row">
-            <div class="reels-info-avatar">${escapeHtml(initials(brand))}</div>
-            <div class="reels-info-handle">${escapeHtml(handle)}</div>
-            <button class="reels-info-subscribe" data-open-drawer-with="podcast">Subscribe</button>
-          </div>
-          <div class="reels-info-caption">${escapeHtml(caption)}</div>
-        </div>
-
-        <div class="reels-progress"><div class="reels-progress-fill"></div></div>
-      </div>
-    `;
-  }
-  function promoSlideHtml(promo, slideIdx) {
-    return `
-      <div class="reels-slide is-promo theme-${promo.theme}" data-slide-index="${slideIdx}" data-type="promo">
-        <div class="reels-promo">
-          <div class="reels-promo-sponsored">${escapeHtml(promo.sponsored)}</div>
-          <div class="reels-promo-headline">${promo.headline}</div>
-          <div class="reels-promo-sub">${escapeHtml(promo.sub)}</div>
-          <button type="button" class="reels-promo-cta" data-open-drawer-with="${escapeHtml(promo.drawer)}">${escapeHtml(promo.cta)}</button>
-        </div>
-      </div>
-    `;
-  }
-
-  function aspectClass(asset) {
-    const w = asset && asset.width, h = asset && asset.height;
-    if (w && h) {
-      if (h > w * 1.1) return 'is-vertical';
-      if (Math.abs(w - h) < Math.max(w, h) * 0.1) return 'is-square';
-      return 'is-horizontal';
-    }
-    return 'is-vertical';
-  }
-
-  function applyFrameAspect(asset) {
-    const frame = document.querySelector('.reels-frame');
-    if (!frame) return;
-    frame.classList.remove('is-vertical', 'is-horizontal', 'is-square');
-    frame.classList.add(aspectClass(asset));
-  }
-
-  function mountSlides(slides, slideIndex) {
-    REELS_SLIDES = slides;
-    const track = document.getElementById('reelsTrack');
-    track.innerHTML = REELS_SLIDES.map((s, i) =>
-      s.type === 'clip' ? clipSlideHtml(s.asset, i) : promoSlideHtml(s.promo, i)
-    ).join('');
-    REELS_INDEX = slideIndex || 0;
-    wireSlideEvents(track);
-    requestAnimationFrame(() => {
-      const slide = track.querySelector(`[data-slide-index="${REELS_INDEX}"]`);
-      if (slide) track.scrollTop = slide.offsetTop;
-      activateSlide(REELS_INDEX, true);
-    });
-  }
-
-  function mountReelsFeed(clips, startIndex) {
-    if (!clips.length) return;
-    const slides = buildSlides(clips);
-    // Map original clip index → slide index in the interleaved list
-    let firstSlideForClip = 0;
-    if (typeof startIndex === 'number') {
-      let count = 0;
-      for (let i = 0; i < slides.length; i++) {
-        if (slides[i].type === 'clip') {
-          if (count === startIndex) { firstSlideForClip = i; break; }
-          count++;
-        }
-      }
-    }
-    mountSlides(slides, firstSlideForClip);
-  }
-
-  function wireSlideEvents(track) {
-    // Top playback controls (play/pause, mute, expand=fullscreen, close)
-    track.querySelectorAll('.reels-top-btn').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        const slide = btn.closest('.reels-slide');
-        const action = btn.dataset.action;
-        if (action === 'mute') { toggleReelsMute(); return; }
-        if (action === 'close') { closeReelsFeed(); return; }
-        if (action === 'expand') {
-          enterFullscreen();
-          return;
-        }
-        if (action === 'playpause') {
-          const v = slide.querySelector('video');
-          if (!v) return;
-          const pausedOverlay = slide.querySelector('.reels-paused-overlay');
-          if (v.paused) {
-            const p = v.play(); if (p && p.catch) p.catch(() => {});
-            pausedOverlay && pausedOverlay.classList.remove('show');
-            btn.innerHTML = window.JW.icon('pause', { size: 18 });
-          } else {
-            v.pause();
-            pausedOverlay && pausedOverlay.classList.add('show');
-            btn.innerHTML = window.JW.icon('play', { size: 18 });
-          }
-        }
-      });
-    });
-
-    // Side action rail — Like / Share / Save toggle visual state, Ask + Book route via data-open-drawer-with
-    track.querySelectorAll('.reels-action').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        const action = btn.dataset.action;
-        if (action === 'like' || action === 'save') {
-          btn.classList.toggle('active');
-          return;
-        }
-        if (action === 'share') {
-          const slide = btn.closest('.reels-slide');
-          const id = slide && slide.dataset.assetId;
-          const asset = id && DATA && DATA.assets.find(x => x.id === id);
-          if (asset && navigator.share) {
-            navigator.share({
-              title: asset.display_title || asset.title || 'JourneyWell',
-              text: asset.description || 'From the JourneyWell channel',
-              url: asset.cdn_url || window.location.href,
-            }).catch(() => {});
-          } else {
-            try {
-              navigator.clipboard && navigator.clipboard.writeText(asset && asset.cdn_url || window.location.href);
-              btn.classList.add('active');
-              const lbl = btn.querySelector('.reels-action-label');
-              const oldText = lbl.textContent;
-              lbl.textContent = 'Copied';
-              setTimeout(() => { btn.classList.remove('active'); lbl.textContent = oldText; }, 1400);
-            } catch (e) {}
-          }
-        }
-      });
-    });
-
-    // Anything with data-open-drawer-with — drawer (Ask, Book, Subscribe, Promo CTAs)
-    track.querySelectorAll('[data-open-drawer-with]').forEach(el => {
-      el.addEventListener('click', e => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (window.JW) window.JW.openDrawer(el.dataset.openDrawerWith);
-      });
-    });
-
-    // Tap clip to pause/play
-    track.querySelectorAll('.reels-slide:not(.is-promo)').forEach(slide => {
-      slide.addEventListener('click', () => {
-        const v = slide.querySelector('video');
-        if (!v) return;
-        const pausedOverlay = slide.querySelector('.reels-paused-overlay');
-        if (v.paused) {
-          const p = v.play(); if (p && p.catch) p.catch(() => {});
-          pausedOverlay && pausedOverlay.classList.remove('show');
-        } else {
-          v.pause();
-          pausedOverlay && pausedOverlay.classList.add('show');
-        }
-      });
-    });
-
-    // IntersectionObserver: only the slide >=60% visible is "active"
-    if (REELS_IO) REELS_IO.disconnect();
-    REELS_IO = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
-          const idx = Number(entry.target.dataset.slideIndex);
-          if (!Number.isNaN(idx) && idx !== REELS_INDEX) {
-            REELS_INDEX = idx;
-            activateSlide(idx, false);
-          }
-        }
-      });
-    }, { root: track, threshold: [0, 0.6, 1] });
-    track.querySelectorAll('.reels-slide').forEach(s => REELS_IO.observe(s));
-
-    // Progress bar tick for current video
-    track.querySelectorAll('video').forEach(v => {
-      v.addEventListener('timeupdate', () => {
-        if (!v.duration) return;
-        const slide = v.closest('.reels-slide');
-        const fill = slide && slide.querySelector('.reels-progress-fill');
-        if (fill) fill.style.width = ((v.currentTime / v.duration) * 100) + '%';
-      });
-    });
-  }
-
-  // Play a video reliably. Waits for buffering if needed, and falls back to
-  // muted if an unmuted autoplay was blocked (so the click is never a no-op).
-  function playWhenReady(v) {
-    if (!v) return () => {};
-    v.muted = REELS_GLOBAL_MUTED;
-    v.playsInline = true;
-    v.setAttribute('playsinline', '');
-    let cancelled = false;
-    const fallbackToMuted = () => {
-      v.muted = true;
-      REELS_GLOBAL_MUTED = true;
-      // Refresh active slide mute button visual
-      const slide = v.closest('.reels-slide');
-      if (slide) {
-        const btn = slide.querySelector('.reels-top-btn[data-action="mute"]');
-        if (btn) btn.innerHTML = window.JW.icon('volumeOff', { size: 18 });
-      }
-    };
-    const tryPlay = () => {
-      if (cancelled) return;
-      const p = v.play();
-      if (p && p.catch) p.catch(err => {
-        // Unmuted autoplay blocked → mute and retry once.
-        if (err && err.name === 'NotAllowedError' && !v.muted) {
-          fallbackToMuted();
-          v.play().catch(() => {
-            v.addEventListener('canplay', () => { if (!cancelled) v.play().catch(() => {}); }, { once: true });
-          });
-          return;
-        }
-        // Otherwise wait for buffer.
-        v.addEventListener('canplay', () => { if (!cancelled) v.play().catch(() => {}); }, { once: true });
-      });
-    };
-    if (v.preload !== 'metadata') v.preload = 'metadata';
-    if (v.readyState >= 2) {
-      tryPlay();
-    } else {
-      try { v.load(); } catch (e) {}
-      v.addEventListener('loadeddata', tryPlay, { once: true });
-      v.addEventListener('canplay', tryPlay, { once: true });
-    }
-    return () => { cancelled = true; };
-  }
-
-  function activateSlide(idx, initial) {
-    const track = document.getElementById('reelsTrack');
-    // Pause every video except the active one
-    track.querySelectorAll('video').forEach(v => {
-      const slide = v.closest('.reels-slide');
-      const isActive = slide.dataset.slideIndex === String(idx);
-      if (isActive) {
-        playWhenReady(v);
-        const pausedOverlay = slide.querySelector('.reels-paused-overlay');
-        pausedOverlay && pausedOverlay.classList.remove('show');
-      } else {
-        try { v.pause(); } catch (e) {}
-        v.currentTime = 0;
-      }
-    });
-    // Sync top control button visuals on the active slide
-    const slide = track.querySelector(`.reels-slide[data-slide-index="${idx}"]`);
-    if (slide) {
-      const muteBtn = slide.querySelector('.reels-top-btn[data-action="mute"]');
-      if (muteBtn) muteBtn.innerHTML = window.JW.icon(REELS_GLOBAL_MUTED ? 'volumeOff' : 'volume', { size: 18 });
-      const playBtn = slide.querySelector('.reels-top-btn[data-action="playpause"]');
-      const v = slide.querySelector('video');
-      if (playBtn && v) playBtn.innerHTML = window.JW.icon(v.paused ? 'play' : 'pause', { size: 18 });
-    }
-    updateReelsNavButtons();
-  }
-
-  function toggleReelsMute() {
-    REELS_GLOBAL_MUTED = !REELS_GLOBAL_MUTED;
-    const track = document.getElementById('reelsTrack');
-    const active = track.querySelector(`.reels-slide[data-slide-index="${REELS_INDEX}"]`);
-    if (!active) return;
-    const v = active.querySelector('video');
-    if (v) v.muted = REELS_GLOBAL_MUTED;
-    const muteBtn = active.querySelector('.reels-top-btn[data-action="mute"]');
-    if (muteBtn) muteBtn.innerHTML = window.JW.icon(REELS_GLOBAL_MUTED ? 'volumeOff' : 'volume', { size: 18 });
-  }
-
-  function updateReelsNavButtons() {
-    const up = document.getElementById('reelsNavUp');
-    const down = document.getElementById('reelsNavDown');
-    if (!up || !down) return;
-    const total = REELS_SLIDES.length;
-    up.disabled = REELS_INDEX <= 0;
-    down.disabled = REELS_INDEX >= total - 1;
-  }
-
-  function scrollReels(delta) {
-    const track = document.getElementById('reelsTrack');
-    const slides = Array.from(track.querySelectorAll('.reels-slide'));
-    const next = Math.min(slides.length - 1, Math.max(0, REELS_INDEX + delta));
-    if (slides[next]) slides[next].scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  function openReelsFeed(clips, startIndex) {
-    if (!clips || !clips.length) return;
-    REELS_OPEN = true;
-    REELS_GLOBAL_MUTED = true; // shorts feed starts muted (TikTok pattern)
-    const overlay = document.getElementById('reelsOverlay');
-    applyFrameAspect(clips[startIndex || 0]);
-    overlay.hidden = false;
-    requestAnimationFrame(() => overlay.classList.add('open'));
-    document.body.style.overflow = 'hidden';
-    mountReelsFeed(clips, startIndex || 0);
-  }
-  // Long-form pool — populated at boot. Used to render the Up-next sidebar
-  // when a horizontal video is opened.
-  let LONGFORM_POOL = [];
-
-  function renderLfMeta(asset) {
-    const brand = asset.brand || 'JourneyWell';
-    const handle = brandHandle(brand);
-    document.getElementById('lfMetaTitle').textContent = asset.display_title || asset.title || 'Untitled';
-    document.getElementById('lfMetaAvatar').textContent = initials(brand);
-    document.getElementById('lfMetaHandle').textContent = handle;
-    document.getElementById('lfMetaChannelSub').textContent = brand + ' · JourneyWell channel';
-    const stats = [
-      asset.created_at ? new Date(asset.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : null,
-      fmtDuration(asset.duration),
-      asset.polished ? 'Polished' : null,
-    ].filter(Boolean).join(' · ');
-    document.getElementById('lfMetaStats').textContent = stats;
-    document.getElementById('lfMetaDesc').textContent = asset.description || asset.ai_description || 'No description on file.';
-  }
-
-  function renderLfUpNext(currentAsset, pool) {
-    const list = document.getElementById('lfUpNextList');
-    const items = pool.filter(a => a.id !== currentAsset.id).slice(0, 12);
-    if (!items.length) { list.innerHTML = '<div style="color:rgba(255,255,255,0.5); font-size:13px; padding:8px 0;">No other episodes yet.</div>'; return; }
-    list.innerHTML = items.map(a => {
-      const thumb = isHttps(a.thumbnail_url)
-        ? `<img src="${escapeHtml(a.thumbnail_url)}" alt="${escapeHtml(a.display_title || a.title || 'JourneyWell video')}" loading="lazy" />` : '';
-      const meta = [a.brand, fmtDuration(a.duration)].filter(Boolean).join(' · ');
-      return `
-        <button type="button" class="upnext-card" data-asset-id="${escapeHtml(a.id)}">
-          <div class="upnext-thumb">${thumb}</div>
-          <div class="upnext-info">
-            <div class="upnext-title">${escapeHtml(a.display_title || a.title || 'Untitled')}</div>
-            <div class="upnext-meta">${escapeHtml(meta)}</div>
-          </div>
-        </button>
-      `;
-    }).join('');
-    list.querySelectorAll('.upnext-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const a = DATA && DATA.assets.find(x => x.id === card.dataset.assetId);
-        if (a) loadAssetIntoOverlay(a);
-      });
-    });
-  }
-
-  // Swap the currently playing asset inside an already-open overlay
-  function loadAssetIntoOverlay(asset) {
-    if (!asset) return;
-    applyFrameAspect(asset);
-    mountSlides([{ type: 'clip', asset }], 0);
-    if (aspectClass(asset) === 'is-horizontal') {
-      renderLfMeta(asset);
-      renderLfUpNext(asset, LONGFORM_POOL);
-    }
-  }
-
-  // Single-asset open — used when ANY card is clicked.
-  // Both orientations now use the same TikTok-style swipe feed (with promo
-  // interstitials). The horizontal frame is sized by .reels-frame.is-horizontal
-  // in CSS; the swipe-up/down + ad pattern is identical to vertical.
-  // If a pool is provided, the clicked asset becomes the start of that pool's
-  // swipeable feed; otherwise we open a singleton feed.
-  function openVideoOverlay(asset, pool) {
-    if (!asset) return;
-    REELS_OPEN = true;
-    REELS_GLOBAL_MUTED = false;  // single-asset open implies intent to watch with sound
-    const overlay = document.getElementById('reelsOverlay');
-    applyFrameAspect(asset);
-    // Make sure no stale long-form layout is left over from any earlier open.
-    overlay.classList.remove('long-form');
-    overlay.hidden = false;
-    requestAnimationFrame(() => overlay.classList.add('open'));
-    document.body.style.overflow = 'hidden';
-
-    let clips, startIndex;
-    if (pool && pool.length) {
-      const idx = pool.findIndex(a => a.id === asset.id);
-      if (idx >= 0) { clips = pool; startIndex = idx; }
-      else          { clips = [asset, ...pool]; startIndex = 0; }
-    } else {
-      clips = [asset];
-      startIndex = 0;
-    }
-    mountReelsFeed(clips, startIndex);
-  }
-  function closeReelsFeed() {
-    REELS_OPEN = false;
-    const overlay = document.getElementById('reelsOverlay');
-    // Pause + detach every video synchronously BEFORE the 240ms fade-out
-    // animation starts. Otherwise the active slide keeps streaming audio
-    // through the close (and innerHTML='' alone doesn't always kill it in time).
-    document.getElementById('reelsTrack').querySelectorAll('video').forEach(v => {
-      try { v.pause(); } catch (e) {}
-      v.removeAttribute('src');
-      try { v.load(); } catch (e) {}
-    });
-    if (document.fullscreenElement) {
-      try { document.exitFullscreen(); } catch (e) {}
-    }
-    overlay.classList.remove('open');
-    setTimeout(() => {
-      overlay.hidden = true;
-      overlay.classList.remove('long-form');
-      document.getElementById('reelsTrack').innerHTML = '';
-    }, 240);
-    document.body.style.overflow = '';
-  }
-  function enterFullscreen() {
-    const frame = document.querySelector('.reels-frame');
-    if (!frame) return;
-    if (document.fullscreenElement) {
-      try { document.exitFullscreen(); } catch (e) {}
-      return;
-    }
-    const req = frame.requestFullscreen || frame.webkitRequestFullscreen || frame.msRequestFullscreen;
-    if (req) {
-      try { req.call(frame); } catch (e) {}
-    }
-  }
-
-  // ---------- mini player ----------
-  let CURRENT_ASSET = null;
-  function openMiniPlayer(asset) {
-    CURRENT_ASSET = asset;
-    const mini = document.getElementById('miniPlayer');
-    const video = document.getElementById('miniPlayerVideo');
-    const title = document.getElementById('miniPlayerTitle');
-    const meta = document.getElementById('miniPlayerMeta');
-
-    if (hasPlayableVideo(asset)) {
-      video.src = asset.cdn_url;
-      if (isHttps(asset.thumbnail_url)) video.poster = asset.thumbnail_url;
-      video.load();
-      const p = video.play();
-      if (p && p.catch) p.catch(() => {});
-    }
-    title.textContent = asset.display_title || asset.title || 'Untitled';
-    meta.textContent = [asset.brand, fmtDuration(asset.duration)].filter(Boolean).join(' · ');
-    mini.hidden = false;
-    requestAnimationFrame(() => mini.classList.add('open'));
-  }
-  function closeMiniPlayer() {
-    const mini = document.getElementById('miniPlayer');
-    const video = document.getElementById('miniPlayerVideo');
-    mini.classList.remove('open');
-    setTimeout(() => { mini.hidden = true; video.pause(); video.removeAttribute('src'); video.load(); }, 280);
-    CURRENT_ASSET = null;
-  }
-
-  // ---------- detail modal (expand from mini) ----------
-  function openDetail(asset) {
-    if (!asset) return;
-    const overlay = document.getElementById('detailOverlay');
-    const playerEl = document.getElementById('detailPlayer');
-    const infoEl = document.getElementById('detailInfo');
-
-    if (hasPlayableVideo(asset)) {
-      const poster = isHttps(asset.thumbnail_url) ? `poster="${escapeHtml(asset.thumbnail_url)}"` : '';
-      playerEl.innerHTML = `<video controls autoplay playsinline preload="metadata" ${poster}><source src="${escapeHtml(asset.cdn_url)}" type="video/mp4" /></video>`;
-    } else if (isHttps(asset.thumbnail_url)) {
-      playerEl.innerHTML = `<div class="player-poster" style="background-image:url('${escapeHtml(asset.thumbnail_url)}');"><div class="player-play" data-icon="play" data-icon-size="32"></div></div>`;
-    } else {
-      playerEl.innerHTML = `<div style="color:var(--text-tertiary); padding:48px; text-align:center">Preview not available</div>`;
-    }
-
-    const meta = [
-      asset.brand ? `<span>${escapeHtml(asset.brand)}</span>` : '',
-      asset.duration ? `<span>${fmtDuration(asset.duration)}</span>` : '',
-      asset.width && asset.height ? `<span>${asset.width} × ${asset.height}</span>` : '',
-    ].filter(Boolean).join('');
-    const tags = (asset.tags || [])
-      .filter(t => !t.startsWith('source:') && !t.startsWith('type:audio') && !t.startsWith('youtube-'))
-      .slice(0, 8)
-      .map(t => `<span class="detail-tag">${escapeHtml(t)}</span>`)
-      .join('');
-
-    infoEl.innerHTML = `
-      <div class="detail-info-eyebrow">${asset.polished ? 'Polished · Studio production' : 'Studio production'}</div>
-      <h2 class="detail-info-title">${escapeHtml(asset.display_title || asset.title || 'Untitled')}</h2>
-      <div class="detail-info-meta">${meta}</div>
-      <div class="detail-info-desc">${escapeHtml(asset.description || asset.ai_description || 'No description on file.')}</div>
-      <div class="detail-info-tags">${tags}</div>
-      <div style="margin-top:auto; display:flex; gap:8px; padding-top:16px">
-        <button class="btn btn-gold" data-open-drawer-with="authority">Want this for your brand?</button>
-      </div>
-    `;
-    infoEl.querySelectorAll('[data-open-drawer-with]').forEach(b => {
-      b.addEventListener('click', () => window.JW && window.JW.openDrawer(b.dataset.openDrawerWith));
-    });
-
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeDetail() {
-    const overlay = document.getElementById('detailOverlay');
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-    const v = overlay.querySelector('video');
-    if (v) { v.pause(); v.removeAttribute('src'); v.load(); }
-  }
-
-  // ---------- tabs (active state + smooth scroll) ----------
-  function wireTabs() {
-    const tabs = document.querySelectorAll('.channel-tab');
-    tabs.forEach(t => {
-      t.addEventListener('click', e => {
-        e.preventDefault();
-        const id = t.dataset.tab;
-        const target = document.getElementById(id);
-        if (!target) return;
-        const offset = 132;
-        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
-      });
-    });
-    // Spy: which section is in view
-    const sections = Array.from(document.querySelectorAll('.channel-section[id]'));
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === id));
-        }
-      });
-    }, { rootMargin: '-160px 0px -60% 0px', threshold: 0 });
-    sections.forEach(s => io.observe(s));
-  }
-
-  // ---------- boot ----------
-  let DATA = null;
-  let CURRENT_SEG = null;  // for hourly refresh + click rewiring
-  document.addEventListener('DOMContentLoaded', async () => {
-    if (!window.JW) return;
-
-    let seg;
-    if (USE_LIVE_FEED_TAGS) {
-      // Pull each section directly from creator-tunnel by tag
-      seg = await loadByLiveFeedTagsForSegment();
-      // No assets tagged live-feed:featured yet -> promote the freshest pieces
-      // so the hero + Featured shelf never sit on "Loading...".
-      if (!seg.featured.length && seg.all.length) {
-        const byDate = (a, b) => (b.created_at || '').localeCompare(a.created_at || '');
-        seg.featured = [...(seg.episodes.length ? seg.episodes : seg.all)].sort(byDate).slice(0, 6);
-      }
-      DATA = { assets: seg.all, topic_counts: {}, total_in_vault: seg.all.length };
-      if (!seg.all.length) {
-        document.getElementById('heroPieceTitle').textContent = 'Channel is loading…';
-        // fall through — render empty strips so the layout shows
-      }
-    } else {
-      DATA = (window.JW.loadCollection ? await window.JW.loadCollection('web') : await window.JW.loadContent());
-      if (!DATA || !DATA.assets) {
-        document.getElementById('heroPieceTitle').textContent = 'Channel is loading…';
-        return;
-      }
-      seg = segment(DATA.assets);
-    }
-    CURRENT_SEG = seg;
-    // Long-form pool for the Up-next sidebar
-    LONGFORM_POOL = seg.episodes.length ? seg.episodes : seg.all.filter(a => aspectClass(a) === 'is-horizontal');
-
-    // Hero piece = first featured
-    renderHeroPiece(seg.featured[0]);
-
-    // Strips
-    renderStrip('#featuredStrip', seg.featured);
-    renderStrip('#episodesStrip', seg.episodes);
-    renderStrip('#shortsStrip', seg.shorts);
-    renderStrip('#btsStrip', seg.bts);
-    renderShows(seg.shows);
-    // Hand off card-video playback to the single-active observer in chrome.js.
-    // Avoids 5+ parallel video streams from card autoplay saturating R2.
-    if (window.JW && typeof window.JW.initAutoplayVideos === 'function') {
-      window.JW.initAutoplayVideos();
-    }
-
-    // Counts
-    document.getElementById('featuredCount').textContent = seg.featured.length + ' picked';
-    document.getElementById('episodesCount').textContent = seg.episodes.length + ' available';
-    document.getElementById('shortsCount').textContent = seg.shorts.length + ' clip' + (seg.shorts.length === 1 ? '' : 's');
-
-    // Channel stats
-    document.getElementById('channelStats').innerHTML = `
-      <span><strong>${seg.all.length}</strong> Pieces</span>
-      <span class="dot"></span>
-      <span><strong>${seg.shows.length}</strong> Shows</span>
-      <span class="dot"></span>
-      <span><strong>${Object.keys(DATA.topic_counts || {}).length || seg.shows.length}</strong> Topics</span>
-    `;
-
-    // Card click — every video card opens in the immersive player.
-    // Cards in the shorts row open the swipeable feed (with promo interstitials);
-    // every other card opens single-asset mode (no swipe, native fullscreen via ⤢).
-    const shortsIds = new Set(seg.shorts.map(s => s.id));
-    document.querySelectorAll('.show-card.playable').forEach(card => {
-      card.addEventListener('click', () => {
-        const a = DATA.assets.find(x => x.id === card.dataset.id);
-        if (!a) return;
-        if (shortsIds.has(a.id)) {
-          // Cross-row pool — any short anywhere flows into the full shorts feed.
-          const idx = seg.shorts.findIndex(s => s.id === a.id);
-          openReelsFeed(seg.shorts, Math.max(0, idx));
-        } else {
-          // Horizontal → TikTok-style swipe feed through the horizontal pool,
-          // promo interstitials spliced in (same UX as vertical, just 16:9 frame).
-          openVideoOverlay(a, LONGFORM_POOL);
-        }
-      });
-    });
-
-    // Hero "Play full" + hero player click — open in immersive player
-    const heroAsset = seg.featured[0];
-    const heroPlayBtn = document.getElementById('heroPiecePlayBtn');
-    const heroPlayer = document.getElementById('heroPiecePlayer');
-    if (heroAsset && heroPlayBtn) heroPlayBtn.onclick = () => openVideoOverlay(heroAsset, LONGFORM_POOL);
-    if (heroAsset && heroPlayer) heroPlayer.onclick = () => openVideoOverlay(heroAsset, LONGFORM_POOL);
-
-    // "Watch shorts" pill — open feed at first slide
-    const watchShortsBtn = document.getElementById('watchShortsBtn');
-    if (watchShortsBtn) {
-      watchShortsBtn.addEventListener('click', () => openReelsFeed(seg.shorts, 0));
-    }
-
-    // Autoplay-on-viewport for all new card videos
-    if (window.JW && window.JW.initAutoplayVideos) window.JW.initAutoplayVideos(document.body);
-
-    // Tabs
-    wireTabs();
   });
-
-  // Mini-player controls
-  document.getElementById('miniPlayerClose').addEventListener('click', closeMiniPlayer);
-  document.getElementById('miniPlayerExpand').addEventListener('click', () => {
-    if (!CURRENT_ASSET) return;
-    const asset = CURRENT_ASSET;
-    closeMiniPlayer();
-    setTimeout(() => openDetail(asset), 100);
-  });
-
-  // Detail modal controls
-  document.getElementById('detailClose').addEventListener('click', closeDetail);
-  document.getElementById('detailOverlay').addEventListener('click', e => {
-    if (e.target.id === 'detailOverlay') closeDetail();
-  });
-  // Reels feed controls
-  document.getElementById('reelsClose').addEventListener('click', closeReelsFeed);
-  document.getElementById('reelsNavUp').addEventListener('click', () => scrollReels(-1));
-  document.getElementById('reelsNavDown').addEventListener('click', () => scrollReels(1));
-  // Wheel-to-slide on desktop (debounced — one slide per gesture)
-  document.getElementById('reelsOverlay').addEventListener('wheel', e => {
-    if (!REELS_OPEN) return;
-    e.preventDefault();
-    const now = Date.now();
-    if (now - REELS_WHEEL_LOCK < 360) return;
-    if (Math.abs(e.deltaY) < 12) return;
-    REELS_WHEEL_LOCK = now;
-    scrollReels(e.deltaY > 0 ? 1 : -1);
-  }, { passive: false });
-
-  document.addEventListener('keydown', e => {
-    if (REELS_OPEN) {
-      if (e.key === 'Escape') return closeReelsFeed();
-      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); scrollReels(1); return; }
-      if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); scrollReels(-1); return; }
-      if (e.key.toLowerCase() === 'm') { toggleReelsMute(); return; }
-    }
-    if (e.key === 'Escape') {
-      if (document.getElementById('detailOverlay').classList.contains('open')) closeDetail();
-      else if (document.getElementById('miniPlayer').classList.contains('open')) closeMiniPlayer();
-    }
-  });
+  var mq=matchMedia('(max-width:760px)');
+  var yt=document.getElementById('ytView'),ig=document.getElementById('igView');
+  function sync(){
+    if(yt)yt.setAttribute('aria-hidden',mq.matches?'true':'false');
+    if(ig)ig.setAttribute('aria-hidden',mq.matches?'false':'true');
+  }
+  sync();
+  if(mq.addEventListener)mq.addEventListener('change',sync);else mq.addListener(sync);
 })();
 </script>
 </body>

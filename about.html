@@ -1,156 +1,260 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>About — JourneyWell</title>
-<meta name="description" content="JourneyWell is a husband-and-wife studio building content authority for founders and brands. Meet Tim and Melodie Simmons." />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>About · JourneyWell</title>
+<meta name="description" content="JourneyWell is a small, deliberate studio led by a husband-and-wife team in Baton Rouge, Louisiana. Built by founders, for founders who actually want to be seen."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>if(!matchMedia('(prefers-reduced-motion:reduce)').matches)document.documentElement.classList.add('janim');</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<link rel="icon" type="image/png" href="images/jw-logo.png"/>
+<link rel="stylesheet" href="v2.css"/>
+<style>
+/* ============ ABOUT · editorial magazine identity ============ */
 
-<link rel="canonical" href="https://journeywell.io/about.html" />
-<meta name="theme-color" content="#CFF42A" />
+/* ---- dark cover / hero ---- */
+.phero.about-hero{padding:200px 0 130px;background:var(--ink)}
+.about-hero .ptag{color:var(--muted);letter-spacing:.3em;margin-bottom:30px}
+.phero.about-hero h1{font-family:'Cormorant Garamond',Garamond,serif;font-weight:500;letter-spacing:-.012em;line-height:1.05;font-size:clamp(44px,7vw,96px);max-width:none}
+.about-hero h1 em{font-weight:500;font-size:1em}
+.about-hero .lead{margin-top:30px;max-width:52ch}
+.begin{margin-top:70px;display:flex;align-items:center;gap:18px;color:var(--faint);font-size:11px;font-weight:600;letter-spacing:.28em;text-transform:uppercase}
+.begin .rule{height:1px;width:min(240px,32vw);background:linear-gradient(90deg,var(--lime),transparent)}
+@media(max-width:560px){
+  .phero.about-hero{padding:160px 0 90px}
+  .phero.about-hero h1{font-size:clamp(37px,10.5vw,44px)}
+}
 
-<link rel="icon" type="image/png" href="/images/jw-logo.png" />
-<link rel="apple-touch-icon" href="/images/jw-logo.png" />
+/* ---- the cream magazine body ---- */
+.magazine{background:var(--cream);color:#12120f}
+.magazine h2{color:#12120f}
+.magazine em{color:#5c680f}
+.magazine .eyebrow{color:#5c680f}
+.magazine mark{background:var(--lime);color:#12120f;padding:.02em .24em;border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.mag-label{display:flex;align-items:center;gap:22px;color:#6b6b60;font-size:11.5px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;white-space:nowrap}
+.mag-label::before,.mag-label::after{content:"";height:1px;background:rgba(18,18,15,.16);flex:1;min-width:24px}
+.mag-label.left::before{display:none}
+@media(max-width:600px){
+  .mag-label{font-size:10px;letter-spacing:.18em;gap:14px}
+  .mag-label.left{white-space:normal}
+  .mag-label.left::after{display:none}
+}
 
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="JourneyWell" />
-<meta property="og:title" content="About — JourneyWell" />
-<meta property="og:description" content="A husband-and-wife studio building content authority for founders and brands. Meet Tim and Melodie Simmons." />
-<meta property="og:url" content="https://journeywell.io/about.html" />
-<meta property="og:image" content="https://journeywell.io/images/jw-logo.png" />
+/* ---- 1 · the letter ---- */
+.letter{padding:clamp(88px,10vw,150px) 0 clamp(72px,8vw,120px)}
+.letter-grid{margin-top:clamp(52px,6vw,84px);display:grid;grid-template-columns:minmax(0,60ch) minmax(260px,380px);gap:clamp(44px,7vw,110px);justify-content:space-between;align-items:start}
+.letter-body{font-family:'Cormorant Garamond',Garamond,serif;font-weight:500;font-size:clamp(18px,1.45vw,21px);line-height:1.68;color:#33332b}
+.letter-body .salut{font-style:italic;font-size:1.18em;color:#12120f;margin-bottom:1.4em}
+.letter-body p+p{margin-top:1.25em}
+.letter-body p.opener::first-letter{float:left;font-family:'Cormorant Garamond',Garamond,serif;font-weight:600;font-size:4.9em;line-height:.76;padding:.06em .14em 0 0;color:#5c680f}
+.signoff{margin-top:2.6em}
+.sig{display:inline-block;font-family:'Cormorant Garamond',Garamond,serif;font-style:italic;font-weight:600;font-size:clamp(40px,4.4vw,58px);line-height:1;color:#12120f;transform:rotate(-2deg);transform-origin:left bottom;margin-top:20px}
+.sig-role{margin-top:18px;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#6b6b60}
+.polaroid{background:#fff;margin:34px 0 0;padding:12px 12px 16px;border:1px solid rgba(18,18,15,.06);box-shadow:0 30px 70px -34px rgba(18,18,15,.42),0 3px 10px rgba(18,18,15,.08);transform:rotate(2.6deg)}
+.polaroid img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.polaroid figcaption{padding:14px 6px 4px;font-family:'Cormorant Garamond',Garamond,serif;font-style:italic;font-size:17px;line-height:1.45;color:#55554b;text-align:center}
+@media(max-width:900px){
+  .letter-grid{grid-template-columns:1fr;gap:0}
+  .polaroid{max-width:330px;margin:52px auto 0}
+}
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="About — JourneyWell" />
-<meta name="twitter:description" content="A husband-and-wife studio building content authority for founders and brands. Meet Tim and Melodie Simmons." />
-<meta name="twitter:image" content="https://journeywell.io/images/jw-logo.png" />
+/* ---- 2 · archive strip ---- */
+.archive{padding:clamp(72px,8vw,124px) 0;border-top:1px solid rgba(18,18,15,.12)}
+.arch-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px 28px;flex-wrap:wrap}
+.arch-note{font-family:'Cormorant Garamond',Garamond,serif;font-style:italic;font-size:17px;color:#6b6b60}
+.arch-rows{margin-top:clamp(36px,4.5vw,60px);display:flex;flex-direction:column;gap:clamp(30px,4vw,50px)}
+.arch-row{display:flex;align-items:flex-end;gap:clamp(22px,3.6vw,56px);overflow-x:auto;padding:10px 2px 4px;scrollbar-width:none}
+.arch-row::-webkit-scrollbar{display:none}
+.arch-row.two{padding-left:clamp(26px,9vw,132px)}
+.arch-item{flex:0 0 auto;margin:0}
+.arch-item img{height:var(--h,72px);width:auto;filter:grayscale(1);transition:filter .45s var(--ease),transform .45s var(--easex)}
+.arch-item:hover img{filter:grayscale(0);transform:translateY(-4px)}
+.arch-item figcaption{margin-top:10px;font-size:10.5px;font-weight:600;letter-spacing:.06em;color:#6b6b60;opacity:.62;white-space:nowrap;transition:opacity .3s var(--ease)}
+.arch-item:hover figcaption{opacity:1}
 
-<link rel="stylesheet" href="style.css?v=5" />
-<link rel="stylesheet" href="lite.css" />
-<link rel="stylesheet" href="redesign.css" />
+/* ---- 3 · principles index ---- */
+.pindex{padding:clamp(84px,9vw,140px) 0;border-top:1px solid rgba(18,18,15,.12)}
+.pindex .sub{margin-top:18px;font-family:'Cormorant Garamond',Garamond,serif;font-style:italic;font-size:clamp(17px,1.4vw,20px);color:#55554b}
+.idx{margin-top:clamp(44px,5vw,68px)}
+.idx-row{display:grid;grid-template-columns:clamp(80px,10vw,130px) minmax(0,340px) 1fr;gap:clamp(20px,3vw,48px);align-items:baseline;padding:clamp(26px,3vw,38px) 0;border-top:1px solid rgba(18,18,15,.16)}
+.idx-row:last-child{border-bottom:1px solid rgba(18,18,15,.16)}
+.idx-num{font-family:'Cormorant Garamond',Garamond,serif;font-style:italic;font-weight:500;font-size:clamp(36px,4vw,58px);line-height:.8;color:#5c680f}
+.idx-row h3{font-weight:800;letter-spacing:-.02em;font-size:clamp(19px,1.7vw,24px);color:#12120f}
+.idx-row p{color:#43433c;font-size:15.5px;line-height:1.62;max-width:56ch}
+@media(max-width:760px){
+  .idx-row{grid-template-columns:56px minmax(0,1fr)}
+  .idx-row p{grid-column:2}
+}
 
-<script type="application/ld+json">
-{ "@context":"https://schema.org","@type":"AboutPage","url":"https://journeywell.io/about.html","name":"About JourneyWell","isPartOf":{"@type":"WebSite","name":"JourneyWell","url":"https://journeywell.io"} }
-</script>
+/* ---- 4 · baton rouge feature ---- */
+.br{padding-top:clamp(70px,8vw,120px)}
+.br-photo{height:clamp(380px,64vh,660px);overflow:hidden;position:relative;margin:0}
+.br-photo img{width:100%;height:118%;object-fit:cover;will-change:transform}
+.br-panel{position:relative;z-index:2;background:var(--cream);width:min(680px,100%);margin-top:calc(-1 * clamp(84px,10vw,150px));padding:clamp(30px,4vw,50px) clamp(26px,4vw,54px) 0 0}
+.br-panel .eyebrow{display:block;margin-bottom:18px}
+.br-panel h2{font-size:clamp(30px,4vw,52px)}
+.br-panel p{margin-top:18px;color:#43433c;font-size:16px;line-height:1.62;max-width:54ch}
+.br-credit{margin-top:22px;font-family:'Cormorant Garamond',Garamond,serif;font-style:italic;font-size:16px;color:#6b6b60}
+
+/* ---- colophon ---- */
+.colophon{padding:clamp(66px,8vw,110px) 0;text-align:center;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#6b6b60}
+</style>
 </head>
-<body class="lite">
+<body>
+<div class="grain"></div>
+<div id="cur"></div><div id="curr"><span class="lab"></span></div>
 
-<!-- HERO -->
-<section class="lite-hero">
-  <div class="lite-container">
-    <div class="eyebrow">About JourneyWell</div>
-    <h1>Built by founders, for founders who actually want to be <em>seen</em>.</h1>
-    <p class="lead">JourneyWell is a small, deliberate studio led by a husband-and-wife team in Baton Rouge, Louisiana. We produce, edit, and ship content for brands that are tired of pretending content is happening.</p>
+<nav id="nav"><div class="wrap">
+  <a class="brand" href="index.html"><span class="dot">J</span> JourneyWell</a>
+  <div class="navlinks">
+    <a href="studio.html">Book the Studio</a>
+    <a href="podcast.html">Launch a Podcast</a>
+    <a href="authority.html">Build Authority</a>
+    <a href="work.html">Work</a>
+    <a href="about.html" style="color:var(--cream)">About</a>
   </div>
-</section>
+  <button class="navcta mag" data-open-drawer>Work with us</button>
+</div></nav>
 
-<!-- IMAGE SLOT 08 — Founders portrait band -->
-<div class="jw-band">
-  <!-- SWAP: replace src with your photo for slot 08 -->
-    <img class="jw-slot-img" src="images/bts/08-about-team.jpg" alt="The JourneyWell team at work" loading="lazy" />
-</div>
+<!-- DARK COVER -->
+<header class="phero about-hero"><div class="wrap">
+  <div class="ptag he-in">About JourneyWell &nbsp;·&nbsp; Est. 2022 &nbsp;·&nbsp; Baton Rouge, LA</div>
+  <h1>
+    <span class="ln"><i>Built by founders,</i></span>
+    <span class="ln"><i>for founders who actually</i></span>
+    <span class="ln"><i>want to be <em>seen</em>.</i></span>
+  </h1>
+  <p class="lead he-in">JourneyWell is a small, deliberate studio run by a husband and wife in Baton Rouge, Louisiana. What follows is our story, told the way we would tell it across the table. Pour a coffee.</p>
+  <div class="begin he-in"><span>Begin reading</span><span class="rule"></span></div>
+</div></header>
 
-<!-- FOUNDERS -->
-<section class="lite-section alt">
-  <div class="lite-container">
-    <div class="lite-founders">
-      <div class="lite-founders-photo">
-        <img src="images/tim-and-mel.png" alt="Tim and Melodie Simmons" />
+<!-- THE CREAM MAGAZINE BODY -->
+<div class="magazine">
+
+  <!-- 1 · A LETTER FROM TIM & MEL -->
+  <section class="letter"><div class="wrap">
+    <div class="mag-label reveal">A letter from Tim &amp; Mel</div>
+    <div class="letter-grid">
+      <div class="letter-body reveal">
+        <p class="salut">Dear founder,</p>
+        <p class="opener">We started JourneyWell in 2022 because we kept watching the gap between DIY content and agency content eat founders alive. Doing it yourself meant nights, weekends, and a show that quietly died at episode six. Hiring an agency meant six month timelines, hostage files, and content that sounded like nobody in particular.</p>
+        <p>So we built the thing in between. A real studio with a real editorial team, kept small on purpose: small enough to know your voice, your clients, and what you actually sell, systemized enough to <mark>ship every single week</mark>.</p>
+        <p>Four years in, that is still the whole model. A husband and wife in the middle of it, a handful of editors and producers we trust completely, and a calendar that does not slip. We would rather stay this size and be essential to fifteen brands than triple and be forgettable to a hundred.</p>
+        <p>Come see the room sometime. The coffee is good and the mics are always hot.</p>
+        <div class="signoff">
+          <p>See you in the studio,</p>
+          <div class="sig">Tim &amp; Melodie</div>
+          <div class="sig-role">Tim &amp; Melodie Simmons · Co-founders, JourneyWell Studios</div>
+        </div>
       </div>
-      <div>
-        <div class="eyebrow">Co-founders</div>
-        <h2>Tim &amp; Melodie Simmons</h2>
-        <p>We started JourneyWell in 2022 with a simple question: <em class="serif">why do most founder podcasts feel like Zoom calls — and most agency content feel like spam?</em></p>
-        <p>Four years later, we've built a studio and a system designed to make neither happen to your brand. Tim runs strategy, production, and the studio floor. Melodie runs operations, client experience, and the editorial standard.</p>
-        <p>It's a small operation by design. We take on a deliberate number of brands per quarter so the work stays exceptional — not because we're trying to be exclusive, but because content that compounds requires real focus.</p>
-        <div class="signature">— Tim &amp; Mel</div>
+      <figure class="polaroid reveal">
+        <img src="images/tim-and-mel.png" alt="Tim and Melodie Simmons, JourneyWell co-founders"/>
+        <figcaption>The two of us. Studio one, somewhere around episode forty.</figcaption>
+      </figure>
+    </div>
+  </div></section>
+
+  <!-- 2 · ARCHIVE STRIP -->
+  <section class="archive"><div class="wrap">
+    <div class="arch-head reveal">
+      <div class="mag-label left">From the studio archive, 2022-2026</div>
+      <div class="arch-note">Ten frames from four years of sessions. Hover for color.</div>
+    </div>
+    <div class="arch-rows">
+      <div class="arch-row reveal">
+        <figure class="arch-item" style="--h:86px"><img src="images/bts/06-studio-mic.jpg" alt="Microphone close-up in studio one"/><figcaption>01 · Mic check, studio one</figcaption></figure>
+        <figure class="arch-item" style="--h:64px"><img src="images/bts/03c-home-edit.jpg" alt="The edit suite"/><figcaption>02 · The edit suite</figcaption></figure>
+        <figure class="arch-item" style="--h:80px"><img src="images/bts/07a-studio-interview.jpg" alt="Interview set with two chairs"/><figcaption>03 · Interview set</figcaption></figure>
+        <figure class="arch-item" style="--h:92px"><img src="images/bts/03b-home-founder-tall.jpg" alt="Founder recording a session"/><figcaption>04 · Founder session</figcaption></figure>
+        <figure class="arch-item" style="--h:68px"><img src="images/bts/01-home-studio-band.jpg" alt="Full band session in the studio"/><figcaption>05 · Full band, one take</figcaption></figure>
+      </div>
+      <div class="arch-row two reveal">
+        <figure class="arch-item" style="--h:72px"><img src="images/bts/04-home-cinema.jpg" alt="Cinema camera rig"/><figcaption>06 · Cinema rig</figcaption></figure>
+        <figure class="arch-item" style="--h:88px"><img src="images/bts/05-studio-detail.jpg" alt="Studio set details"/><figcaption>07 · Set details</figcaption></figure>
+        <figure class="arch-item" style="--h:62px"><img src="images/bts/10-podcast-session.jpg" alt="Podcast recording session"/><figcaption>08 · Podcast, take one</figcaption></figure>
+        <figure class="arch-item" style="--h:80px"><img src="images/bts/08-about-team.jpg" alt="The JourneyWell team at work"/><figcaption>09 · The team, 2024</figcaption></figure>
+        <figure class="arch-item" style="--h:70px"><img src="images/bts/07c-studio-brand.jpg" alt="Brand shoot day on set"/><figcaption>10 · Brand shoot day</figcaption></figure>
       </div>
     </div>
-  </div>
-</section>
+  </div></section>
 
-<!-- THE STORY -->
-<section class="lite-section">
-  <div class="lite-narrow">
-    <div class="eyebrow">The story</div>
-    <h2 style="margin-bottom:24px">Built for the gap between in-house and agency.</h2>
-    <p style="font-size:18px; color:var(--ink-2); line-height:1.7; margin-bottom:18px">
-      Most founder content lives in two failure modes. Either you do it yourself — and ship one LinkedIn post a quarter
-      because you're running a company — or you hire an agency that produces something polished and forgettable that nobody can tell came from you.
-    </p>
-    <p style="font-size:18px; color:var(--ink-2); line-height:1.7; margin-bottom:18px">
-      JourneyWell was built for the third path. A real studio you can walk into. A real editorial team behind it. A system
-      that turns one recording into a month of content. And a calendar that runs without you having to babysit it.
-    </p>
-    <p style="font-size:18px; color:var(--ink-2); line-height:1.7">
-      We've been refining the system with 15+ founder brands. Two Dudes And, Smile Spa, Melara, Bonvenu Bank, She's Built Different — each one
-      tested and broke the system in different ways. What's left is what works.
-    </p>
-  </div>
-</section>
-
-<!-- IMAGE SLOT 09 — Editorial cinematic -->
-<div class="jw-cinematic">
-  <!-- SWAP: replace src with your photo for slot 09 -->
-    <img class="jw-slot-img" src="images/bts/09-about-founders.jpg" alt="Founders at work in the studio" loading="lazy" />
-  <div class="jw-cinematic-overlay"><div class="jw-cinematic-lede">Small team. <em>Big output.</em></div></div>
-</div>
-
-<!-- VALUES -->
-<section class="lite-section alt">
-  <div class="lite-container">
-    <div class="lite-section-head">
-      <div class="eyebrow neutral">How we work</div>
-      <h2>Four operating principles.</h2>
-    </div>
-
-    <div class="lite-grid cols-2">
-      <div class="lite-step-card">
-        <div class="lite-step-num">01</div>
+  <!-- 3 · PRINCIPLES INDEX -->
+  <section class="pindex"><div class="wrap">
+    <div class="mag-label left reveal">How we work</div>
+    <h2 class="reveal" style="margin-top:26px">Four operating <em>principles</em>.</h2>
+    <p class="sub reveal">In order of how often we say them out loud.</p>
+    <div class="idx">
+      <div class="idx-row reveal">
+        <div class="idx-num">i.</div>
         <h3>Done, not perfect.</h3>
-        <p>Real content compounds. Polished content that ships in 8 weeks loses to good content that ships in two. We optimize for cadence first, polish second.</p>
+        <p>A shipped episode beats a perfect plan, and polish without cadence is a graveyard.</p>
       </div>
-      <div class="lite-step-card">
-        <div class="lite-step-num">02</div>
+      <div class="idx-row reveal">
+        <div class="idx-num">ii.</div>
         <h3>You own everything.</h3>
-        <p>All masters, all brand assets, all feeds. We don't lock you into our infrastructure. If you leave, you take everything with you.</p>
+        <p>Raw files, masters, feeds, accounts: all yours from day one, because we are allergic to hostage taking.</p>
       </div>
-      <div class="lite-step-card">
-        <div class="lite-step-num">03</div>
+      <div class="idx-row reveal">
+        <div class="idx-num">iii.</div>
         <h3>It has to sound like you.</h3>
-        <p>No generic AI slop. Every piece of content goes through human editorial. If it could've been written by anyone, it shouldn't have your name on it.</p>
+        <p>Everything we ship is cut from your actual voice and words, and if your mom would not recognize you in it, we redo it.</p>
       </div>
-      <div class="lite-step-card">
-        <div class="lite-step-num">04</div>
+      <div class="idx-row reveal">
+        <div class="idx-num">iv.</div>
         <h3>Real numbers, real reviews.</h3>
-        <p>Quarterly authority audits. Real metrics. Honest answers when something isn't working. We're operators, not vendors.</p>
+        <p>Monthly reporting on what actually moved: impressions, listens, replies, booked calls. No vanity decks.</p>
       </div>
     </div>
-  </div>
-</section>
+  </div></section>
 
-<!-- LOCATION -->
-<section class="lite-section">
-  <div class="lite-narrow">
-    <div class="eyebrow">Where we are</div>
-    <h2 style="margin-bottom:18px">Baton Rouge, Louisiana.</h2>
-    <p style="font-size:18px; color:var(--ink-2); line-height:1.7">
-      The studio is in Baton Rouge. We work with clients globally — most of our editorial team is remote.
-      If you're local and want to come tour the studio, we'll happily host you for an hour. Just ask.
-    </p>
-  </div>
-</section>
+  <!-- 4 · BATON ROUGE FEATURE -->
+  <section class="br">
+    <figure class="br-photo" data-cursor="view"><img src="images/bts/09-about-founders.jpg" alt="The JourneyWell studio in Baton Rouge" data-parallax-img/></figure>
+    <div class="wrap"><div class="br-panel reveal">
+      <span class="eyebrow">Where we are</span>
+      <h2>Baton Rouge, <em>Louisiana</em>.</h2>
+      <p>A real room you can walk into. Mics hot, lights set, coffee on. Most of our clients are Louisiana founders who record with us monthly, and remote founders fly in to batch an entire quarter in a single day.</p>
+      <div class="br-credit">Studio one, photographed on a Tuesday afternoon.</div>
+    </div></div>
+  </section>
 
-<!-- BIG CTA -->
-<section class="lite-cta">
-  <div class="lite-container">
-    <h2>Want to work together?</h2>
-    <p>Whether it's one studio session or a full system — start the conversation.</p>
-    <div class="lite-cta-buttons">
-      <button class="btn btn-large btn-primary" data-open-drawer>Get started</button>
+  <div class="colophon reveal">JourneyWell Studios &nbsp;·&nbsp; About, Vol. I &nbsp;·&nbsp; Written in Baton Rouge, Louisiana &nbsp;·&nbsp; Est. 2022</div>
+
+</div>
+
+<!-- BACK TO DARK · STATS -->
+<div class="stats"><div class="wrap">
+  <div class="stat reveal"><div class="num"><span class="count" data-to="2022">0</span></div><div class="lbl">Studio founded</div></div>
+  <div class="stat reveal"><div class="num"><span class="count" data-to="200">0</span><em>+</em></div><div class="lbl">Episodes produced</div></div>
+  <div class="stat reveal"><div class="num"><span class="count" data-to="15">0</span><em>+</em></div><div class="lbl">Founder brands</div></div>
+  <div class="stat reveal"><div class="num"><span class="count" data-to="9.4" data-dec="1">0</span><em>k+</em></div><div class="lbl">Assets in the vault</div></div>
+</div></div>
+
+<!-- CTA -->
+<section class="cta"><div class="wrap">
+  <h2 class="reveal">Want to work<br><em>together</em>?</h2>
+  <p class="reveal">Come see the studio, meet the team, and map your first month of content. Start in 30 seconds.</p>
+  <button class="btn btn-primary mag reveal" data-open-drawer>Start the conversation <span class="ar">↗</span></button>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="top">
+    <div>
+      <a class="brand" href="index.html"><span class="dot">J</span> JourneyWell</a>
+      <p style="color:var(--muted);max-width:32ch;font-size:14px">The studio + system behind founders building real content authority. Baton Rouge, LA.</p>
+    </div>
+    <div class="cols">
+      <div class="fcol"><h4>Work with us</h4><a href="studio.html">Book the Studio</a><a href="podcast.html">Launch a Podcast</a><a href="authority.html">Build Authority</a></div>
+      <div class="fcol"><h4>Studio</h4><a href="work.html">The Work</a><a href="about.html">About</a><a href="blog.html">Notes</a></div>
     </div>
   </div>
-</section>
-
-<script src="chrome.js"></script>
+  <div class="bot"><div>© 2026 JourneyWell Studios</div><div>Produced in-house · Owned by you</div></div>
+</div></footer>
+<script src="v2.js"></script>
 </body>
 </html>
