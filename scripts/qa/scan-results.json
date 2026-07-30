@@ -477,12 +477,6 @@
     "color": "rgba(10, 10, 10, 0.62)"
    },
    {
-    "el": "button.row-action-pill",
-    "text": "WATCH SHORTS",
-    "bg": "rgb(207, 244, 42)",
-    "color": "rgb(0, 0, 0)"
-   },
-   {
     "el": "div.subscribe-card",
     "text": "WANT YOURS NEXT?\nTHIS IS WHAT THE SYSTEM SHIPS.\n\nE",
     "bg": "rgb(207, 244, 42)",
@@ -1199,12 +1193,6 @@
    {
     "el": "a.channel-tab.active",
     "text": "BEHIND THE SCENES",
-    "bg": "rgb(207, 244, 42)",
-    "color": "rgb(0, 0, 0)"
-   },
-   {
-    "el": "button.row-action-pill",
-    "text": "WATCH SHORTS",
     "bg": "rgb(207, 244, 42)",
     "color": "rgb(0, 0, 0)"
    },
