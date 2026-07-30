@@ -200,7 +200,7 @@
 }
 
 /* ---------- Newsletter slab (cream) ---------- */
-.blog-newsletter-slab { padding: 96px 0; }
+.blog-newsletter-slab { padding: 56px 0; }
 .blog-newsletter-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

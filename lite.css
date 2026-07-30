@@ -61,8 +61,10 @@ body.lite .lite-narrow { max-width: 760px; margin: 0 auto; padding: 0 28px; }
   body.lite .lite-container, body.lite .lite-narrow { padding: 0 18px; }
 }
 
-body.lite .lite-section { padding: 96px 0; }
-body.lite .lite-section.tight { padding: 56px 0; }
+/* B3 (FIX-RUNBOOK): section bands roughly halved — the old 96px gaps left
+   whole viewports of empty gradient between sections at scroll speed. */
+body.lite .lite-section { padding: 52px 0; }
+body.lite .lite-section.tight { padding: 36px 0; }
 body.lite .lite-section.alt { background: var(--bg-alt); }
 
 /* ---------- NAV (overrides chrome.js dark nav) ---------- */
@@ -364,7 +366,7 @@ body.lite .hero-video-ctas {
 
 /* ---------- HERO ---------- */
 body.lite .lite-hero {
-  padding: 88px 0 48px;
+  padding: 56px 0 40px;
   position: relative;
   overflow: hidden;
 }
@@ -732,7 +734,7 @@ body.lite .lite-founders .signature {
 
 /* ---------- BIG CTA BAND ---------- */
 body.lite .lite-cta {
-  padding: 88px 0;
+  padding: 56px 0;
   background: var(--ink);
   color: #fff;
   text-align: center;

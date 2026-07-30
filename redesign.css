@@ -531,29 +531,31 @@ body.lite .hero-split .hero-carousel {
    like `body.lite .lite-card` win specificity and replace this rule's list,
    which dropped opacity/filter and made cards pop in. Animations apply
    independently of the transition cascade and can't be clobbered the same way. */
+/* B3 (FIX-RUNBOOK): reveals must never leave a viewport empty at human
+   scroll speed — duration + delay capped at ~300ms, small offset, light blur. */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  filter: blur(6px);
+  transform: translateY(14px);
+  filter: blur(3px);
   will-change: opacity, transform, filter;
 }
 .reveal.is-in-view {
-  animation: jw-reveal-fade 1s cubic-bezier(.22, .61, .36, 1) forwards;
+  animation: jw-reveal-fade 0.28s cubic-bezier(.22, .61, .36, 1) forwards;
 }
 @keyframes jw-reveal-fade {
   to { opacity: 1; transform: none; filter: none; }
 }
 
-/* Stagger children inside grids so they cascade in instead of all at once */
+/* Stagger children inside grids so they cascade in instead of all at once.
+   Delays capped ≤ 0.28s so the last card never lags a full beat behind. */
 .reveal-stagger > .reveal:nth-child(1)  { animation-delay: 0.00s; }
-.reveal-stagger > .reveal:nth-child(2)  { animation-delay: 0.07s; }
-.reveal-stagger > .reveal:nth-child(3)  { animation-delay: 0.14s; }
-.reveal-stagger > .reveal:nth-child(4)  { animation-delay: 0.21s; }
-.reveal-stagger > .reveal:nth-child(5)  { animation-delay: 0.28s; }
-.reveal-stagger > .reveal:nth-child(6)  { animation-delay: 0.35s; }
-.reveal-stagger > .reveal:nth-child(7)  { animation-delay: 0.42s; }
-.reveal-stagger > .reveal:nth-child(8)  { animation-delay: 0.49s; }
-.reveal-stagger > .reveal:nth-child(n+9) { animation-delay: 0.56s; }
+.reveal-stagger > .reveal:nth-child(2)  { animation-delay: 0.04s; }
+.reveal-stagger > .reveal:nth-child(3)  { animation-delay: 0.08s; }
+.reveal-stagger > .reveal:nth-child(4)  { animation-delay: 0.12s; }
+.reveal-stagger > .reveal:nth-child(5)  { animation-delay: 0.16s; }
+.reveal-stagger > .reveal:nth-child(6)  { animation-delay: 0.20s; }
+.reveal-stagger > .reveal:nth-child(7)  { animation-delay: 0.24s; }
+.reveal-stagger > .reveal:nth-child(n+8) { animation-delay: 0.28s; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal {

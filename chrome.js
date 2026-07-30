@@ -1084,11 +1084,11 @@
         }
       });
     }, {
-      // Shrink the observed viewport from the bottom by 15% so animations
-      // fire when elements scroll into the upper ~85% of the screen — they
-      // start fading as soon as they're meaningfully on-screen, not after.
-      threshold: 0.05,
-      rootMargin: '0px 0px -15% 0px'
+      // B3 (FIX-RUNBOOK): extend the observed viewport 200px BELOW the fold so
+      // sections start revealing before they enter — at human scroll speed the
+      // content is already visible when it arrives, never an empty viewport.
+      threshold: 0,
+      rootMargin: '0px 0px 200px 0px'
     });
 
     document.querySelectorAll('.reveal').forEach(function (el) {
