@@ -25,12 +25,11 @@
 })();
 
 (function () {
-  // Portfolio (portfolio.html) is temporarily hidden from navigation — the
-  // page still exists and can be revealed by adding it back to PAGES + MENU
-  // when ready.
+  // "Work" points at portfolio.html (case studies) until the work.html channel
+  // page can stand alone — deep links into the channel remain in the mega-menu.
   const PAGES = [
     { href: 'solutions.html', label: 'Solutions' },
-    { href: 'work.html',      label: 'Work' },
+    { href: 'portfolio.html', label: 'Work' },
     { href: 'about.html',     label: 'About' },
     { href: 'blog.html',      label: 'Blogs' },
   ];
@@ -80,21 +79,21 @@
     },
     {
       label: 'Work',
-      href: 'work.html',
+      href: 'portfolio.html',
       panel: {
         cols: [
           {
             heading: 'Watch',
             links: [
-              { icon: 'play',   label: 'Episodes',          sub: 'Long-form interviews',   href: 'work.html#section-episodes' },
-              { icon: 'video',  label: 'Shorts',            sub: 'Vertical reels & cuts',  href: 'work.html#section-shorts' },
+              { icon: 'play',   label: 'Episodes',          sub: 'Long-form interviews',   href: 'work.html#episodes' },
+              { icon: 'video',  label: 'Shorts',            sub: 'Vertical reels & cuts',  href: 'work.html#shorts' },
             ],
           },
           {
             heading: 'Explore',
             links: [
-              { icon: 'camera', label: 'Behind the scenes', sub: 'How the work gets made', href: 'work.html#section-bts' },
-              { icon: 'grid',   label: 'All shows',         sub: 'Every brand, every row', href: 'work.html' },
+              { icon: 'camera', label: 'Behind the scenes', sub: 'How the work gets made', href: 'work.html#bts' },
+              { icon: 'grid',   label: 'All shows',         sub: 'Every brand, every row', href: 'portfolio.html' },
             ],
           },
         ],
@@ -108,9 +107,6 @@
         },
       },
     },
-    // Portfolio mega-menu entry is temporarily hidden. Its panel/link
-    // definition can be restored alongside the PAGES entry above when the
-    // page returns to navigation.
     { label: 'About',   href: 'about.html' },
     { label: 'Blogs',   href: 'blog.html' },
   ];
