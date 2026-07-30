@@ -1274,6 +1274,24 @@ body.lite .hero-video-ctas .btn-ghost:hover,
 [data-theme="light"] .attr-name { color: #0a0a0a; }
 [data-theme="light"] .attr-role { color: rgba(10, 10, 10, 0.55); }
 
+/* =====================================================================
+   B4 (FIX-RUNBOOK) — mobile header: the theme-toggle circle sat flush
+   against (and on narrow metrics, on top of) the wordmark — at 390px the
+   right cluster (toggle + Get Started + hamburger) left zero free space.
+   Compact the cluster below 600px so the wordmark always has breathing room.
+   ===================================================================== */
+/* !important is deliberate: lite.css (body.lite .logo/.btn/.nav-cta) and the
+   non-lite nav rules above both outrank any clean selector here; these are
+   leaf-level phone-only size accommodations, not theme decisions. */
+@media (max-width: 600px) {
+  .theme-toggle { width: 32px !important; height: 32px !important; margin-right: 0 !important; }
+  .theme-toggle svg { width: 16px; height: 16px; }
+  .nav-cta { gap: 6px !important; }
+  .nav-cta .btn-gold { padding: 9px 12px !important; font-size: 11px !important; }
+  .logo { font-size: 15px !important; gap: 8px !important; }
+  .logo .logo-mark { width: 26px !important; height: 26px !important; }
+}
+
 /* ---------- Drawer: Book-a-call calendar embed ----------
    GHL iframe lives inside the drawer body. Pull it flush to the drawer
    edges (negative margin to escape body padding) so the calendar UI

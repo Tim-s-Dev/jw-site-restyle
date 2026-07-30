@@ -1475,17 +1475,30 @@
     const t = (tags || []).find(x => typeof x === 'string' && x.startsWith(prefix + ':'));
     return t ? t.slice(prefix.length + 1) : null;
   }
+  // B4 (FIX-RUNBOOK): display-title cleanup at render time. Vault titles ship
+  // with editor numbering ("9. ", "10) "), trailing production notes
+  // ("(Really short)"), file extensions, and emoji — none of which belong on
+  // the public site. content.json / API data stays untouched; this only
+  // shapes what renders. Exposed as JW.cleanDisplayTitle for page scripts
+  // (work.html applies it to its own card renderer too).
+  let EMOJI_RE = null;
+  try { EMOJI_RE = new RegExp('[\\p{Extended_Pictographic}\\u{FE0F}\\u{200D}\\u{20E3}]', 'gu'); } catch (e) { /* old engines: skip emoji strip */ }
   function cleanTitle(raw) {
-    return String(raw || 'Untitled')
-      .replace(/\.(mp4|mov|webm|m4v)$/i, '')
-      .replace(/^[✀-➿☀-⛿✅✔︎️\s]+/, '')
-      .trim();
+    let t = String(raw || '')
+      .replace(/\.(mp4|mov|webm|m4v)$/i, '')       // file extension
+      .replace(/^\s*\d{1,3}\s*[.)\-–—]\s+/, '')     // leading numbering "9. " / "10) "
+      .replace(/\s*\([^)]*\)\s*$/, '');             // trailing "(Really short)"-style note
+    if (EMOJI_RE) t = t.replace(EMOJI_RE, '');
+    t = t.replace(/\s{2,}/g, ' ').trim();
+    return t || 'Untitled';
   }
   function adaptCollectionAsset(a) {
     const brandSlug = tagValue(a.tags, 'brand');
     const topicSlug = tagValue(a.tags, 'topic');
     const fallback = cleanTitle(a.title);
-    const display = (a.display_title && String(a.display_title).trim()) || fallback;
+    const display = (a.display_title && String(a.display_title).trim())
+      ? cleanTitle(a.display_title)
+      : fallback;
     return {
       id: a.id,
       title: a.title || display,
@@ -1566,7 +1579,7 @@
     const hasVideo = isHttps(asset.cdn_url) && /\.(mp4|webm|mov)$/i.test(asset.cdn_url);
     const hasThumb = isHttps(asset.thumbnail_url);
     const meta = asset.brand ? asset.brand : (asset.duration ? `${Math.round(asset.duration)}s` : 'Studio');
-    const title = asset.display_title || asset.title || 'Untitled';
+    const title = cleanTitle(asset.display_title || asset.title);
     let coverInner = '';
     if (hasVideo) {
       // Native autoplay + muted is allowed by all browsers without user interaction.
@@ -1715,6 +1728,7 @@
     loadCtTag,
     initAutoplayVideos,
     renderShowCard,
+    cleanDisplayTitle: cleanTitle,
     promoCard,
     injectPromo,
     icon,
