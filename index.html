@@ -93,13 +93,16 @@
     </div>
 
     <div class="hero-carousel" id="heroCarousel" aria-roledescription="carousel" aria-label="Recent work showcase">
+      <!-- Fallback slides are real local studio frames — chrome.js swaps in
+           live-feed:carousel videos when creator-tunnel answers; if it doesn't,
+           these stay. No stock/placeholder imagery here, ever. -->
       <div class="hero-carousel-stage">
-        <figure class="hero-slide" data-pos="prev"><img src="https://picsum.photos/seed/jw-a/640/800" alt="Recent JourneyWell studio production"></figure>
-        <figure class="hero-slide" data-pos="current"><img src="https://picsum.photos/seed/jw-b/640/800" alt="Recent JourneyWell studio production"></figure>
-        <figure class="hero-slide" data-pos="next"><img src="https://picsum.photos/seed/jw-c/640/800" alt="Recent JourneyWell studio production"></figure>
-        <figure class="hero-slide" data-pos="hidden"><img src="https://picsum.photos/seed/jw-d/640/800" alt="Recent JourneyWell studio production"></figure>
-        <figure class="hero-slide" data-pos="hidden"><img src="https://picsum.photos/seed/jw-e/640/800" alt="Recent JourneyWell studio production"></figure>
-        <figure class="hero-slide" data-pos="hidden"><img src="https://picsum.photos/seed/jw-f/640/800" alt="Recent JourneyWell studio production"></figure>
+        <figure class="hero-slide" data-pos="prev"><img src="images/bts/03b-home-founder-tall.jpg" alt="A founder recording session in the JourneyWell studio"></figure>
+        <figure class="hero-slide" data-pos="current"><img src="images/bts/06-studio-mic.jpg" alt="A host recording at the mic"></figure>
+        <figure class="hero-slide" data-pos="next"><img src="images/bts/02-home-split.jpg" alt="A recording session in progress"></figure>
+        <figure class="hero-slide" data-pos="hidden"><img src="images/bts/07b-studio-solo-tall.jpg" alt="Solo recording session"></figure>
+        <figure class="hero-slide" data-pos="hidden"><img src="images/bts/10-podcast-session.jpg" alt="A podcast recording session"></figure>
+        <figure class="hero-slide" data-pos="hidden"><img src="img/studio/2-mic.jpg" alt="Two-mic interview setup"></figure>
       </div>
       <div class="hero-carousel-dots" id="heroCarouselDots"></div>
     </div>
@@ -246,11 +249,34 @@
       <a href="work.html" class="btn btn-ghost">Browse all <span id="iconArrLink"></span></a>
     </div>
 
+    <!-- Baked fallback: real case-study cards (facts from portfolio.html).
+         The live feed overwrites these when creator-tunnel answers; if it
+         errors or times out, these stay — never a "Loading…" skeleton. -->
     <div class="lite-tile-grid" id="liteHomeTiles">
-      <!-- Filled by chrome.js loadCollection('web') -->
-      <div class="lite-tile"><div class="lite-tile-thumb"></div><div class="lite-tile-body"><div class="lite-tile-title">Loading…</div></div></div>
-      <div class="lite-tile"><div class="lite-tile-thumb"></div><div class="lite-tile-body"><div class="lite-tile-title">Loading…</div></div></div>
-      <div class="lite-tile"><div class="lite-tile-thumb"></div><div class="lite-tile-body"><div class="lite-tile-title">Loading…</div></div></div>
+      <a href="portfolio.html#case-bonvenu-bank" class="lite-tile">
+        <div class="lite-tile-thumb"><img src="images/bts/02-home-split.jpg" alt="A recording session in the JourneyWell studio" loading="lazy" /></div>
+        <div class="lite-tile-body">
+          <div class="lite-tile-eyebrow">Case study</div>
+          <div class="lite-tile-title">Bonvenu Bank — local bank → trusted advisor</div>
+          <div class="lite-tile-meta">5 brand pillars · 22 reels · 6 long-form</div>
+        </div>
+      </a>
+      <a href="portfolio.html#case-shes-built-different" class="lite-tile">
+        <div class="lite-tile-thumb"><img src="images/bts/03b-home-founder-tall.jpg" alt="A founder recording session" loading="lazy" /></div>
+        <div class="lite-tile-body">
+          <div class="lite-tile-eyebrow">Case study</div>
+          <div class="lite-tile-title">She's Built Different — concept → launched in 14 days</div>
+          <div class="lite-tile-meta">14d to launch · 7 episodes · 9 shorts</div>
+        </div>
+      </a>
+      <a href="portfolio.html#case-melara" class="lite-tile">
+        <div class="lite-tile-thumb"><img src="images/bts/10-podcast-session.jpg" alt="A podcast recording session" loading="lazy" /></div>
+        <div class="lite-tile-body">
+          <div class="lite-tile-eyebrow">Case study</div>
+          <div class="lite-tile-title">Melara — mortgage broker → finance educator</div>
+          <div class="lite-tile-meta">Weekly drops · 20+ reels · 3 series</div>
+        </div>
+      </a>
     </div>
   </div>
 </section>
@@ -429,19 +455,21 @@
     ['cmpC1','cmpC2','cmpC3','cmpC4','cmpC5','cmpC6'].forEach(id => setIcon(id, 'check', 18));
     ['cmpX1','cmpX2','cmpX3','cmpX4','cmpX5','cmpX6'].forEach(id => setIcon(id, 'minus', 18));
 
-    // Recent work tiles. Prefer CT tag `live-feed:recent-work` (cap 6). Until
-    // the curated set is populated, fall back to `live-feed:episode` so the
-    // row is never empty.
+    // Recent work tiles. Prefer CT tag `live-feed:recent-work` (cap 6), then
+    // `live-feed:episode`. Only LIVE feed data overwrites the baked fallback
+    // tiles above — on error/timeout the static case-study cards stay put.
+    const isLive = d => d && d.assets && d.assets.length &&
+      (d.source === 'creator-tunnel-tag' || d.source === 'mediavault-collection');
     let data = window.JW.loadCtTag
       ? await window.JW.loadCtTag('live-feed:recent-work', 6)
       : null;
-    if (!data || !data.assets || !data.assets.length) {
+    if (!isLive(data)) {
       data = window.JW.loadCtTag
         ? await window.JW.loadCtTag('live-feed:episode', 6)
-        : (window.JW.loadCollection ? await window.JW.loadCollection('web') : await window.JW.loadContent());
+        : (window.JW.loadCollection ? await window.JW.loadCollection('web') : null);
     }
     const wrap = document.getElementById('liteHomeTiles');
-    if (!wrap || !data || !data.assets || !data.assets.length) return;
+    if (!wrap || !isLive(data)) return;
     const items = data.assets.slice(0, 6);
     function fmtDur(s) {
       if (!s) return '';
@@ -485,8 +513,5 @@
     if (window.JW.initAutoplayVideos) window.JW.initAutoplayVideos(wrap);
   });
 </script>
-<!-- impeccable-live-start -->
-<script src="http://localhost:8400/live.js"></script>
-<!-- impeccable-live-end -->
 </body>
 </html>

@@ -122,6 +122,19 @@
   // SOP: AUTOMATION_SOP.md (Tim's Mac copy) and Memory API "JourneyWell Website Lead Automation".
   const GHL_WEBHOOK_URL = 'https://n8n.journeywellhub.com/webhook/jw-lead';
 
+  // Remote-feed fetches (creator-tunnel / MediaVault) must never hang the UI:
+  // every call goes through this 4s AbortController guard so a dead or slow
+  // API degrades to the baked fallbacks instead of leaving skeleton states.
+  const REMOTE_FETCH_TIMEOUT_MS = 4000;
+  function fetchWithTimeout(url, opts, ms) {
+    ms = ms || REMOTE_FETCH_TIMEOUT_MS;
+    const ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    const merged = Object.assign({}, opts || {}, ctrl ? { signal: ctrl.signal } : {});
+    let timer = null;
+    if (ctrl) timer = setTimeout(function () { ctrl.abort(); }, ms);
+    return fetch(url, merged).finally(function () { if (timer) clearTimeout(timer); });
+  }
+
   const here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   // Blog posts should mark "Blogs" as the active nav item
   const activeHref = IN_BLOG_POST ? 'blog.html' : here;
@@ -966,7 +979,7 @@
     const ctUrl = resolveCreatorTunnelUrl();
     if (!ctUrl) { frame.dataset.navMediaState = 'no-ct'; return; }
     try {
-      const res = await fetch(`${ctUrl}/api/assets?tag=${encodeURIComponent(tag)}&limit=1`, { cache: 'no-store' });
+      const res = await fetchWithTimeout(`${ctUrl}/api/assets?tag=${encodeURIComponent(tag)}&limit=1`, { cache: 'no-store' });
       if (!res.ok) { frame.dataset.navMediaState = 'http-' + res.status; return; }
       const data = await res.json();
       const asset = (data.items || [])[0];
@@ -1132,7 +1145,7 @@
       if (cache.has(slug)) return cache.get(slug);
       const p = (async () => {
         try {
-          const r = await fetch(`${ctUrl}/api/assets?tag=profile-picture:${encodeURIComponent(slug)}&limit=1`, { cache: 'no-store' });
+          const r = await fetchWithTimeout(`${ctUrl}/api/assets?tag=profile-picture:${encodeURIComponent(slug)}&limit=1`, { cache: 'no-store' });
           if (!r.ok) return null;
           const d = await r.json();
           return (d.items && d.items[0]) || null;
@@ -1173,7 +1186,7 @@
     const ctUrl = resolveCreatorTunnelUrl();
     if (!ctUrl) return null;
     try {
-      const res = await fetch(`${ctUrl}/api/assets?tag=live-feed:carousel&limit=6`, { cache: 'no-store' });
+      const res = await fetchWithTimeout(`${ctUrl}/api/assets?tag=live-feed:carousel&limit=6`, { cache: 'no-store' });
       if (!res.ok) return null;
       const data = await res.json();
       const playable = (data.items || []).filter(a =>
@@ -1198,7 +1211,7 @@
     const ctUrl = resolveCreatorTunnelUrl();
     if (!ctUrl) return;
     try {
-      const res = await fetch(`${ctUrl}/api/assets?tag=live-feed:hero&limit=1`, { cache: 'no-store' });
+      const res = await fetchWithTimeout(`${ctUrl}/api/assets?tag=live-feed:hero&limit=1`, { cache: 'no-store' });
       if (!res.ok) return;
       const data = await res.json();
       const a = (data.items || [])[0];
@@ -1430,7 +1443,7 @@
         : 'https://creator-tunnel.vercel.app');
     if (!ctUrl) return heroAssets.slice();
     try {
-      const res = await fetch(`${ctUrl}/api/assets?tag=live-feed:shorts&limit=48`, { cache: 'no-store' });
+      const res = await fetchWithTimeout(`${ctUrl}/api/assets?tag=live-feed:shorts&limit=48`, { cache: 'no-store' });
       if (!res.ok) return heroAssets.slice();
       const data = await res.json();
       const heroIds = new Set(heroAssets.map(a => a.id));
@@ -1457,6 +1470,18 @@
       console.warn('Could not load content.json — using placeholders.', e);
       return null;
     }
+  }
+
+  // ---------- BAKED FALLBACKS ----------
+  // content.json carries a `fallbacks` block (real case-study cards + local
+  // studio frames). Pages use it when the live feed errors out or times out,
+  // so the terminal state is always real content — never a skeleton.
+  let FALLBACKS_CACHE = null;
+  async function getFallbacks() {
+    if (FALLBACKS_CACHE) return FALLBACKS_CACHE;
+    const data = await loadContent();
+    FALLBACKS_CACHE = (data && data.fallbacks) || null;
+    return FALLBACKS_CACHE;
   }
 
   // ---------- COLLECTION LOADER (MediaVault → site) ----------
@@ -1501,7 +1526,7 @@
   }
   async function loadCollection(slug) {
     try {
-      const r = await fetch(`${MEDIAVAULT_API}/embed/${encodeURIComponent(slug)}`, { cache: 'no-cache' });
+      const r = await fetchWithTimeout(`${MEDIAVAULT_API}/embed/${encodeURIComponent(slug)}`, { cache: 'no-cache' });
       if (!r.ok) throw new Error(`status ${r.status}`);
       const j = await r.json();
       const assets = (j.assets || []).map(adaptCollectionAsset);
@@ -1533,7 +1558,7 @@
     try {
       const ctUrl = resolveCreatorTunnelUrl();
       const url = `${ctUrl}/api/assets?tag=${encodeURIComponent(tag)}&limit=${limit}`;
-      const r = await fetch(url, { cache: 'no-store' });
+      const r = await fetchWithTimeout(url, { cache: 'no-store' });
       if (!r.ok) throw new Error(`status ${r.status}`);
       const j = await r.json();
       const assets = (j.items || []).map(adaptCollectionAsset);
@@ -1707,6 +1732,7 @@
     openDrawer,
     renderWorkInto,
     loadContent,
+    getFallbacks,
     loadCollection,
     loadCtTag,
     initAutoplayVideos,
