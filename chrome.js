@@ -25,12 +25,11 @@
 })();
 
 (function () {
-  // Portfolio (portfolio.html) is temporarily hidden from navigation — the
-  // page still exists and can be revealed by adding it back to PAGES + MENU
-  // when ready.
+  // "Work" points at portfolio.html (case studies) until the work.html channel
+  // page can stand alone — deep links into the channel remain in the mega-menu.
   const PAGES = [
     { href: 'solutions.html', label: 'Solutions' },
-    { href: 'work.html',      label: 'Work' },
+    { href: 'portfolio.html', label: 'Work' },
     { href: 'about.html',     label: 'About' },
     { href: 'blog.html',      label: 'Blogs' },
   ];
@@ -80,21 +79,21 @@
     },
     {
       label: 'Work',
-      href: 'work.html',
+      href: 'portfolio.html',
       panel: {
         cols: [
           {
             heading: 'Watch',
             links: [
-              { icon: 'play',   label: 'Episodes',          sub: 'Long-form interviews',   href: 'work.html#section-episodes' },
-              { icon: 'video',  label: 'Shorts',            sub: 'Vertical reels & cuts',  href: 'work.html#section-shorts' },
+              { icon: 'play',   label: 'Episodes',          sub: 'Long-form interviews',   href: 'work.html#episodes' },
+              { icon: 'video',  label: 'Shorts',            sub: 'Vertical reels & cuts',  href: 'work.html#shorts' },
             ],
           },
           {
             heading: 'Explore',
             links: [
-              { icon: 'camera', label: 'Behind the scenes', sub: 'How the work gets made', href: 'work.html#section-bts' },
-              { icon: 'grid',   label: 'All shows',         sub: 'Every brand, every row', href: 'work.html' },
+              { icon: 'camera', label: 'Behind the scenes', sub: 'How the work gets made', href: 'work.html#bts' },
+              { icon: 'grid',   label: 'All shows',         sub: 'Every brand, every row', href: 'portfolio.html' },
             ],
           },
         ],
@@ -108,9 +107,6 @@
         },
       },
     },
-    // Portfolio mega-menu entry is temporarily hidden. Its panel/link
-    // definition can be restored alongside the PAGES entry above when the
-    // page returns to navigation.
     { label: 'About',   href: 'about.html' },
     { label: 'Blogs',   href: 'blog.html' },
   ];
@@ -125,6 +121,19 @@
   // Fans out to GHL Upsert + Notion Log + Slack Notify (#jw-leadteam C0AEWAS4Y6N).
   // SOP: AUTOMATION_SOP.md (Tim's Mac copy) and Memory API "JourneyWell Website Lead Automation".
   const GHL_WEBHOOK_URL = 'https://n8n.journeywellhub.com/webhook/jw-lead';
+
+  // Remote-feed fetches (creator-tunnel / MediaVault) must never hang the UI:
+  // every call goes through this 4s AbortController guard so a dead or slow
+  // API degrades to the baked fallbacks instead of leaving skeleton states.
+  const REMOTE_FETCH_TIMEOUT_MS = 4000;
+  function fetchWithTimeout(url, opts, ms) {
+    ms = ms || REMOTE_FETCH_TIMEOUT_MS;
+    const ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    const merged = Object.assign({}, opts || {}, ctrl ? { signal: ctrl.signal } : {});
+    let timer = null;
+    if (ctrl) timer = setTimeout(function () { ctrl.abort(); }, ms);
+    return fetch(url, merged).finally(function () { if (timer) clearTimeout(timer); });
+  }
 
   const here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   // Blog posts should mark "Blogs" as the active nav item
@@ -222,6 +231,10 @@
   }
 
   // ---------- FOOTER ----------
+  // Contact block: email + city + socials on every page. Studio street
+  // address intentionally absent — it is not published anywhere in this repo
+  // (the studio FAQ says it's sent with booking confirmations). Add it here
+  // once Tim supplies it. No phone number exists in the repo either.
   function footerHtml() {
     const allPages = PAGES.concat(SUB_PAGES);
     return `
@@ -237,6 +250,17 @@
             <a href="#">Terms</a>
           </div>
           <div class="footer-meta">© 2026 JourneyWell</div>
+        </div>
+        <div class="container footer-inner" style="margin-top:16px">
+          <div class="footer-meta">
+            <a href="mailto:team@journeywell.io" style="text-transform:none">team@journeywell.io</a>
+            <span>Baton Rouge, LA</span>
+          </div>
+          <div class="footer-meta">
+            <a href="https://www.instagram.com/journeywell.co/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.linkedin.com/company/journeywellio" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.facebook.com/journeywell.co" target="_blank" rel="noopener noreferrer">Facebook</a>
+          </div>
         </div>
       </footer>
     `;
@@ -370,6 +394,7 @@
                 <div class="drawer-option-arrow">→</div>
               </button>
             </div>
+            <p style="margin-top:16px; font-size:13px; color:var(--text-tertiary)">Prefer email? <a href="mailto:team@journeywell.io" style="color:inherit; text-decoration:underline">team@journeywell.io</a></p>
           </section>
 
           <!-- STEP 5 — Book-a-call calendar (GHL embed). Bypasses steps 2/3/4
@@ -378,6 +403,7 @@
             <div class="drawer-eyebrow">Pick a time</div>
             <h2 class="drawer-title">Book a call with Tim.</h2>
             <p class="drawer-sub">Choose a slot that works — confirmation lands in your inbox immediately.</p>
+            <p class="drawer-sub" style="margin-top:-8px">30 minutes. We map your content system, what it costs, and whether we're a fit. No pitch deck.</p>
             <div id="bookingFrameMount" class="drawer-booking-frame"></div>
           </section>
 
@@ -405,6 +431,15 @@
             <div class="drawer-form-group">
               <label>Phone (optional)</label>
               <input type="tel" id="contactPhone" placeholder="+1 (555) 555-5555" />
+            </div>
+            <div class="drawer-form-group">
+              <label>Monthly budget (optional)</label>
+              <div class="drawer-pill-group" data-single-pill="monthlyBudget">
+                <button type="button" class="drawer-pill" data-val="under-1k">Under $1k</button>
+                <button type="button" class="drawer-pill" data-val="1k-2.5k">$1k–$2.5k</button>
+                <button type="button" class="drawer-pill" data-val="2.5k-5k">$2.5k–$5k</button>
+                <button type="button" class="drawer-pill" data-val="5k-plus">$5k+</button>
+              </div>
             </div>
             <div class="drawer-form-group">
               <label>Anything else we should know? (optional)</label>
@@ -598,7 +633,10 @@
     state.step = n;
     const isStudio = state.path === 'studio';
     const isBook = state.path === 'book';
-    const totalSteps = isBook ? 2 : (isStudio ? 2 : 4);
+    // Every non-book path really runs 1→2→3→4 (drawerNext submits at 3, then
+    // confirmation) — the old studio total of 2 printed "Step 3 of 2" and
+    // overflowed the progress bar.
+    const totalSteps = isBook ? 2 : 4;
     document.querySelectorAll('.drawer-step').forEach(s => {
       s.classList.toggle('active', String(s.dataset.step) === String(n));
     });
@@ -652,13 +690,33 @@
     if (n === 5) {
       const mount = document.getElementById('bookingFrameMount');
       if (mount && !mount.querySelector('iframe')) {
+        // Loading state the moment the pane opens; swapped out when the GHL
+        // iframe fires `load`, replaced by an email fallback after 10s.
+        const loader = document.createElement('div');
+        loader.className = 'drawer-booking-loading';
+        loader.innerHTML = '<span class="drawer-booking-spinner" aria-hidden="true"></span><span>Loading Tim’s calendar…</span>';
+        mount.appendChild(loader);
+
         const src = `https://api.leadconnectorhq.com/widget/booking/${GHL_BOOKING_CALENDAR_ID}`;
         const iframe = document.createElement('iframe');
         iframe.src = src;
         iframe.title = 'Book a call with Tim';
         iframe.loading = 'lazy';
         iframe.scrolling = 'no';
-        iframe.style.cssText = 'width:100%; min-height:720px; border:0; display:block;';
+        // Collapsed while loading so the spinner isn't floating above 720px
+        // of blank space; expanded on load.
+        iframe.style.cssText = 'width:100%; height:0; border:0; display:block;';
+        let bookingLoaded = false;
+        iframe.addEventListener('load', () => {
+          bookingLoaded = true;
+          iframe.style.cssText = 'width:100%; min-height:720px; border:0; display:block;';
+          loader.remove();
+        });
+        setTimeout(() => {
+          if (!bookingLoaded && loader.isConnected) {
+            loader.innerHTML = 'Calendar’s being slow — email <a href="mailto:team@journeywell.io">team@journeywell.io</a> or go back and use the form.';
+          }
+        }, 10000);
         mount.appendChild(iframe);
         // GHL ships form_embed.js for parent-side iframe auto-resize. Load once.
         if (!document.querySelector('script[data-ghl-form-embed]')) {
@@ -672,17 +730,25 @@
     }
     showStep(n);
   }
+  // Idempotent: safe to re-run after every step-2 injection AND once at
+  // install (for pills living in static drawer markup, e.g. step-3 budget).
   function hookPills() {
     document.querySelectorAll('[data-single-pill]').forEach(group => {
-      group.querySelectorAll('.drawer-pill').forEach(p => p.addEventListener('click', () => {
-        group.querySelectorAll('.drawer-pill').forEach(x => x.classList.remove('selected'));
-        p.classList.add('selected');
-      }));
+      group.querySelectorAll('.drawer-pill:not([data-pill-wired])').forEach(p => {
+        p.setAttribute('data-pill-wired', '');
+        p.addEventListener('click', () => {
+          group.querySelectorAll('.drawer-pill').forEach(x => x.classList.remove('selected'));
+          p.classList.add('selected');
+        });
+      });
     });
     document.querySelectorAll('[data-multi-pill]').forEach(group => {
-      group.querySelectorAll('.drawer-pill').forEach(p => p.addEventListener('click', () => {
-        p.classList.toggle('selected');
-      }));
+      group.querySelectorAll('.drawer-pill:not([data-pill-wired])').forEach(p => {
+        p.setAttribute('data-pill-wired', '');
+        p.addEventListener('click', () => {
+          p.classList.toggle('selected');
+        });
+      });
     });
   }
   // Wire form submissions to formsubmit.co. First submission triggers an email
@@ -831,6 +897,25 @@
       el.addEventListener('click', () => openDrawer(el.dataset.openDrawerWith))
     );
 
+    // Wire pill groups that live in static drawer markup (e.g. the step-3
+    // budget select) — goStep(2) only re-hooks after injecting step-2 bodies.
+    hookPills();
+
+    // A8: the fixed Get Started pill overlapped work.html's NOW SHOWING panel
+    // at desktop widths. Keep it tucked until the visitor scrolls past the
+    // hero (lite pages hide the pill entirely, so this only governs the
+    // channel page).
+    const floatBtn = document.querySelector('.float-btn');
+    if (floatBtn) {
+      let floatRaf;
+      const syncFloatBtn = () => floatBtn.classList.toggle('is-tucked', window.scrollY < 520);
+      window.addEventListener('scroll', () => {
+        cancelAnimationFrame(floatRaf);
+        floatRaf = requestAnimationFrame(syncFloatBtn);
+      }, { passive: true });
+      syncFloatBtn();
+    }
+
     // Swap any [data-icon] placeholders for flat SVGs (theme-aware via currentColor).
     // A MutationObserver re-runs the swap so dynamically-injected markup (e.g. the
     // reels feed built via innerHTML) gets flat icons too — no per-callsite wiring.
@@ -970,7 +1055,7 @@
     const ctUrl = resolveCreatorTunnelUrl();
     if (!ctUrl) { frame.dataset.navMediaState = 'no-ct'; return; }
     try {
-      const res = await fetch(`${ctUrl}/api/assets?tag=${encodeURIComponent(tag)}&limit=1`, { cache: 'no-store' });
+      const res = await fetchWithTimeout(`${ctUrl}/api/assets?tag=${encodeURIComponent(tag)}&limit=1`, { cache: 'no-store' });
       if (!res.ok) { frame.dataset.navMediaState = 'http-' + res.status; return; }
       const data = await res.json();
       const asset = (data.items || [])[0];
@@ -1136,7 +1221,7 @@
       if (cache.has(slug)) return cache.get(slug);
       const p = (async () => {
         try {
-          const r = await fetch(`${ctUrl}/api/assets?tag=profile-picture:${encodeURIComponent(slug)}&limit=1`, { cache: 'no-store' });
+          const r = await fetchWithTimeout(`${ctUrl}/api/assets?tag=profile-picture:${encodeURIComponent(slug)}&limit=1`, { cache: 'no-store' });
           if (!r.ok) return null;
           const d = await r.json();
           return (d.items && d.items[0]) || null;
@@ -1177,7 +1262,7 @@
     const ctUrl = resolveCreatorTunnelUrl();
     if (!ctUrl) return null;
     try {
-      const res = await fetch(`${ctUrl}/api/assets?tag=live-feed:carousel&limit=6`, { cache: 'no-store' });
+      const res = await fetchWithTimeout(`${ctUrl}/api/assets?tag=live-feed:carousel&limit=6`, { cache: 'no-store' });
       if (!res.ok) return null;
       const data = await res.json();
       const playable = (data.items || []).filter(a =>
@@ -1202,7 +1287,7 @@
     const ctUrl = resolveCreatorTunnelUrl();
     if (!ctUrl) return;
     try {
-      const res = await fetch(`${ctUrl}/api/assets?tag=live-feed:hero&limit=1`, { cache: 'no-store' });
+      const res = await fetchWithTimeout(`${ctUrl}/api/assets?tag=live-feed:hero&limit=1`, { cache: 'no-store' });
       if (!res.ok) return;
       const data = await res.json();
       const a = (data.items || [])[0];
@@ -1434,7 +1519,7 @@
         : 'https://creator-tunnel.vercel.app');
     if (!ctUrl) return heroAssets.slice();
     try {
-      const res = await fetch(`${ctUrl}/api/assets?tag=live-feed:shorts&limit=48`, { cache: 'no-store' });
+      const res = await fetchWithTimeout(`${ctUrl}/api/assets?tag=live-feed:shorts&limit=48`, { cache: 'no-store' });
       if (!res.ok) return heroAssets.slice();
       const data = await res.json();
       const heroIds = new Set(heroAssets.map(a => a.id));
@@ -1463,6 +1548,18 @@
     }
   }
 
+  // ---------- BAKED FALLBACKS ----------
+  // content.json carries a `fallbacks` block (real case-study cards + local
+  // studio frames). Pages use it when the live feed errors out or times out,
+  // so the terminal state is always real content — never a skeleton.
+  let FALLBACKS_CACHE = null;
+  async function getFallbacks() {
+    if (FALLBACKS_CACHE) return FALLBACKS_CACHE;
+    const data = await loadContent();
+    FALLBACKS_CACHE = (data && data.fallbacks) || null;
+    return FALLBACKS_CACHE;
+  }
+
   // ---------- COLLECTION LOADER (MediaVault → site) ----------
   // Live-fetches a curated Creator Tunnel collection (e.g. "web") and shapes
   // each asset into the same fields content.json provides, so the rest of the
@@ -1475,17 +1572,27 @@
     const t = (tags || []).find(x => typeof x === 'string' && x.startsWith(prefix + ':'));
     return t ? t.slice(prefix.length + 1) : null;
   }
-  function cleanTitle(raw) {
-    return String(raw || 'Untitled')
+  // Render-time display-title cleanup: strips file extensions, leading vault
+  // numbering ("9. ", "10 - "), trailing "(Really short)"-style notes, and
+  // emoji. Data in content.json / creator-tunnel stays untouched — this only
+  // shapes what the public site prints.
+  function displayTitle(raw) {
+    const s = String(raw || '')
       .replace(/\.(mp4|mov|webm|m4v)$/i, '')
-      .replace(/^[✀-➿☀-⛿✅✔︎️\s]+/, '')
+      .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}]/gu, '')
+      .replace(/^\s*\d{1,3}\s*[.)\-–—]\s*/, '')
+      .replace(/\s*\([^)]*\)\s*$/, '')
+      .replace(/\s{2,}/g, ' ')
       .trim();
+    return s || 'Untitled';
   }
   function adaptCollectionAsset(a) {
     const brandSlug = tagValue(a.tags, 'brand');
     const topicSlug = tagValue(a.tags, 'topic');
-    const fallback = cleanTitle(a.title);
-    const display = (a.display_title && String(a.display_title).trim()) || fallback;
+    const fallback = displayTitle(a.title);
+    const display = (a.display_title && String(a.display_title).trim())
+      ? displayTitle(a.display_title)
+      : fallback;
     return {
       id: a.id,
       title: a.title || display,
@@ -1505,7 +1612,7 @@
   }
   async function loadCollection(slug) {
     try {
-      const r = await fetch(`${MEDIAVAULT_API}/embed/${encodeURIComponent(slug)}`, { cache: 'no-cache' });
+      const r = await fetchWithTimeout(`${MEDIAVAULT_API}/embed/${encodeURIComponent(slug)}`, { cache: 'no-cache' });
       if (!r.ok) throw new Error(`status ${r.status}`);
       const j = await r.json();
       const assets = (j.assets || []).map(adaptCollectionAsset);
@@ -1537,7 +1644,7 @@
     try {
       const ctUrl = resolveCreatorTunnelUrl();
       const url = `${ctUrl}/api/assets?tag=${encodeURIComponent(tag)}&limit=${limit}`;
-      const r = await fetch(url, { cache: 'no-store' });
+      const r = await fetchWithTimeout(url, { cache: 'no-store' });
       if (!r.ok) throw new Error(`status ${r.status}`);
       const j = await r.json();
       const assets = (j.items || []).map(adaptCollectionAsset);
@@ -1566,7 +1673,9 @@
     const hasVideo = isHttps(asset.cdn_url) && /\.(mp4|webm|mov)$/i.test(asset.cdn_url);
     const hasThumb = isHttps(asset.thumbnail_url);
     const meta = asset.brand ? asset.brand : (asset.duration ? `${Math.round(asset.duration)}s` : 'Studio');
-    const title = asset.display_title || asset.title || 'Untitled';
+    // Render-time cleanup — raw content.json assets (used as fallback/blend)
+    // still carry vault numbering / "(Really short)" notes / emoji.
+    const title = displayTitle(asset.display_title || asset.title);
     let coverInner = '';
     if (hasVideo) {
       // Native autoplay + muted is allowed by all browsers without user interaction.
@@ -1578,9 +1687,15 @@
     } else if (hasThumb) {
       coverInner = `<img src="${escapeHtml(asset.thumbnail_url)}" alt="" loading="lazy" />`;
     }
+    // Video covers render solid black until poster/first frame arrives (and
+    // stay black if the poster URL is broken) — brand every video cover with
+    // the JW logo on ink underneath. A loaded poster/frame paints over it.
+    const coverClass = coverInner
+      ? (hasVideo ? 'cover-brand-fallback' : '')
+      : altClass;
     return `
       <div class="show-card playable" data-id="${asset.id || ''}">
-        <div class="show-cover ${coverInner ? '' : altClass}">
+        <div class="show-cover ${coverClass}">
           ${coverInner}
           ${hasVideo ? '<div class="play-overlay" aria-hidden="true" data-icon="play" data-icon-size="26"></div>' : ''}
         </div>
@@ -1592,7 +1707,31 @@
   function escapeHtml(s) {
     return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
-  async function renderWorkInto(selector, count, tag) {
+  // Round-robin across brands so one client never dominates a strip
+  // (e.g. podcast.html "Recently launched" was 4/5 Bonvenu tiles).
+  function diversifyByBrand(assets, limit) {
+    const byBrand = new Map();
+    assets.forEach(a => {
+      const key = a.brand || 'JourneyWell';
+      if (!byBrand.has(key)) byBrand.set(key, []);
+      byBrand.get(key).push(a);
+    });
+    const out = [];
+    const max = limit || assets.length;
+    let added = true;
+    while (out.length < max && added) {
+      added = false;
+      for (const bucket of byBrand.values()) {
+        if (!bucket.length) continue;
+        out.push(bucket.shift());
+        added = true;
+        if (out.length >= max) break;
+      }
+    }
+    return out;
+  }
+
+  async function renderWorkInto(selector, count, tag, opts) {
     const target = document.querySelector(selector);
     if (!target) return;
     let data = null;
@@ -1603,7 +1742,26 @@
       data = await loadContent();
     }
     if (!data || !data.assets || !data.assets.length) return; // keep placeholders
-    const items = (count ? data.assets.slice(0, count) : data.assets);
+    let pool = data.assets;
+    if (opts && opts.diversifyByBrand) {
+      // When the live feed is brand-monotone, blend in content.json clips
+      // from brands the feed is missing (real published work — Melara,
+      // Bonvenu, etc.) so the strip shows the roster, not one client.
+      if (data.source === 'creator-tunnel-tag' || data.source === 'mediavault-collection') {
+        const local = await loadContent();
+        if (local && local.assets && local.assets.length) {
+          const seenIds = new Set(pool.map(a => a.id));
+          const liveBrands = new Set(pool.map(a => a.brand).filter(Boolean));
+          pool = pool.concat(local.assets.filter(a =>
+            a && !seenIds.has(a.id) && a.brand && !liveBrands.has(a.brand)
+          ));
+        }
+      }
+      pool = diversifyByBrand(pool, count || pool.length);
+    } else if (count) {
+      pool = pool.slice(0, count);
+    }
+    const items = pool;
     target.innerHTML = items.map(renderShowCard).join('');
     initAutoplayVideos(target);
   }
@@ -1711,10 +1869,12 @@
     openDrawer,
     renderWorkInto,
     loadContent,
+    getFallbacks,
     loadCollection,
     loadCtTag,
     initAutoplayVideos,
     renderShowCard,
+    displayTitle,
     promoCard,
     injectPromo,
     icon,

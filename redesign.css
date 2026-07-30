@@ -879,6 +879,9 @@ body.lite,
 
 /* Full-page-form variant on /get-started.html — body is hardcoded black */
 [data-theme="light"] body.full-page-form { background: var(--paper, #f6f5f2); }
+/* A7: style.css .logo is #fff — on the light paper background the wordmark
+   was white-on-white. Ink it in light mode. */
+[data-theme="light"] body.full-page-form .logo { color: #0a0a0a; }
 
 /* ---------- LIGHT THEME: mobile nav (hamburger + drawer panel) ----------
    style.css ships these white-on-near-black at the @media (max-width: 900px)

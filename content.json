@@ -1,5 +1,51 @@
 {
   "generated_at": "2026-06-12T13:04:49.048Z",
+  "fallbacks": {
+    "note": "Static degrade content used when creator-tunnel is unreachable or slow (>4s). Titles/metas are sourced verbatim from portfolio.html case cards; images are real local studio frames. Never invent new numbers here.",
+    "cards": [
+      {
+        "title": "Bonvenu Bank — Local bank → trusted advisor",
+        "meta": "5 brand pillars · 22 reels · 6 long-form",
+        "image": "images/bts/02-home-split.jpg",
+        "href": "portfolio.html#case-bonvenu-bank"
+      },
+      {
+        "title": "She's Built Different — Concept → launched podcast in 14 days",
+        "meta": "14d to launch · 7 episodes · 9 shorts",
+        "image": "images/bts/03b-home-founder-tall.jpg",
+        "href": "portfolio.html#case-shes-built-different"
+      },
+      {
+        "title": "Two Dudes And — Friendship podcast → cult following",
+        "meta": "Active show · 12+ episodes · 30+ shorts",
+        "image": "images/bts/07a-studio-interview.jpg",
+        "href": "portfolio.html#case-two-dudes-and"
+      },
+      {
+        "title": "Smile Spa — Local clinic → educational authority",
+        "meta": "62-min hero piece · Inbound driver",
+        "image": "images/bts/06-studio-mic.jpg",
+        "href": "portfolio.html#case-smile-spa"
+      },
+      {
+        "title": "Melara — Mortgage broker → finance educator",
+        "meta": "Weekly drops · 20+ reels · 3 series",
+        "image": "images/bts/10-podcast-session.jpg",
+        "href": "portfolio.html#case-melara"
+      },
+      {
+        "title": "JourneyWell Studio — Personal Finance series",
+        "meta": "14+ episodes · In-house system",
+        "image": "images/bts/01-home-studio-band.jpg",
+        "href": "portfolio.html#case-journeywell-studio"
+      }
+    ],
+    "workHero": {
+      "title": "JourneyWell Studios — the channel",
+      "desc": "Episodes, shorts, and behind-the-scenes from our Baton Rouge studio. We capture it. We produce it. We publish it. You own the audience.",
+      "poster": "images/bts/04-home-cinema.jpg"
+    }
+  },
   "source": "mediavault",
   "api": "https://reels.journeywellhub.com/ct",
   "total_in_vault": 6,

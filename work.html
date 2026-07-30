@@ -43,12 +43,14 @@
           <div class="channel-eyebrow">Channel · Baton Rouge, LA</div>
           <h1 class="channel-name">JourneyWell <em>Studios</em></h1>
           <p class="channel-tagline">The studio + system behind founders, brands, and creators building real content authority. We capture it. We produce it. We publish it. You own the audience.</p>
+          <!-- Static fallback line — replaced with real counts only when the
+               live feed answers. Never shows zero-counters or dashes. -->
           <div class="channel-stats" id="channelStats">
-            <span><strong>—</strong> Pieces</span>
+            <span>Episodes</span>
             <span class="dot"></span>
-            <span><strong>—</strong> Shows</span>
+            <span>Shorts</span>
             <span class="dot"></span>
-            <span><strong>—</strong> Topics</span>
+            <span>Behind the scenes</span>
           </div>
           <div class="channel-ctas">
             <button class="btn btn-gold" data-open-drawer-with="studio">Book the studio</button>
@@ -64,7 +66,9 @@
 <section class="hero-piece-section">
   <div class="container hero-piece-grid">
     <div class="hero-piece-player" id="heroPiecePlayer">
-      <video id="heroPieceVideo" autoplay muted loop playsinline preload="metadata"></video>
+      <!-- Poster is a real studio frame so the pinned card is never a black
+           box while the trailer loads (or if the feed is down). -->
+      <video id="heroPieceVideo" autoplay muted loop playsinline preload="metadata" poster="images/bts/04-home-cinema.jpg"></video>
       <div class="hero-piece-overlay">
         <div class="hero-piece-badge">Pinned · Channel trailer</div>
       </div>
@@ -72,8 +76,10 @@
     </div>
     <div class="hero-piece-info">
       <div class="hero-piece-eyebrow" id="heroPieceEyebrow">Now showing</div>
-      <h2 class="hero-piece-title" id="heroPieceTitle">Loading…</h2>
-      <p class="hero-piece-desc" id="heroPieceDesc"></p>
+      <!-- Static fallback copy — overwritten by the live trailer when the
+           feed answers. Never "Loading…" as a terminal state. -->
+      <h2 class="hero-piece-title" id="heroPieceTitle">JourneyWell Studios — the channel</h2>
+      <p class="hero-piece-desc" id="heroPieceDesc">Episodes, shorts, and behind-the-scenes from our Baton Rouge studio. We capture it. We produce it. We publish it. You own the audience.</p>
       <div class="hero-piece-meta" id="heroPieceMeta"></div>
       <div class="hero-piece-ctas">
         <button class="btn btn-gold" id="heroPiecePlayBtn"><span data-icon="play" data-icon-size="16"></span> Play</button>
@@ -101,7 +107,7 @@
   <div class="container">
     <div class="row-header">
       <h3 class="row-title">Featured</h3>
-      <span class="row-meta" id="featuredCount">—</span>
+      <span class="row-meta" id="featuredCount"></span>
     </div>
     <div class="work-strip-wrap"><div class="work-strip" id="featuredStrip"></div></div>
   </div>
@@ -112,7 +118,7 @@
   <div class="container">
     <div class="row-header">
       <h3 class="row-title">Episodes</h3>
-      <span class="row-meta" id="episodesCount">—</span>
+      <span class="row-meta" id="episodesCount"></span>
     </div>
     <div class="work-strip-wrap"><div class="work-strip episode-strip" id="episodesStrip"></div></div>
   </div>
@@ -124,7 +130,7 @@
     <div class="row-header">
       <h3 class="row-title">Shorts</h3>
       <div style="display:flex; gap:14px; align-items:center;">
-        <span class="row-meta" id="shortsCount">—</span>
+        <span class="row-meta" id="shortsCount"></span>
         <button type="button" class="row-action-pill" id="watchShortsBtn"><span data-icon="play" data-icon-size="15"></span> Watch shorts</button>
       </div>
     </div>
@@ -289,17 +295,24 @@
     (typeof window !== 'undefined' && window.CREATOR_TUNNEL_URL) ||
     (IS_LOCAL ? 'http://127.0.0.1:8787' : 'https://creator-tunnel.vercel.app');
 
+  // 4s AbortController guard — a dead/slow creator-tunnel must degrade to the
+  // baked fallback content, never leave the channel on skeletons.
+  const FEED_TIMEOUT_MS = 4000;
   async function fetchByTag(tag, limit) {
     if (!CREATOR_TUNNEL_URL) return [];  // not configured for this host — silent no-op
     const url = `${CREATOR_TUNNEL_URL}/api/assets?tag=${encodeURIComponent(tag)}&limit=${limit || 24}`;
+    const ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    const timer = ctrl ? setTimeout(() => ctrl.abort(), FEED_TIMEOUT_MS) : null;
     try {
-      const res = await fetch(url, { cache: 'no-cache' });
+      const res = await fetch(url, { cache: 'no-cache', ...(ctrl ? { signal: ctrl.signal } : {}) });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
       return (data.items || []).map(adaptCreatorTunnelAsset);
     } catch (err) {
       console.warn('[live-feed] failed for tag', tag, err);
       return [];
+    } finally {
+      if (timer) clearTimeout(timer);
     }
   }
 
@@ -313,13 +326,19 @@
     const brand = brandSlug
       ? brandSlug.split('-').map(w => w ? w[0].toUpperCase() + w.slice(1) : '').join(' ')
       : null;
-    const derived = String(a.title || 'Untitled').replace(/\.(mp4|mov|webm|m4v)$/i, '').trim();
-    const display = (typeof a.display_title === 'string' && a.display_title.trim()) ? a.display_title.trim() : derived;
+    // Render-time title cleanup (chrome.js JW.displayTitle): strips vault
+    // numbering, "(Really short)"-style notes, emoji, file extensions.
+    const tidy = (window.JW && window.JW.displayTitle)
+      ? window.JW.displayTitle
+      : (s => String(s || 'Untitled').replace(/\.(mp4|mov|webm|m4v)$/i, '').trim());
+    const derived = tidy(a.title);
+    const display = (typeof a.display_title === 'string' && a.display_title.trim()) ? tidy(a.display_title) : derived;
     return {
       id: a.id,
       title: a.title || display,
       display_title: display,
       brand: brand,
+      topic: tagVal('topic'),
       file_type: a.file_type,
       duration: a.duration_seconds || 0,
       thumbnail_url: a.thumbnail_url || null,
@@ -419,9 +438,15 @@
     }
     const meta = [asset.brand, fmtDuration(asset.duration)].filter(Boolean).join(' · ') || 'Studio';
     const title = asset.display_title || asset.title || 'Untitled';
+    // Video covers render solid black until poster/first frame arrives (and
+    // stay black if the poster URL is broken) — brand every video cover with
+    // the JW logo on ink underneath. A loaded poster/frame paints over it.
+    const coverClass = coverInner
+      ? (hasVideo ? 'cover-brand-fallback' : '')
+      : altClass;
     return `
       <div class="show-card playable" data-id="${escapeHtml(asset.id)}">
-        <div class="show-cover ${coverInner ? '' : altClass}">
+        <div class="show-cover ${coverClass}">
           ${coverInner}
           <div class="play-overlay" aria-hidden="true" data-icon="play" data-icon-size="26"></div>
         </div>
@@ -435,10 +460,53 @@
     const el = document.querySelector(selector);
     if (!el) return;
     if (!items.length) {
-      el.innerHTML = '<div style="color:var(--text-tertiary); padding:24px 0; font-size:14px;">Nothing here yet — check back soon.</div>';
+      el.innerHTML = '<div style="color:var(--text-tertiary); padding:24px 0; font-size:14px;">Nothing here yet — <a href="portfolio.html" style="color:inherit; text-decoration:underline;">browse the portfolio</a> in the meantime.</div>';
       return;
     }
     el.innerHTML = items.map(cardHtml).join('');
+  }
+
+  // Static degrade: when the live feed answers with nothing (down, slow, or
+  // empty), fill the shelves with the baked case-study cards from
+  // content.json `fallbacks` — real work, real numbers, local images.
+  function fallbackCardHtml(c) {
+    return `
+      <a class="show-card" href="${escapeHtml(c.href || 'portfolio.html')}" style="text-decoration:none; color:inherit;">
+        <div class="show-cover">
+          <img src="${escapeHtml(c.image)}" alt="${escapeHtml(c.title)}" loading="lazy" />
+        </div>
+        <div class="show-title">${escapeHtml(c.title)}</div>
+        <div class="show-meta">${escapeHtml(c.meta || 'Case study')}</div>
+      </a>
+    `;
+  }
+  async function renderChannelFallback() {
+    let fb = null;
+    try {
+      if (window.JW && window.JW.getFallbacks) fb = await window.JW.getFallbacks();
+    } catch (e) { /* content.json unreachable — baked HTML copy stays */ }
+    const cards = (fb && fb.cards) || [];
+    if (fb && fb.workHero) {
+      document.getElementById('heroPieceTitle').textContent = fb.workHero.title;
+      document.getElementById('heroPieceDesc').textContent = fb.workHero.desc;
+      const v = document.getElementById('heroPieceVideo');
+      if (v && fb.workHero.poster && !v.getAttribute('poster')) v.setAttribute('poster', fb.workHero.poster);
+    }
+    if (cards.length) {
+      const html = cards.map(fallbackCardHtml).join('');
+      const featured = document.getElementById('featuredStrip');
+      const episodes = document.getElementById('episodesStrip');
+      if (featured) featured.innerHTML = html;
+      if (episodes) episodes.innerHTML = cards.slice(0, 4).map(fallbackCardHtml).join('');
+      document.getElementById('featuredCount').textContent = 'Case studies';
+      document.getElementById('episodesCount').textContent = '';
+    }
+    // Shorts + BTS have no static stand-in — point at the portfolio instead
+    // of leaving bare section headers, and hide the dead Watch-shorts pill.
+    renderStrip('#shortsStrip', []);
+    renderStrip('#btsStrip', []);
+    const watchBtn = document.getElementById('watchShortsBtn');
+    if (watchBtn) watchBtn.style.display = 'none';
   }
 
   function renderHeroPiece(asset) {
@@ -1140,18 +1208,48 @@
       }
       DATA = { assets: seg.all, topic_counts: {}, total_in_vault: seg.all.length };
       if (!seg.all.length) {
-        document.getElementById('heroPieceTitle').textContent = 'Channel is loading…';
-        // fall through — render empty strips so the layout shows
+        // Live feed unreachable, slow (>4s), or empty — degrade to the baked
+        // case-study cards. The static hero copy + stats line stay in place.
+        await renderChannelFallback();
+        wireTabs();
+        return;
       }
     } else {
       DATA = (window.JW.loadCollection ? await window.JW.loadCollection('web') : await window.JW.loadContent());
-      if (!DATA || !DATA.assets) {
-        document.getElementById('heroPieceTitle').textContent = 'Channel is loading…';
+      if (!DATA || !DATA.assets || !DATA.assets.length) {
+        await renderChannelFallback();
+        wireTabs();
         return;
       }
       seg = segment(DATA.assets);
     }
     CURRENT_SEG = seg;
+
+    // Raw vault filenames must never ship as public titles (IMG_9981,
+    // BTS_RINGLIGHT, "Chris Bush BTS 2 May 6"…) — relabel them generically.
+    // Each live-feed bucket holds its own adapted objects (dedupe only builds
+    // seg.all), so the pass runs over every list, shows rows included.
+    const isFilenameShaped = (t, strict) => {
+      const s = String(t || '').trim();
+      if (!s) return true;
+      if (/^IMG[-_ ]?\d+/i.test(s)) return true;   // IMG_9981 — anywhere
+      if (/_/.test(s)) return true;                // bts_ringlight, Sequence 06_1 — underscores mean filename
+      if (/\bBTS\b/i.test(s)) return true;         // "Chris Bush BTS 2 May 6" — anywhere
+      if (/^sequence[\s_-]*\d/i.test(s)) return true; // "Sequence 06" editor exports
+      // All-caps dumps — only inside the BTS shelf, where an all-caps string
+      // is a filename, not a title.
+      if (strict && /[A-Za-z]/.test(s) && s === s.toUpperCase()) return true;
+      return false;
+    };
+    const relabel = strict => a => {
+      if (isFilenameShaped(a.display_title || a.title, strict)) {
+        a.display_title = 'Behind the scenes · JourneyWell Studio';
+      }
+    };
+    [seg.featured, seg.episodes, seg.shorts, seg.all].forEach(list => (list || []).forEach(relabel(false)));
+    (seg.shows || []).forEach(s => (s.items || []).forEach(relabel(false)));
+    (seg.bts || []).forEach(relabel(true));
+
     // Long-form pool for the Up-next sidebar
     LONGFORM_POOL = seg.episodes.length ? seg.episodes : seg.all.filter(a => aspectClass(a) === 'is-horizontal');
 
@@ -1175,14 +1273,20 @@
     document.getElementById('episodesCount').textContent = seg.episodes.length + ' available';
     document.getElementById('shortsCount').textContent = seg.shorts.length + ' clip' + (seg.shorts.length === 1 ? '' : 's');
 
-    // Channel stats
-    document.getElementById('channelStats').innerHTML = `
-      <span><strong>${seg.all.length}</strong> Pieces</span>
-      <span class="dot"></span>
-      <span><strong>${seg.shows.length}</strong> Shows</span>
-      <span class="dot"></span>
-      <span><strong>${Object.keys(DATA.topic_counts || {}).length || seg.shows.length}</strong> Topics</span>
-    `;
+    // Channel stats — distinct shows counted across the WHOLE feed (the old
+    // count only saw live-feed:show tagged assets → "1 SHOWS" while episodes
+    // listed several brands), topics from distinct topic tags, and correct
+    // singular/plural throughout.
+    const showCount = Math.max(
+      seg.shows.length,
+      new Set(seg.all.map(a => a.brand).filter(Boolean)).size
+    );
+    const topicCount = new Set(seg.all.map(a => a.topic).filter(Boolean)).size
+      || Object.keys(DATA.topic_counts || {}).length;
+    const statBit = (n, noun) => `<span><strong>${n}</strong> ${noun}${n === 1 ? '' : 's'}</span>`;
+    const statBits = [statBit(seg.all.length, 'Piece'), statBit(showCount, 'Show')];
+    if (topicCount) statBits.push(statBit(topicCount, 'Topic'));
+    document.getElementById('channelStats').innerHTML = statBits.join('<span class="dot"></span>');
 
     // Card click — every video card opens in the immersive player.
     // Cards in the shorts row open the swipeable feed (with promo interstitials);
