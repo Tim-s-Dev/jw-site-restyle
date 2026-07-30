@@ -438,10 +438,11 @@
     }
     const meta = [asset.brand, fmtDuration(asset.duration)].filter(Boolean).join(' · ') || 'Studio';
     const title = asset.display_title || asset.title || 'Untitled';
-    // Poster-less videos render solid black until first frame — brand the
-    // cover (JW logo on ink) so no tile is ever a black hole.
+    // Video covers render solid black until poster/first frame arrives (and
+    // stay black if the poster URL is broken) — brand every video cover with
+    // the JW logo on ink underneath. A loaded poster/frame paints over it.
     const coverClass = coverInner
-      ? (hasVideo && !hasThumb ? 'cover-brand-fallback' : '')
+      ? (hasVideo ? 'cover-brand-fallback' : '')
       : altClass;
     return `
       <div class="show-card playable" data-id="${escapeHtml(asset.id)}">
@@ -500,6 +501,12 @@
       document.getElementById('featuredCount').textContent = 'Case studies';
       document.getElementById('episodesCount').textContent = '';
     }
+    // Shorts + BTS have no static stand-in — point at the portfolio instead
+    // of leaving bare section headers, and hide the dead Watch-shorts pill.
+    renderStrip('#shortsStrip', []);
+    renderStrip('#btsStrip', []);
+    const watchBtn = document.getElementById('watchShortsBtn');
+    if (watchBtn) watchBtn.style.display = 'none';
   }
 
   function renderHeroPiece(asset) {
@@ -1218,22 +1225,28 @@
     }
     CURRENT_SEG = seg;
 
-    // BTS items whose titles are raw vault filenames (IMG_9981,
-    // BTS_RINGLIGHT, CHRIS BUSH BTS 2 MAY 6…) get a generic public label.
-    // Mutates the shared asset objects so cards + overlay captions agree.
-    const isFilenameShaped = t => {
+    // Raw vault filenames must never ship as public titles (IMG_9981,
+    // BTS_RINGLIGHT, "Chris Bush BTS 2 May 6"…) — relabel them generically.
+    // Each live-feed bucket holds its own adapted objects (dedupe only builds
+    // seg.all), so the pass runs over every list, shows rows included.
+    const isFilenameShaped = (t, strict) => {
       const s = String(t || '').trim();
       if (!s) return true;
-      if (/^IMG[-_ ]?\d+/i.test(s)) return true;      // IMG_9981
-      if (/_/.test(s)) return true;                   // BTS_RINGLIGHT, BTS_36F4
-      if (s === s.toUpperCase() && /[A-Z]/.test(s)) return true; // CHRIS BUSH BTS 2 MAY 6
+      if (/^IMG[-_ ]?\d+/i.test(s)) return true;   // IMG_9981 — anywhere
+      if (/\bBTS\b/i.test(s)) return true;         // "Chris Bush BTS 2 May 6" — anywhere
+      // All-caps / underscore dumps (BTS_RINGLIGHT, BTS_36F4) — only inside
+      // the BTS shelf, where an all-caps string is a filename, not a title.
+      if (strict && /[A-Za-z]/.test(s) && s === s.toUpperCase()) return true;
       return false;
     };
-    seg.bts.forEach(a => {
-      if (isFilenameShaped(a.display_title || a.title)) {
+    const relabel = strict => a => {
+      if (isFilenameShaped(a.display_title || a.title, strict)) {
         a.display_title = 'Behind the scenes · JourneyWell Studio';
       }
-    });
+    };
+    [seg.featured, seg.episodes, seg.shorts, seg.all].forEach(list => (list || []).forEach(relabel(false)));
+    (seg.shows || []).forEach(s => (s.items || []).forEach(relabel(false)));
+    (seg.bts || []).forEach(relabel(true));
 
     // Long-form pool for the Up-next sidebar
     LONGFORM_POOL = seg.episodes.length ? seg.episodes : seg.all.filter(a => aspectClass(a) === 'is-horizontal');

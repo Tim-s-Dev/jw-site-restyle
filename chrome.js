@@ -1682,10 +1682,11 @@
     } else if (hasThumb) {
       coverInner = `<img src="${escapeHtml(asset.thumbnail_url)}" alt="" loading="lazy" />`;
     }
-    // Poster-less videos render solid black until their first frame — the
-    // cover-brand-fallback class puts the JW logo on ink behind them.
+    // Video covers render solid black until poster/first frame arrives (and
+    // stay black if the poster URL is broken) — brand every video cover with
+    // the JW logo on ink underneath. A loaded poster/frame paints over it.
     const coverClass = coverInner
-      ? (hasVideo && !hasThumb ? 'cover-brand-fallback' : '')
+      ? (hasVideo ? 'cover-brand-fallback' : '')
       : altClass;
     return `
       <div class="show-card playable" data-id="${asset.id || ''}">
