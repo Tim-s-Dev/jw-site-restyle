@@ -231,6 +231,10 @@
   }
 
   // ---------- FOOTER ----------
+  // Contact block: email + city + socials on every page. Studio street
+  // address intentionally absent — it is not published anywhere in this repo
+  // (the studio FAQ says it's sent with booking confirmations). Add it here
+  // once Tim supplies it. No phone number exists in the repo either.
   function footerHtml() {
     const allPages = PAGES.concat(SUB_PAGES);
     return `
@@ -246,6 +250,17 @@
             <a href="#">Terms</a>
           </div>
           <div class="footer-meta">© 2026 JourneyWell</div>
+        </div>
+        <div class="container footer-inner" style="margin-top:16px">
+          <div class="footer-meta">
+            <a href="mailto:team@journeywell.io" style="text-transform:none">team@journeywell.io</a>
+            <span>Baton Rouge, LA</span>
+          </div>
+          <div class="footer-meta">
+            <a href="https://www.instagram.com/journeywell.co/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.linkedin.com/company/journeywellio" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.facebook.com/journeywell.co" target="_blank" rel="noopener noreferrer">Facebook</a>
+          </div>
         </div>
       </footer>
     `;
