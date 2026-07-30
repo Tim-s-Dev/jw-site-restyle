@@ -452,7 +452,7 @@ body.lite .lite-card .lite-card-link {
   font-size: 14px; font-weight: 600;
   color: var(--accent-deep);
 }
-body.lite .lite-card .lite-card-link:hover { color: var(--accent); }
+body.lite .lite-card .lite-card-link:hover { color: var(--ink); }
 
 /* Photo variant — vertical photo fills the entire card; text overlays the
    bottom on a transparent-to-dark gradient so the photo stays visible
@@ -556,7 +556,7 @@ body.lite .lite-step-card .lite-step-num {
   font-style: italic;
   font-size: 36px;
   font-weight: 500;
-  color: var(--accent);
+  color: var(--accent-deep);
   line-height: 1;
   margin-bottom: 18px;
 }
@@ -582,7 +582,7 @@ body.lite .lite-stat-num {
   margin-bottom: 6px;
 }
 body.lite .lite-stat-num em {
-  color: var(--accent);
+  color: var(--accent-deep);
   font-style: normal;
   font-family: inherit;
 }
@@ -684,7 +684,7 @@ body.lite .lite-quote-mark {
   font-style: italic;
   font-size: 80px;
   font-weight: 500;
-  color: var(--accent);
+  color: var(--accent-deep);
   line-height: 1;
   margin-bottom: 8px;
 }

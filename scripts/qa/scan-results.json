@@ -51,110 +51,7 @@
     "color": "rgb(0, 0, 0)"
    }
   ],
-  "limeTextOnLight": [
-   {
-    "el": "em",
-    "text": "every week.",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "em",
-    "text": "+",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "em",
-    "text": "yr",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "em",
-    "text": "audience",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.lite-step-num",
-    "text": "01",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.lite-step-num",
-    "text": "02",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.lite-step-num",
-    "text": "03",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.lite-step-num",
-    "text": "04",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "em",
-    "text": "Shipped the same week.",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.lite-tile-eyebrow",
-    "text": "POLISHED \u00b7 STUDIO",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(247,247,248)"
-   },
-   {
-    "el": "span.lite-quote-mark.reveal.is-in-view",
-    "text": "\"",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.eyebrow",
-    "text": "WHO WE ARE",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "em",
-    "text": "obsessed",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "em",
-    "text": "actually",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.lite-compare-head.jw.lite-compare-cell",
-    "text": "JourneyWell",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.lite-compare-cell.jw.center",
-    "text": "2 wks",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.drawer-step-indicator",
-    "text": "STEP 1 OF 4",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   }
-  ]
+  "limeTextOnLight": []
  },
  "solutions-light": {
   "limeBgWhiteText": [],
@@ -226,44 +123,7 @@
     "color": "rgb(0, 0, 0)"
    }
   ],
-  "limeTextOnLight": [
-   {
-    "el": "div.eyebrow",
-    "text": "SOLUTIONS",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "em",
-    "text": "One",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "em",
-    "text": "actually",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.lite-compare-head.jw.lite-compare-cell",
-    "text": "JourneyWell",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.lite-compare-cell.jw.center",
-    "text": "2 wks",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.drawer-step-indicator",
-    "text": "STEP 1 OF 4",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   }
-  ]
+  "limeTextOnLight": []
  },
  "studio-light": {
   "limeBgWhiteText": [],
@@ -329,26 +189,7 @@
     "color": "rgb(0, 0, 0)"
    }
   ],
-  "limeTextOnLight": [
-   {
-    "el": "em",
-    "text": "Walk out with an episode.",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "em",
-    "text": "You just talk.",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.drawer-step-indicator",
-    "text": "STEP 1 OF 4",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   }
-  ]
+  "limeTextOnLight": []
  },
  "authority-light": {
   "limeBgWhiteText": [],
@@ -462,50 +303,7 @@
     "color": "rgb(0, 0, 0)"
    }
   ],
-  "limeTextOnLight": [
-   {
-    "el": "em",
-    "text": "Thirty pieces.",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.amplify-num",
-    "text": "1",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.amplify-num",
-    "text": "2",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.amplify-num",
-    "text": "8",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.amplify-num",
-    "text": "4",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.amplify-num",
-    "text": "3",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.drawer-step-indicator",
-    "text": "STEP 1 OF 4",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   }
-  ]
+  "limeTextOnLight": []
  },
  "podcast-light": {
   "limeBgWhiteText": [],
@@ -643,26 +441,7 @@
     "color": "rgb(0, 0, 0)"
    }
   ],
-  "limeTextOnLight": [
-   {
-    "el": "em",
-    "text": "two weeks",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "em",
-    "text": "have",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.drawer-step-indicator",
-    "text": "STEP 1 OF 4",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   }
-  ]
+  "limeTextOnLight": []
  },
  "work-light": {
   "limeBgWhiteText": [],
@@ -752,32 +531,7 @@
     "color": "rgb(0, 0, 0)"
    }
   ],
-  "limeTextOnLight": [
-   {
-    "el": "div.channel-eyebrow",
-    "text": "CHANNEL \u00b7 BATON ROUGE, LA",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "em",
-    "text": "Studios",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.hero-piece-eyebrow.reveal.is-in-view",
-    "text": "NOW SHOWING",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.drawer-step-indicator",
-    "text": "STEP 1 OF 4",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   }
-  ]
+  "limeTextOnLight": []
  },
  "portfolio-light": {
   "limeBgWhiteText": [],
@@ -825,38 +579,7 @@
     "color": "rgb(0, 0, 0)"
    }
   ],
-  "limeTextOnLight": [
-   {
-    "el": "div.eyebrow",
-    "text": "PORTFOLIO",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "em",
-    "text": "actually",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "a",
-    "text": "Work channel",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.lite-tile-eyebrow",
-    "text": "POLISHED",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(247,247,248)"
-   },
-   {
-    "el": "div.drawer-step-indicator",
-    "text": "STEP 1 OF 4",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   }
-  ]
+  "limeTextOnLight": []
  },
  "about-light": {
   "limeBgWhiteText": [],
@@ -904,80 +627,7 @@
     "color": "rgb(0, 0, 0)"
    }
   ],
-  "limeTextOnLight": [
-   {
-    "el": "div.eyebrow",
-    "text": "ABOUT JOURNEYWELL",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "em",
-    "text": "seen",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.eyebrow",
-    "text": "CO-FOUNDERS",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "em.serif",
-    "text": "why do most founder podcasts feel like Zoom calls ",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.signature",
-    "text": "\u2014 Tim & Mel",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.eyebrow.reveal.is-in-view",
-    "text": "THE STORY",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.lite-step-num",
-    "text": "01",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.lite-step-num",
-    "text": "02",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.lite-step-num",
-    "text": "03",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.lite-step-num",
-    "text": "04",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.eyebrow.reveal.is-in-view",
-    "text": "WHERE WE ARE",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.drawer-step-indicator",
-    "text": "STEP 1 OF 4",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   }
-  ]
+  "limeTextOnLight": []
  },
  "blog-light": {
   "limeBgWhiteText": [],
@@ -1031,68 +681,7 @@
     "color": "rgb(0, 0, 0)"
    }
   ],
-  "limeTextOnLight": [
-   {
-    "el": "div.eyebrow",
-    "text": "BLOGS",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "em",
-    "text": "studio",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.lite-tile-eyebrow",
-    "text": "FEATURED \u00b7 CONTENT & SEO",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.lite-blog-card-eyebrow",
-    "text": "SOCIAL MEDIA \u00b7 7 MIN READ",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.lite-blog-card-eyebrow",
-    "text": "WELLNESS MARKETING \u00b7 7 MIN READ",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.lite-blog-card-eyebrow",
-    "text": "VIDEO STRATEGY \u00b7 7 MIN READ",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.lite-blog-card-eyebrow",
-    "text": "CONTENT & SEO \u00b7 8 MIN READ",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.lite-blog-card-eyebrow",
-    "text": "WELLNESS MARKETING \u00b7 8 MIN READ",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(255,255,255)"
-   },
-   {
-    "el": "div.eyebrow.reveal.is-in-view",
-    "text": "NEWSLETTER",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   },
-   {
-    "el": "div.drawer-step-indicator",
-    "text": "STEP 1 OF 4",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   }
-  ]
+  "limeTextOnLight": []
  },
  "get-started-light": {
   "limeBgWhiteText": [],
@@ -1134,14 +723,7 @@
     "color": "rgb(0, 0, 0)"
    }
   ],
-  "limeTextOnLight": [
-   {
-    "el": "div.drawer-step-indicator",
-    "text": "STEP 1 OF 4",
-    "color": "rgb(207, 244, 42)",
-    "effBg": "rgb(246,245,242)"
-   }
-  ]
+  "limeTextOnLight": []
  },
  "index-dark": {
   "limeBgWhiteText": [],

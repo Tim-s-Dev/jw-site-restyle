@@ -1200,6 +1200,78 @@ body.lite .hero-video-ctas .btn-ghost:hover,
 [data-theme="light"] .jw-split-wrap.flip .jw-split-txt h2 em { color: var(--accent-deep, #CFF42A); }
 [data-theme="light"] .jw-split-wrap.flip .jw-split-txt p { color: var(--text-on-cream-muted); }
 
+/* =====================================================================
+   B1 (FIX-RUNBOOK 7/30) — THEME-AWARE TEXT ACCENT
+   --accent-deep is THE accent for TEXT: lime (#CFF42A) in dark theme,
+   dark olive (#55700A — 5.7:1 on white, same hue family) in light theme.
+   Lime TEXT is only allowed on dark surfaces; lime text on light surfaces
+   computes ~1.3:1 and disappears. lite.css declares --accent-deep on
+   body.lite, so it must be rebound at both scopes for the cascade to win.
+   ===================================================================== */
+:root { --accent-deep: #CFF42A; }
+[data-theme="light"],
+[data-theme="light"] body.lite { --accent-deep: #55700A; }
+[data-theme="dark"],
+[data-theme="dark"] body.lite { --accent-deep: #CFF42A; }
+
+/* style.css (dark-era base) hardcodes lime TEXT on these; the surfaces they
+   sit on render light in light mode. Dark mode keeps lime via the cascade. */
+[data-theme="light"] .hero h1 em,
+[data-theme="light"] .hero-tight h1 em,
+[data-theme="light"] .page-hero h1 em,
+[data-theme="light"] .work-hero h1 em,
+[data-theme="light"] .section-title em,
+[data-theme="light"] .final-cta h2 em,
+[data-theme="light"] .channel-name em,
+[data-theme="light"] .channel-eyebrow,
+[data-theme="light"] .hero-piece-eyebrow,
+[data-theme="light"] .drawer-step-indicator,
+[data-theme="light"] .amplify-num,
+[data-theme="light"] .jw-promo-card-eyebrow,
+[data-theme="light"] .jw-promo-card-title em,
+[data-theme="light"] .jw-promo-card-cta,
+[data-theme="light"] .jw-promo-inprose-eyebrow,
+[data-theme="light"] .jw-promo-inprose-title em,
+[data-theme="light"] .jw-promo-inprose-cta,
+[data-theme="light"] .footer-meta a:hover {
+  color: var(--accent-deep);
+}
+
+/* =====================================================================
+   B1 — HARDCODED DARK-ERA COLORS (white/washed text invisible on light)
+   style.css classes with rgba(255,255,255,x)/#fff text whose surfaces
+   render light in light mode. Dark mode untouched.
+   ===================================================================== */
+/* Authority amplify grid: white-tint cards + white labels on a light section */
+[data-theme="light"] .amplify-item {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: var(--line-dk);
+}
+[data-theme="light"] .amplify-item:hover {
+  background: rgba(207, 244, 42, 0.14);
+  border-color: var(--accent-deep);
+}
+[data-theme="light"] .amplify-label { color: rgba(10, 10, 10, 0.72); }
+
+/* Footer © line (style.css hardcodes white 0.55; light footers are cream/white) */
+[data-theme="light"] .footer-meta { color: rgba(10, 10, 10, 0.6); }
+
+/* work.html row counters ("N PICKED" etc.) on the light channel surface */
+[data-theme="light"] .row-meta { color: rgba(10, 10, 10, 0.55); }
+
+/* get-started.html wordmark (page body flips to paper in light mode) */
+[data-theme="light"] body.full-page-form .logo { color: #0a0a0a; }
+
+/* Promo cards / in-prose promos (blog posts + any light surface) */
+[data-theme="light"] .jw-promo-card-title,
+[data-theme="light"] .jw-promo-inprose-title { color: #0a0a0a; }
+[data-theme="light"] .jw-promo-card-desc,
+[data-theme="light"] .jw-promo-inprose-desc { color: rgba(10, 10, 10, 0.72); }
+
+/* Testimonial attribution (homepage + blog post foot) */
+[data-theme="light"] .attr-name { color: #0a0a0a; }
+[data-theme="light"] .attr-role { color: rgba(10, 10, 10, 0.55); }
+
 /* ---------- Drawer: Book-a-call calendar embed ----------
    GHL iframe lives inside the drawer body. Pull it flush to the drawer
    edges (negative margin to escape body padding) so the calendar UI
