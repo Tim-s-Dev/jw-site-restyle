@@ -3399,3 +3399,22 @@ body.full-page-form .full-page-mast .logo {
   animation: jw-booking-spin 0.8s linear infinite;
 }
 @keyframes jw-booking-spin { to { transform: rotate(360deg); } }
+
+/* ---------- Branded cover fallback (A8) ----------
+   Poster-less <video> cards render solid black until their first frame.
+   Put the JW logo on ink behind them so no tile is ever a black hole.
+   (Media surface — ink background is intentional in both themes.) */
+.show-cover.cover-brand-fallback {
+  background-color: #0a0a0a;
+  background-image: url('images/jw-logo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 56px auto;
+}
+
+/* ---------- Floating pill scroll-tuck (A8) ----------
+   The fixed Get Started pill overlapped work.html's NOW SHOWING panel at
+   desktop width. chrome.js adds .is-tucked while scrollY < 520 so the pill
+   only appears once the visitor is past the hero. */
+.float-btn { transition: transform 200ms ease, box-shadow 200ms ease, opacity 200ms ease; }
+.float-btn.is-tucked { opacity: 0; pointer-events: none; transform: translateY(16px); }

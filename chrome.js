@@ -898,6 +898,21 @@
     // budget select) — goStep(2) only re-hooks after injecting step-2 bodies.
     hookPills();
 
+    // A8: the fixed Get Started pill overlapped work.html's NOW SHOWING panel
+    // at desktop widths. Keep it tucked until the visitor scrolls past the
+    // hero (lite pages hide the pill entirely, so this only governs the
+    // channel page).
+    const floatBtn = document.querySelector('.float-btn');
+    if (floatBtn) {
+      let floatRaf;
+      const syncFloatBtn = () => floatBtn.classList.toggle('is-tucked', window.scrollY < 520);
+      window.addEventListener('scroll', () => {
+        cancelAnimationFrame(floatRaf);
+        floatRaf = requestAnimationFrame(syncFloatBtn);
+      }, { passive: true });
+      syncFloatBtn();
+    }
+
     // Swap any [data-icon] placeholders for flat SVGs (theme-aware via currentColor).
     // A MutationObserver re-runs the swap so dynamically-injected markup (e.g. the
     // reels feed built via innerHTML) gets flat icons too — no per-callsite wiring.
@@ -1554,17 +1569,27 @@
     const t = (tags || []).find(x => typeof x === 'string' && x.startsWith(prefix + ':'));
     return t ? t.slice(prefix.length + 1) : null;
   }
-  function cleanTitle(raw) {
-    return String(raw || 'Untitled')
+  // Render-time display-title cleanup: strips file extensions, leading vault
+  // numbering ("9. ", "10 - "), trailing "(Really short)"-style notes, and
+  // emoji. Data in content.json / creator-tunnel stays untouched — this only
+  // shapes what the public site prints.
+  function displayTitle(raw) {
+    const s = String(raw || '')
       .replace(/\.(mp4|mov|webm|m4v)$/i, '')
-      .replace(/^[✀-➿☀-⛿✅✔︎️\s]+/, '')
+      .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}]/gu, '')
+      .replace(/^\s*\d{1,3}\s*[.)\-–—]\s*/, '')
+      .replace(/\s*\([^)]*\)\s*$/, '')
+      .replace(/\s{2,}/g, ' ')
       .trim();
+    return s || 'Untitled';
   }
   function adaptCollectionAsset(a) {
     const brandSlug = tagValue(a.tags, 'brand');
     const topicSlug = tagValue(a.tags, 'topic');
-    const fallback = cleanTitle(a.title);
-    const display = (a.display_title && String(a.display_title).trim()) || fallback;
+    const fallback = displayTitle(a.title);
+    const display = (a.display_title && String(a.display_title).trim())
+      ? displayTitle(a.display_title)
+      : fallback;
     return {
       id: a.id,
       title: a.title || display,
@@ -1657,9 +1682,14 @@
     } else if (hasThumb) {
       coverInner = `<img src="${escapeHtml(asset.thumbnail_url)}" alt="" loading="lazy" />`;
     }
+    // Poster-less videos render solid black until their first frame — the
+    // cover-brand-fallback class puts the JW logo on ink behind them.
+    const coverClass = coverInner
+      ? (hasVideo && !hasThumb ? 'cover-brand-fallback' : '')
+      : altClass;
     return `
       <div class="show-card playable" data-id="${asset.id || ''}">
-        <div class="show-cover ${coverInner ? '' : altClass}">
+        <div class="show-cover ${coverClass}">
           ${coverInner}
           ${hasVideo ? '<div class="play-overlay" aria-hidden="true" data-icon="play" data-icon-size="26"></div>' : ''}
         </div>
@@ -1821,6 +1851,7 @@
     loadCtTag,
     initAutoplayVideos,
     renderShowCard,
+    displayTitle,
     promoCard,
     injectPromo,
     icon,

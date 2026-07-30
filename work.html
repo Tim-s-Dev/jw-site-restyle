@@ -326,13 +326,19 @@
     const brand = brandSlug
       ? brandSlug.split('-').map(w => w ? w[0].toUpperCase() + w.slice(1) : '').join(' ')
       : null;
-    const derived = String(a.title || 'Untitled').replace(/\.(mp4|mov|webm|m4v)$/i, '').trim();
-    const display = (typeof a.display_title === 'string' && a.display_title.trim()) ? a.display_title.trim() : derived;
+    // Render-time title cleanup (chrome.js JW.displayTitle): strips vault
+    // numbering, "(Really short)"-style notes, emoji, file extensions.
+    const tidy = (window.JW && window.JW.displayTitle)
+      ? window.JW.displayTitle
+      : (s => String(s || 'Untitled').replace(/\.(mp4|mov|webm|m4v)$/i, '').trim());
+    const derived = tidy(a.title);
+    const display = (typeof a.display_title === 'string' && a.display_title.trim()) ? tidy(a.display_title) : derived;
     return {
       id: a.id,
       title: a.title || display,
       display_title: display,
       brand: brand,
+      topic: tagVal('topic'),
       file_type: a.file_type,
       duration: a.duration_seconds || 0,
       thumbnail_url: a.thumbnail_url || null,
@@ -432,9 +438,14 @@
     }
     const meta = [asset.brand, fmtDuration(asset.duration)].filter(Boolean).join(' · ') || 'Studio';
     const title = asset.display_title || asset.title || 'Untitled';
+    // Poster-less videos render solid black until first frame — brand the
+    // cover (JW logo on ink) so no tile is ever a black hole.
+    const coverClass = coverInner
+      ? (hasVideo && !hasThumb ? 'cover-brand-fallback' : '')
+      : altClass;
     return `
       <div class="show-card playable" data-id="${escapeHtml(asset.id)}">
-        <div class="show-cover ${coverInner ? '' : altClass}">
+        <div class="show-cover ${coverClass}">
           ${coverInner}
           <div class="play-overlay" aria-hidden="true" data-icon="play" data-icon-size="26"></div>
         </div>
@@ -1206,6 +1217,24 @@
       seg = segment(DATA.assets);
     }
     CURRENT_SEG = seg;
+
+    // BTS items whose titles are raw vault filenames (IMG_9981,
+    // BTS_RINGLIGHT, CHRIS BUSH BTS 2 MAY 6…) get a generic public label.
+    // Mutates the shared asset objects so cards + overlay captions agree.
+    const isFilenameShaped = t => {
+      const s = String(t || '').trim();
+      if (!s) return true;
+      if (/^IMG[-_ ]?\d+/i.test(s)) return true;      // IMG_9981
+      if (/_/.test(s)) return true;                   // BTS_RINGLIGHT, BTS_36F4
+      if (s === s.toUpperCase() && /[A-Z]/.test(s)) return true; // CHRIS BUSH BTS 2 MAY 6
+      return false;
+    };
+    seg.bts.forEach(a => {
+      if (isFilenameShaped(a.display_title || a.title)) {
+        a.display_title = 'Behind the scenes · JourneyWell Studio';
+      }
+    });
+
     // Long-form pool for the Up-next sidebar
     LONGFORM_POOL = seg.episodes.length ? seg.episodes : seg.all.filter(a => aspectClass(a) === 'is-horizontal');
 
@@ -1229,14 +1258,20 @@
     document.getElementById('episodesCount').textContent = seg.episodes.length + ' available';
     document.getElementById('shortsCount').textContent = seg.shorts.length + ' clip' + (seg.shorts.length === 1 ? '' : 's');
 
-    // Channel stats
-    document.getElementById('channelStats').innerHTML = `
-      <span><strong>${seg.all.length}</strong> Pieces</span>
-      <span class="dot"></span>
-      <span><strong>${seg.shows.length}</strong> Shows</span>
-      <span class="dot"></span>
-      <span><strong>${Object.keys(DATA.topic_counts || {}).length || seg.shows.length}</strong> Topics</span>
-    `;
+    // Channel stats — distinct shows counted across the WHOLE feed (the old
+    // count only saw live-feed:show tagged assets → "1 SHOWS" while episodes
+    // listed several brands), topics from distinct topic tags, and correct
+    // singular/plural throughout.
+    const showCount = Math.max(
+      seg.shows.length,
+      new Set(seg.all.map(a => a.brand).filter(Boolean)).size
+    );
+    const topicCount = new Set(seg.all.map(a => a.topic).filter(Boolean)).size
+      || Object.keys(DATA.topic_counts || {}).length;
+    const statBit = (n, noun) => `<span><strong>${n}</strong> ${noun}${n === 1 ? '' : 's'}</span>`;
+    const statBits = [statBit(seg.all.length, 'Piece'), statBit(showCount, 'Show')];
+    if (topicCount) statBits.push(statBit(topicCount, 'Topic'));
+    document.getElementById('channelStats').innerHTML = statBits.join('<span class="dot"></span>');
 
     // Card click — every video card opens in the immersive player.
     // Cards in the shorts row open the swipeable feed (with promo interstitials);
