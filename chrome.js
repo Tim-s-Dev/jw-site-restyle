@@ -1628,7 +1628,31 @@
   function escapeHtml(s) {
     return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
-  async function renderWorkInto(selector, count, tag) {
+  // Round-robin across brands so one client never dominates a strip
+  // (e.g. podcast.html "Recently launched" was 4/5 Bonvenu tiles).
+  function diversifyByBrand(assets, limit) {
+    const byBrand = new Map();
+    assets.forEach(a => {
+      const key = a.brand || 'JourneyWell';
+      if (!byBrand.has(key)) byBrand.set(key, []);
+      byBrand.get(key).push(a);
+    });
+    const out = [];
+    const max = limit || assets.length;
+    let added = true;
+    while (out.length < max && added) {
+      added = false;
+      for (const bucket of byBrand.values()) {
+        if (!bucket.length) continue;
+        out.push(bucket.shift());
+        added = true;
+        if (out.length >= max) break;
+      }
+    }
+    return out;
+  }
+
+  async function renderWorkInto(selector, count, tag, opts) {
     const target = document.querySelector(selector);
     if (!target) return;
     let data = null;
@@ -1639,7 +1663,9 @@
       data = await loadContent();
     }
     if (!data || !data.assets || !data.assets.length) return; // keep placeholders
-    const items = (count ? data.assets.slice(0, count) : data.assets);
+    const items = (opts && opts.diversifyByBrand)
+      ? diversifyByBrand(data.assets, count || data.assets.length)
+      : (count ? data.assets.slice(0, count) : data.assets);
     target.innerHTML = items.map(renderShowCard).join('');
     initAutoplayVideos(target);
   }

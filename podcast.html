@@ -233,7 +233,9 @@
     it.querySelector('.faq-q').addEventListener('click', () => it.classList.toggle('open'));
   });
   document.addEventListener('DOMContentLoaded', () => {
-    if (window.JW) window.JW.renderWorkInto('#podcastExamples', 6, 'live-feed:episode');
+    // diversifyByBrand: round-robin across clients so the strip is never
+    // 4/5 tiles from one brand.
+    if (window.JW) window.JW.renderWorkInto('#podcastExamples', 6, 'live-feed:episode', { diversifyByBrand: true });
   });
 </script>
 </body>
