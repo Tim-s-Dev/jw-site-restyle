@@ -1673,7 +1673,9 @@
     const hasVideo = isHttps(asset.cdn_url) && /\.(mp4|webm|mov)$/i.test(asset.cdn_url);
     const hasThumb = isHttps(asset.thumbnail_url);
     const meta = asset.brand ? asset.brand : (asset.duration ? `${Math.round(asset.duration)}s` : 'Studio');
-    const title = asset.display_title || asset.title || 'Untitled';
+    // Render-time cleanup — raw content.json assets (used as fallback/blend)
+    // still carry vault numbering / "(Really short)" notes / emoji.
+    const title = displayTitle(asset.display_title || asset.title);
     let coverInner = '';
     if (hasVideo) {
       // Native autoplay + muted is allowed by all browsers without user interaction.
