@@ -633,7 +633,10 @@
     state.step = n;
     const isStudio = state.path === 'studio';
     const isBook = state.path === 'book';
-    const totalSteps = isBook ? 2 : (isStudio ? 2 : 4);
+    // Every non-book path really runs 1→2→3→4 (drawerNext submits at 3, then
+    // confirmation) — the old studio total of 2 printed "Step 3 of 2" and
+    // overflowed the progress bar.
+    const totalSteps = isBook ? 2 : 4;
     document.querySelectorAll('.drawer-step').forEach(s => {
       s.classList.toggle('active', String(s.dataset.step) === String(n));
     });
@@ -1737,9 +1740,26 @@
       data = await loadContent();
     }
     if (!data || !data.assets || !data.assets.length) return; // keep placeholders
-    const items = (opts && opts.diversifyByBrand)
-      ? diversifyByBrand(data.assets, count || data.assets.length)
-      : (count ? data.assets.slice(0, count) : data.assets);
+    let pool = data.assets;
+    if (opts && opts.diversifyByBrand) {
+      // When the live feed is brand-monotone, blend in content.json clips
+      // from brands the feed is missing (real published work — Melara,
+      // Bonvenu, etc.) so the strip shows the roster, not one client.
+      if (data.source === 'creator-tunnel-tag' || data.source === 'mediavault-collection') {
+        const local = await loadContent();
+        if (local && local.assets && local.assets.length) {
+          const seenIds = new Set(pool.map(a => a.id));
+          const liveBrands = new Set(pool.map(a => a.brand).filter(Boolean));
+          pool = pool.concat(local.assets.filter(a =>
+            a && !seenIds.has(a.id) && a.brand && !liveBrands.has(a.brand)
+          ));
+        }
+      }
+      pool = diversifyByBrand(pool, count || pool.length);
+    } else if (count) {
+      pool = pool.slice(0, count);
+    }
+    const items = pool;
     target.innerHTML = items.map(renderShowCard).join('');
     initAutoplayVideos(target);
   }

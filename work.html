@@ -1233,9 +1233,11 @@
       const s = String(t || '').trim();
       if (!s) return true;
       if (/^IMG[-_ ]?\d+/i.test(s)) return true;   // IMG_9981 — anywhere
+      if (/_/.test(s)) return true;                // bts_ringlight, Sequence 06_1 — underscores mean filename
       if (/\bBTS\b/i.test(s)) return true;         // "Chris Bush BTS 2 May 6" — anywhere
-      // All-caps / underscore dumps (BTS_RINGLIGHT, BTS_36F4) — only inside
-      // the BTS shelf, where an all-caps string is a filename, not a title.
+      if (/^sequence[\s_-]*\d/i.test(s)) return true; // "Sequence 06" editor exports
+      // All-caps dumps — only inside the BTS shelf, where an all-caps string
+      // is a filename, not a title.
       if (strict && /[A-Za-z]/.test(s) && s === s.toUpperCase()) return true;
       return false;
     };
