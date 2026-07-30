@@ -19,8 +19,11 @@ body.lite {
   --muted-2:      #8a8d94;
   --line:         rgba(0, 0, 0, 0.08);
   --line-strong:  rgba(0, 0, 0, 0.16);
-  --accent:       #CFF42A;       /* Spotify green */
-  --accent-deep:  #CFF42A;
+  --accent:       #CFF42A;       /* Spotify green.
+     RULE: lime bg pairs with #0a0a0a text only. Never white-on-lime (both themes). */
+  --accent-deep:  #CFF42A;       /* Theme-aware text accent — redesign.css rebinds
+     this to dark olive in light theme so accent TEXT stays readable. Lime text
+     is only allowed on dark surfaces. */
   --accent-tint:  rgba(207, 244, 42, 0.10);
   --accent-glow:  rgba(207, 244, 42, 0.22);
   --danger:       #d61f4a;
@@ -132,7 +135,9 @@ body.lite .btn svg.icon { width: 16px; height: 16px; flex-shrink: 0; }
 body.lite .btn-gold,
 body.lite .btn-primary {
   background: var(--accent);
-  color: #fff;
+  /* RULE (Tim, 7/30): lime bg pairs with #0a0a0a text only. Never white-on-lime.
+     Literal ink here on purpose — var(--ink) flips to white in dark mode. */
+  color: #0a0a0a;
   border-color: var(--accent);
 }
 body.lite .btn-gold:hover,

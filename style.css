@@ -14,7 +14,7 @@
   --ink:          #0a0a0a;
   --paper:        #f6f5f2;
   --paper-2:      #ffffff;
-  --lime:         #CFF42A;
+  --lime:         #CFF42A;  /* RULE: lime bg pairs with #0a0a0a text only. Never white-on-lime. */
   --lime-dim:     rgba(207, 244, 42, 0.15);
   --lime-glow:    rgba(207, 244, 42, 0.35);
   --pink:         #ff2d8a;
