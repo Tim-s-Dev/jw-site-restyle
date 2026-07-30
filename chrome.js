@@ -402,6 +402,7 @@
             <div class="drawer-eyebrow">Pick a time</div>
             <h2 class="drawer-title">Book a call with Tim.</h2>
             <p class="drawer-sub">Choose a slot that works — confirmation lands in your inbox immediately.</p>
+            <p class="drawer-sub" style="margin-top:-8px">30 minutes. We map your content system, what it costs, and whether we're a fit. No pitch deck.</p>
             <div id="bookingFrameMount" class="drawer-booking-frame"></div>
           </section>
 
@@ -429,6 +430,15 @@
             <div class="drawer-form-group">
               <label>Phone (optional)</label>
               <input type="tel" id="contactPhone" placeholder="+1 (555) 555-5555" />
+            </div>
+            <div class="drawer-form-group">
+              <label>Monthly budget (optional)</label>
+              <div class="drawer-pill-group" data-single-pill="monthlyBudget">
+                <button type="button" class="drawer-pill" data-val="under-1k">Under $1k</button>
+                <button type="button" class="drawer-pill" data-val="1k-2.5k">$1k–$2.5k</button>
+                <button type="button" class="drawer-pill" data-val="2.5k-5k">$2.5k–$5k</button>
+                <button type="button" class="drawer-pill" data-val="5k-plus">$5k+</button>
+              </div>
             </div>
             <div class="drawer-form-group">
               <label>Anything else we should know? (optional)</label>
@@ -676,13 +686,33 @@
     if (n === 5) {
       const mount = document.getElementById('bookingFrameMount');
       if (mount && !mount.querySelector('iframe')) {
+        // Loading state the moment the pane opens; swapped out when the GHL
+        // iframe fires `load`, replaced by an email fallback after 10s.
+        const loader = document.createElement('div');
+        loader.className = 'drawer-booking-loading';
+        loader.innerHTML = '<span class="drawer-booking-spinner" aria-hidden="true"></span><span>Loading Tim’s calendar…</span>';
+        mount.appendChild(loader);
+
         const src = `https://api.leadconnectorhq.com/widget/booking/${GHL_BOOKING_CALENDAR_ID}`;
         const iframe = document.createElement('iframe');
         iframe.src = src;
         iframe.title = 'Book a call with Tim';
         iframe.loading = 'lazy';
         iframe.scrolling = 'no';
-        iframe.style.cssText = 'width:100%; min-height:720px; border:0; display:block;';
+        // Collapsed while loading so the spinner isn't floating above 720px
+        // of blank space; expanded on load.
+        iframe.style.cssText = 'width:100%; height:0; border:0; display:block;';
+        let bookingLoaded = false;
+        iframe.addEventListener('load', () => {
+          bookingLoaded = true;
+          iframe.style.cssText = 'width:100%; min-height:720px; border:0; display:block;';
+          loader.remove();
+        });
+        setTimeout(() => {
+          if (!bookingLoaded && loader.isConnected) {
+            loader.innerHTML = 'Calendar’s being slow — email <a href="mailto:team@journeywell.io">team@journeywell.io</a> or go back and use the form.';
+          }
+        }, 10000);
         mount.appendChild(iframe);
         // GHL ships form_embed.js for parent-side iframe auto-resize. Load once.
         if (!document.querySelector('script[data-ghl-form-embed]')) {
@@ -696,17 +726,25 @@
     }
     showStep(n);
   }
+  // Idempotent: safe to re-run after every step-2 injection AND once at
+  // install (for pills living in static drawer markup, e.g. step-3 budget).
   function hookPills() {
     document.querySelectorAll('[data-single-pill]').forEach(group => {
-      group.querySelectorAll('.drawer-pill').forEach(p => p.addEventListener('click', () => {
-        group.querySelectorAll('.drawer-pill').forEach(x => x.classList.remove('selected'));
-        p.classList.add('selected');
-      }));
+      group.querySelectorAll('.drawer-pill:not([data-pill-wired])').forEach(p => {
+        p.setAttribute('data-pill-wired', '');
+        p.addEventListener('click', () => {
+          group.querySelectorAll('.drawer-pill').forEach(x => x.classList.remove('selected'));
+          p.classList.add('selected');
+        });
+      });
     });
     document.querySelectorAll('[data-multi-pill]').forEach(group => {
-      group.querySelectorAll('.drawer-pill').forEach(p => p.addEventListener('click', () => {
-        p.classList.toggle('selected');
-      }));
+      group.querySelectorAll('.drawer-pill:not([data-pill-wired])').forEach(p => {
+        p.setAttribute('data-pill-wired', '');
+        p.addEventListener('click', () => {
+          p.classList.toggle('selected');
+        });
+      });
     });
   }
   // Wire form submissions to formsubmit.co. First submission triggers an email
@@ -854,6 +892,10 @@
     document.querySelectorAll('[data-open-drawer-with]').forEach(el =>
       el.addEventListener('click', () => openDrawer(el.dataset.openDrawerWith))
     );
+
+    // Wire pill groups that live in static drawer markup (e.g. the step-3
+    // budget select) — goStep(2) only re-hooks after injecting step-2 bodies.
+    hookPills();
 
     // Swap any [data-icon] placeholders for flat SVGs (theme-aware via currentColor).
     // A MutationObserver re-runs the swap so dynamically-injected markup (e.g. the
