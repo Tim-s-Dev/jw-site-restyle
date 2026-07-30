@@ -394,6 +394,7 @@
                 <div class="drawer-option-arrow">→</div>
               </button>
             </div>
+            <p style="margin-top:16px; font-size:13px; color:var(--text-tertiary)">Prefer email? <a href="mailto:team@journeywell.io" style="color:inherit; text-decoration:underline">team@journeywell.io</a></p>
           </section>
 
           <!-- STEP 5 — Book-a-call calendar (GHL embed). Bypasses steps 2/3/4
