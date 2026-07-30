@@ -31,7 +31,7 @@
     { href: 'solutions.html', label: 'Solutions' },
     { href: 'portfolio.html', label: 'Work' },
     { href: 'about.html',     label: 'About' },
-    { href: 'blog.html',      label: 'Blogs' },
+    { href: 'blog.html',      label: 'Blog' },
   ];
 
   // Service sub-pages (kept in footer + linked from Solutions, off main nav)
@@ -108,7 +108,7 @@
       },
     },
     { label: 'About',   href: 'about.html' },
-    { label: 'Blogs',   href: 'blog.html' },
+    { label: 'Blog',   href: 'blog.html' },
   ];
 
   // Subfolder-aware path prefix. Blog posts live under /blog/<slug>.html
@@ -1169,11 +1169,11 @@
         }
       });
     }, {
-      // Shrink the observed viewport from the bottom by 15% so animations
-      // fire when elements scroll into the upper ~85% of the screen — they
-      // start fading as soon as they're meaningfully on-screen, not after.
-      threshold: 0.05,
-      rootMargin: '0px 0px -15% 0px'
+      // B3 (FIX-RUNBOOK): extend the observed viewport 200px BELOW the fold so
+      // sections start revealing before they enter — at human scroll speed the
+      // content is already visible when it arrives, never an empty viewport.
+      threshold: 0,
+      rootMargin: '0px 0px 200px 0px'
     });
 
     document.querySelectorAll('.reveal').forEach(function (el) {
@@ -1572,26 +1572,29 @@
     const t = (tags || []).find(x => typeof x === 'string' && x.startsWith(prefix + ':'));
     return t ? t.slice(prefix.length + 1) : null;
   }
-  // Render-time display-title cleanup: strips file extensions, leading vault
-  // numbering ("9. ", "10 - "), trailing "(Really short)"-style notes, and
-  // emoji. Data in content.json / creator-tunnel stays untouched — this only
-  // shapes what the public site prints.
-  function displayTitle(raw) {
-    const s = String(raw || '')
-      .replace(/\.(mp4|mov|webm|m4v)$/i, '')
-      .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}]/gu, '')
-      .replace(/^\s*\d{1,3}\s*[.)\-–—]\s*/, '')
-      .replace(/\s*\([^)]*\)\s*$/, '')
-      .replace(/\s{2,}/g, ' ')
-      .trim();
-    return s || 'Untitled';
+  // Display-title cleanup at render time. Vault titles ship with editor
+  // numbering ("9. ", "10) "), trailing production notes ("(Really short)"),
+  // file extensions, and emoji — none of which belong on the public site.
+  // content.json / API data stays untouched; this only shapes what renders.
+  // Exposed as both JW.cleanDisplayTitle and JW.displayTitle for page scripts.
+  let EMOJI_RE = null;
+  try { EMOJI_RE = new RegExp('[\\p{Extended_Pictographic}\\u{FE0F}\\u{200D}\\u{20E3}]', 'gu'); } catch (e) { /* old engines: skip emoji strip */ }
+  function cleanTitle(raw) {
+    let t = String(raw || '')
+      .replace(/\.(mp4|mov|webm|m4v)$/i, '')       // file extension
+      .replace(/^\s*\d{1,3}\s*[.)\-–—]\s+/, '')     // leading numbering "9. " / "10) "
+      .replace(/\s*\([^)]*\)\s*$/, '');             // trailing "(Really short)"-style note
+    if (EMOJI_RE) t = t.replace(EMOJI_RE, '');
+    t = t.replace(/\s{2,}/g, ' ').trim();
+    return t || 'Untitled';
   }
+  const displayTitle = cleanTitle;
   function adaptCollectionAsset(a) {
     const brandSlug = tagValue(a.tags, 'brand');
     const topicSlug = tagValue(a.tags, 'topic');
-    const fallback = displayTitle(a.title);
+    const fallback = cleanTitle(a.title);
     const display = (a.display_title && String(a.display_title).trim())
-      ? displayTitle(a.display_title)
+      ? cleanTitle(a.display_title)
       : fallback;
     return {
       id: a.id,
@@ -1675,7 +1678,7 @@
     const meta = asset.brand ? asset.brand : (asset.duration ? `${Math.round(asset.duration)}s` : 'Studio');
     // Render-time cleanup — raw content.json assets (used as fallback/blend)
     // still carry vault numbering / "(Really short)" notes / emoji.
-    const title = displayTitle(asset.display_title || asset.title);
+    const title = cleanTitle(asset.display_title || asset.title);
     let coverInner = '';
     if (hasVideo) {
       // Native autoplay + muted is allowed by all browsers without user interaction.
@@ -1875,6 +1878,7 @@
     initAutoplayVideos,
     renderShowCard,
     displayTitle,
+    cleanDisplayTitle: cleanTitle,
     promoCard,
     injectPromo,
     icon,

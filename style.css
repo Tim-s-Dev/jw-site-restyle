@@ -14,7 +14,7 @@
   --ink:          #0a0a0a;
   --paper:        #f6f5f2;
   --paper-2:      #ffffff;
-  --lime:         #CFF42A;
+  --lime:         #CFF42A;  /* RULE: lime bg pairs with #0a0a0a text only. Never white-on-lime. */
   --lime-dim:     rgba(207, 244, 42, 0.15);
   --lime-glow:    rgba(207, 244, 42, 0.35);
   --pink:         #ff2d8a;
@@ -228,7 +228,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* ---------- Hero ---------- */
 .hero {
-  padding: 120px 0 80px;
+  padding: 72px 0 56px;
   position: relative;
   background:
     radial-gradient(1100px 500px at 78% 22%, rgba(31, 107, 255, 0.32) 0%, transparent 60%),
@@ -237,7 +237,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     #000;
   border-bottom: 8px solid var(--lime);
 }
-.hero-tight { padding: 100px 0 60px; }
+.hero-tight { padding: 64px 0 44px; }
 .hero h1 {
   font-size: clamp(54px, 9vw, 120px);
   margin-bottom: 28px;
@@ -312,8 +312,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ---------- Section ---------- */
-.section { padding: 110px 0; position: relative; }
-.section-tight { padding: 72px 0; }
+/* B3 (FIX-RUNBOOK): big empty bands halved */
+.section { padding: 60px 0; position: relative; }
+.section-tight { padding: 48px 0; }
 .section-cream {
   background: var(--paper);
   color: var(--text-on-cream);
@@ -730,7 +731,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* ---------- Final CTA ---------- */
 .final-cta {
-  padding: 140px 0;
+  padding: 72px 0;
   background:
     radial-gradient(700px 500px at 80% 0%, rgba(31, 107, 255, 0.18), transparent 60%),
     radial-gradient(700px 500px at 0% 100%, rgba(255, 45, 138, 0.18), transparent 60%),
@@ -1102,7 +1103,7 @@ body.full-page-form .full-page-mast .logo {
   .logo-strip-inner { gap: 24px; justify-content: flex-start; }
   .brand-mark { width: 80px; height: 22px; }
   .section, .section-tight { padding: 80px 0; }
-  .final-cta { padding: 100px 0; }
+  .final-cta { padding: 64px 0; }
   .float-btn { bottom: 16px; right: 16px; padding: 12px 18px; }
 }
 
@@ -1311,7 +1312,7 @@ body.full-page-form .full-page-mast .logo {
 
 /* Page hero variants */
 .page-hero {
-  padding: 96px 0 72px;
+  padding: 60px 0 48px;
   background:
     radial-gradient(900px 500px at 78% 22%, rgba(31, 107, 255, 0.28) 0%, transparent 60%),
     radial-gradient(800px 600px at 18% 88%, rgba(124, 58, 237, 0.28) 0%, transparent 60%),

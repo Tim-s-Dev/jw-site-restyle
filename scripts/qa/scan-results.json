@@ -1,0 +1,1454 @@
+{
+ "index-light": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "button.btn.btn-large.btn-primary",
+    "text": "Build my system",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "button.btn.btn-large.btn-primary",
+    "text": "Get started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "solutions-light": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "a.btn.btn-primary.btn-large",
+    "text": "Book the studio",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "span",
+    "text": "Most popular",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "a.btn.btn-primary.btn-large",
+    "text": "Launch a show",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "a.btn.btn-primary.btn-large",
+    "text": "See the system",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "button.btn.btn-large.btn-primary",
+    "text": "Get started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "studio-light": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.hero-eyebrow",
+    "text": "THE STUDIO",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgba(10, 10, 10, 0.66)"
+   },
+   {
+    "el": "button.btn.btn-gold.btn-large",
+    "text": "Book a session",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "WHAT'S INCLUDED",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "FAQ",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "authority-light": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.hero-eyebrow",
+    "text": "THE SYSTEM",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgba(10, 10, 10, 0.66)"
+   },
+   {
+    "el": "button.btn.btn-gold.btn-large",
+    "text": "Build my system",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "WHAT YOU GET PER RECORDING",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "01 \u2014 CAPTURE",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "02 \u2014 PRODUCE",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "03 \u2014 MULTIPLY",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "04 \u2014 DISTRIBUTE",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "THE SHIFT",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.dark-card-eyebrow",
+    "text": "BEFORE",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.dark-card-eyebrow",
+    "text": "AFTER",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "WHAT'S INCLUDED",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "FAQ",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "podcast-light": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.hero-eyebrow",
+    "text": "PODCAST LAUNCH",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgba(10, 10, 10, 0.66)"
+   },
+   {
+    "el": "button.btn.btn-gold.btn-large",
+    "text": "Launch my show",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "WHAT'S IN A LAUNCH",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.dark-card-eyebrow",
+    "text": "PRE-LAUNCH",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.dark-card-eyebrow",
+    "text": "PRODUCTION",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.dark-card-eyebrow",
+    "text": "DISTRIBUTION",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.dark-card-eyebrow",
+    "text": "SUPPORT",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "span.jw-promo-band-eyebrow",
+    "text": "FROM JOURNEYWELL",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "button.btn.btn-gold.btn-large",
+    "text": "Book the studio",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "DAY 1\u20132",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "DAY 3\u20135",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "DAY 6\u20138",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "DAY 9\u201312",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "DAY 13\u201314",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "RECENTLY LAUNCHED",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "FAQ",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "work-light": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "button.btn.btn-gold",
+    "text": "BOOK THE STUDIO",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.hero-piece-badge",
+    "text": "PINNED \u00b7 CHANNEL TRAILER",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "button.btn.btn-gold",
+    "text": "PLAY",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "a.channel-tab.active",
+    "text": "BEHIND THE SCENES",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgba(10, 10, 10, 0.62)"
+   },
+   {
+    "el": "button.row-action-pill",
+    "text": "WATCH SHORTS",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.subscribe-card",
+    "text": "WANT YOURS NEXT?\nTHIS IS WHAT THE SYSTEM SHIPS.\n\nE",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "button.lf-meta-btn.cta",
+    "text": "Book the studio",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "button.float-btn",
+    "text": "GET STARTED",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "portfolio-light": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "button.btn.btn-large.btn-primary",
+    "text": "Apply to work with us",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "about-light": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "button.btn.btn-large.btn-primary",
+    "text": "Get started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "blog-light": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "button.btn.btn-primary.btn-large",
+    "text": "Subscribe",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "button.btn.btn-large.btn-primary",
+    "text": "Get started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "get-started-light": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "index-dark": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "button.btn.btn-large.btn-primary",
+    "text": "Build my system",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "button.btn.btn-large.btn-primary",
+    "text": "Get started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "solutions-dark": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "a.btn.btn-primary.btn-large",
+    "text": "Book the studio",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "span",
+    "text": "Most popular",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "a.btn.btn-primary.btn-large",
+    "text": "Launch a show",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "a.btn.btn-primary.btn-large",
+    "text": "See the system",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "button.btn.btn-large.btn-primary",
+    "text": "Get started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "studio-dark": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.hero-eyebrow",
+    "text": "THE STUDIO",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "button.btn.btn-gold.btn-large",
+    "text": "Book a session",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "WHAT'S INCLUDED",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "FAQ",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "authority-dark": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.hero-eyebrow",
+    "text": "THE SYSTEM",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "button.btn.btn-gold.btn-large",
+    "text": "Build my system",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "WHAT YOU GET PER RECORDING",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "01 \u2014 CAPTURE",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "02 \u2014 PRODUCE",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "03 \u2014 MULTIPLY",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "04 \u2014 DISTRIBUTE",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "THE SHIFT",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.dark-card-eyebrow",
+    "text": "BEFORE",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.dark-card-eyebrow",
+    "text": "AFTER",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "WHAT'S INCLUDED",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "FAQ",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "podcast-dark": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.hero-eyebrow",
+    "text": "PODCAST LAUNCH",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "button.btn.btn-gold.btn-large",
+    "text": "Launch my show",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "WHAT'S IN A LAUNCH",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.dark-card-eyebrow",
+    "text": "PRE-LAUNCH",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.dark-card-eyebrow",
+    "text": "PRODUCTION",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.dark-card-eyebrow",
+    "text": "DISTRIBUTION",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.dark-card-eyebrow",
+    "text": "SUPPORT",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "span.jw-promo-band-eyebrow",
+    "text": "FROM JOURNEYWELL",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "button.btn.btn-gold.btn-large",
+    "text": "Book the studio",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "DAY 1\u20132",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "DAY 3\u20135",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "DAY 6\u20138",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "DAY 9\u201312",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.process-item-num",
+    "text": "DAY 13\u201314",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "RECENTLY LAUNCHED",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.section-eyebrow",
+    "text": "FAQ",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "work-dark": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "button.btn.btn-gold",
+    "text": "BOOK THE STUDIO",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.hero-piece-badge",
+    "text": "PINNED \u00b7 CHANNEL TRAILER",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "button.btn.btn-gold",
+    "text": "PLAY",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "a.channel-tab.active",
+    "text": "BEHIND THE SCENES",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "button.row-action-pill",
+    "text": "WATCH SHORTS",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.subscribe-card",
+    "text": "WANT YOURS NEXT?\nTHIS IS WHAT THE SYSTEM SHIPS.\n\nE",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "button.lf-meta-btn.cta",
+    "text": "Book the studio",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "button.float-btn",
+    "text": "GET STARTED",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "portfolio-dark": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "button.btn.btn-large.btn-primary",
+    "text": "Apply to work with us",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "about-dark": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "button.btn.btn-large.btn-primary",
+    "text": "Get started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "blog-dark": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "button.btn.btn-primary.btn-large",
+    "text": "Subscribe",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "button.btn.btn-large.btn-primary",
+    "text": "Get started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(10, 10, 10)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ },
+ "get-started-dark": {
+  "limeBgWhiteText": [],
+  "limeBgOther": [
+   {
+    "el": "button.btn.btn-gold",
+    "text": "Get Started",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "TELL US WHERE TO START",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Pick a time",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Tell us a bit more",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow",
+    "text": "Almost there",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   },
+   {
+    "el": "div.drawer-eyebrow.gold",
+    "text": "Done",
+    "bg": "rgb(207, 244, 42)",
+    "color": "rgb(0, 0, 0)"
+   }
+  ],
+  "limeTextOnLight": []
+ }
+}

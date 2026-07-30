@@ -95,7 +95,7 @@
   font-family: var(--serif-font);
   font-style: italic;
   font-weight: 400;
-  color: var(--lime);
+  color: var(--accent-deep, var(--lime));
   letter-spacing: -0.01em;
   text-transform: none;
 }
@@ -149,7 +149,7 @@
   font-family: var(--serif-font);
   font-style: italic;
   font-weight: 400;
-  color: var(--lime);
+  color: var(--accent-deep, var(--lime));
   text-transform: none;
 }
 
@@ -158,7 +158,7 @@
   font-family: var(--display-font);
   font-size: 11px; font-weight: 800; letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--lime);
+  color: var(--accent-deep, var(--lime));
 }
 .blog-byline {
   font-family: var(--display-font);
@@ -200,7 +200,7 @@
 }
 
 /* ---------- Newsletter slab (cream) ---------- */
-.blog-newsletter-slab { padding: 96px 0; }
+.blog-newsletter-slab { padding: 56px 0; }
 .blog-newsletter-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -268,7 +268,7 @@
   margin: 16px 0 36px;
 }
 .blog-pull-quote em {
-  color: var(--lime);
+  color: var(--accent-deep, var(--lime));
 }
 .blog-pull-attr {
   display: flex; align-items: center; gap: 16px;
@@ -334,7 +334,7 @@
   margin-bottom: 32px;
 }
 .blog-breadcrumb a { color: rgba(255, 255, 255, 0.55); }
-.blog-breadcrumb a:hover { color: var(--lime); }
+.blog-breadcrumb a:hover { color: var(--accent-deep, var(--lime)); }
 .blog-breadcrumb .sep { margin: 0 10px; opacity: 0.4; }
 
 .blog-post-hero h1 {
@@ -350,7 +350,7 @@
   font-family: var(--serif-font);
   font-style: italic;
   font-weight: 400;
-  color: var(--lime);
+  color: var(--accent-deep, var(--lime));
   letter-spacing: -0.01em;
   text-transform: none;
 }
@@ -372,7 +372,7 @@
   flex-wrap: wrap;
 }
 .blog-post-hero-meta .author {
-  color: var(--lime);
+  color: var(--accent-deep, var(--lime));
   font-weight: 900;
 }
 .blog-post-hero-meta .sep { color: rgba(255, 255, 255, 0.3); }
@@ -416,7 +416,7 @@
   display: block;
   transition: color 150ms ease;
 }
-.blog-post-toc a:hover { color: var(--lime); }
+.blog-post-toc a:hover { color: var(--accent-deep, var(--lime)); }
 
 .blog-post-share-eyebrow {
   font-family: var(--display-font);
@@ -468,7 +468,7 @@
   font-family: var(--serif-font);
   font-style: italic;
   font-weight: 400;
-  color: var(--lime);
+  color: var(--accent-deep, var(--lime));
   text-transform: none;
 }
 .blog-prose h3 {
@@ -484,11 +484,11 @@
 .blog-prose em {
   font-family: var(--serif-font);
   font-style: italic;
-  color: var(--lime);
+  color: var(--accent-deep, var(--lime));
   font-weight: 400;
 }
 .blog-prose a {
-  color: var(--lime);
+  color: var(--accent-deep, var(--lime));
   text-decoration: none;
   border-bottom: 1px solid rgba(207, 244, 42, 0.4);
   transition: border-color 150ms ease;
@@ -544,7 +544,7 @@
   font-family: var(--display-font);
   font-size: 10px; font-weight: 900; letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--lime);
+  color: var(--accent-deep, var(--lime));
   margin-bottom: 12px;
 }
 .blog-post-rail-card.dark .blog-post-rail-eyebrow { color: #000; }
@@ -629,3 +629,63 @@
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.78);
 }
+
+/* =====================================================================
+   B1 (FIX-RUNBOOK 7/30) — LIGHT THEME for the blog shell
+   blog.css is dark-era (white text everywhere). In light mode the post
+   hero/body sections render light (redesign.css section rules), so every
+   hardcoded white needs a dark counterpart. Dark mode is untouched.
+   blog.css loads after redesign.css on post pages, so these live here.
+   ===================================================================== */
+[data-theme="light"] .blog-breadcrumb,
+[data-theme="light"] .blog-breadcrumb a { color: rgba(10, 10, 10, 0.55); }
+[data-theme="light"] .blog-breadcrumb a:hover { color: var(--accent-deep); }
+[data-theme="light"] .blog-post-hero h1 { color: #0a0a0a; }
+[data-theme="light"] .blog-post-hero .blog-post-lede { color: rgba(10, 10, 10, 0.74); }
+[data-theme="light"] .blog-post-hero-meta { color: rgba(10, 10, 10, 0.62); }
+[data-theme="light"] .blog-post-hero-meta .sep { color: rgba(10, 10, 10, 0.3); }
+[data-theme="light"] .blog-post-toc-eyebrow,
+[data-theme="light"] .blog-post-share-eyebrow { color: rgba(10, 10, 10, 0.5); }
+[data-theme="light"] .blog-post-toc a { color: rgba(10, 10, 10, 0.7); }
+[data-theme="light"] .blog-post-share-row a {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: var(--line-dk);
+  color: #0a0a0a;
+}
+[data-theme="light"] .blog-prose { color: rgba(10, 10, 10, 0.85); }
+[data-theme="light"] .blog-prose h2,
+[data-theme="light"] .blog-prose h3,
+[data-theme="light"] .blog-prose strong,
+[data-theme="light"] .blog-prose blockquote { color: #0a0a0a; }
+[data-theme="light"] .blog-prose p,
+[data-theme="light"] .blog-prose ul,
+[data-theme="light"] .blog-prose ol { color: rgba(10, 10, 10, 0.82); }
+[data-theme="light"] .blog-post-rail-card {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: var(--line-dk);
+}
+[data-theme="light"] .blog-post-rail-title { color: #0a0a0a; }
+[data-theme="light"] .blog-post-rail-desc { color: rgba(10, 10, 10, 0.7); }
+[data-theme="light"] .blog-post-tag {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: var(--line-dk);
+  color: rgba(10, 10, 10, 0.78);
+}
+[data-theme="light"] .blog-rail-eyebrow { color: rgba(10, 10, 10, 0.55); }
+[data-theme="light"] .blog-rail-title,
+[data-theme="light"] .blog-feature-title { color: #0a0a0a; }
+[data-theme="light"] .blog-feature-excerpt { color: rgba(10, 10, 10, 0.72); }
+[data-theme="light"] .blog-byline,
+[data-theme="light"] .blog-byline-sm,
+[data-theme="light"] .blog-card .blog-card-meta { color: rgba(10, 10, 10, 0.6); }
+[data-theme="light"] .blog-pill {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: var(--line-dk);
+  color: rgba(10, 10, 10, 0.78);
+}
+[data-theme="light"] .blog-pill:hover {
+  border-color: rgba(10, 10, 10, 0.3);
+  color: #0a0a0a;
+}
+/* .blog-post-rail-card.dark is the LIME card — its forced #000 text stands.
+   .blog-post-rail-input keeps its dark fill in both themes (reads on both). */
