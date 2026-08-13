@@ -135,6 +135,33 @@
     return fetch(url, merged).finally(function () { if (timer) clearTimeout(timer); });
   }
 
+  // Creator-tunnel assets keep their ORIGINAL master in `cdn_url` — which is
+  // often a format no browser can decode (camera RAW .arw/.cr2/.nef/.dng, .tif,
+  // .psd, .heic, .mkv...). Deciding what to render from the cdn_url extension
+  // alone silently drops those assets even though the vault always ships a
+  // web-ready `thumbnail_url` (-thumb.jpg) alongside them: the asset looks
+  // correctly tagged in the tunnel and simply never appears on the site.
+  //
+  // resolveMedia() is the single place that answers "what can I actually put in
+  // the DOM for this asset?". Order: playable video → displayable image →
+  // web-ready thumbnail of an undecodable master → nothing.
+  const VIDEO_EXT = /\.(mp4|webm|mov|m4v)(\?|#|$)/i;
+  const IMAGE_EXT = /\.(jpe?g|png|webp|gif|avif)(\?|#|$)/i;
+  function httpsUrl(u) { return typeof u === 'string' && u.startsWith('https://') ? u : null; }
+  function resolveMedia(asset) {
+    if (!asset) return null;
+    const cdn = httpsUrl(asset.cdn_url);
+    const thumb = httpsUrl(asset.thumbnail_url);
+    // A video master stays a video; the thumbnail becomes its poster.
+    if (cdn && VIDEO_EXT.test(cdn)) return { kind: 'video', src: cdn, poster: thumb };
+    // A directly displayable image master renders as-is.
+    if (cdn && IMAGE_EXT.test(cdn)) return { kind: 'image', src: cdn, poster: null };
+    // Master is undecodable (RAW/TIFF/PSD/HEIC/exotic video) but the vault
+    // derivative is a normal JPG — render that instead of dropping the asset.
+    if (thumb && IMAGE_EXT.test(thumb)) return { kind: 'image', src: thumb, poster: null, derived: true };
+    return null;
+  }
+
   const here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   // Blog posts should mark "Blogs" as the active nav item
   const activeHref = IN_BLOG_POST ? 'blog.html' : here;
@@ -1059,37 +1086,34 @@
       if (!res.ok) { frame.dataset.navMediaState = 'http-' + res.status; return; }
       const data = await res.json();
       const asset = (data.items || [])[0];
-      if (!asset || typeof asset.cdn_url !== 'string' || !asset.cdn_url.startsWith('https://')) {
-        frame.dataset.navMediaState = 'empty';
+      const media = resolveMedia(asset);
+      if (!media) {
+        // No asset carries the tag at all, or it has neither a playable master
+        // nor a web-ready thumbnail. Keep the baked poster.
+        frame.dataset.navMediaState = asset ? 'unsupported' : 'empty';
         return;
       }
-      const isVideo = /\.(mp4|webm|mov)(\?|#|$)/i.test(asset.cdn_url);
-      const isImage = /\.(jpe?g|png|webp|gif|avif)(\?|#|$)/i.test(asset.cdn_url);
-      if (isVideo) {
+      if (media.kind === 'video') {
         const v = document.createElement('video');
-        v.src = asset.cdn_url;
+        v.src = media.src;
         v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true;
         v.preload = 'metadata';
         v.setAttribute('muted', '');
         v.setAttribute('loop', '');
         v.setAttribute('playsinline', '');
-        if (typeof asset.thumbnail_url === 'string' && asset.thumbnail_url.startsWith('https://')) {
-          v.poster = asset.thumbnail_url;
-        }
+        if (media.poster) v.poster = media.poster;
         frame.appendChild(v);
         frame.classList.add('has-video');
         frame.dataset.navMediaState = 'video';
-      } else if (isImage) {
+      } else {
         // No image yet? swap the poster for the tagged still.
         const existing = frame.querySelector('img');
         const img = existing || document.createElement('img');
-        img.src = asset.cdn_url;
+        img.src = media.src;
         img.alt = '';
         img.loading = 'lazy';
         if (!existing) frame.appendChild(img);
-        frame.dataset.navMediaState = 'image';
-      } else {
-        frame.dataset.navMediaState = 'unsupported';
+        frame.dataset.navMediaState = media.derived ? 'image-derived' : 'image';
       }
     } catch (e) {
       console.warn('[nav-media] fetch failed for tag', tag, e);

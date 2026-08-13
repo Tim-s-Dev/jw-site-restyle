@@ -298,16 +298,28 @@
   // 4s AbortController guard — a dead/slow creator-tunnel must degrade to the
   // baked fallback content, never leave the channel on skeletons.
   const FEED_TIMEOUT_MS = 4000;
+  // Per-bucket fetch ceiling. This MUST stay above the number of assets anyone
+  // is likely to tag into a single slot: whatever the request doesn't return is
+  // invisible on the site while still showing as tagged in the creator tunnel,
+  // which reads as "I tagged it and nothing happened". (Shorts crossed the old
+  // 24 default and 4 tagged clips silently vanished.) fetchByTag warns loudly
+  // if the bucket ever outgrows this again.
+  const FEED_LIMIT = 60;
   async function fetchByTag(tag, limit) {
     if (!CREATOR_TUNNEL_URL) return [];  // not configured for this host — silent no-op
-    const url = `${CREATOR_TUNNEL_URL}/api/assets?tag=${encodeURIComponent(tag)}&limit=${limit || 24}`;
+    const url = `${CREATOR_TUNNEL_URL}/api/assets?tag=${encodeURIComponent(tag)}&limit=${limit || FEED_LIMIT}`;
     const ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
     const timer = ctrl ? setTimeout(() => ctrl.abort(), FEED_TIMEOUT_MS) : null;
     try {
       const res = await fetch(url, { cache: 'no-cache', ...(ctrl ? { signal: ctrl.signal } : {}) });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
-      return (data.items || []).map(adaptCreatorTunnelAsset);
+      const items = data.items || [];
+      // Truncation must never be silent — it looks identical to "the tag didn't work".
+      if (typeof data.total === 'number' && data.total > items.length) {
+        console.warn(`[live-feed] ${tag}: ${data.total} assets tagged but only ${items.length} fetched — raise FEED_LIMIT (currently ${FEED_LIMIT}).`);
+      }
+      return items.map(adaptCreatorTunnelAsset);
     } catch (err) {
       console.warn('[live-feed] failed for tag', tag, err);
       return [];
